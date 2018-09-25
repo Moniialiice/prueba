@@ -67,7 +67,9 @@
                                         echo "";
                                     }if($dato->zona_oriente == 1){
                                         echo "Fiscalia Zona Oriente ";
-                                    }if($dato->fiscal_genral == 1){
+                                    }else{
+                                        echo "";                                       
+                                    }if($dato->fiscal_general == 1){
                                         echo "Fiscal General";
                                     }else{
                                         echo "";
@@ -87,12 +89,12 @@
                                         echo "Central Jurídico ";
                                   }else{
                                         echo"";
-                                  }if($dato->servicio_carrera == 0){
+                                  }if($dato->servicio_carrera == 1){
                                         echo"Servicio Carrera ";
                                   }else{
                                         echo "";
                                   }if($dato->otra != " "){
-                                        echo ".$dato->otra.";
+                                        echo "$dato->otra";
                                   }else{
                                         echo "";
                                   }
@@ -100,7 +102,7 @@
                                 echo "</td>".
                                     "<td>".$dato->asunto."</td>".
                                     "<td>".$dato->termino."</td>".
-                                    "<td>".$dato->atencion."</td>".
+                                    "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                                     "<td align='center'><a href='muestraOficio/".$dato->id_oficioseg."' class='fa fa-file fa-1x'></a></td>".
                                 "</tr>";
 

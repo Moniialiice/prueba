@@ -29,7 +29,7 @@
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
-            <div class="col-lg-11">
+            <div class="col-lg-9">
                 <div class="card">
                     <div class="card-header">
                         <strong>Datos Oficio Seguimiento</strong>
@@ -62,9 +62,9 @@
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Selecciona Oficio</label></div>
                                 <div class="col-12 col-md-9">
-                                    <select name="tipo_oficio" id="select" class="form-control">
-                                        <option name="nomenclatura" value="0">Cordinador Genaral</option>
-                                        <option name="nomenclatura" value="1">Secretario Particular</option>
+                                    <select name="nomenclatura" id="nomenclatura" class="form-control">
+                                        <option  value="0">Cordinador Genaral</option>
+                                        <option  value="1">Secretario Particular</option>
                                     </select>
                                 </div>
                             </div>

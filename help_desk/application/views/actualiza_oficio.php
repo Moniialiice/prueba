@@ -7,20 +7,22 @@
  */
 
 ?>
-
 <div class='breadcrumbs'>
     <div class='col-sm-4'>
         <div class='page-header float-left'>
             <div class='page-title'>
-                <h1>Actualiza Oficio</h1>
+                <h1>Actualiza Oficio Seguimiento</h1>
             </div>
         </div>
     </div>
-    <div class='col-sm-8'>
+<?php
+    foreach ($datos as $dato) {
+        echo"    
+        <div class='col-sm-8'>
         <div class='page-header float-right'>
             <div class='page-title'>
                 <ol class='breadcrumb text-right'>
-                    <!--li><a href='list'>Consultar</a></li-->
+                    <li><a href='consultaOficio'>Consultar Oficio</a></li>
                 </ol>
             </div>
         </div>
@@ -35,28 +37,22 @@
                         <strong>Actualiza Oficio Seguimiento</strong>
                     </div>
                     <div class='card-body card-block'>
-                        <form action='actualizaOficio' method='post' enctype='multipart/form-data' class='form-horizontal'>
-                            <?php
-                                foreach ($datos as $dato) {
-
+                        <form action='#' method='post' enctype='multipart/form-data' class='form-horizontal'>";
                                 echo "<div class='row form-group'>
-                                        <div class='col col-md-3'><label for='nomenclatura' class=' form-control-label'>Nomenclatura</label></div>
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Nomenclatura</label></div>
                                         <div class='col-12 col-md-9'>
-                                            <input type='text' id='disable-input' name='nomenclatura' class='form-control' disabled>".$dato->nomenclatura."</div>
-                                       </div> ";
-                                echo "       <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='asunto' class=' form-control-label'>Asunto</label></div>
-                                        <div class='col-12 col-md-9'>
-                                            <input type='text' id='disable-input' name='asunto' class='form-control' disabled>".$dato->asunto."</div>
-                                       </div>";
+                                            <input type='text' id='disabled-input' name='nomenclatura' class='form-control' value='".$dato->nomenclatura."' disabled></div>
+                                            <input type='text' id='disabled-input' name='id_oficio' class='form-control' value='".$dato->id_oficioseg."' hidden>
+                                        </div>";
+                                echo "<div class='row form-group'>
+                                        <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
+                                         <div class='col-12 col-md-9'>
+                                            <textarea name='asunto' id='textarea-input' rows='3' class='form-control' disabled>".$dato->asunto."</textarea></div>
+                                    </div>";
                                 echo "<div class='row form-group'>
                                             <div class='col col-md-3'><label for='fecha' class=' form-control-label'>Fecha</label></div>
-                                            <div class='col-12 col-md-9'><input type='text' id='disable-input' name='fecha' class='form-control' disabled>".$dato->fecha."</div>
+                                            <div class='col-12 col-md-9'><input type='text' id='disable-input' name='fecha' class='form-control' value='".$dato->fecha."' disabled></div>
                                         </div> ";
-                                echo "<div class='row form-group'>
-                                        <div class='col col-md-3'><label for='hora' class=' form-control-label'>Hora</label></div>
-                                        <div class='col-12 col-md-9'><input type='text' id='disable-input' name='correo' class='form-control' disabled>".$dato->hora."</div>
-                                    </div>";
                                 echo "<div class='row form-group'>
                                         <div class='col col-md-3'><label class=' form-control-label'>Etiquetas de Asuntos</label></div>
                                         <div class='col col-md-9'>
@@ -217,7 +213,6 @@
                                                     </label>
                                                 </div>";
                                         }
-
                                           echo "                                         
                                             </div>
                                         </div>     
@@ -278,7 +273,7 @@
                                                     </label>
                                                 </div>";
                                         }
-                                        if($dato->fiscal_genral == 1){
+                                        if($dato->fiscal_general == 1){
                                             echo "<div class='checkbox'>
                                                     <label for='checkbox5' class='form-check-label'>
                                                         <input type='checkbox' id='checkbox5' name='fgeneral' value='1' class='form-check-input' checked disabled> Fiscal General
@@ -343,7 +338,7 @@
                                                     </label>
                                                 </div>";
                                         }
-                                        if($dato->servicio_carrera1== 1){
+                                        if($dato->servicio_carrera== 1){
                                             echo"<div class='checkbox'>
                                                     <label for='checkbox10' class='form-check-label'>
                                                         <input type='checkbox' id='checkbox10' name='servicio' value='1' class='form-check-input' disabled checked> Servicio Carrera
@@ -359,12 +354,12 @@
                                         if($dato->otra != " "){
                                             echo "<div class='checkbox'>
                                                         <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
-                                                        <div class='col-12 col-md-9'><textarea name='otra' id='textarea-input' rows='5' placeholder='' class='form-control' disabled>".$dato->otra."</textarea></div>
+                                                        <div class='col-12 col-md-9'><textarea name='otrad' id='textarea-input' rows='5' placeholder='' class='form-control' disabled>".$dato->otra."</textarea></div>
                                                    </div>";
                                         }else{
                                             echo "<div class='checkbox'>
                                                         <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
-                                                        <div class='col-12 col-md-9'><textarea name='otra' id='textarea-input' rows='5' placeholder='' class='form-control disabled'></textarea></div>
+                                                        <div class='col-12 col-md-9'><textarea name='otrad' id='textarea-input' rows='5' placeholder='' class='form-control disabled'></textarea></div>
                                                     </div>";
                                         }
                                         echo "
@@ -401,7 +396,7 @@
                                                         </label>
                                                    </div>";
                                          }
-                                         if($dato->gestionar_perticion == 1){
+                                         if($dato->gestionar_peticion == 1){
                                              echo "<div class='checkbox'>
                                                         <label for='checkbox3' class='form-check-label'>
                                                             <input type='checkbox' id='checkbox3' name='gestionar' value='1' class='form-check-input' checked disabled> Gestionar Petición y Permitir Constancias que Acrediten la Atención Brindada
@@ -443,8 +438,8 @@
                                                 </div>
                                             </div>        
                                        </div>";
-                                echo "<div class='row form form-group'>
-                                        <div class='col col-md-3'><label class='form-control-label'>Informar A:</label></div>
+                                echo "<div class='row form-group'>
+                                        <div class='col col-md-3'><label class='form-control-label'>Informar a:</label></div>
                                         <div class='col col-md-9'>
                                             <div class='form-check'>";
                                         if($dato->esta_oficina == 1){
@@ -463,13 +458,13 @@
                                         if($dato->peticionario == 1){
                                             echo "<div class='checkbox'>
                                                     <label for='checkbox3' class='form-check-label'>
-                                                        <input type='checkbox' id='checkbox2' name='peticionario' value='1' class='orm-check-input' checked disabled> Peticionario
+                                                        <input type='checkbox' id='checkbox2' name='peticionario' value='1' class='form-check-input' checked disabled> Peticionario
                                                     </label>
                                                 </div>";
                                         }else{
                                             echo "<div class='checkbox'>
                                                     <label for='checkbox3' class='form-check-label'>
-                                                        <input type='checkbox' id='checkbox2' name='peticionario' value='1' class='orm-check-input' disabled> Peticionario
+                                                        <input type='checkbox' id='checkbox2' name='peticionario' value='1' class='form-check-input' disabled> Peticionario
                                                     </label>
                                                 </div>";
                                         }
@@ -493,20 +488,24 @@
                                     </div>
                                     
                                     <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Termino:</label></div>
-                                        <div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control'>".$dato->termino."</div>
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Termino: </label></div>
+                                        <div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' value='".$dato->termino."' class='form-control'></div>
                                     </div>
                                     <div class='row form-group'>
-                                        <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones</label></div>
-                                        <div class='col-12 col-md-9'><textarea name='observaciones' id='textarea-input' rows='9' placeholder='' class='form-control'>".$dato->observaciones."</textarea></div>
+                                        <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones: </label></div>
+                                        <div class='col-12 col-md-9'><textarea name='observaciones' id='textarea-input' rows='5' class='form-control'>".$dato->observaciones."</textarea></div>
                                     </div>
                                     <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label'>Archivo Seguimiento (Opcional)</label></div>
-                                        <div class='col-12 col-md-9'><input id='arc_opcional' name='opcional' class='form-control-file' type='file'></div>
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Atención: </label></div>
+                                        <div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."' disabled></div>
                                     </div>
                                     <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label' >Archivo final</label></div>
-                                        <div class='col-12 col-md-9'><input id='arc_final' name='final' class='form-control-file' type='file'></div>
+                                        <div class='col col-md-3'><label for='file-input' class=' form-control-label'>Archivo Seguimiento (Opcional): </label></div>
+                                        <div class='col-12 col-md-9'><input id='opcional' name='opcional' class='form-control-file' type='file'></div>
+                                    </div>
+                                    <div class='row form-group'>
+                                        <div class='col col-md-3'><label for='file-input' class=' form-control-label' >Archivo final: </label></div>
+                                        <div class='col-12 col-md-9'><input id='final' name='final' class='form-control-file' type='file'></div>
                                     </div>
                                     ";
                                 }

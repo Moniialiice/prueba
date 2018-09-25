@@ -70,8 +70,6 @@ class Oficio extends CI_Controller
                     $central = $this->input->post('central'),
                     $servicio = $this->input->post('servicio'),
                     $otrad = $this->input->post('otrad'),
-
-                    //asjdfa
                     //ruta oficio
                     $diligencia = $this->input->post('diligencias'),
                     $personalmente = $this->input->post('personalmente'),
@@ -85,7 +83,8 @@ class Oficio extends CI_Controller
                     //datos oficio    
                     $termino = $this->input->post('termino'),
                     $observaciones = $this->input->post('observaciones'),
-                    $id_entrada = $this->input->post('entrada')
+                    $id_entrada = $this->input->post('entrada'),
+                    $atencion = $this->input->post('atencion')
                 );
                 //si los datos son ingresados muestra mensaje
                 if ($query) {
@@ -124,17 +123,17 @@ class Oficio extends CI_Controller
         //consulta los datos del oficio por el id de oficio
         $datos ['datos'] = $this->Oficio_model->report($id);
         //si el termino es 0 carga formulario sólo para visualizar e imprimir oficio
-        if ($datos->termino == 0) 
-        {
+        //if ($datos->termino == "48 hrs" ) 
+        //{
             $this->load->view('templates/head');
-            $this->load->view('consulta_oficio',$datos);
+            $this->load->view('actualiza_oficio',$datos);
             $this->load->view('templates/footer');
-        //carga formulario para actualizar
+        /*carga formulario para actualizar
         }else{
             $this->load->view('templates/head');
             $this->load->view('actualiza_oficio',$datos);
             $this->load->view('templates/footer');
-        }
+        }*/
     }
     //función para descargar archivo seguimiento o final
     public function descarga()
@@ -145,7 +144,9 @@ class Oficio extends CI_Controller
     //función de actualizzación dependiendo del termino del Oficio
     public function modificaOficio()
     {
-        $ide = $this->input->post('entrada');
+        //recibe id de oficio seguimiento
+        $id_oficio = $this->input->post('id_oficio');
+        //
         if($this->input->post()){
             //datos requeridos para subir archivo y ruta a guardar 
             $config['upload_path'] = $this->folder;
@@ -154,7 +155,7 @@ class Oficio extends CI_Controller
             //carga libreria archivos e inicializa el array config con los datos del archivo
             $this->load->library('upload',$config);
             $this->upload->initialize($config);
-            //si existe algun error en los datos que contiene config, carga vista-formulario para mostrar mensaje error
+            //si archivo final esta vacio o no cumple con los datos requeridos manda mensaje de error
             if ( ! $this->upload->do_upload('final')){
                 $error = array('error' => $this->upload->display_errors());
                 $this->load->view('templates/head');
@@ -163,15 +164,18 @@ class Oficio extends CI_Controller
             }else{
                 //carga los datos del archivo
                 $upload_data = $this->upload->data();
-                //toma el nombre del archivo
+                //toma el nombre del archivo final
                 $arch_final = $upload_data['file_name'];
+                //recibe archivo opcional
+                $this->upload->do_upload('opcional');
+                //toma el nombre del archivo opcional
                 $arch_opcional = $upload_data['file_name'];            
                 $add = $this->Oficio_model->updateOficio(
                     $nomenclatura = $this->input->post('nomenclatura'),
                     $asunto = $this->input->post('asunto'),
                     $fecha = $this->input->post('fecha'),
                     //etiqueta de asuntos
-                    $colaboracion = $this->input->post('colaboracion');
+                    $colaboracion = $this->input->post('colaboracion'),
                     $amparo = $this->input->post('amparos'),
                     $solicitudes = $this->input->post('solicitudes'),
                     $gestion = $this->gestion->post('gestion'),
@@ -193,7 +197,7 @@ class Oficio extends CI_Controller
                     $informacion = $this->input->post('informacion'),
                     $central = $this->input->post('central'),
                     $servicio = $this->input->post('servicio'),
-                    $otrad = $this->input->post('otrad');
+                    $otrad = $this->input->post('otrad'),
                     //ruta de oficio
                     $diligencias = $this->input->post('diligencias'),
                     $personalmente = $this->input->post('personalmente'),
@@ -213,13 +217,14 @@ class Oficio extends CI_Controller
                 ); 
                 if($add){
                     $this->session->set_flashdata('Corecto','Creado Correctamente');
-                    $this->index($ide);
+                    $this->actualizarOficio($id_oficio);
                 }else{
                     $this->session->set_flashdata('Incorrecto','No creado');
-                    $this->index($ide);
+                    $this->actualizarOficio($id_oficio);
                 } 
             }           
         }else{
+            //recibe formulario vacio
             $this->session->set_flashdata('error','datos no recibidos');    
             $this->index($ide);
         }

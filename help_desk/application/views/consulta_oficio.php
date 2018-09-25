@@ -23,7 +23,7 @@
         <div class='page-header float-right'>
             <div class='page-title'>
                 <ol class='breadcrumb text-right'>
-                    <li><a href='imprimirOficio/".$datos->id_oficioseg."' class='fa fa-download fa-1x'></a></li>
+                    <li><a href='imprimirOficio/".$dato->id_oficioseg."' class='fa fa-download fa-1x'></a></li>
                 </ol>
             </div>
         </div>
@@ -40,23 +40,19 @@
                     <div class='card-body card-block'>
                         <form action='#' method='post' enctype='multipart/form-data' class='form-horizontal'>";
                                 echo "<div class='row form-group'>
-                                        <div class='col col-md-3'><label for='nomenclatura' class=' form-control-label'>Nomenclatura</label></div>
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Nomenclatura</label></div>
                                         <div class='col-12 col-md-9'>
-                                            <input type='text' id='disabled-input' name='nomenclatura' class='form-control' disabled>".$dato->nomenclatura."</div>
+                                            <input type='text' id='disabled-input' name='nomenclatura' class='form-control' value='".$dato->nomenclatura."' disabled></div>
                                        </div> ";
-                                echo "       <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='asunto' class=' form-control-label'>Asunto</label></div>
-                                        <div class='col-12 col-md-9'>
-                                            <input type='text' id='disable-input' name='asunto' class='form-control' disabled>".$dato->asunto."</div>
-                                       </div>";
+                                echo "<div class='row form-group'>
+                                        <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
+                                         <div class='col-12 col-md-9'>
+                                            <textarea name='asunto' id='textarea-input' rows='3' class='form-control' disabled>".$dato->asunto."</textarea></div>
+                                    </div>";
                                 echo "<div class='row form-group'>
                                             <div class='col col-md-3'><label for='fecha' class=' form-control-label'>Fecha</label></div>
-                                            <div class='col-12 col-md-9'><input type='text' id='disable-input' name='fecha' class='form-control' disabled>".$dato->fecha."</div>
+                                            <div class='col-12 col-md-9'><input type='text' id='disable-input' name='fecha' class='form-control' value='".$dato->fecha."' disabled></div>
                                         </div> ";
-                                echo "<div class='row form-group'>
-                                        <div class='col col-md-3'><label for='hora' class=' form-control-label'>Hora</label></div>
-                                        <div class='col-12 col-md-9'><input type='text' id='disable-input' name='correo' class='form-control' disabled>".$dato->hora."</div>
-                                    </div>";
                                 echo "<div class='row form-group'>
                                         <div class='col col-md-3'><label class=' form-control-label'>Etiquetas de Asuntos</label></div>
                                         <div class='col col-md-9'>
@@ -217,7 +213,6 @@
                                                     </label>
                                                 </div>";
                                         }
-
                                           echo "                                         
                                             </div>
                                         </div>     
@@ -278,7 +273,7 @@
                                                     </label>
                                                 </div>";
                                         }
-                                        if($dato->fiscal_genral == 1){
+                                        if($dato->fiscal_general == 1){
                                             echo "<div class='checkbox'>
                                                     <label for='checkbox5' class='form-check-label'>
                                                         <input type='checkbox' id='checkbox5' name='fgeneral' value='1' class='form-check-input' checked disabled> Fiscal General
@@ -343,7 +338,7 @@
                                                     </label>
                                                 </div>";
                                         }
-                                        if($dato->servicio_carrera1== 1){
+                                        if($dato->servicio_carrera== 1){
                                             echo"<div class='checkbox'>
                                                     <label for='checkbox10' class='form-check-label'>
                                                         <input type='checkbox' id='checkbox10' name='servicio' value='1' class='form-check-input' disabled checked> Servicio Carrera
@@ -359,12 +354,12 @@
                                         if($dato->otra != " "){
                                             echo "<div class='checkbox'>
                                                         <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
-                                                        <div class='col-12 col-md-9'><textarea name='otra' id='textarea-input' rows='5' placeholder='' class='form-control' disabled>".$dato->otra."</textarea></div>
+                                                        <div class='col-12 col-md-9'><textarea name='otrad' id='textarea-input' rows='5' placeholder='' class='form-control' disabled>".$dato->otra."</textarea></div>
                                                    </div>";
                                         }else{
                                             echo "<div class='checkbox'>
                                                         <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
-                                                        <div class='col-12 col-md-9'><textarea name='otra' id='textarea-input' rows='5' placeholder='' class='form-control disabled'></textarea></div>
+                                                        <div class='col-12 col-md-9'><textarea name='otrad' id='textarea-input' rows='5' placeholder='' class='form-control disabled'></textarea></div>
                                                     </div>";
                                         }
                                         echo "
@@ -401,7 +396,7 @@
                                                         </label>
                                                    </div>";
                                          }
-                                         if($dato->gestionar_perticion == 1){
+                                         if($dato->gestionar_peticion == 1){
                                              echo "<div class='checkbox'>
                                                         <label for='checkbox3' class='form-check-label'>
                                                             <input type='checkbox' id='checkbox3' name='gestionar' value='1' class='form-check-input' checked disabled> Gestionar Petición y Permitir Constancias que Acrediten la Atención Brindada
@@ -443,8 +438,8 @@
                                                 </div>
                                             </div>        
                                        </div>";
-                                echo "<div class='row form form-group'>
-                                        <div class='col col-md-3'><label class='form-control-label'>Informar A:</label></div>
+                                echo "<div class='row form-group'>
+                                        <div class='col col-md-3'><label class='form-control-label'>Informar a:</label></div>
                                         <div class='col col-md-9'>
                                             <div class='form-check'>";
                                         if($dato->esta_oficina == 1){
@@ -463,13 +458,13 @@
                                         if($dato->peticionario == 1){
                                             echo "<div class='checkbox'>
                                                     <label for='checkbox3' class='form-check-label'>
-                                                        <input type='checkbox' id='checkbox2' name='peticionario' value='1' class='orm-check-input' checked disabled> Peticionario
+                                                        <input type='checkbox' id='checkbox2' name='peticionario' value='1' class='form-check-input' checked disabled> Peticionario
                                                     </label>
                                                 </div>";
                                         }else{
                                             echo "<div class='checkbox'>
                                                     <label for='checkbox3' class='form-check-label'>
-                                                        <input type='checkbox' id='checkbox2' name='peticionario' value='1' class='orm-check-input' disabled> Peticionario
+                                                        <input type='checkbox' id='checkbox2' name='peticionario' value='1' class='form-check-input' disabled> Peticionario
                                                     </label>
                                                 </div>";
                                         }
@@ -494,23 +489,39 @@
                                     
                                     <div class='row form-group'>
                                         <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Termino:</label></div>
-                                        <div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' placeholder='' class='form-control' disabled>".$dato->termino."</div>
+                                        <div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control' value='".$dato->termino."' disabled></div>
                                     </div>
                                     <div class='row form-group'>
                                         <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones</label></div>
-                                        <div class='col-12 col-md-9'><textarea name='observaciones' id='textarea-input' rows='9' placeholder='' class='form-control' disabled>".$dato->observaciones."</textarea></div>
+                                        <div class='col-12 col-md-9'><textarea name='observaciones' id='textarea-input' rows='9' class='form-control' disabled>".$dato->observaciones."</textarea></div>
                                     </div>";
+                                    echo "
+                                    <div class='row form-group'>
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Atención:</label></div>
+                                        <div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."' disabled></div>
+                                    </div>";  
                                     if($dato->arch_seguimiento != ""){
                                         echo"<div class='row form-group'>
-                                                <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label'>Archivo Seguimiento (Opcional)</label></div>
+                                                <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label'>Archivo Seguimiento (Opcional):</label></div>
                                                 <div class='col-12 col-md-9'><a href='descargarOficio/".$dato->arch_seguimiento."' class='fa fa-download fa-1x'></a></div>
                                             </div>";
+                                    }else{
+                                        echo"<div class='row form-group'>
+                                                <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label'>Sin Archivo Seguimiento </label></div>
+                                            </div>";
+                                    }
+                                    if($dato->arch_final != ""){
+                                        echo"<div class='row form-group'>
+                                                <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label' >Archivo final:</label></div>
+                                                <div class='col-12 col-md-9'><a href='descargarOficio/".$dato->arch_final."' class='fa fa-download fa-1x'></a></div>
+                                            </div>";
+                                    }else{
+                                        echo"<div class='row form-group'>
+                                                <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label' >Sin Archivo final</label></div>
+                                            </div>";
                                     }    
-                                echo"    
-                                    <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label' >Archivo final</label></div>
-                                        <div class='col-12 col-md-9'><a href='descargarOficio/".$dato->arch_final."' class='fa fa-download fa-1x'></a></div>
-                                    </div>";
+                                
+                                   
                                 }
                             ?>
                     </div> <!-- card-body-->
