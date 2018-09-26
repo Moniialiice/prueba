@@ -82,13 +82,26 @@ class Oficio_model extends CI_Model{
         $query = $this->db->query("SELECT o.id_oficioseg,o.nomenclatura, o.fecha, o.termino, o.observaciones, o.arch_seguimiento, o.arch_final, o.asunto, a.colaboracion, a.amparos, a.solicitudes, a.gestion, a.cursos_capacitaciones, a.juzgados, a.recursos_humanos, a.telefonia, a.estadistica, a.relaciones_interis, a.boletas_audiencia, a.copias_conocimiento, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, i.esta_oficina, i.peticionario, i.institucion_requiriente, r.realiza_diligencias, r.recibir_personalmente, r.gestionar_peticion, r.archivo, r.otras, en.id_oficioEntrada, en.no_oficioEntrada, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, etiquetas_asunto AS a, informar AS i, ruta_oficio AS r, oficio_entrada AS en, usuario AS u WHERE d.id_destinatario = o.id_destinatario AND o.id_oficioEntrada = en.id_oficioEntrada AND u.id_usuario = o.atencion AND id_oficioseg = '$id' ");
         return $query->result();
     }
+    //consulta para actualizar
+    public function updateOficio($observaciones,$termino,$arch_opcional,$arch_final,$id){
+        $query = $this->db->query("UPDATE oficio_seguimiento SET observaciones = '$observaciones', termino = '$termino', arch_seguimiento = '$arch_opcional', arch_final = '$arch_final' WHERE id_oficioseg = '$id'");
+        if($query){
+            return TRUE; 
+        }else{
+            return FALSE;
+        }
+    }
     //consulta de oficio y destinatario mediante el id para generar reporte en pdf 
-    public function reportOficio()
+    public function reportOficio($id)
     {
-        $query = $this->db->query("SELECT o.nomenclatura, o.fecha, o.hora, o.asunto, o.termino, o.atencion, o.observaciones, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra FROM oficio_seguimiento AS o, destinatario AS d  WHERE d.id_destinatario = o.id_destinatario ");
+        $query = $this->db->query("SELECT o.id_oficioseg, o.nomenclatura, o.fecha, o.termino, o.observaciones, o.asunto, a.colaboracion, a.amparos, a.solicitudes, a.gestion, a.cursos_capacitaciones, a.juzgados, a.recursos_humanos, a.telefonia, a.estadistica, a.relaciones_interis, a.boletas_audiencia, a.copias_conocimiento, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, i.esta_oficina, i.peticionario, i.institucion_requiriente, r.realiza_diligencias, r.recibir_personalmente, r.gestionar_peticion, r.archivo, r.otras, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, etiquetas_asunto AS a, informar AS i, ruta_oficio AS r,usuario AS u WHERE d.id_destinatario = o.id_destinatario AND u.id_usuario = o.atencion AND id_oficioseg = '$id'");
         return $query->result();
     }
-    public function updateOficio($id){
-        $query = $this->db->query("UPDATE oficio_seguimiento SET arch_final='', apellidop = '$app', apellidom = '$apm', activo = '$activo', usuario = '$usuario', password = '$password', id_tipoUsuario = '$tipoUser', id_dependencias = '$dependencia' WHERE id_usuario = '$id'");
+    //consulta prueba par a pdf
+    public function reportU($id)
+    {
+        $query = $this->db->query("SELECT * FROM usuario");
+        return $query->result();
     }
+
 }

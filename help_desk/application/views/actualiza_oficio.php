@@ -36,8 +36,17 @@
                     <div class='card-header'>
                         <strong>Actualiza Oficio Seguimiento</strong>
                     </div>
-                    <div class='card-body card-block'>
-                        <form action='#' method='post' enctype='multipart/form-data' class='form-horizontal'>";
+                    <div class='card-body card-block'>";
+                     //Mensajes
+                     if($this->session->flashdata('Modificado')){
+                        echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Datos modificados correctamente.</label></div>";
+                    }else{if($this->session->flashdata('No')){
+                        echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Datos no modificados.</label></div>";
+                    }
+                    }if($this->session->flashdata('Error')){
+                        echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Consultar administrador.</label></div>";
+                    }
+            echo "<br>      <form action='actualizaOficio' method='post' enctype='multipart/form-data' class='form-horizontal'>";
                                 echo "<div class='row form-group'>
                                         <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Nomenclatura</label></div>
                                         <div class='col-12 col-md-9'>
@@ -218,7 +227,7 @@
                                         </div>     
                                       </div>";
                                         echo "<div class='row form-group'>
-                                        <div class='col col-md-3'><label class=' form-control-label'>Dirigido A:</label></div>
+                                        <div class='col col-md-3'><label class=' form-control-label'>Dirigido a:</label></div>
                                         <div class='col col-md-9'>
                                             <div class='form-check'>";
                                         if($dato->conase == 1){
