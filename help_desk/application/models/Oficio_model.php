@@ -83,7 +83,8 @@ class Oficio_model extends CI_Model{
         return $query->result();
     }
     //consulta para actualizar
-    public function updateOficio($observaciones,$termino,$arch_opcional,$arch_final,$id){
+    public function updateOficio($observaciones,$termino,$arch_opcional,$arch_final,$id)
+    {
         $query = $this->db->query("UPDATE oficio_seguimiento SET observaciones = '$observaciones', termino = '$termino', arch_seguimiento = '$arch_opcional', arch_final = '$arch_final' WHERE id_oficioseg = '$id'");
         if($query){
             return TRUE; 

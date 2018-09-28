@@ -62,6 +62,7 @@ h4{
 	header("Content-Type: text/html;charset=ISO-8859-1");
 
 ?>
+
 <TABLE>
 	<TR><th align="center"><h2> ORDEN DE SERVICIO </h2></th></TR>
 	<TR><td>&nbsp;</td></TR>

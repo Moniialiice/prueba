@@ -124,10 +124,9 @@ class Oficio extends CI_Controller
         //consulta los datos del oficio por el id de oficio
         $datos ['datos'] = $this->Oficio_model->report($id);
         //manda datos de la consulta a la vista, donde se valida el  termino para
-        //mostrar el tipo de formulario
             $this->load->view('templates/head');
             $this->load->view('consulta_oficio',$datos);
-            $this->load->view('templates/footer');
+            $this->load->view('templates/footer');    
     }
     //función para descargar archivo seguimiento o final
     public function descarga($name)
@@ -181,7 +180,7 @@ class Oficio extends CI_Controller
     //función para craar pdf
     public function imprimirOficio($id)
     {
-        $datos['dato'] = $this->Oficio_model->reportU($id);
+        $datos['dato'] = $this->Oficio_model->reportOficio($id);
         //var_dump($peticiones);
         $html = $this->load->view('oficio_pdf', $datos, true);
         //this the the PDF filename that user will get to download

@@ -39,20 +39,29 @@ gtag('config', 'UA-23581568-13');
         })
     }); 
     
-    //Búsqueda de usuario
+    /*Búsqueda de usuario*/
    $(function (e) {
         $('#usuario').submit(function (e) {
             e.preventDefault()
             $('#results').load('muestraUsuario' + $('#usuario').serialize()
         })
     });
-
+    /*busqueda de oficio */
     $(function (e){
         $('#oficio').submit(function (e){
             e.preventDefault()
             $('#results').load('resultOficio' + $('#oficio').serialize())
         })
     });
+    /*link de pdf*/
+    $(#function(e){
+        $('#pdf').click(function {
+            e.preventDefault()
+            
+        })
+    });
+        
+    
          
 </script>
 
