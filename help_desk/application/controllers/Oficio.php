@@ -190,7 +190,7 @@ class Oficio extends CI_Controller
         //Tamaño de pdf
         //var_dump($data);
         $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
-        $pdf->segundaHoja = true;
+        $pdf->segundaHoja = false;
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
         $pdf->SetHeaderMargin(20);

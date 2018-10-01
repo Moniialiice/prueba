@@ -34,9 +34,9 @@ gtag('config', 'UA-23581568-13');
     /*Búsqueda de oficio recepción*/
     $(function(e){
         $('#entrada').submit(function (e){
-            e.preventDefault()
-            $('#results').load('resultEntrada' + $('#entrada').serialize())
-        })
+            e.preventDefault();
+            $('#results').load('resultEntrada' + $('#entrada').serialize());
+        });
     }); 
     
     /*Búsqueda de usuario*/
