@@ -25,14 +25,18 @@
                     <strong class="card-title">Oficio Recepción</strong>
                 </div>
                 <div class="card-body">
-                    <div class="form-inline">
-                        <form class="search-form" action="resultEntrada" method="post" id="entrada">
-                            <div class="col col-md-5"><label class="search-form label" >Búsqueda por número de oficio</label></div>
-                            <input class="form-control mr-sm-3" type="text" placeholder="" id="text-input" name='busqueda'>
-                            <button class="search-form" type="submit" id=""><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                    <div  class="card-body card-block" id="results"></div>
+                        <div class="form-inline">
+                            <form class="search-form" action="resultEntrada" method="post" id="entrada" name='entrada'>
+                                <div class="col col-md-5"><label for="text-input" class="form-control-label" >Búsqueda por número de oficio</label></div>
+                                    <input class="form-control mr-sm-3" type="text-input" id="text-input" name='busqueda'>
+                                <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha</label></div>
+                                    <input class="form-control mr-sm-3" type='text-input' class="form-control" id="datepicker" name="date1">
+                                <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha</label></div>
+                                    <input class="form-control mr-sm-3" type="text-input" class="form-control" id="datepickerf" name="date2">
+                                <button type="submit" id=""><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <div  class="card-body card-block" id="results"></div>
                     <table class="table">
                         <thead>
                             <tr>

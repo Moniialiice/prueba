@@ -26,7 +26,7 @@
                 </div>
                 <div class="card-body">
                     <div class="form-inline">
-                        <form class="search-form" action="muestraUsuario" method="post" id="usuario">
+                        <form class="search-form" action="consultaUsuario" method="post" id="usuario" name="usuario">
                             <div class="col col-md-5"><label class="search-form label" >Búsqueda por nombre de usuario</label></div>
                             <input class="form-control mr-sm-2" type="text" placeholder="Nombre" id="text-input" name='busqueda'>
                             <button class="search-form mr-sm-2" type="submit" id=""><i class="fa fa-search"></i></button>
@@ -40,3 +40,11 @@
       </div>
   </div>
 </div>
+<script type='text/javascript'>
+   $(function(e){
+        $('#usuario').submit(function(e){
+            e.preventDefault()
+            $('#results').load('muestraUsuario') + $('#usuario').serialize()
+        })
+    })
+</script>

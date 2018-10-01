@@ -15,7 +15,7 @@ class Usuario extends CI_Controller
     {
         parent::__construct();
         $this->load->library('pagination');
-        $this->load->helper('url');
+        $this->load->helper(array('url','form'));
         $this->load->library('session');
         $this->load->library('encrypt');
         $this->load->model('Usuario_model');
@@ -63,7 +63,7 @@ class Usuario extends CI_Controller
                     $app = $this->input->post('app'),
                     $apm = $this->input->post('apm'),
                     $user = $this->input->post('user'),
-                    $passw,
+                    $pass,
                     $activo = $this->input->post('activo'),
                     $tipoUser = $this->input->post('tipUsuario'),
                     $dependencia = $this->input->post('dependencia'));
@@ -125,9 +125,7 @@ class Usuario extends CI_Controller
     {
         $search = $this->input->post('busqueda');
         $datos['datos'] = $this->Usuario_model->search_usuario($search);
-        $this->load->view('templates/head');
         $this->load->view('all_usuarios',$datos);
-        $this->load->view('templates/footer');
     }
     //carga vista con los  datos del usuario para modificar además de los tipos de usuario
     public function actualizarUsuario($id)
@@ -160,8 +158,7 @@ class Usuario extends CI_Controller
                         $user = $this->input->post('user'),
                         $pass,
                         $tipoUser = $this->input->post('tipUsuario'),
-                        $dependencia = $this->input->post('dependencia')
-                    );  
+                        $dependencia = $this->input->post('dependencia'));  
                     //mensajes
                     if($query == TRUE){
                         $this->session->set_flashdata('Modificado','Datos modificados correctamente');

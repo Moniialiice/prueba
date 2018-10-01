@@ -26,42 +26,18 @@ gtag('config', 'UA-23581568-13');
 <-- evento -->
 
 <script>
-    $("#target").submit(function(event) {
+    /*$("#target").submit(function(event) {
         alert( "Alerta target" );
         event.preventDefault();
     });
 
-    /*Búsqueda de oficio recepción*/
-    $(function(e){
-        $('#entrada').submit(function (e){
-            e.preventDefault();
-            $('#results').load('resultEntrada' + $('#entrada').serialize());
-        });
-    }); 
-    
-    /*Búsqueda de usuario*/
-   $(function (e) {
-        $('#usuario').submit(function (e) {
-            e.preventDefault()
-            $('#results').load('muestraUsuario' + $('#usuario').serialize()
-        })
-    });
-    /*busqueda de oficio */
+    /*busqueda de oficio*
     $(function (e){
         $('#oficio').submit(function (e){
             e.preventDefault()
             $('#results').load('resultOficio' + $('#oficio').serialize())
         })
-    });
-    /*link de pdf*/
-    $(#function(e){
-        $('#pdf').click(function {
-            e.preventDefault()
-            
-        })
-    });
-        
-    
+    });*/
          
 </script>
 
