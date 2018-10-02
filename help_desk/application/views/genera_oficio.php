@@ -265,12 +265,18 @@
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Termino:</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="termino" placeholder="" class="form-control"></div>
+                                <div class="col col-md-3"><label for="select" class=" form-control-label"> Termino:</label></div>
+                                    <div class="col col-md-9">
+                                        <select name="termino" id="termino" class=" form-control">
+                                            <option value="0">00:00 hrs</option>
+                                            <option value="1">24:00 hrs</option>
+                                            <option value="2">48:00 hrs</option>
+                                        </select>    
+                                    </div>    
                             </div>
                             <div class="row form-group">
                                 <div class="col col-sm-3"><label for="textarea-input" class=" form-control-label">Observaciones</label></div>
-                                <div class="col-12 col-md-9"><textarea name="observaciones" id="textarea-input" rows="9" placeholder="" class="form-control"></textarea></div>
+                                <div class="col col-md-9"><textarea name="observaciones" id="textarea-input" rows="9" placeholder="" class="form-control"></textarea></div>
                             </div>
                             <div class="row form-group">
                                 <div class= "col col-md3"><label for="text-input" class="form-control-label">Atención</label></div>

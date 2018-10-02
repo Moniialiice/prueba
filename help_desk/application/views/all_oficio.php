@@ -100,9 +100,15 @@
                                   }
 
                                 echo "</td>".
-                                    "<td>".$dato->asunto."</td>".
-                                    "<td>".$dato->termino."</td>".
-                                    "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
+                                    "<td>".$dato->asunto."</td>";
+                                if($dato->termino == 0){
+                                    echo "<td> 00:00 hrs </td>";
+                                }if($dato->termino == 1){
+                                    echo "<td> 24:00 hrs </td>";
+                                }if($dato->termino == 2){
+                                    echo "<td> 48:00 hrs </td>";
+                                }    
+                                echo"<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                                     "<td align='center'><a href='muestraOficio/".$dato->id_oficioseg."' class='fa fa-file fa-1x'></a></td>".
                                 "</tr>";
 

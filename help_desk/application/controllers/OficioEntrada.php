@@ -89,7 +89,7 @@ class OficioEntrada extends CI_Controller
             redirect('nuevaEntrada');
         }    
     }
-    //carga la vista para la busqueda  de oficios entrada
+    //carga la vista para la busqueda de oficios entrada
     public function busquedaEntrada ()
     {
         $this->load->view('templates/head');

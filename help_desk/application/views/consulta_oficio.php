@@ -498,11 +498,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Termino:</label></div>
-                                        <div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control' value='".$dato->termino."' disabled></div>
-                                    </div>
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Termino:</label></div>";
+                                    if($dato->termino == 0){
+                                        echo "<div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control' value='00:00 hrs' disabled></div>";
+                                    }    
+                              echo "</div>
                                     <div class='row form-group'>
                                         <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones</label></div>
                                         <div class='col-12 col-md-9'><textarea name='observaciones' id='textarea-input' rows='9' class='form-control' disabled>".$dato->observaciones."</textarea></div>
@@ -1021,8 +1022,26 @@
                                         </div>
                                         
                                         <div class='row form-group'>
-                                            <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Termino: </label></div>
-                                            <div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' value='".$dato->termino."' class='form-control'></div>
+                                            <div class='col col-md-3'><label for='select' class=' form-control-label'> Termino:</label></div>
+                                            <div class='col col-md-9'>
+                                                <select name='termino' id='termino' class=' form-control'>";
+                                                    if($dato->termino == 0){
+                                                    echo "<option value='0'>00:00 hrs</option>
+                                                            <option value='1'>24:00 hrs</option>
+                                                            <option value='2'>48:00 hrs</option>";
+                                                    }if($dato->termino == 1)
+                                                        {
+                                                            echo "<option value='1'>24:00 hrs</option>
+                                                                  <option value='2'>48:00 hrs</option>
+                                                                  <option value='0'>00:00 hrs</option>"; 
+                                                        }if($dato->termino == 2)
+                                                            {
+                                                                echo "<option value='2'>48:00 hrs</option>
+                                                                      <option value='0'>00:00 hrs</option>
+                                                                      <option value='1'>24:00 hrs</option>";
+                                                            }                                                   
+                                        echo "  </select>    
+                                            </div> 
                                         </div>
                                         <div class='row form-group'>
                                             <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones: </label></div>
@@ -1032,11 +1051,21 @@
                                             <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Atención: </label></div>
                                             <div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."' disabled></div>
                                         </div>
-                                        <div><label for='text-input' class='form-control-label fa fa-exclamation' > Archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>
-                                        <div class='row form-group'>
+                                        <div><label for='text-input' class='form-control-label fa fa-exclamation' > Archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>";
+                                if($dato->arch_seguimiento == "")
+                                {
+                                    echo "<div class='row form-group'>
                                             <div class='col col-md-3'><label for='file-input' class=' form-control-label'>Archivo Seguimiento (Opcional): </label></div>
                                             <div class='col-12 col-md-9'><input id='opcional' name='opcional' class='form-control-file' type='file'></div>
-                                        </div>
+                                          </div>";
+                                }else{
+                                    echo"<div class='row form-group'>
+                                            <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label'>Archivo Seguimiento (Opcional):</label></div>
+                                            <div class='col-12 col-md-9'><a href='descargarOficio/".$dato->arch_seguimiento."' class='fa fa-download fa-2x'></a></div>
+                                            <input type='text' name='opcional' value='".$dato->arch_seguimiento."' hidden >
+                                        </div>";
+                                }
+                                    echo"    
                                         <div class='row form-group'>
                                             <div class='col col-md-3'><label for='file-input' class=' form-control-label' >Archivo final: </label></div>
                                             <div class='col-12 col-md-9'><input id='final' name='final' class='form-control-file' type='file'></div>
