@@ -35,6 +35,7 @@
                             }if($this->session->flashdata('Error')){
                                 echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Consultar administrador.</label></div>";
                             }
+                            echo validation_errors();
                         ?>
                         <br>
                         <form action='actualizaUsuario' method='post' enctype='multipart/form-data' class='form-horizontal'>
@@ -61,15 +62,18 @@
                                     <div class='row form-group'>
                                         <div class='col col-md-3'><label for='' class='form-control-label'>Usuario</label></div>
                                         <div class='col-12 col-md-9'><input type='text' id='text-input' name='user' class='form-control' value='".$dato->usuario."'></div>
-                                    </div>";                  
-                                    echo "<div class='row form-group'>
+                                    </div>
+                                    <div class='row form-group'>
                                         <div class='col col-md-3'><label for='' class='form-control-label'>Contraseña</label></div>
                                         <div class='col-12 col-md-9'><input type='password' id='text-input' name='password' class='form-control' value='".$dato->password."'></div>
-                                    </div>";                    
-                                echo "    
+                                    </div>
                                     <div class='row form-group'>
                                         <div class='col col-md-3'><label for='' class='form-control-label'>Nueva Contraseña</label></div>
-                                        <div class='col-12 col-md-9'><input type='password' id='text-input' name='password1' class='form-control'></div>
+                                        <div class='col-12 col-md-9'><input type='password' id='text-input' name='newps' class='form-control'></div>
+                                    </div>   
+                                    <div class='row form-group'>
+                                        <div class='col col-md-3'><label for='' class='form-control-label'>Repetir Nueva Contraseña</label></div>
+                                        <div class='col-12 col-md-9'><input type='password' id='text-input' name='newpsr' class='form-control'></div>
                                     </div>";
                                 if($dato->activo !=0 ){
                                     echo " <div class='row form-group'>

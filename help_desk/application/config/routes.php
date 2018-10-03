@@ -59,11 +59,11 @@ $route['index'] = 'Home/inicio';
 $route['close'] = 'Home/cerrarSesion';
 //Usuario
 $route['nuevoUsuario'] = 'Usuario/generaUsuario';
-$route['insertaU'] = 'Usuario/altaUsuario';
+$route['insertaU'] = 'Usuario/altaUsuarioVal';
 $route['consultaUsuario'] = 'Usuario/busquedaUsuario';
 $route['muestraUsuario'] = 'Usuario/consultaUsuario';
 $route['datosUsuario/(:num)'] = 'Usuario/actualizarUsuario/$1';
-$route['actualizaUsuario'] = 'Usuario/modificaUsuario';
+$route['actualizaUsuario'] = 'Usuario/modificaUsuarioVal';
 //rutas oficio de entrada
 $route['nuevaEntrada'] = 'OficioEntrada/generaEntrada';
 $route['insertaEntrada'] = 'OficioEntrada/createOEntrada';

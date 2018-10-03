@@ -142,7 +142,7 @@ class Oficio extends CI_Controller
         $id_oficio = $this->input->post('id_oficio');
         //
         if($this->input->post()){           
-            //valida si archivo aopcional existe
+            //valida si archivo opcional existe
             if( ! $this->input->post('opcional') ){
                 //datos requeridos para subir archivo y ruta a guardar 
                 $config['upload_path'] = $this->folder;
@@ -176,8 +176,7 @@ class Oficio extends CI_Controller
                 }else{
                     $this->session->set_flashdata('No','No creado');
                     $this->actualizarOficio($id_oficio);
-                }                
-                        
+                }                            
             }else{
                 //datos requeridos para subir archivoa y ruta a guardar
                 $config['upload_path'] = $this->folder;

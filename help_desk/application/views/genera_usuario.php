@@ -37,41 +37,43 @@ if($this->session->flashdata('correcto'))?>
                     <div class="card-body card-block">
                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div>                       
                         <?php
-                            //Mensajes
+                            //Mensajes de error
                             if($this->session->flashdata('Creado')){
                                 echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Usuario creado correctamente.</label></div>";
-                            }else{if($this->session->flashdata('No Creado')){
+                            }else{if($this->session->flashdata('No')){
                                 echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Datos no ingresados.</label></div>";
                             }
                             }
                             if($this->session->flashdata('Error')){
                                 echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Consultar administrador.</label></div>";
-                            }if($this->session->flashdata('Existe')){
-                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'>  Usuario ya existe.</label></div>";
                             }
-
+                            echo validation_errors();
                         ?>
                         <br>
                         <form action="insertaU" method="post" enctype="multipart/form-data" class="form-horizontal" id="target"><!-- route de la función que inserta los datos //insertaU--->
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nombre</label></div>
-                                <div class="col-12 col-md-12"><input type="text" id="text-input" name="name" placeholder="" class="form-control"></div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Apellido Materno</label></div>
-                                <div class="col-12 col-md-12"><input type="text" id="text-input" name="app" placeholder="" class="form-control"></div>
+                                <div class="col-12 col-md-12"><input type="text" id="text-input" name="name" placeholder="" class="form-control" value="<?php echo set_value('name'); ?>"></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Apellido Paterno</label></div>
-                                <div class="col-12 col-md-12"><input type="text" id="text-input" name="apm" placeholder="" class="form-control"></div>
+                                <div class="col-12 col-md-12"><input type="text" id="text-input" name="app" placeholder="" class="form-control" value="<?php echo set_value('app'); ?>"></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Apellido Materno</label></div>
+                                <div class="col-12 col-md-12"><input type="text" id="text-input" name="apm" placeholder="" class="form-control" value="<?php echo set_value('apm');?>"></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Usuario</label></div>
-                                <div class="col-12 col-md-12"><input type="text" id="text-input" name="user" placeholder="" class="form-control"></div>
+                                <div class="col-12 col-md-12"><input type="text" id="text-input" name="user" placeholder="" class="form-control" value="<?php echo set_value('user');?>"></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Contraseña</label></div>
-                                <div class="col-12 col-md-12"><input type="password" id="text-input" name="password" placeholder="" class="form-control"></div>
+                                <div class="col-12 col-md-12"><input type="password" id="text-input" name="password" placeholder="" class="form-control" value="<?php echo set_value('password');?>"></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Repetir Contraseña</label></div>
+                                <div class="col-12 col-md-12"><input type="password" id="text-input" name="passwordr" placeholder="" class="form-control"></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Activo</label></div>
