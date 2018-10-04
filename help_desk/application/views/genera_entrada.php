@@ -34,7 +34,7 @@
                         <strong>Generar Oficio Recepción</strong>
                     </div>
                     <div class="card-body card-block">
-                        <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div>
+                        <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
                         <?php
                             //Mensajes
                             if($this->session->flashdata('Creado')){
@@ -43,20 +43,15 @@
                                 if($this->session->flashdata('No Creado')){
                                     echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción no creado.</label></div>";
                                 }
-                            }
-                                if($this->session->flashdata('Existente')){
-                                    echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> El oficio ya existe.</label></div>";
-                                }if($this->session->flashdata('Error')){
+                            }if($this->session->flashdata('Error')){
                                     echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos</label></div>";
                                 }
+                                echo validation_errors();    
                         ?>
-                        <?php echo validation_errors(); ?>
-                        <?php if(isset($error)){print $error;}?>
-                        <br>
                         <form action="insertaEntrada" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Oficio</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="no_oficio" placeholder="" class="form-control"></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="no_oficio" class="form-control" value="<?php echo set_value('no_oficio'); ?>" ></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Recepción</label></div>
@@ -65,7 +60,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar"></span>
                                         </span>
-                                        <input type='text-input' class="form-control" id="datepicker" name="fecha">
+                                        <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha'); ?>">
                                     </div>
                                 </div>
                             </div>
@@ -76,17 +71,17 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar"></span>
                                         </span>
-                                        <input type="text-input" class="form-control" id="datepickerf" name="fecha_real">
+                                        <input type="text-input" class="form-control" id="datepickerf" name="fecha_real" value="<?php echo set_value('fecha_real'); ?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label"> Firma Origen</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="firma" placeholder="" class="form-control"></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="firma" placeholder="" class="form-control" value="<?php echo set_value('firma'); ?>"></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label"> Peticion</label></div>
-                                <div class="col-12 col-md-9"><textarea name="peticion" id="textarea-input" rows="5" placeholder="" class="form-control"></textarea></div>
+                                <div class="col-12 col-md-9"><textarea name="peticion" id="textarea-input" rows="5" placeholder="" class="form-control"><?php echo set_value('peticion'); ?></textarea></div>
                             </div>
                             <div class="row form-group">
                                  <div class="col col-md-3"><label for="file-input" class="form-control-label"> Archivo Entrada</label></div>

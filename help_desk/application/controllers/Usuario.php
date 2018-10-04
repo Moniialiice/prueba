@@ -37,12 +37,9 @@ class Usuario extends CI_Controller
     //inserta nuevo usuario con validaciones
     public function altaUsuarioVal()
     {
-        //mensaje de error de la validación
-        $this->form_validation->set_message('required', '%s es obligatorio.');
-        //$this->form_validation->set_message('numeric', '%s debe ser numérico.');
         if($this->input->post())
         {   
-            //recibe campos de formulario
+            //recibe datos de formulario
             $name = $this->input->post('name');
             $app = $this->input->post('app');
             $apm = $this->input->post('apm');

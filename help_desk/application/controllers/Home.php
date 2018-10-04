@@ -26,8 +26,6 @@ class Home extends CI_Controller {
 	//función recibe datos del formulario, valida para iniciar sesion
     public function validaDatos()
     {
-        //mensaje de error de la validación de la librería sí los campos estan vacios
-        $this->form_validation->set_message('required', '%s Incorrecto');
         if($this->input->post())
         {
             $user = $this->input->post('username');
