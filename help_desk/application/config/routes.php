@@ -75,7 +75,7 @@ $route['muestraEntrada'] = 'OficioEntrada/reportEntradaId';
 
 //rutas de seguimiento oficio
 $route['nuevoSeguimiento/(:any)'] = 'Oficio/index/$1';
-$route['insertaOficio'] = 'Oficio/createOficio';
+$route['insertaOficio'] = 'Oficio/createOficioVal';
 $route['consultaOficio'] = 'Oficio/busquedaOficio';
 $route['resultOficio'] = 'Oficio/consultaOficio';
 $route['muestraOficio/(:num)'] = 'Oficio/actualizarOficio/$1';

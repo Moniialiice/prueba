@@ -42,16 +42,6 @@ class Usuario_model extends CI_Model
         $query = $this->db->query("SELECT * FROM dependencias ORDER BY dependencias ASC");
         return $query->result();
     }
-    //valida si el usuario existe
-    public function validaUs ($val)
-    {
-        $query = $this->db->query("SELECT usuario FROM usuario WHERE usuario = '$val'");
-        if($query){
-            return TRUE;
-        }else{
-            return FALSE;
-        }
-    }
     //inserta los datos del usuario
     public function createUsuario($name,$app,$apm,$user,$pass,$activo,$tipoUser,$dependencia)
     {

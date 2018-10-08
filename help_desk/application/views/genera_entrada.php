@@ -31,21 +31,21 @@
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Generar Oficio Recepción</strong>
+                        <strong>Datos Oficio Recepción</strong>
                     </div>
                     <div class="card-body card-block">
-                        <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
+                        <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div>
                         <?php
                             //Mensajes
                             if($this->session->flashdata('Creado')){
                                 echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción creado correctamente.</label></div>";
-                            }else{
-                                if($this->session->flashdata('No Creado')){
-                                    echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción no creado.</label></div>";
-                                }
-                            }if($this->session->flashdata('Error')){
-                                    echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos</label></div>";
-                                }
+                            }
+                            if($this->session->flashdata('No')){
+                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción no creado.</label></div>";                            
+                            }
+                            if($this->session->flashdata('Error')){
+                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos</label></div>";
+                            }
                                 echo validation_errors();    
                         ?>
                         <form action="insertaEntrada" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -56,22 +56,22 @@
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Recepción</label></div>
                                 <div class="col-12 col-md-9">
-                                    <div class='input-group' >
+                                    <div class='input-group' >                                        
+                                        <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha'); ?>">
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar"></span>
                                         </span>
-                                        <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha'); ?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Real</label></div>
                                 <div class="col-12 col-md-9">
-                                    <div class="input-group">
+                                    <div class="input-group">                                        
+                                        <input type="text-input" class="form-control" id="datepickerf" name="fecha_real" value="<?php echo set_value('fecha_real'); ?>">
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar"></span>
                                         </span>
-                                        <input type="text-input" class="form-control" id="datepickerf" name="fecha_real" value="<?php echo set_value('fecha_real'); ?>">
                                     </div>
                                 </div>
                             </div>
@@ -84,8 +84,8 @@
                                 <div class="col-12 col-md-9"><textarea name="peticion" id="textarea-input" rows="5" placeholder="" class="form-control"><?php echo set_value('peticion'); ?></textarea></div>
                             </div>
                             <div class="row form-group">
-                                 <div class="col col-md-3"><label for="file-input" class="form-control-label"> Archivo Entrada</label></div>
-                                 <div class="col-12 col-md-9"><input id="file-input" name="entrada" class="form-control-file" type="file" size="100"></div>
+                                 <div class="col col-md-3"><label for="file-input" class="form-control-label"> Archivo Entrada (Imagen o PDF)</label></div>
+                                 <div class="col-12 col-md-9"><input id="file-input" name="entrada" class="form-control-file" type="file" ></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label"> Atención</label></div>

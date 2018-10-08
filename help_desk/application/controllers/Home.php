@@ -29,8 +29,7 @@ class Home extends CI_Controller {
         if($this->input->post())
         {
             $user = $this->input->post('username');
-            $pass = $this->input->post('password');           
-
+            $pass = $this->input->post('password');
             //Validamos que los campos no esten vacios con la libreria
             $this->form_validation->set_rules('username', 'Usuario', 'required');
             $this->form_validation->set_rules('password', 'Contraseña', 'required');

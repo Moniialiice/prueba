@@ -40,16 +40,16 @@ if($this->session->flashdata('correcto'))?>
                             //Mensajes de error
                             if($this->session->flashdata('Creado')){
                                 echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Usuario creado correctamente.</label></div>";
-                            }else{if($this->session->flashdata('No')){
-                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Datos no ingresados.</label></div>";
-                            }
-                            }
+                            }else{
+                                if($this->session->flashdata('No')){
+                                    echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Datos no ingresados.</label></div>";
+                                }
+                            }       
                             if($this->session->flashdata('Error')){
                                 echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Consultar administrador.</label></div>";
                             }
                             echo validation_errors();
-                        ?>
-                        <br>
+                        ?>                        
                         <form action="insertaU" method="post" enctype="multipart/form-data" class="form-horizontal" id="target"><!-- route de la función que inserta los datos //insertaU--->
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nombre</label></div>
@@ -98,7 +98,7 @@ if($this->session->flashdata('correcto'))?>
                                     <select name='tipUsuario' id='tipUsuario' class='form-control'>
                                         <?php
                                         foreach ( $tipo as $tipoU) {
-                                            echo "<option value='$tipoU->id_tipoUsuario'>".$tipoU->tipoUsuario."</option>";
+                                            echo "<option value='$tipoU->id_tipoUsuario'".set_select('tipUsuario',$tipoU->id_tipoUsuario).">".$tipoU->tipoUsuario."</option>";
                                         }
                                         ?>
                                     </select>
@@ -110,7 +110,7 @@ if($this->session->flashdata('correcto'))?>
                                     <select name="dependencia" id="dependencia" class=" form-control">
                                     <?php
                                        foreach ($depen as $dependencia){
-                                           echo "<option value='$dependencia->id_dependencias'>".$dependencia->dependencias."</option>";
+                                           echo "<option value='$dependencia->id_dependencias'".set_select('dependencia',$dependencia->id_dependencias).">".$dependencia->dependencias."</option>";
                                        }
                                     ?>
                                     </select>

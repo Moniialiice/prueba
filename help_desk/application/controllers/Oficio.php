@@ -39,8 +39,7 @@ class Oficio extends CI_Controller
     {
         //recibe el id de entrada
         $ide = $this->input->post('entrada');
-        if($this->input->post()){
-            
+        if($this->input->post()){            
             //los datos son enviados al modelo
             $query = $this->Oficio_model->create_oficio(
             //datos oficio
@@ -103,6 +102,55 @@ class Oficio extends CI_Controller
             $this->index($ide);
         }
     }
+    //valida los datos para insertar en la base 
+    public function createOficioVal()
+    {
+        $ide = $this->input->post('entrada');
+        if($this->input->post())
+        {
+            //recibimos datos del formulario
+            $fecha = $this->input->post('fecha');
+            $asunto = $this->input->post('asunto');
+            $observaciones = $this->input->post('observaciones');
+            //valida los datos del formulario
+            $this->form_validation->set_rules('fecha','Fecha','required');
+            $this->form_validation->set_rules('asunto','Asunto','required');
+            $this->form_validation->set_rules('observaciones', 'Observaciones', 'required');
+            //sí la validación es correcta procede insetar en la base de datos
+            if($this->form_validation->run()==TRUE)
+            {
+                $query = $this->Oficio_model->createOficio(
+                    $fecha = $this->input->post('fecha'),
+                    $asunto = $this->input->post('asunto'),
+                    $observaciones = $this->inut->post('observaciones')
+                );
+                //sí la inserción se ejecuta con exito, manda mensaje y carga formulario con los datos ingresados
+                if($query==TRUE)
+                {
+                    $this->session->set_flashdata('Creado','Oficio creado correctamente');
+                    $this->actualizarOficio($ide);
+                }else{
+                    $this->session->set_flashdata('No','Error en la inserción');
+                    $this->index($ide);    
+                    }
+            }else{
+                //tomamos los datos del formulario en un array
+                $datos = array();
+                $datos['fecha'] = $fecha;
+                $datos['asunto'] = $asunto;
+                $datos['observaciones'] = $observaciones;
+                $datos['datos'] = $this->Oficio_model->datosEntrada($ide);
+                //envia datos del array en la vista
+                $this->load->view('templates/head');
+                $this->load->view('genera_oficio',$datos); 
+                $this->load->view('templates/footer');
+            }
+        }else{
+            //mensaje de error si  la inserción no se realiza
+            $this->session->set_flashdata('Error','Consultar administrador');
+            $this->index($ide);
+        }
+    } 
     //carga formulario de busqueda
     public function busquedaOficio()
     {
@@ -141,7 +189,7 @@ class Oficio extends CI_Controller
         //recibe id de oficio seguimiento
         $id_oficio = $this->input->post('id_oficio');
         //
-        if($this->input->post()){           
+        if($this->input->post()){                       
             //valida si archivo opcional existe
             if( ! $this->input->post('opcional') ){
                 //datos requeridos para subir archivo y ruta a guardar 

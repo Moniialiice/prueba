@@ -13,12 +13,6 @@ class Entrada_model extends CI_Model
         $this->load->database();
     }
 
-    //consulta de reporte entrada donde oficio ya existe
-    public function validaOf($noO)
-    {
-        $query = $this->db->query("SELECT no_oficioEntrada FROM oficio_entrada WHERE no_oficioEntrada = '$noO'");
-        return $query->result();
-    }
     //funcion para dar de alta el oficio de entrada
     public function createOficio($no_oficio,$firma_origen,$peticion,$arch_entrada,$id_usuario,$fecha,$fecha_r)
     {

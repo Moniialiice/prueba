@@ -45,7 +45,7 @@ class Usuario extends CI_Controller
             $apm = $this->input->post('apm');
             $user = $this->input->post('user');
             $pass = $this->input->post('password');
-            
+            //inicia las validaciones por cada campo
             $this->form_validation->set_rules('name', 'Nombre', 'required');
             $this->form_validation->set_rules('app', 'Apellido paterno', 'required');
             $this->form_validation->set_rules('apm', 'Apellido materno', 'required');
@@ -54,7 +54,6 @@ class Usuario extends CI_Controller
             //verifica la confirmación de contraseña coincida con la contraseña 
             $this->form_validation->set_rules('password', 'Contraseña', 'required|matches[passwordr]');
             $this->form_validation->set_rules('passwordr', 'Repetir contraseña', 'required');
-
                 //Sí la validación es correcta procede a insertar los datos en la base de datos
                 if($this->form_validation->run() == TRUE){
                     $query = $this->Usuario_model->createUsuario(
@@ -76,20 +75,22 @@ class Usuario extends CI_Controller
                         redirect('nuevoUsuario');
                     }
                 }else{
-                    $data = array();
-                    $data['name'] = $name;
-                    $data['app'] = $app;
-                    $data['apm'] = $apm;
-                    $data['user'] = $user;
-                    $data['password'] = $pass;
+                    //tomamos los datos del formulario en un array
+                    $datos = array();
+                    $datos['name'] = $name;
+                    $datos['app'] = $app;
+                    $datos['apm'] = $apm;
+                    $datos['user'] = $user;
+                    $datos['password'] = $pass;
                     //consulta el tipo de usuario para mostrar en el formulario
                     $tipo = $this->Usuario_model->tipoUsuario();
-                    $data ['tipo'] = $tipo;
+                    $datos['tipo'] = $tipo;
                     //consulta  las dependencias para mostrar en el formulario
                     $depen = $this->Usuario_model->getDependencia();
-                    $data ['depen'] = $depen;
+                    $datos['depen'] = $depen;
+                    //se envian los datos del formulario a la vista
                     $this->load->view('templates/head');
-                    $this->load->view('genera_usuario',$data);
+                    $this->load->view('genera_usuario',$datos);
                     $this->load->view('templates/footer');
                 }
         }else{
@@ -123,8 +124,6 @@ class Usuario extends CI_Controller
     //actualizar usuario con validaciones
     public function modificaUsuarioVal()
     {
-        //mensaje de error de la validación
-        $this->form_validation->set_message('required', '%s es obligatorio.');
         //recibe el id del usuario
         $i = $this->input->post('id');
         if($this->input->post())
@@ -139,61 +138,79 @@ class Usuario extends CI_Controller
             $this->form_validation->set_rules('app', 'Apellido paterno', 'required');
             $this->form_validation->set_rules('apm', 'Apellido materno', 'required');
             $this->form_validation->set_rules('user', 'Usuario', 'required');
-            //si nueva contraseña es vacio
-            if( !$this->input->post('newps'))
-            {
-                //Sí la validación es correcta procede a insertar los datos en la base de datos
-                if($this->form_validation->run() == TRUE){
-                    $query = $this->Usuario_model->updateUsuario(
-                        $id = $this->input->post('id'),
-                        $name = $this->input->post('name'),
-                        $app = $this->input->post('app'),
-                        $apm = $this->input->post('apm'),
-                        $activo = $this->input->post('activo'),
-                        $user = $this->input->post('user'),
-                        $pass = $this->input->post('password'),
-                        $tipoUser = $this->input->post('tipUsuario'),
-                        $dependencia = $this->input->post('dependencia'));  
-                    //sí se inserto los datos manda mensaje     
-                    if($query == true){    
-                        $this->session->set_flashdata('Modificado','Usuario creado correctamente');
-                        $this->actualizarUsuario($i);
+            //sí la vacidación es correcta
+            if( $this->form_validation->run() == TRUE)
+            {            
+                //si nueva contraseña es vacio
+                if( !$this->input->post('newps'))
+                {
+                    //Sí la validación es correcta procede a insertar los datos en la base de datos
+                    if($this->form_validation->run() == TRUE){
+                        $query = $this->Usuario_model->updateUsuario(
+                            $id = $this->input->post('id'),
+                            $name = $this->input->post('name'),
+                            $app = $this->input->post('app'),
+                            $apm = $this->input->post('apm'),
+                            $activo = $this->input->post('activo'),
+                            $user = $this->input->post('user'),
+                            $pass = $this->input->post('password'),
+                            $tipoUser = $this->input->post('tipUsuario'),
+                            $dependencia = $this->input->post('dependencia'));  
+                        //sí se inserto los datos manda mensaje     
+                        if($query == true){    
+                            $this->session->set_flashdata('Modificado','Usuario creado correctamente');
+                            $this->actualizarUsuario($i);
+                        }else{
+                            $this->session->set_flashdata('No', 'Datos no ingresados');
+                            $this->actualizarUsuario($i);
+                        }
                     }else{
-                        $this->session->set_flashdata('No', 'Datos no ingresados');
                         $this->actualizarUsuario($i);
                     }
+                //si es nueva contraseña procede a validar    
                 }else{
-                    $this->actualizarUsuario($i);
-                }
-            //si es nueva contraseña procede a validar    
+                    //verifica la confirmación de contraseña coincida con la contraseña 
+                    $this->form_validation->set_rules('newps', 'Contraseña', 'required|matches[newpsr]');
+                    $this->form_validation->set_rules('newpsr', 'Repetir contraseña', 'required');
+                    //Sí la validación es correcta procede a insertar los datos en la base de datos
+                    if($this->form_validation->run() == TRUE){
+                        $query = $this->Usuario_model->updateUsuario(
+                            $id = $this->input->post('id'),
+                            $name = $this->input->post('name'),
+                            $app = $this->input->post('app'),
+                            $apm = $this->input->post('apm'),
+                            $activo = $this->input->post('activo'),
+                            $user = $this->input->post('user'),
+                            $pass = $this->input->post('newps'),
+                            $tipoUser = $this->input->post('tipUsuario'),
+                            $dependencia = $this->input->post('dependencia'));  
+                        //sí se inserto los datos manda mensaje     
+                        if($query == true){    
+                            $this->session->set_flashdata('Modificado','Usuario creado correctamente');
+                            $this->actualizarUsuario($i);
+                        }else{
+                            $this->session->set_flashdata('No', 'Datos no ingresados');
+                            $this->actualizarUsuario($i);
+                        }
+                    }else{
+                        $this->actualizarUsuario($i);
+                    }
+                }    
             }else{
-                //verifica la confirmación de contraseña coincida con la contraseña 
-                $this->form_validation->set_rules('newps', 'Contraseña', 'required|matches[newpsr]');
-                $this->form_validation->set_rules('newpsr', 'Repetir contraseña', 'required');
-                //Sí la validación es correcta procede a insertar los datos en la base de datos
-                if($this->form_validation->run() == TRUE){
-                    $query = $this->Usuario_model->updateUsuario(
-                        $id = $this->input->post('id'),
-                        $name = $this->input->post('name'),
-                        $app = $this->input->post('app'),
-                        $apm = $this->input->post('apm'),
-                        $activo = $this->input->post('activo'),
-                        $user = $this->input->post('user'),
-                        $pass = $this->input->post('newps'),
-                        $tipoUser = $this->input->post('tipUsuario'),
-                        $dependencia = $this->input->post('dependencia'));  
-                    //sí se inserto los datos manda mensaje     
-                    if($query == true){    
-                        $this->session->set_flashdata('Modificado','Usuario creado correctamente');
-                        $this->actualizarUsuario($i);
-                    }else{
-                        $this->session->set_flashdata('No', 'Datos no ingresados');
-                        $this->actualizarUsuario($i);
-                    }
-                }else{
-                    $this->actualizarUsuario($i);
-                }
-            }       
+                //tomamos los datos en un array para emviar a la vista
+                $datos=array();
+                $datos['name'] = $name;
+                $datos['app'] = $app;
+                $datos['apm'] = $app;
+                $datos['user'] = $user;
+                $datos['usuario'] = $this->Usuario_model->muestraUsuario($i);                 
+                $datos['tipu'] = $this->Usuario_model->tipoUsuarioId($i);
+                $datos['dep'] = $this->Usuario_model->dependenciasId($i);
+                //envia los datos al formulario en la vista
+                $this->load->view('templates/head');
+                $this->load->view('actualiza_usuario',$datos);
+                $this->load->view('templates/footer');
+            }                  
         }else{
             $this->session->set_flashdata('Error', 'Consultar administrador');
             $this->actualizarUsuario($i);

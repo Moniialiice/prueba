@@ -33,9 +33,8 @@
                             </div>
                             <div class = "alert alert-heading">
                             <?php
-                                if(validation_errors()){
-                                    echo validation_errors();
-                                }if($this->session->flashdata('Activo')){
+                                 echo validation_errors();
+                                if($this->session->flashdata('Activo')){
                                     echo "Consultar administrador";
                                 }if($this->session->flashdata('Error')){
                                     echo "Verificar Datos.";
