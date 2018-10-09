@@ -25,16 +25,21 @@
                     <strong class="card-title">Oficio Recepción</strong>
                 </div>
                 <div class="card-body">
-                    <div class="form-inline">
-                        <form class="search-form" action="resultEntrada" method="post" id="entrada">
-                            <div class="col col-md-5"><label class="search-form label" >Búsqueda por número de oficio</label></div>
-                            <input class="form-control mr-sm-3" type="text" placeholder="" id="text-input" name='busqueda'>
-                            <button class="search-form" type="submit" id=""><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                    <div  class="card-body card-block" id="results">
-                    </div>
+                        <div class="form-inline">
+                            <form class="search-form" method="post" id="entrada" name='entrada' enctype="multipart/form-data">
+                                <div class="col col-md-5"><label for="text-input" class="form-control-label" >Búsqueda por número de oficio</label></div>
+                                    <input class="form-control mr-sm-3" type="text-input" id="busqueda" name='busqueda'>
+                                <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Recepción</label></div>
+                                    <input class="form-control mr-sm-3" type='text-input' class="form-control" id="datepicker" name="datepicker">
+                                <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Real</label></div>
+                                    <input class="form-control mr-sm-3" type="text-input" class="form-control" id="datepickerf" name="datepickerf">
+                                <span class="input-group-addon">
+                                    <span class="fa fa-search" OnClick="BusquedaEn();"></span>
+                                </span>
+                            </form>
+                        </div>
                 </div>
+                <div  class="card-body card-block" id="results"></div>
             </div>
         </div>
       </div>

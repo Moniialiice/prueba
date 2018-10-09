@@ -25,21 +25,5 @@ gtag('config', 'UA-23581568-13');
 </script>
 <-- evento -->
 
-<script>
-    /*$("#target").submit(function(event) {
-        alert( "Alerta target" );
-        event.preventDefault();
-    });
-
-    /*busqueda de oficio*
-    $(function (e){
-        $('#oficio').submit(function (e){
-            e.preventDefault()
-            $('#results').load('resultOficio' + $('#oficio').serialize())
-        })
-    });*/
-         
-</script>
-
 </body>
 </html>

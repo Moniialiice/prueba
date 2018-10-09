@@ -26,25 +26,18 @@
                 </div>
                 <div class="card-body">
                     <div class="form-inline">
-                        <form class="search-form" action="consultaUsuario" method="post" id="usuario" name="usuario">
+                        <form class="search-form" name="usuario" id="usuario" method="post" enctype="multipart/form-data">
                             <div class="col col-md-5"><label class="search-form label" >Búsqueda por nombre de usuario</label></div>
-                            <input class="form-control mr-sm-2" type="text" placeholder="Nombre" id="text-input" name='busqueda'>
-                            <button class="search-form mr-sm-2" type="submit" id=""><i class="fa fa-search"></i></button>
+                            <input class="form-control mr-sm-2" type="text" placeholder="Nombre" id="busqueda" name='busqueda'>
+                            <span class="input-group-addon">
+                                <span class="fa fa-search" OnClick="BusquedaUs();"></span>
+                            </span>
                         </form>
                     </div>
-                    <div  class="card-body card-block" id="results">
-                    </div>
+                    <div  class="card-body card-block" id="results"></div>
                 </div>
             </div>
         </div>
       </div>
   </div>
 </div>
-<script type='text/javascript'>
-   $(function(e){
-        $('#usuario').submit(function(e){
-            e.preventDefault()
-            $('#results').load('muestraUsuario') + $('#usuario').serialize()
-        })
-    })
-</script>

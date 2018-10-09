@@ -108,19 +108,17 @@ class OficioEntrada extends CI_Controller
     public function busquedaEntrada ()
     {
         $this->load->view('templates/head');
-        $this->load->view('prueba');
+        $this->load->view('busqueda_entrada');
         $this->load->view('templates/footer');
     }
     //arroja el resultado de la busqueda de los oficios
     public function consultaEntrada()
     {
         $search = $this->input->post('busqueda');
-        $date1 = $this->input->post('date1');
-        $date2 = $this->input->post('date2');
+        $date1 = $this->input->post('datepicker');
+        $date2 = $this->input->post('datepickerf');
         $datos ['datos'] = $this->Entrada_model->searchFecha($search,$date1,$date2);
-        $this->load->view('templates/head');
         $this->load->view('all_entrada',$datos);
-        $this->load->view('templates/footer');
     }
     //función para descagar archivos
     public function descarga($name)

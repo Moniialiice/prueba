@@ -108,8 +108,10 @@ class Usuario extends CI_Controller
     public function consultaUsuario()
     {
         $search = $this->input->post('busqueda');
-        $datos['datos'] = $this->Usuario_model->search_usuario($search);
+        //var_dump($search);
+        $datos['datos'] = $this->Usuario_model->search_usuario($search);        
         $this->load->view('all_usuarios',$datos);
+    
     }
     //carga vista con los  datos del usuario para modificar además de los tipos de usuario
     public function actualizarUsuario($id)

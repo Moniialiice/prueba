@@ -23,16 +23,16 @@ class Entrada_model extends CI_Model
             return false;
         }
     }
-    //consulta mediante la búsqueda de oficio entrada
-    public function searchOficioEntrada($search)
-    {
-        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%$search%' AND e.atencion = u.id_usuario ORDER BY e.fecha_ent DESC ");
-        return $query->result();
-    }
     //busqueda con fecha y no. de nomenclatura
     public function searchFecha($search,$date1,$date2)
     {
-        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%$search%' AND e.fecha_real BETWEEN '$date1' AND '$date2' AND e.atencion = u.id_usuario ORDER BY e.fecha_ent DESC ");
+        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%$search%' AND e.fecha_real BETWEEN '$date1' AND '$date2' AND e.atencion = u.id_usuario ORDER BY e.no_oficioEntrada DESC ");
+        return $query->result();
+    }
+    //busqueda por id del usuario
+    public function searchID($search,$date1,$date2,$id)
+    {
+        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%C0%' AND e.fecha_real BETWEEN '2018-09-01' AND '2018-10-01' AND e.atencion = u.id_usuario AND e.atencion = 1 ORDER BY e.no_oficioEntrada DESC ");
         return $query->result();
     }
     //reporte de los oficios de entrada que el usuario ha creado

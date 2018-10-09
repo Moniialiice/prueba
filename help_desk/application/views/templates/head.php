@@ -32,7 +32,7 @@ if($this->session->flashdata('correcto'))
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
             <!--datepicker-->
     <script>
-        $(function () {
+        $(function Calendario() {
             $( "#datepicker,#datepickerf").datepicker({
                 dateFormat: 'yy-mm-dd',
                 changeMonth:true,
@@ -53,6 +53,7 @@ if($this->session->flashdata('correcto'))
     <link rel='stylesheet' href='assets/scss/style.css'>
     <!---->
     <script type='text/javascript' src='https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js'></script>
+    <script src="assets/js/busqueda.js"></script>
 </head>
 <body>
         <!-- Left Panel -->
