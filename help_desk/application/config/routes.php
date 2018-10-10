@@ -64,6 +64,10 @@ $route['consultaUsuario'] = 'Usuario/busquedaUsuario';
 $route['muestraUsuario'] = 'Usuario/consultaUsuario';
 $route['datosUsuario/(:num)'] = 'Usuario/actualizarUsuario/$1';
 $route['actualizaUsuario'] = 'Usuario/modificaUsuarioVal';
+//paginación
+$route['paginacion/(:num)'] = 'Usuario/ejemplo';
+$route['paginacion'] = 'Usuario/ejemplo';
+
 //rutas oficio de entrada
 $route['nuevaEntrada'] = 'OficioEntrada/generaEntrada';
 $route['insertaEntrada'] = 'OficioEntrada/createOEntrada';
@@ -82,3 +86,8 @@ $route['muestraOficio/(:num)'] = 'Oficio/actualizarOficio/$1';
 $route['descargarOficio/(:any)'] = 'Oficio/descarga/$1';
 $route['actualizaOficio'] = 'Oficio/modificaOficio';
 $route['imprimirOficio/(:num)'] = 'Oficio/imprimirOficio/$1';
+
+//rutas de paginación
+$route['provincia/pagina/(:num)'] = 'provincia';//cuando no sea la primera página
+$route['provincia/pagina'] = 'provincia';//cuando sea la primera página
+

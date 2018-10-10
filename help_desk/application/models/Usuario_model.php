@@ -52,6 +52,27 @@ class Usuario_model extends CI_Model
             return false;
         }
     }
+
+    //obtenemos el total de filas para hacer la paginación
+	function filas()
+	{
+		return $this->db->count_all('usuario');
+	}
+        
+    //obtenemos todas las provincias a paginar con la función
+    //total_posts_paginados pasando la cantidad por página y el segmento
+    //como parámetros de la misma
+	function total_paginados($porpagina,$segmento) 
+    {
+        $query = $this->db->get('usuario',$porpagina,$segmento);
+        return $query->result();
+
+        /*if( $query->num_rows > 0 ){
+          return $query->result();
+        }else{
+          return FALSE;
+        }*/
+	}
     //busqueda de usuario por nombre o usuario
     public function search_usuario($search)
     {

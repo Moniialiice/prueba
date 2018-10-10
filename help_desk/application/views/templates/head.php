@@ -51,9 +51,10 @@ if($this->session->flashdata('correcto'))
     <!--jquery-->
     <!--link rel='stylesheet' href='assets/css/bootstrap-select.less'> -->
     <link rel='stylesheet' href='assets/scss/style.css'>
+    <!--Carga código javascrip del sistema-->
+    <script src="assets/js/query.js"></script>
     <!---->
     <script type='text/javascript' src='https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js'></script>
-    <script src="assets/js/busqueda.js"></script>
 </head>
 <body>
         <!-- Left Panel -->
@@ -96,7 +97,7 @@ if($this->session->flashdata('correcto'))
                                 <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-user'></i>Usuario</a>
                                 <ul class='sub-menu children dropdown-menu'>
                                     <li><i class='menu-icon fa fa-user-plus'></i><a href='nuevoUsuario'>Alta</a></li>
-                                    <li><i class='menu-icon fa fa-users'></i><a href='consultaUsuario'>Consulta</a></li>
+                                    <li><i class='menu-icon fa fa-users'></i><a href='paginacion'>Consulta</a></li>
                                 </ul>
                             </li>
                         </ul>

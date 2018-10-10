@@ -18,7 +18,19 @@ function BusquedaEn(){
         type: 'post',
         data: data,
         success:function(data){
-            $('#results').html(data);
+            $('#rentrada').html(data);
+        }
+    });
+}
+//búsqueda de Oficio seguimiento
+function BusquedaOf(){
+    var data = $('#oficio').serialize();
+    $.ajax({
+        url: 'Oficio/consultaOficio',
+        type: 'post',
+        data: data,
+        success:function(data){
+            $('#roficio').html(data);
         }
     });
 }

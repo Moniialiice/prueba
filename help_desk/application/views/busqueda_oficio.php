@@ -22,17 +22,23 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Oficio Seguimiento</strong>
+                    <strong class="card-title">Búsqueda Oficio Seguimiento</strong>
                 </div>
                 <div class="card-body">
                     <div class="form-inline">
                         <form class="search-form" action="resultOficio" method="post" id="oficio">
-                            <div class="col col-md-5"><label class="search-form label" >Búsqueda nomenclatura o termino </label></div>
-                            <input class="form-control mr-sm-3" type="text" placeholder="" id="text-input" name='busqueda'>
-                            <button class="search-form" type="submit" id=""><i class="fa fa-search"></i></button>
+                        <div class="col col-md-5"><label for="text-input" class="form-control-label" >Búsqueda por número de oficio</label></div>
+                                    <input class="form-control mr-sm-3" type="text-input" id="busqueda" name='busqueda'>
+                                <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Inicial</label></div>
+                                    <input class="form-control mr-sm-3" type='text-input' class="form-control" id="datepicker" name="datepicker">
+                                <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Final</label></div>
+                                    <input class="form-control mr-sm-3" type="text-input" class="form-control" id="datepickerf" name="datepickerf">
+                                <span class="input-group-addon">
+                                    <span class="fa fa-search" OnClick="BusquedaOf();"></span>
+                                </span>
                         </form>
                     </div>
-                    <div  class="card-body card-block" id="results"></div>
+                    <div  class="card-body card-block" id="roficio"></div>
                 </div>
             </div>
         </div>

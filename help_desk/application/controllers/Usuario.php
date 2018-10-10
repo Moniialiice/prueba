@@ -109,9 +109,40 @@ class Usuario extends CI_Controller
     {
         $search = $this->input->post('busqueda');
         //var_dump($search);
-        $datos['datos'] = $this->Usuario_model->search_usuario($search);        
-        $this->load->view('all_usuarios',$datos);
-    
+        $datos['datos'] = $this->Usuario_model->search_usuario($search);
+        //$datos['datos'] = $this->Usuario_model->search_usuario($search);        
+        $this->load->view('all_usuarios',$datos);    
+    }
+    //ejemplo de paginacion
+    public function ejemplo()
+    {
+        //$search = $this->input->post('busqueda');
+        //numero de registros mostrados
+        $config['base_url'] = base_url().'paginacion/';
+        $config['total_rows'] = $this->Usuario_model->filas();
+        $config['per_page'] = 5;
+        $config['uri_segment'] = 3;
+        /*Se personaliza la paginación para que se adapte a bootstrap*/
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['last_link'] = FALSE;
+        $config['first_link'] = FALSE;
+        $config['next_link'] = '&raquo;';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo;';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>'; 
+        
+        $this->pagination->initialize($config);
+        $datos['datos'] = $this->Usuario_model->total_paginados($config['per_page'],$config['uri_segment']);
+        //$datos['datos'] = $this->Usuario_model->search_usuario($search);
+        //var_dump($datos);
+        $this->load->view('templates/head');        
+        $this->load->view('prueba',$datos);
+        $this->load->view('templates/footer');
     }
     //carga vista con los  datos del usuario para modificar además de los tipos de usuario
     public function actualizarUsuario($id)

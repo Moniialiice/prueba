@@ -162,10 +162,10 @@ class Oficio extends CI_Controller
     public function consultaOficio()
     {
         $search = $this->input->post('busqueda');
-        $datos['datos'] = $this->Oficio_model->searchOficio($search);
-            $this->load->view('templates/head');
-            $this->load->view('all_oficio', $datos);
-            $this->load->view('templates/footer');     
+        $date1 = $this->input->post('datepicker');
+        $date2 = $this->input->post('datepickerf');
+        $datos['datos'] = $this->Oficio_model->searchDate($search,$date1,$date2);
+        $this->load->view('all_oficio', $datos);
     }
     //carga formulario de actualización
     public function actualizarOficio($id)

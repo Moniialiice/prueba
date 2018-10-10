@@ -22,16 +22,16 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Oficio Recepción</strong>
+                    <strong class="card-title">Búsqueda Oficio Recepción</strong>
                 </div>
                 <div class="card-body">
                         <div class="form-inline">
                             <form class="search-form" method="post" id="entrada" name='entrada' enctype="multipart/form-data">
-                                <div class="col col-md-5"><label for="text-input" class="form-control-label" >Búsqueda por número de oficio</label></div>
+                                <div class="col col-md-5"><label for="text-input" class="form-control-label" >Número de oficio</label></div>
                                     <input class="form-control mr-sm-3" type="text-input" id="busqueda" name='busqueda'>
-                                <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Recepción</label></div>
+                                <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Inicial</label></div>
                                     <input class="form-control mr-sm-3" type='text-input' class="form-control" id="datepicker" name="datepicker">
-                                <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Real</label></div>
+                                <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Final</label></div>
                                     <input class="form-control mr-sm-3" type="text-input" class="form-control" id="datepickerf" name="datepickerf">
                                 <span class="input-group-addon">
                                     <span class="fa fa-search" OnClick="BusquedaEn();"></span>
@@ -39,7 +39,7 @@
                             </form>
                         </div>
                 </div>
-                <div  class="card-body card-block" id="results"></div>
+                <div  class="card-body card-block" id="rentrada"></div>
             </div>
         </div>
       </div>
