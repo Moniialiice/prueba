@@ -2,7 +2,7 @@
 function BusquedaUs(){
     var data = $('#usuario').serialize();
     $.ajax({
-        url: 'Usuario/consultaUsuario',
+        url: 'Usuario/ejemplo',
         type: 'post',
         data: data,
         success:function(data){
@@ -31,6 +31,18 @@ function BusquedaOf(){
         data: data,
         success:function(data){
             $('#roficio').html(data);
+        }
+    });
+}
+
+function Paginacion(){
+    var data = $('#usuario').serialize();
+    $.ajax({
+        url: 'Usuario/ejemplo',
+        type: 'post',
+        data: data,
+        success:function(data){
+            $('#results').html(data);
         }
     });
 }

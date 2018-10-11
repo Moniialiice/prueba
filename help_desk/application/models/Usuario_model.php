@@ -52,27 +52,6 @@ class Usuario_model extends CI_Model
             return false;
         }
     }
-
-    //obtenemos el total de filas para hacer la paginación
-	function filas()
-	{
-		return $this->db->count_all('usuario');
-	}
-        
-    //obtenemos todas las provincias a paginar con la función
-    //total_posts_paginados pasando la cantidad por página y el segmento
-    //como parámetros de la misma
-	function total_paginados($porpagina,$segmento) 
-    {
-        $query = $this->db->get('usuario',$porpagina,$segmento);
-        return $query->result();
-
-        /*if( $query->num_rows > 0 ){
-          return $query->result();
-        }else{
-          return FALSE;
-        }*/
-	}
     //busqueda de usuario por nombre o usuario
     public function search_usuario($search)
     {
@@ -106,6 +85,26 @@ class Usuario_model extends CI_Model
     {
         $query = $this->db->query("DELETE from usuario WHERE id_usuario = '$id_usuario'");
         return $query->result();
+    }
+    
+    //obtenemos el total de filas para hacer la paginación
+	function filas($search) {
+        $this->db->like('usuario', $search);
+        $consulta = $this->db->get('usuario');
+        return $consulta->num_rows();
+    }      
+    //obtenemos todas las provincias a paginar con la función
+    //total_posts_paginados pasando la cantidad por página y el segmento
+    //como parámetros de la misma
+	function total_paginados($search, $por_pagina, $segmento) {
+        $this->db->like('usuario', $search);
+        $consulta = $this->db->get('usuario', $por_pagina, $segmento);
+        if ($consulta->num_rows() > 0) {
+            foreach ($consulta->result() as $fila) {
+            $data[] = $fila;
+        }
+            return $data;
+        }
     }
 
 }

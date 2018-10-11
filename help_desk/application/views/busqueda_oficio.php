@@ -2,7 +2,7 @@
     <div class="col-sm-4">
         <div class="page-header float-left">
             <div class="page-title">
-                <h1> Consulta Oficio Seguimiento</h1>
+                <h1>Consulta Oficio Seguimiento</h1>
             </div>
         </div>
     </div>
@@ -27,12 +27,12 @@
                 <div class="card-body">
                     <div class="form-inline">
                         <form class="search-form" action="resultOficio" method="post" id="oficio">
-                        <div class="col col-md-5"><label for="text-input" class="form-control-label" >Búsqueda por número de oficio</label></div>
+                            <div class="col col-md-5"><label for="text-input" class="form-control-label" >Búsqueda por número de oficio</label></div>
                                     <input class="form-control mr-sm-3" type="text-input" id="busqueda" name='busqueda'>
-                                <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Inicial</label></div>
-                                    <input class="form-control mr-sm-3" type='text-input' class="form-control" id="datepicker" name="datepicker">
-                                <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Final</label></div>
-                                    <input class="form-control mr-sm-3" type="text-input" class="form-control" id="datepickerf" name="datepickerf">
+                            <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Inicial</label></div>
+                                <input class="form-control mr-sm-3" type='text-input' class="form-control" id="datepicker" name="datepicker">
+                            <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Final</label></div>
+                                <input class="form-control mr-sm-3" type="text-input" class="form-control" id="datepickerf" name="datepickerf">
                                 <span class="input-group-addon">
                                     <span class="fa fa-search" OnClick="BusquedaOf();"></span>
                                 </span>

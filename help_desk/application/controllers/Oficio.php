@@ -161,9 +161,12 @@ class Oficio extends CI_Controller
     //muestra consulta de oficio por la búsqueda
     public function consultaOficio()
     {
+        //recibe datos del formulario
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('datepicker');
         $date2 = $this->input->post('datepickerf');
+        //código de la paginación
+        //datos de la consulta oficio  
         $datos['datos'] = $this->Oficio_model->searchDate($search,$date1,$date2);
         $this->load->view('all_oficio', $datos);
     }

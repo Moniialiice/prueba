@@ -1,3 +1,8 @@
+<div class="card-body card-block">
+    <span>
+        <span class="fa fa-file" OnClick="();"></span>
+    </span>                          
+</div>
 <table class="table">
     <thead>
     <tr>
@@ -36,12 +41,10 @@
         ?>
     </tbody>
 </table>
-    <ul class="pagination">
-        <?php
-            /* Se imprimen los números de página */           
-            echo $this->pagination->create_links();
-        ?>
-    </ul>
+    <?php
+        /* Se imprimen los números de página */           
+        echo $this->pagination->create_links();
+    ?>
                                 
                    
 
