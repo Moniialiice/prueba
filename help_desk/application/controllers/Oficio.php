@@ -108,22 +108,60 @@ class Oficio extends CI_Controller
         $ide = $this->input->post('entrada');
         if($this->input->post())
         {
+            //id del usuario que creo el oficio
+            $atencion = $this->input->post('atencion');
             //recibimos datos del formulario
             $fecha = $this->input->post('fecha');
             $asunto = $this->input->post('asunto');
             $observaciones = $this->input->post('observaciones');
+            $termino = $this->input->post('termino');
             //valida los datos del formulario
             $this->form_validation->set_rules('fecha','Fecha','required');
             $this->form_validation->set_rules('asunto','Asunto','required');
             $this->form_validation->set_rules('observaciones', 'Observaciones', 'required');
+            //etiquetad
+            $colaboracion = $this->input->post('colaboracion');
+            $amparo = $this->input->post('amparos');
+            $solicitudes = $this->input->post('solicitudes');
+            $gestion = $this->input->post('gestion');
+            $cursos = $this->input->post('cursos');
+            $juzgados = $this->input->post('juzgados');
+            $rh = $this->input->post('rh');
+            $estadistica = $this->input->post('estadistica');
+            $telefonia = $this->input->post('telefonia');
+            $ri = $this->input->post('ri');
+            $boletas = $this->input->post('boletas');
+            $conocimiento = $this->input->post('conocimiento');
+            //dirigido a
+            $conase = $this->input->post('conase');
+            $toluca = $this->input->post('toluca');
+            $mexico = $this->input->post('mexico');
+            $zoriente = $this->input->post('zoriente');
+            $fgeneral = $this->input->post('fgeneral');
+            $vicefiscalia = $this->input->post('vicefiscalia');
+            $oficialia = $this->input->post('oficialia');
+            $informacion = $this->input->post('informacion');
+            $central = $this->input->post('central');
+            $servicio = $this->input->post('servicio');
+            $otrad = $this->input->post('otrad');
+            //ruta oficio
+            $diligencia = $this->input->post('diligencias');
+            $personalmente = $this->input->post('personalmente');
+            $gestionar = $this->input->post('gestionar');
+            $archivo = $this->input->post('archivo');
+            $otrar = $this->input->post('otrar');
+            //informar a
+
             //sí la validación es correcta procede insetar en la base de datos
             if($this->form_validation->run()==TRUE)
             {
-                $query = $this->Oficio_model->createOficio(
-                    $fecha = $this->input->post('fecha'),
-                    $asunto = $this->input->post('asunto'),
-                    $observaciones = $this->inut->post('observaciones')
-                );
+                //inserta en asunto etiquetas
+                $etiquetas = $this->Oficio_model->insert_etiquetas($colaboracion,$amparo,$solicitudes,$gestion,$cursos,$juzgados,$rh,$estadistica,$telefonia,$ri,$boletas,$conocimiento);
+                //inserta dirigido a
+                $dirigido = $this->Oficio_model->insert_destinatario($toluca,$mexico,$zoriente,$fgeneral,$vicefiscalia,$oficialia,$informacion,$central,$servicio,$otrad);
+                //inserta en ruta oficio
+                $ruta = $this->Oficio_model->insert_acciones($diligencia,$personalmente,$gestionar,$archivo,$otrar);
+                $query = $this->Oficio_model->createOficio($fecha,$etiquetas,$termino,$dirigido,$observaciones,$atencion,$ruta);
                 //sí la inserción se ejecuta con exito, manda mensaje y carga formulario con los datos ingresados
                 if($query==TRUE)
                 {

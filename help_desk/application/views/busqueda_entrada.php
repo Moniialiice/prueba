@@ -29,9 +29,9 @@
                             <form class="search-form" method="post" id="entrada" name='entrada' enctype="multipart/form-data">
                                 <div class="col col-md-5"><label for="text-input" class="form-control-label" >Número de oficio</label></div>
                                     <input class="form-control mr-sm-3" type="text-input" id="busqueda" name='busqueda'>
-                                <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Inicial</label></div>
+                                <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Real Inicial</label></div>
                                     <input class="form-control mr-sm-3" type='text-input' class="form-control" id="datepicker" name="datepicker">
-                                <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Final</label></div>
+                                <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Real Final</label></div>
                                     <input class="form-control mr-sm-3" type="text-input" class="form-control" id="datepickerf" name="datepickerf">
                                 <span class="input-group-addon">
                                     <span class="fa fa-search" OnClick="BusquedaEn();"></span>

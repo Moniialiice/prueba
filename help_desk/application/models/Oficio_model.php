@@ -64,7 +64,7 @@ class Oficio_model extends CI_Model{
     public function createOficio($nomenclatura,$fecha,$id_etAsunto,$termino,$id_destinatario,$observaciones,$arc_opcional,$arc_final,$atencion,$id_ruta,$id_informar,$asunto,$id_entrada)
     {
         $query = $this->db->query("INSERT INTO oficio_seguimiento (nomenclatura, fecha, id_etAsunto, termino, id_destinatario, observaciones, arch_seguimiento, arch_final, atencion, id_ruta, id_informar, asunto, id_oficioEntrada) 
-                                      VALUES ('$nomenclatura', '$fecha', '$id_etAsunto', '$termino', '$id_destinatario', '$observaciones', '$arc_opcional', '$arc_final', '$atencion', '$id_ruta', '$id_informar', '$asunto', '$id_entrada')");
+                                      VALUES ('$nomenclatura', '$fecha', '$id_etAsunto', '$termino', '$id_destinatario', '$observaciones', '', '', '$atencion', '$id_ruta', '$id_informar', '$asunto', '$id_entrada')");
         if($query){
             return true;
         }else{

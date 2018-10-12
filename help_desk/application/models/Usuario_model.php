@@ -22,6 +22,16 @@ class Usuario_model extends CI_Model
         $result = $query->row();
         return $result;
     }
+    public function test($id){
+        $this->db->select('id_usuario, apellidop, apellidom, nombre, activo, password, id_tipoUsuario, tipoUsuario, id_dependencia, depedencias');
+        $this->db->from('usuario');
+        $this->db->from('tipousuario');
+        $this->db->from('dependencias');
+        $this->db->where('id_tipoUsuario','id_tipoUsuario');
+        $this->db->where('id_usuario',$id);
+        $query = $this->db->get();
+        return $query;
+    }
     //consulta todos los datos de usuario, tipo de usuario y dependencia por id del usuario
     public function muestraUsuario($id)
     {
