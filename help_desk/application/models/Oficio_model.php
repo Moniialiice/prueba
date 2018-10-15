@@ -10,6 +10,29 @@ class Oficio_model extends CI_Model{
     {
         $this->load->database();
     }
+    //funcion para insertar oficio
+    public function insertpru ($colaboracion,$amparo,$solicitudes,$gestion,$cursos,$juzgados,$rh,$telefonia,$estadistica,$ri,$boletas,$conocimiento,$conase,$toluca,$mexico,$zoriente,$fgeneral,$vicefiscalia,$oficialia,$informacion,$central,$servicio,$otrad,$diligencia,$personalmente,$gestionar,$archivo,$otrar,$oficina,$peticionario,$requiriente,$nomenclatura,$fecha,$id_etAsunto,$termino,$id_destinatario,$observaciones,$arc_opcional,$arc_final,$atencion,$id_ruta,$id_informar,$asunto,$id_entrada)
+    {
+        $query = $this->db->query("CREATE FUNCTION insertOficio(IN colaboracion INT, IN amparo INT, IN solicitudes INT, IN gestion INT, IN cursos INT, IN juzgados INT, IN rh INT, IN telefonia INT, IN estadisctica INT, IN relaciones_interis INT, IN boletas_audiencia INT, IN copias_conocimiento INT
+                                    IN conase INT, IN toluca INT, IN mexico INT, IN zoriente INT, IN fgeneral INT, IN vicefiscalia INT, IN oficialia INT, IN informacion INT, IN central INT, IN servicio INT, IN otrad LONGTEXT,
+                                    IN diligencia INT, IN personalmente INT, IN gestionar INT, IN archivo INT, IN otrar LONGTEXT, IN oficina INT, IN peticionario INT, IN requiriente INT, 
+                                    IN nomenclatura VARCHAR(100), IN fecha DATE, IN id_etAsunto INT, IN termino INT, IN id_destinatario INT, IN observaciones LONGTEXT, IN arc_opcional VARCHAR(100), IN arc_final VARCHAR(100), IN atencion INT, IN id_ruta INT, IN id_informar INT, IN asunto LONGTEXT, IN id_entrada INT )
+                                    BEGIN 
+                                        INSERT INTO etiquetas_asunto (colaboracion, amparos, solicitudes, gestion, cursos_capacitaciones, juzgados, recursos_humanos, telefonia, estadistica, relaciones_interis, boletas_audiencia, copias_conocimiento) 
+                                        VALUES('colaboracion', 'amparo', 'solicitudes', 'gestion', 'cursos', 'juzgados', 'rh', 'telefonia', 'estadistica', 'ri','boletas','conocimiento');
+                                        INSERT INTO destinatario (conase, valle_toluca, valle_mexico, zona_oriente, fiscal_general, vicefiscalia, oficialia_mayor, informacion_estadistica, central_juridico, servicio_carrera, otra) 
+                                        VALUES ('conase', 'toluca', 'mexico', 'zoriente', 'fgeneral', 'vicefiscalia', 'oficialia', 'informacion', 'central', 'servicio', 'otrad')
+                                        INSERT INTO ruta_oficio (realiza_diligencias, recibir_personalmente, gestionar_peticion, archivo, otras) 
+                                        VALUES ('diligencia', 'personalmente', 'gestionar', 'archivo', 'otrar');
+                                        INSERT INTO informar (esta_oficina, peticionario, institucion_requiriente) 
+                                        VALUES('oficina','peticionario','requiriente');
+                                        INSERT INTO oficio_seguimiento (nomenclatura, fecha, id_etAsunto, termino, id_destinatario, observaciones, arch_seguimiento, arch_final, atencion, id_ruta, id_informar, asunto, id_oficioEntrada) 
+                                      VALUES ('nomenclatura', 'fecha', 'id_etAsunto', 'termino', 'id_destinatario', 'observaciones', '', '', 'atencion', 'id_ruta', 'id_informar', 'asunto', 'id_entrada')
+
+
+                                    ");
+        return $query->result();
+    } 
     //muestra id y número de oficio del oficio recepción para agregarlos al nuevo oficio
     public function datosEntrada($id)
     {
@@ -87,6 +110,12 @@ class Oficio_model extends CI_Model{
     public function report($id)
     {
         $query = $this->db->query("SELECT o.id_oficioseg,o.nomenclatura, o.fecha, o.termino, o.observaciones, o.arch_seguimiento, o.arch_final, o.asunto, a.colaboracion, a.amparos, a.solicitudes, a.gestion, a.cursos_capacitaciones, a.juzgados, a.recursos_humanos, a.telefonia, a.estadistica, a.relaciones_interis, a.boletas_audiencia, a.copias_conocimiento, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, i.esta_oficina, i.peticionario, i.institucion_requiriente, r.realiza_diligencias, r.recibir_personalmente, r.gestionar_peticion, r.archivo, r.otras, en.id_oficioEntrada, en.no_oficioEntrada, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, etiquetas_asunto AS a, informar AS i, ruta_oficio AS r, oficio_entrada AS en, usuario AS u WHERE d.id_destinatario = o.id_destinatario AND o.id_oficioEntrada = en.id_oficioEntrada AND u.id_usuario = o.atencion AND id_oficioseg = '$id' ");
+        return $query->result();
+    }
+    //Obtiene el termino del oficio para modificar o actualizar
+    public function get_termino($id)
+    {
+        $query = $this->db->query("SELECT termino FROM oficio_seguimiento WHERE id_oficioseg = $id");
         return $query->result();
     }
     //consulta para actualizar

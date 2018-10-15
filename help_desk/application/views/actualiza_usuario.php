@@ -22,7 +22,7 @@
             <div class='col-lg-9'>
                 <div class='card'>
                     <div class='card-header'>
-                        <strong>Actualizar Usuario</strong>
+                        <strong>Datos Usuario</strong>
                     </div>
                     <div class='card-body card-block'>
                         <?php

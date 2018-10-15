@@ -178,7 +178,7 @@ class Oficio extends CI_Controller
                 $datos['asunto'] = $asunto;
                 $datos['observaciones'] = $observaciones;
                 $datos['datos'] = $this->Oficio_model->datosEntrada($ide);
-                //envia datos del array en la vista
+                //envia datos del array a la vista
                 $this->load->view('templates/head');
                 $this->load->view('genera_oficio',$datos); 
                 $this->load->view('templates/footer');
@@ -213,9 +213,16 @@ class Oficio extends CI_Controller
     {
         //consulta los datos del oficio por el id de oficio
         $datos ['datos'] = $this->Oficio_model->report($id);
-        //manda datos de la consulta a la vista, donde se valida el  termino para
+        //obtiene el termino del oficio
+        $termino = $this->Oficio_model->get_termino($id);
+        //manda datos de la consulta a la vista, donde se valida el termino para mostrar el formulario correspondiente 
             $this->load->view('templates/head');
-            $this->load->view('consulta_oficio',$datos);
+            if($termino==0)
+            {
+                $this->load->view('consulta_oficio',$datos); //formulario para visualizar oficio e imprimir
+            }else{
+                $this->load->view('actualiza_oficio',$datos); //formulario para modificar oficio
+            }
             $this->load->view('templates/footer');    
     }
     //función para descargar archivo seguimiento o final
@@ -224,7 +231,7 @@ class Oficio extends CI_Controller
         $data = file_get_contents($this->folder.$name);
         force_download($name,$data);
     }
-    //función de actualizzación dependiendo del termino del Oficio
+    //función de actualización dependiendo del termino del Oficio
     public function modificaOficio()
     {
         //recibe id de oficio seguimiento
@@ -330,5 +337,10 @@ class Oficio extends CI_Controller
         //$pdf->IncludeJS("print();");
         $pdf->Output($pdfFilePath, 'I');
     }
+
+    /**mysql> CALL simpleproc(@a);
+
+mysql> SELECT @a; */
+
 
 }
