@@ -58,16 +58,16 @@
                                             echo "<div class='col-12 col-md-9'>
                                             <input type='text' id='text-input' value='".$dato->no_oficioEntrada."' class='form-control' disabled>
                                             <input type='text' id='text-input' name='entrada' value='".$dato->id_oficioEntrada."' hidden>
-                                            </div>";
-                                        }
+                                            </div>";                                            
+                                        }                                        
                                     ?>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Selecciona Oficio</label></div>
                                 <div class="col-12 col-md-9">
-                                    <select name="nomenclatura" id="nomenclatura" class="form-control">
-                                        <option  value="0">Cordinador Genaral</option>
-                                        <option  value="1">Secretario Particular</option>
+                                    <select name="tipoOficio" id="tipoOficio" class="form-control">
+                                        <option  value="0" <?php echo set_select('tipoOficio','0');?>>Cordinador Genaral</option>
+                                        <option  value="1" <?php echo set_select('tipoOficio','1');?>>Secretario Particular</option>
                                     </select>
                                 </div>
                             </div>
@@ -271,9 +271,9 @@
                                 <div class="col col-md-3"><label for="select" class=" form-control-label"> Termino:</label></div>
                                     <div class="col col-md-9">
                                         <select name="termino" id="termino" class=" form-control">
-                                            <option value="2">48:00 hrs</option>
-                                            <option value="1">24:00 hrs</option>
-                                            <option value="0">00:00 hrs</option>
+                                            <option value="2" <?php echo set_select('termino','2');?>>48:00 hrs</option>
+                                            <option value="1" <?php echo set_select('termino','1');?>>24:00 hrs</option>
+                                            <option value="0" <?php echo set_select('termino','0');?>>00:00 hrs</option>
                                         </select>    
                                     </div>    
                             </div>

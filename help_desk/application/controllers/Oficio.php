@@ -34,80 +34,21 @@ class Oficio extends CI_Controller
         $this->load->view('genera_oficio',$datos);
         $this->load->view('templates/footer');
     }
-    //función recibe los datos del formulario para insertarlo en la base de datos
-    public function createOficio()
-    {
-        //recibe el id de entrada
-        $ide = $this->input->post('entrada');
-        if($this->input->post()){            
-            //los datos son enviados al modelo
-            $query = $this->Oficio_model->create_oficio(
-            //datos oficio
-                    $nomenclatura = $this->input->post('nomenclatura'),
-                    $fecha = $this->input->post('fecha'),
-                    $asunto = $this->input->post('asunto'),
-                    //etiquetas de asunto
-                    $colaboracion = $this->input->post('colaboracion'),
-                    $amparo = $this->input->post('amparos'),
-                    $solicitudes = $this->input->post('solicitudes'),
-                    $gestion = $this->input->post('gestion'),
-                    $cursos = $this->input->post('cursos'),
-                    $juzgados = $this->input->post('juzgados'),
-                    $rh = $this->input->post('rh'),
-                    $estadistica = $this->input->post('estadistica'),
-                    $telefonia = $this->input->post('telefonia'),
-                    $ri = $this->input->post('ri'),
-                    $boletas = $this->input->post('boletas'),
-                    $conocimiento = $this->input->post('conocimiento'),
-                    //dirigido a
-                    $conase = $this->input->post('conase'),
-                    $toluca = $this->input->post('toluca'),
-                    $mexico = $this->input->post('mexico'),
-                    $zoriente = $this->input->post('zoriente'),
-                    $fgeneral = $this->input->post('fgeneral'),
-                    $vicefiscalia = $this->input->post('vicefiscalia'),
-                    $oficialia = $this->input->post('oficialia'),
-                    $informacion = $this->input->post('informacion'),
-                    $central = $this->input->post('central'),
-                    $servicio = $this->input->post('servicio'),
-                    $otrad = $this->input->post('otrad'),
-                    //ruta oficio
-                    $diligencia = $this->input->post('diligencias'),
-                    $personalmente = $this->input->post('personalmente'),
-                    $gestionar = $this->input->post('gestionar'),
-                    $archivo = $this->input->post('archivo'),
-                    $otrar = $this->input->post('otrar'),
-                    //informar a
-                    $oficina = $this->input->post('oficina'),
-                    $peticionario = $this->input->post('peticionario'),
-                    $requiriente = $this->input->post('requiriente'),
-                    //datos oficio    
-                    $termino = $this->input->post('termino'),
-                    $observaciones = $this->input->post('observaciones'),
-                    $id_entrada = $this->input->post('entrada'),
-                    $atencion = $this->input->post('atencion')
-                );
-                //si los datos son ingresados muestra mensaje
-                if ($query) {
-                    $this->session->set_flashdata('Creado', 'Oficio creado correctamente');
-                    //carga el formulario
-                    $this->index($ide);
-                }else {
-                    //mensaje de error si no inserta en la bas e de datos
-                    $this->session->set_flashdata('No', 'Oficio no registrado');
-                    $this->index($ide);
-                }
-        }else{
-            $this->session->set_flashdata('Error','Error');
-            $this->index($ide);
-        }
-    }
     //valida los datos para insertar en la base 
     public function createOficioVal()
     {
         $ide = $this->input->post('entrada');
+        $tipoOficio = $this->input->post('tipoOficio');
+            if($tipoOficio == 0){
+                $tipOficio = '400LIA000/';
+            }else{
+                $tipOficio = '400LI0010/';
+            }
+            $date = setlocale(LC_TIME, 'es_ES.UTF-8');
+
         if($this->input->post())
         {
+            
             //id del usuario que creo el oficio
             $atencion = $this->input->post('atencion');
             //recibimos datos del formulario
@@ -178,6 +119,8 @@ class Oficio extends CI_Controller
                 $datos['asunto'] = $asunto;
                 $datos['observaciones'] = $observaciones;
                 $datos['datos'] = $this->Oficio_model->datosEntrada($ide);
+                $datos['prueba'] = $tipOficio;
+                $datos['pruebaDate'] = $date;
                 //envia datos del array a la vista
                 $this->load->view('templates/head');
                 $this->load->view('genera_oficio',$datos); 
