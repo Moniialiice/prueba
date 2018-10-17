@@ -59,7 +59,8 @@
                                             <input type='text' id='text-input' value='".$dato->no_oficioEntrada."' class='form-control' disabled>
                                             <input type='text' id='text-input' name='entrada' value='".$dato->id_oficioEntrada."' hidden>
                                             </div>";                                            
-                                        }                                        
+                                        }
+                                                                                
                                     ?>
                             </div>
                             <div class="row form-group">

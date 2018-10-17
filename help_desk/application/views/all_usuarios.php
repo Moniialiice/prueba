@@ -1,3 +1,8 @@
+<div class="card-body card-block">
+    <span>
+        <span class="fa fa-file" OnClick="();"></span>
+    </span>                          
+</div>
 <table class="table">
     <thead>
     <tr>

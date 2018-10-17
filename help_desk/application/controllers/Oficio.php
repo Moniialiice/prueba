@@ -101,8 +101,11 @@ class Oficio extends CI_Controller
                 //inserta dirigido a
                 $dirigido = $this->Oficio_model->insert_destinatario($toluca,$mexico,$zoriente,$fgeneral,$vicefiscalia,$oficialia,$informacion,$central,$servicio,$otrad);
                 //inserta en ruta oficio
-                $ruta = $this->Oficio_model->insert_acciones($diligencia,$personalmente,$gestionar,$archivo,$otrar);
-                $query = $this->Oficio_model->createOficio($fecha,$etiquetas,$termino,$dirigido,$observaciones,$atencion,$ruta);
+                $ruta = $this->Oficio_model->insert_ruta($diligencia,$personalmente,$gestionar,$archivo,$otrar);                
+                //insertar informar 
+                $informar = $this->Oficio_model->insert_informar($oficina,$peticionario,$requiriente);
+                //insertar en la tabla oficio seguimiento
+                $query = $this->Oficio_model->createOficio($nomenclatura,$fecha,$etiquetas,$termino,$dirigido,$observaciones,$atencion,$ruta,$informar,$asunto,$ide);
                 //sí la inserción se ejecuta con exito, manda mensaje y carga formulario con los datos ingresados
                 if($query==TRUE)
                 {
