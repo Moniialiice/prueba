@@ -47,6 +47,7 @@
                             echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Consultar administrador.</label></div>";
                         }
             echo"<br>   <form action='actualizaOficio' method='post' enctype='multipart/form-data' class='form-horizontal'>";
+                                
                                 echo "<div class='row form-group'>
                                         <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Nomenclatura</label></div>
                                         <div class='col-12 col-md-9'>
@@ -54,7 +55,7 @@
                                             <input type='text' id='disabled-input' name='id_oficio' class='form-control' value='".$dato->id_oficioseg."' hidden>
                                         </div>";
                                 echo "<div class='row form-group'>
-                                        <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
+                                        <div class='col col-md-3'><label for='text-input' class='form-control-label'>Asunto</label></div>
                                          <div class='col-12 col-md-9'>
                                             <textarea name='asunto' id='textarea-input' rows='3' class='form-control' disabled>".$dato->asunto."</textarea></div>
                                     </div>";
@@ -497,7 +498,7 @@
                                     </div>
                                     
                                     <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='select' class=' form-control-label'> Termino:</label></div>
+                                        <div class='col col-md-3'><label for='select' class=' form-control-label'> Termino</label></div>
                                         <div class='col col-md-9'>
                                             <select name='termino' id='termino' class=' form-control'>";
                                                 if($dato->termino == 0){
@@ -519,30 +520,35 @@
                                         </div> 
                                     </div>
                                     <div class='row form-group'>
-                                        <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones: </label></div>
+                                        <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones </label></div>
                                         <div class='col-12 col-md-9'><textarea name='observaciones' id='textarea-input' rows='5' class='form-control'>".$dato->observaciones."</textarea></div>
                                     </div>
                                     <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Atención: </label></div>
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Atención </label></div>
                                         <div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."' disabled></div>
+                                    </div>
+                                    <div class='row form-group'>
+                                        <div class='col col-sm-3'><label for='text-input' class=' form-control-label'>Oficio Recepción</label></div>
+                                        <div class='col-12 col-md-9'><input type='text' id='text-input' value='".$dato->no_oficioEntrada."' class='form-control' disabled></div>
+                                        <input type='text' id='text-input' name='entrada' value='".$dato->id_oficioEntrada."' hidden>
                                     </div>
                                     <div><label for='text-input' class='form-control-label fa fa-exclamation' > Archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>";
                             if($dato->arch_seguimiento == "")
                             {
                                 echo "<div class='row form-group'>
-                                        <div class='col col-md-3'><label for='file-input' class=' form-control-label'>Archivo Seguimiento (Opcional): </label></div>
+                                        <div class='col col-md-3'><label for='file-input' class=' form-control-label'>Archivo Seguimiento (Opcional)</label></div>
                                         <div class='col-12 col-md-9'><input id='opcional' name='opcional' class='form-control-file' type='file'></div>
                                       </div>";
                             }else{
                                 echo"<div class='row form-group'>
-                                        <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label'>Archivo Seguimiento (Opcional):</label></div>
+                                        <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label'>Archivo Seguimiento (Opcional)</label></div>
                                         <div class='col-12 col-md-9'><a href='descargarOficio/".$dato->arch_seguimiento."' class='fa fa-download fa-2x'></a></div>
                                         <input type='text' name='opcional' value='".$dato->arch_seguimiento."' hidden >
                                     </div>";
                             }
                                 echo"    
                                     <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='file-input' class=' form-control-label' >Archivo final: </label></div>
+                                        <div class='col col-md-3'><label for='file-input' class=' form-control-label' >Archivo final </label></div>
                                         <div class='col-12 col-md-9'><input id='final' name='final' class='form-control-file' type='file'></div>
                                     </div>";                                            
             echo "  </div> <!-- card-body-->

@@ -55,7 +55,7 @@
                                             <input type='text' id='disabled-input' name='nomenclatura' class='form-control' value='".$dato->nomenclatura."' disabled></div>
                                        </div> ";
                                 echo "<div class='row form-group'>
-                                        <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
+                                        <div class='col col-md-3'><label for='text-input' class='form-control-label'>Asunto</label></div>
                                          <div class='col-12 col-md-9'>
                                             <textarea name='asunto' id='textarea-input' rows='3' class='form-control' disabled>".$dato->asunto."</textarea></div>
                                     </div>";
@@ -497,7 +497,7 @@
                                         </div>
                                     </div>
                                     <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Termino:</label></div>";
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Termino</label></div>";
                                     if($dato->termino == 0){
                                         echo "<div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control' value='00:00 hrs' disabled></div>";
                                     }    
@@ -505,10 +505,15 @@
                                     <div class='row form-group'>
                                         <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones</label></div>
                                         <div class='col-12 col-md-9'><textarea name='observaciones' id='textarea-input' rows='9' class='form-control' disabled>".$dato->observaciones."</textarea></div>
+                                    </div>
+                                    <div class='row form-group'>
+                                        <div class='col col-sm-3'><label for='text-input' class=' form-control-label'>Oficio Recepción</label></div>
+                                        <div class='col-12 col-md-9'><input type='text' id='text-input' value='".$dato->no_oficioEntrada."' class='form-control' disabled></div>
+                                        <input type='text' id='text-input' name='entrada' value='".$dato->id_oficioEntrada."' hidden>
                                     </div>";
                                     echo "
                                     <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Atención:</label></div>
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Atención</label></div>
                                         <div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."' disabled></div>
                                     </div>";  
                                     if($dato->arch_seguimiento != ""){
@@ -531,12 +536,10 @@
                                                 <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label' >Sin Archivo final</label></div>
                                             </div>";
                                     }                       
-        
+                                }
                             
         echo"       </div> <!-- card-body-->
                 </div>
             </div>
         </div>";        
-        ?>
-
-    </div>
+?>

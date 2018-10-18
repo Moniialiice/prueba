@@ -43,12 +43,13 @@ CREATE FUNCTION insertRutaOficio (diligencia INT, personalmente INT, gestionar I
     END;
         //     
 /**funcion para insertar en la tabla oficio seguimiento */
- DELIMITER //
-CREATE FUNCTION insertOficioS (fecha, id_etAsunto, termino, id_destinatario, observaciones, atencion, id_ruta, id_informar, asunto, id_entrada)
+DELIMITER //
+CREATE FUNCTION insertOficioS (nomeclatura varchar(50), fecha DATE, id_etAsunto INT, termino INT, id_destinatario INT, observaciones LONGTEXT, atencion INT, id_ruta INT, id_informar INT, asunto INT, id_entrada INT)
     RETURNS INT
     BEGIN
-        DECLARE 
-        INSERT INTO oficio_seguimiento (nomenclatura, fecha, id_etAsunto, termino, id_destinatario, observaciones, arch_seguimiento, arch_final, atencion, id_ruta, id_informar, asunto, id_oficioEntrada) 
-        VALUES (nomenclatura, fecha, id_etAsunto, termino, id_destinatario, observaciones, '', '', atencion, id_ruta, id_informar, asunto, id_entrada);
+    	DECLARE ID INT;
+        INSERT INTO oficio_seguimiento (nomenclatura, fecha, id_etAsunto, termino, id_destinatario, observaciones, arch_seguimiento, arch_final, atencion, id_ruta, id_informar, asunto, id_oficioEntrada) VALUES (nomenclatura, fecha, id_etAsunto, termino, id_destinatario, observaciones, '', '', atencion, id_ruta, id_informar, asunto, id_entrada);
+        SELECT LAST_INSERT_ID() INTO ID;
+        RETURN ID;
     END;
-    //        
+    // 

@@ -52,6 +52,7 @@
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Oficio Recepción</label></div>
                                     <?php
+                                        //echo date('l jS \of F Y h:i:s A');
                                     //oficio entrada e id
                                         foreach ($datos as $dato)
                                         {
@@ -59,8 +60,7 @@
                                             <input type='text' id='text-input' value='".$dato->no_oficioEntrada."' class='form-control' disabled>
                                             <input type='text' id='text-input' name='entrada' value='".$dato->id_oficioEntrada."' hidden>
                                             </div>";                                            
-                                        }
-                                                                                
+                                        }                                                                                
                                     ?>
                             </div>
                             <div class="row form-group">

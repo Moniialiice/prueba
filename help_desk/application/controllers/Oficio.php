@@ -37,14 +37,7 @@ class Oficio extends CI_Controller
     //valida los datos para insertar en la base 
     public function createOficioVal()
     {
-        $ide = $this->input->post('entrada');
-        $tipoOficio = $this->input->post('tipoOficio');
-            if($tipoOficio == 0){
-                $tipOficio = '400LIA000/';
-            }else{
-                $tipOficio = '400LI0010/';
-            }
-            $date = setlocale(LC_TIME, 'es_ES.UTF-8');
+        $ide = $this->input->post('entrada');   
 
         if($this->input->post())
         {
@@ -92,29 +85,41 @@ class Oficio extends CI_Controller
             $archivo = $this->input->post('archivo');
             $otrar = $this->input->post('otrar');
             //informar a
-
+            $oficina = $this->input->post('oficina');
+            $peticionario = $this->input->post('peticionario');
+            $requiriente = $this->input->post('requiriente');
             //sí la validación es correcta procede insetar en la base de datos
             if($this->form_validation->run()==TRUE)
-            {
+            {   
+                //recibe el tipo de oficio (cordinador, secretario particular)
+                $tipoOficio = $this->input->post('tipoOficio');
+                //dependiendo del tipo de oficio carga la nomclatura
+                if($tipoOficio == 0){
+                    $nomenclatura = '400LIA000/'.date('dmhis\/Y');;
+                }else{
+                    $nomenclatura = '400LI0010/'.date('dmhi\/Y');;
+                }
                 //inserta en asunto etiquetas
                 $etiquetas = $this->Oficio_model->insert_etiquetas($colaboracion,$amparo,$solicitudes,$gestion,$cursos,$juzgados,$rh,$estadistica,$telefonia,$ri,$boletas,$conocimiento);
+                var_dump($etiquetas);
+                #array(1) { [0]=> object(stdClass)26 (1) { ["insertEtiquetas ('1', '1', '', '', '', '', '', '', '', '','','')"]=> string(2) "18" } }
                 //inserta dirigido a
-                $dirigido = $this->Oficio_model->insert_destinatario($toluca,$mexico,$zoriente,$fgeneral,$vicefiscalia,$oficialia,$informacion,$central,$servicio,$otrad);
+                $dirigido = $this->Oficio_model->insert_destinatario($conase,$toluca,$mexico,$zoriente,$fgeneral,$vicefiscalia,$oficialia,$informacion,$central,$servicio,$otrad);
+                var_dump($dirigido);
                 //inserta en ruta oficio
                 $ruta = $this->Oficio_model->insert_ruta($diligencia,$personalmente,$gestionar,$archivo,$otrar);                
+                var_dump ($ruta);
                 //insertar informar 
                 $informar = $this->Oficio_model->insert_informar($oficina,$peticionario,$requiriente);
+                var_dump ($informar);
                 //insertar en la tabla oficio seguimiento
-                $query = $this->Oficio_model->createOficio($nomenclatura,$fecha,$etiquetas,$termino,$dirigido,$observaciones,$atencion,$ruta,$informar,$asunto,$ide);
+                $query = $this->Oficio_model->createOficio($nomenclatura, $fecha, $etiquetas, $termino, $dirigido, $observaciones, $atencion, $ruta, $informar, $asunto, $ide);
                 //sí la inserción se ejecuta con exito, manda mensaje y carga formulario con los datos ingresados
-                if($query==TRUE)
-                {
-                    $this->session->set_flashdata('Creado','Oficio creado correctamente');
-                    $this->actualizarOficio($ide);
-                }else{
-                    $this->session->set_flashdata('No','Error en la inserción');
-                    $this->index($ide);    
-                    }
+
+                $this->session->set_flashdata('Creado','Oficio creado correctamente');
+                //carga formulario de actualizar con el id del nuevo oficio
+                $this->actualizarOficio($query);
+
             }else{
                 //tomamos los datos del formulario en un array
                 $datos = array();
@@ -163,11 +168,11 @@ class Oficio extends CI_Controller
         $termino = $this->Oficio_model->get_termino($id);
         //manda datos de la consulta a la vista, donde se valida el termino para mostrar el formulario correspondiente 
             $this->load->view('templates/head');
-            if($termino==0)
+            if($termino[0]->termino != 0)
             {
-                $this->load->view('consulta_oficio',$datos); //formulario para visualizar oficio e imprimir
-            }else{
                 $this->load->view('actualiza_oficio',$datos); //formulario para modificar oficio
+            }else{
+                $this->load->view('consulta_oficio',$datos); //formulario para visualizar oficio e imprimir
             }
             $this->load->view('templates/footer');    
     }
