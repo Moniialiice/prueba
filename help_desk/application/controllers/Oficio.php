@@ -91,34 +91,25 @@ class Oficio extends CI_Controller
             //sí la validación es correcta procede insetar en la base de datos
             if($this->form_validation->run()==TRUE)
             {   
-                //recibe el tipo de oficio (cordinador, secretario particular)
-                $tipoOficio = $this->input->post('tipoOficio');
-                //dependiendo del tipo de oficio carga la nomclatura
-                if($tipoOficio == 0){
-                    $nomenclatura = '400LIA000/'.date('dmhis\/Y');;
-                }else{
-                    $nomenclatura = '400LI0010/'.date('dmhi\/Y');;
-                }
+                $query = $this->Oficio_model->datosEntrada($ide);
                 //inserta en asunto etiquetas
                 $etiquetas = $this->Oficio_model->insert_etiquetas($colaboracion,$amparo,$solicitudes,$gestion,$cursos,$juzgados,$rh,$estadistica,$telefonia,$ri,$boletas,$conocimiento);
-                var_dump($etiquetas);
-                #array(1) { [0]=> object(stdClass)26 (1) { ["insertEtiquetas ('1', '1', '', '', '', '', '', '', '', '','','')"]=> string(2) "18" } }
+                //var_dump($etiquetas[0]);
                 //inserta dirigido a
                 $dirigido = $this->Oficio_model->insert_destinatario($conase,$toluca,$mexico,$zoriente,$fgeneral,$vicefiscalia,$oficialia,$informacion,$central,$servicio,$otrad);
-                var_dump($dirigido);
+                
                 //inserta en ruta oficio
                 $ruta = $this->Oficio_model->insert_ruta($diligencia,$personalmente,$gestionar,$archivo,$otrar);                
-                var_dump ($ruta);
+                
                 //insertar informar 
                 $informar = $this->Oficio_model->insert_informar($oficina,$peticionario,$requiriente);
-                var_dump ($informar);
+                var_dump($informar);
+                var_dump($informar[0]->insert_informar($oficina,$peticionario,$requiriente));
                 //insertar en la tabla oficio seguimiento
                 $query = $this->Oficio_model->createOficio($nomenclatura, $fecha, $etiquetas, $termino, $dirigido, $observaciones, $atencion, $ruta, $informar, $asunto, $ide);
-                //sí la inserción se ejecuta con exito, manda mensaje y carga formulario con los datos ingresados
 
-                $this->session->set_flashdata('Creado','Oficio creado correctamente');
-                //carga formulario de actualizar con el id del nuevo oficio
-                $this->actualizarOficio($query);
+                //si la inserción es correcta carga formulario de actualizar con el id del nuevo oficio
+                //$this->actualizarOficio($query);
 
             }else{
                 //tomamos los datos del formulario en un array
@@ -127,8 +118,6 @@ class Oficio extends CI_Controller
                 $datos['asunto'] = $asunto;
                 $datos['observaciones'] = $observaciones;
                 $datos['datos'] = $this->Oficio_model->datosEntrada($ide);
-                $datos['prueba'] = $tipOficio;
-                $datos['pruebaDate'] = $date;
                 //envia datos del array a la vista
                 $this->load->view('templates/head');
                 $this->load->view('genera_oficio',$datos); 
@@ -139,7 +128,41 @@ class Oficio extends CI_Controller
             $this->session->set_flashdata('Error','Consultar administrador');
             $this->index($ide);
         }
-    } 
+    }
+    //cargar número consecutivo para nomenclatura
+    public function consecutivo()
+    {
+        //recibe el tipo de oficio (cordinador, secretario particular)
+        $tipoOficio = $this->input->post('tipoOficio');        
+        //dependiendo del tipo de oficio carga la nomclatura
+        //se obtiene el año en curso 
+        $date = date('Y');
+        $last = $this->Oficio_model->ultimaNom(); //ultima nomenclatura en la tabla
+        $ext = $last[0]->nomenclatura;          
+        $nom = explode("/",$ext); //corta nomenclatura en cada diagonal
+        $inicial = $nom[0];
+        $num = $nom[1]; //número consecutivo de la nomenclatura
+        $year = $nom[2];  //año de nomenclatura
+        //si año en curso es igual al año de última nomenclatura
+        if($year == $date){ 
+            //suma 1 a la nomenclatura para el nuevo registro
+            $num + 1; 
+            $consecutivo = $num.'/'.$year;
+            var_dump($consecutivo);
+        }else{
+            $new = '0001'; 
+            $consecutivo = $new.'/'.$date;
+        }  
+        //si tipo de usuario es igual al último registro
+        if( $tipoOficio == $inicial ){
+            $nomenclatura = '400LIA000/'.$consecutivo;  
+            var_dump($nomenclatura);          
+        }else{
+            $nomenclatura = '400LI0010/'.$consecutivo;
+            var_dump($nomenclatura);
+        }
+    }
+    
     //carga formulario de busqueda
     public function busquedaOficio()
     {

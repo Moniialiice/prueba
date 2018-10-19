@@ -48,6 +48,7 @@
                             }
                             echo validation_errors();
                         ?>
+                        
                         <form action="insertaOficio" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Oficio Recepción</label></div>
@@ -60,15 +61,16 @@
                                             <input type='text' id='text-input' value='".$dato->no_oficioEntrada."' class='form-control' disabled>
                                             <input type='text' id='text-input' name='entrada' value='".$dato->id_oficioEntrada."' hidden>
                                             </div>";                                            
-                                        }                                                                                
+                                        }
+                                        
                                     ?>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Selecciona Oficio</label></div>
                                 <div class="col-12 col-md-9">
-                                    <select name="tipoOficio" id="tipoOficio" class="form-control">
-                                        <option  value="0" <?php echo set_select('tipoOficio','0');?>>Cordinador Genaral</option>
-                                        <option  value="1" <?php echo set_select('tipoOficio','1');?>>Secretario Particular</option>
+                                    <select name="tipoOficio" id="tipoOficio" class="form-control" >
+                                        <option  value="400LIA000" <?php echo set_select('tipoOficio','400LIA000');?>>Cordinador General</option>
+                                        <option  value="400LI0010" <?php echo set_select('tipoOficio','400LI0010');?>>Secretario Particular</option>
                                     </select>
                                 </div>
                             </div>

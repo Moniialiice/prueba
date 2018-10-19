@@ -86,3 +86,5 @@ $route['muestraOficio/(:num)'] = 'Oficio/actualizarOficio/$1';
 $route['descargarOficio/(:any)'] = 'Oficio/descarga/$1';
 $route['actualizaOficio'] = 'Oficio/modificaOficio';
 $route['imprimirOficio/(:num)'] = 'Oficio/imprimirOficio/$1';
+//consecutivo
+$route['getNomenclatura'] = 'Oficio/consecutivo';

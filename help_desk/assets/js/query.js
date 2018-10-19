@@ -35,6 +35,20 @@ function BusquedaOf(){
     });
 }
 
+//imprime nomenclatura 
+function nomenclatura(){
+    var data = $('#nom').serialize();
+    $.ajax({
+        url: 'Oficio/consecutivo',
+        type: 'post',
+        data: data,
+        success:function(data){
+            $('#consecutivo').html(data);
+        }
+    });
+}
+
+
 function Paginacion(){
     var data = $('#usuario').serialize();
     $.ajax({
