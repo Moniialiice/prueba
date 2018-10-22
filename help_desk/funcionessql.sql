@@ -53,3 +53,24 @@ CREATE FUNCTION insertOficioS (nomeclatura varchar(50), fecha DATE, id_etAsunto 
         RETURN ID;
     END;
     // 
+
+DELIMITER //
+CREATE FUNCTION INSERTOFICIO (oficina INT, peticionario INT, requiriente INT, colaboracion  INT, amparo INT, solicitudes INT, gestion INT, cursos INT, juzgados INT, rh INT, telefonia INT, estadistica INT, ri INT, boletas INT, conocimiento INT, conase INT, toluca INT, mexico INT, zoriente INT, fgeneral INT, vicefiscalia INT, oficialia INT, informacion INT, central INT, servicio INT, otrad LONGTEXT, diligencia INT, personalmente INT, gestionar INT, archivo INT, otrar LONGTEXT, nomenclatura VARCHAR(100), fecha DATE, termino INT, observaciones LONGTEXT, atencion INT, asunto LONGTEXT, id_entrada INT) 
+RETURNS INT
+BEGIN
+DECLARE IDI, IDE, IDD, IDR, IDO INT;
+	INSERT INTO informar (esta_oficina, peticionario, institucion_requiriente) VALUES (oficina, peticionario, requiriente);
+    	SELECT LAST_INSERT_ID() INTO IDI;
+    INSERT INTO etiquetas_asunto (colaboracion, amparos, solicitudes, gestion, cursos_capacitaciones, juzgados, recursos_humanos, telefonia, estadistica, relaciones_interis, boletas_audiencia, copias_conocimiento) VALUES (colaboracion, amparo, solicitudes, gestion, cursos, juzgados, rh, telefonia, estadistica, ri, boletas, conocimiento);            
+    	SELECT LAST_INSERT_ID() INTO IDE;
+    INSERT INTO destinatario (conase, valle_toluca, valle_mexico, zona_oriente, fiscal_general, vicefiscalia, oficialia_mayor, informacion_estadistica, central_juridico, servicio_carrera, otra) VALUES (conase, toluca, mexico, zoriente, fgeneral, vicefiscalia, oficialia, informacion, central, servicio, otrad);
+    	SELECT LAST_INSERT_ID() INTO IDD;
+	INSERT INTO ruta_oficio (realiza_diligencias, recibir_personalmente, gestionar_peticion, archivo, otras) VALUES (diligencia, personalmente, gestionar, archivo, otrar);
+        SELECT LAST_INSERT_ID() INTO IDR;
+    INSERT INTO oficio_seguimiento (nomenclatura, fecha, id_etAsunto, termino, id_destinatario, observaciones, arch_seguimiento, arch_final, atencion, id_ruta, id_informar, asunto, id_oficioEntrada) VALUES (nomenclatura, fecha, IDE, termino, IDD, observaciones, '', '', atencion, IDR, IDI, asunto, id_entrada);
+        SELECT LAST_INSERT_ID() INTO IDO;    
+
+RETURN IDO;
+END
+
+//

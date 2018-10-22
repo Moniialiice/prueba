@@ -60,7 +60,7 @@
                                             echo "<div class='col-12 col-md-9'>
                                             <input type='text' id='text-input' value='".$dato->no_oficioEntrada."' class='form-control' disabled>
                                             <input type='text' id='text-input' name='entrada' value='".$dato->id_oficioEntrada."' hidden>
-                                            </div>";                                            
+                                            </div>";
                                         }
                                         
                                     ?>
@@ -73,12 +73,12 @@
                                         <option  value="400LI0010" <?php echo set_select('tipoOficio','400LI0010');?>>Secretario Particular</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>  
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Recepción</label></div>
                                 <div class="col-12 col-md-9">
                                     <div class='input-group' >
-                                        <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha');?>" >
+                                        <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha');?>"  >
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar" ></span>
                                         </span>

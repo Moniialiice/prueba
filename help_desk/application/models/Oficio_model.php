@@ -17,41 +17,24 @@ class Oficio_model extends CI_Model{
         return $query->result();
     }
     //se obtiene ultima nomenclatura de oficio seguimiento
-    public function ultimaNom(){
+    public function lastNom(){
         $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='1'");
         return $query->result();
     }
-    //etiquetas_asunto 
-    public function insert_etiquetas($colaboracion,$amparo,$solicitudes,$gestion,$cursos,$juzgados,$rh,$telefonia,$estadistica,$ri,$boletas,$conocimiento)
-    {
-        $query = $this->db->query("SELECT insertEtiquetas ('$colaboracion', '$amparo', '$solicitudes', '$gestion', '$cursos', '$juzgados', '$rh', '$telefonia', '$estadistica', '$ri','$boletas','$conocimiento')");
+    //se obtiene ultima nomenclatura de oficio seguimiento
+    public function nomCordinador(){
+        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='1'");
         return $query->result();
     }
-    //destinatario
-    public function insert_destinatario($conase,$toluca,$mexico,$zoriente,$fgeneral,$vicefiscalia,$oficialia,$informacion,$central,$servicio,$otrad)
-    {
-        $query = $this->db->query("SELECT insertDestinatario ('$conase', '$toluca', '$mexico', '$zoriente', '$fgeneral', '$vicefiscalia', '$oficialia', '$informacion', '$central', '$servicio', '$otrad')");
-        return $query->result();  
-    } 
-    //aciones-ruta_oficio
-    public function insert_ruta($diligencia,$personalmente,$gestionar,$archivo,$otrar)
-    {
-        $query = $this->db->query("SELECT insertRutaOficio ('$diligencia', '$personalmente', '$gestionar', '$archivo', '$otrar')");
+    //se obtiene ultima nomenclatura de oficio seguimiento
+    public function nomSecretario(){
+        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='1'");
         return $query->result();
     }
-    //llama funcion insertInformar para insertar en la table informar
-    public function insert_informar($oficina,$peticionario,$requiriente)
+    //llama oficio para insertar oficio seguimiento
+    public function insert_Oficio($oficina,$peticionario,$requiriente,$colaboracion,$amparo,$solicitudes,$gestion,$cursos,$juzgados,$rh,$telefonia,$estadistica,$ri,$boletas,$conocimiento,$conase,$toluca,$mexico,$zoriente,$fgeneral,$vicefiscalia,$oficialia,$informacion,$central,$servicio,$otrad,$diligencia,$personalmente,$gestionar,$archivo,$otrar,$nomenclatura,$fecha, $etiquetas, $termino, $dirigido, $observaciones, $atencion, $ruta, $informar, $asunto, $ide)
     {
-        $this->db->select("insertInformar('$oficina','$peticionario','$requiriente')");       
-        $query = $this->db->get();
-        $result = $query->row();
-        return $result;
-    }
-    //ingresa los datos en la tabla oficio con las respectivas llaves foraneas
-    public function createOficio($nomenclatura,$fecha, $etiquetas, $termino, $dirigido, $observaciones, $atencion, $ruta, $informar, $asunto, $ide)
-    {
-        $query = $this->db->query("SELECT insertOficioS('$nomenclatura','$fecha','$etiquetas','$termino','$dirigido','$observaciones','$atencion','$ruta','$informar','$asunto','$ide');");
-        return $query->result();    
+        $query = $this->db->query("SELECT INSERTOFICIO ('$oficina','$peticionario','$requiriente','$colaboracion', '$amparo', '$solicitudes', '$gestion', '$cursos', '$juzgados', '$rh', '$telefonia', '$estadistica', '$ri','$boletas','$conocimiento', '$conase', '$toluca', '$mexico', '$zoriente', '$fgeneral', '$vicefiscalia', '$oficialia', '$informacion', '$central', '$servicio', '$otrad', '$diligencia', '$personalmente', '$gestionar', '$archivo', '$otrar', '$nomenclatura','$fecha','$etiquetas','$termino','$dirigido','$observaciones','$atencion','$ruta','$informar','$asunto','$ide')");
     }
     //consulta oficios donde la fecha, nomenclatura o termino sean igual a la busquedas
     public function searchOficio($search)

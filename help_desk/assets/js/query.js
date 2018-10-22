@@ -48,6 +48,13 @@ function nomenclatura(){
     });
 }
 
+$(function (e) {
+    $('#not').submit(function (e) {
+        e.preventDefault()
+        $('#nott').load('buscanoticia.php?' + $('#not').serialize())
+    })
+})
+
 
 function Paginacion(){
     var data = $('#usuario').serialize();
