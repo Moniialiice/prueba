@@ -28,10 +28,10 @@ class Home extends CI_Controller {
     {
         if($this->input->post())
         {
-            $user = $this->input->post('username');
+            $user = $this->input->post('email');
             $pass = $this->input->post('password');
             //Validamos que los campos no esten vacios con la libreria
-            $this->form_validation->set_rules('username', 'Usuario', 'required');
+            $this->form_validation->set_rules('email', 'Correo', 'required');
             $this->form_validation->set_rules('password', 'Contraseña', 'required');
             //Sino estan vacios los campos, se consulta los datos del usuario
             if ($this->form_validation->run() == TRUE)
@@ -39,9 +39,9 @@ class Home extends CI_Controller {
                 $query = $this->Usuario_model->getDatos($user,$pass);
                 //Sí se ejecuta con exito la consulta se almacenan los datos en un array
                 if ($query) {
-                    $data_user = array(
+                         $data_user = array(
                         'id_usuario' => $query->id_usuario,
-                        'usuario' => $query->usuario,
+                        'name' => $query->nombre,
                         'id_tipoUsuario' => $query->id_tipoUsuario,
                         'activo' => $query->activo,
                         'correcto' => TRUE
@@ -50,19 +50,21 @@ class Home extends CI_Controller {
                     $this->session->set_userdata($data_user);
                     //carga la función inicio, ingresando al sistema
                     redirect('index');
-                }else {
-                    //si usuario esta inactivo muestra mensaje
-                    if($this->session->userdata('activo') == 0){
-                        $this->session->set_flashdata('Activo', 'Consultar administrador');
-                        redirect('home');
-                    }else{
+                }else{
+                        $datos = array();
+                        $datos['email'] = $user;                
+                        //mandamos datos a la vista
                         //si los datos son incorrectos muestra mensaje
                         $this->session->set_flashdata('Error', 'Verificar datos');
-                        redirect('home');
-                    }
+                        $this->load->view('templates/head1');
+                        $this->load->view('login',$datos);
+                        $this->load->view('templates/footer1');                         
+                    }                
+            }else{
+                if($this->session->userdata('activo') == 0){
+                    $this->session->set_flashdata('Activo', 'Consultar administrador');
+                    redirect('home');
                 }
-            } else {
-                redirect('home');
             }
         }else{
             redirect('home');

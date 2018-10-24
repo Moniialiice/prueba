@@ -33,7 +33,7 @@
                                 <th scope="col">Firma Origen</th>
                                 <th scope="col">Petición</th>
                                 <th scope="col">Atención</th>
-                                <th scope="col">Imprimir</th>
+                                <th scope="col">Descargar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,8 +45,8 @@
                                         "<td>".$dato->firma_origen."</td>".
                                         "<td>".$dato->peticion."</td>".
                                         "<td>".$dato->nombre."</td>".
-                                        "<td align='center'><a href='descargar/".$dato->arch_entrada."' 'class='fa fa-download fa-1x'> </a></td>".
-                                      "</tr>";
+                                        "<td align='center'><a href='descargar/".$dato->arch_entrada."' class='fa fa-download fa-1x'></a></td>".
+                                        "</tr>";
                               }
                              ?>
                         </tbody>

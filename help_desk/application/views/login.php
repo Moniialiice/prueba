@@ -17,8 +17,8 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <!--div class="input-group-addon">Usuario</div-->
-                                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                    <input type="text" id="username" name="username" class="form-control">
+                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                    <input type="text" id="email" name="email" class="form-control" value="<?php echo set_value('email');?>" >
                                 </div>
                             </div>
                             <div class="form-group">

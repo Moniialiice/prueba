@@ -497,7 +497,7 @@
                                         </div>
                                     </div>
                                     <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Termino</label></div>";
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Término</label></div>";
                                     if($dato->termino == 0){
                                         echo "<div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control' value='00:00 hrs' disabled></div>";
                                     }    

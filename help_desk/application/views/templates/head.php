@@ -165,7 +165,7 @@ if($this->session->flashdata('correcto'))
                 <div class='col-sm-5'>
                     <div class='user-area dropdown float-right'>
                         <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                            <?php echo $name = $this->session->userdata('usuario'); ?>
+                            <?php echo $name = $this->session->userdata('name'); ?>
                         </a>
                         <div class='user-menu dropdown-menu'>
                             <!--a class='nav-link' href='#'><i class='fa fa- user'></i>Mi Perfil</a-->

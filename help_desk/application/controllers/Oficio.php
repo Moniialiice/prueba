@@ -104,7 +104,10 @@ class Oficio extends CI_Controller
                 $year = date('Y'); //carga el año en curso del servidor     
                 //dependiendo del tipo de oficio carga la nomeclatura   
                 if( $tipoOficio == '400LIA000' ){
-                    $last = $this->Oficio_model->lastNom(); //ultima nomenclatura en la tabla cordinador
+                    $LID = $this->Oficio_model->lastID(); //consulta el id del ultimo resgistro de oficio seguimiento
+                    $name = 'MAX(id_oficioseg)'; // nombre de la columna que devuelve consulta
+                    $LIDO = $LID[0]->$name; //se obtiene sólo el id deñ ultimo registro
+                    $last = $this->Oficio_model->lastNom($LIDO); //consulta nomenclatura del ultimo registro 
                     $ext = $last[0]->nomenclatura; //toma campo nomenclatura          
                     $nom = explode("/",$ext); //corta nomenclatura en cada diagonal
                     $num = $nom[1]; //número consecutivo de la nomenclatura
@@ -114,12 +117,16 @@ class Oficio extends CI_Controller
                     $nomenclatura = '400LIA000/'.$consecutivo.'/'.$year;                               
                 }else{
                     //oficio secretariado 
-                    $last = $this->Oficio_model->lastNom(); //ultima nomenclatura en la tabla
-                    $ext = $last[0]->nomenclatura;          
+                    $LID = $this->Oficio_model->lastID(); //consulta el id del ultimo registro del oficio seguimiento
+                    $name = 'MAX(id_oficioseg)'; //nombre de la columna que devuelve consulta
+                    $LIDO = $LID[0]->$name; //se obtiene sólo el id del ultimo registro 
+                    $last = $this->Oficio_model->lastNom($LIDO); //ultima nomenclatura en la tabla cordinador
+                    $ext = $last[0]->nomenclatura; //toma campo nomenclatura          
                     $nom = explode("/",$ext); //corta nomenclatura en cada diagonal
                     $num = $nom[1]; //número consecutivo de la nomenclatura
                     //$consecutivo = 0000; //si es nuevo folio comentar la linea anterior y posterior dar de alta oficio seguimiento 
-                    $consecutivo = $num + 1;  
+                    $consecutivo = $num + 1;
+                    //$this->generate_numbers($num,'1','4');  
                     $nomenclatura = '400LI0010/'.$consecutivo.'/'.$year;
                 }
                 $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha, $termino, $observaciones, $atencion, $asunto, $ide);
@@ -158,32 +165,7 @@ class Oficio extends CI_Controller
             $this->index($ide);
         }
     }
-    //cargar número consecutivo para nomenclatura dependiendo del último resgstro de la tabla
-    public function consecutivo($tipoOficio)
-    {
-        $year = date('Y'); //carga el año en curso del servidor     
-        //dependiendo del tipo de oficio carga la nomeclatura   
-        if( $tipoOficio == '400LIA000' ){
-            $last = $this->Oficio_model->lastNom(); //ultima nomenclatura en la tabla cordinador
-            $ext = $last[0]->nomenclatura; //toma campo nomenclatura          
-            $nom = explode("/",$ext); //corta nomenclatura en cada diagonal
-            $num = $nom[1]; //número consecutivo de la nomenclatura
-            //$consecutivo = 0000; //si es nuevo folio comentar la linea anterior y posterior dar de alta oficio seguimiento 
-            $consecutivo = $num + 1;
-            //$this->generate_numbers($num,'1','4');  
-            $nomenclatura = '400LIA000/'.$consecutivo.'/'.$year;                               
-        }else{
-            //oficio secretariado 
-            $last = $this->Oficio_model->lastNom(); //ultima nomenclatura en la tabla
-            $ext = $last[0]->nomenclatura;          
-            $nom = explode("/",$ext); //corta nomenclatura en cada diagonal
-            $num = $nom[1]; //número consecutivo de la nomenclatura
-            //$consecutivo = 0000; //si es nuevo folio comentar la linea anterior y posterior dar de alta oficio seguimiento 
-            $consecutivo = $num + 1;  
-            $nomenclatura = '400LI0010/'.$consecutivo.'/'.$year;
-        }
-        return $nomenclatura;
-    } 
+
     //ejemplo consecutivo
     function generate_numbers($start, $count, $digits) 
     {

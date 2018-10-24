@@ -13,29 +13,19 @@ class Usuario_model extends CI_Model
     }
     public function getDatos($user,$pass)
     {
-        $this->db->select('id_usuario, usuario, id_tipoUsuario, activo');
+        $this->db->select('id_usuario, nombre, id_tipoUsuario, activo');
         $this->db->from('usuario');
-        $this->db->where('usuario', $user);
         $this->db->where('password', $pass);
+        $this->db->where('correo',$user);
         $this->db->where('activo', 1);
         $query = $this->db->get();
         $result = $query->row();
         return $result;
     }
-    public function test($id){
-        $this->db->select('id_usuario, apellidop, apellidom, nombre, activo, password, id_tipoUsuario, tipoUsuario, id_dependencia, depedencias');
-        $this->db->from('usuario');
-        $this->db->from('tipousuario');
-        $this->db->from('dependencias');
-        $this->db->where('id_tipoUsuario','id_tipoUsuario');
-        $this->db->where('id_usuario',$id);
-        $query = $this->db->get();
-        return $query;
-    }
     //consulta todos los datos de usuario, tipo de usuario y dependencia por id del usuario
     public function muestraUsuario($id)
     {
-        $query = $this->db->query("SELECT u.id_usuario, u.apellidop, u.apellidom, u.usuario, u.nombre, u.activo, u.password, t.id_tipoUsuario, t.tipoUsuario, d.id_dependencias, d.dependencias 
+        $query = $this->db->query("SELECT u.id_usuario, u.apellidop, u.apellidom, u.usuario, u.nombre, u.activo, u.correo, u.password, t.id_tipoUsuario, t.tipoUsuario, d.id_dependencias, d.dependencias 
                                     FROM usuario AS u, tipousuario as t, dependencias as d 
                                     WHERE u.id_tipoUsuario = t.id_tipoUsuario AND u.id_usuario = '$id'");
         return $query->result();
@@ -55,7 +45,7 @@ class Usuario_model extends CI_Model
     //inserta los datos del usuario
     public function createUsuario($name,$app,$apm,$user,$pass,$activo,$tipoUser,$dependencia)
     {
-        $query = $this->db->query("INSERT INTO usuario (nombre, apellidop, apellidom, activo, usuario, password, id_tipoUsuario, id_dependencias) VALUES ('$name','$app','$apm','$activo','$user','$pass','$tipoUser','$dependencia')");
+        $query = $this->db->query("INSERT INTO usuario (nombre, apellidop, apellidom, activo, correo, usuario, password, id_tipoUsuario, id_dependencias) VALUES ('$name','$app','$apm','$activo','$user','$pass','$tipoUser','$dependencia')");
         if($query){
             return true;
         }else{
@@ -65,7 +55,7 @@ class Usuario_model extends CI_Model
     //busqueda de usuario por nombre o usuario
     public function search_usuario($search)
     {
-        $query = $this->db->query("SELECT u.id_usuario, u.usuario, u.nombre, u.apellidop, u.apellidom, u.activo, u.id_tipoUsuario, t.tipoUsuario FROM usuario AS u, tipousuario as t WHERE u.nombre LIKE '%$search%' AND u.id_tipoUsuario=t.id_tipoUsuario ORDER BY id_usuario ASC");
+        $query = $this->db->query("SELECT u.id_usuario, u. correo, u.usuario, u.nombre, u.apellidop, u.apellidom, u.activo, u.id_tipoUsuario, t.tipoUsuario FROM usuario AS u, tipousuario as t WHERE u.nombre LIKE '%$search%' AND u.id_tipoUsuario=t.id_tipoUsuario ORDER BY id_usuario ASC");
         return $query->result();
     }
     //muestra tipo de usuario que es diferente al que tiene el usuario para modificar

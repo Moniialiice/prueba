@@ -271,7 +271,7 @@
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label"> Termino:</label></div>
+                                <div class="col col-md-3"><label for="select" class=" form-control-label"> Término:</label></div>
                                     <div class="col col-md-9">
                                         <select name="termino" id="termino" class=" form-control">
                                             <option value="2" <?php echo set_select('termino','2');?>>48:00 hrs</option>

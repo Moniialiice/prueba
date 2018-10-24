@@ -23,8 +23,13 @@ class Oficio_model extends CI_Model{
         return $query->result();
     }
     //se obtiene ultima nomenclatura de oficio seguimiento
-    public function lastNom(){
-        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='1'");
+    public function lastID(){
+        $query = $this->db->query("SELECT MAX(id_oficioseg) FROM oficio_seguimiento");
+        return $query->result();
+    }
+    //se obtiene ultima nomenclatura de oficio seguimiento
+    public function lastNom($id){
+        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='$id'");
         return $query->result();
     }
     //se obtiene ultima nomenclatura de oficio seguimiento
@@ -61,7 +66,7 @@ class Oficio_model extends CI_Model{
     }
     //consulta con la fecha y nomenclatura de oficio
     public function searchDate($search,$date1,$date2){
-        $query = $this->db->query("SELECT o.id_oficioseg,o.nomenclatura, o.fecha, o.asunto, o.termino, o.atencion, o.observaciones, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, usuario AS u WHERE fecha BETWEEN '$date1' AND '$date2' AND nomenclatura LIKE '%$search%' AND o.id_destinatario = d.id_destinatario AND o.atencion = u.id_usuario ORDER BY o.nomenclatura");
+        $query = $this->db->query("SELECT o.id_oficioseg,o.nomenclatura, o.fecha, o.asunto, o.termino, o.atencion, o.observaciones, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, usuario AS u WHERE fecha BETWEEN '$date1' AND '$date2' AND nomenclatura LIKE '%$search%' AND o.id_destinatario = d.id_destinatario AND o.atencion = u.id_usuario ORDER BY o.fecha");
         return $query->result();
     }
     //consulta de Oficio mediante id, muestra todos los datos de oficio (usuario, entrada,) 
