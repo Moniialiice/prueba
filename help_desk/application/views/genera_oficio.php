@@ -99,58 +99,58 @@
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbox1" class="form-check-label ">
-                                                <input type="checkbox" id="checkbox1" name="amparos" value="1" <?php echo set_checkbox('amparos','1');?> class="form-check-input"> Amparos
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
                                             <label for="checkbox2" class="form-check-label ">
-                                                <input type="checkbox" id="checkbox2" name="solicitudes" value="1" <?php echo set_checkbox('solicitudes','1');?> class="form-check-input"> Solicitudes
+                                                <input type="checkbox" id="checkbox2" name="amparos" value="1" <?php echo set_checkbox('amparos','1');?> class="form-check-input"> Amparos
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label for="checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="checkbox3" name="gestion" value="1" <?php echo set_checkbox('gestion','1');?> class="form-check-input"> Gestión
+                                                <input type="checkbox" id="checkbox3" name="solicitudes" value="1" <?php echo set_checkbox('solicitudes','1');?> class="form-check-input"> Solicitudes
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="checkbox3" name="cursos" value="1" <?php echo set_checkbox('cursos','1');?> class="form-check-input"> Cursos y Capacitaciones
+                                            <label for="checkbox4" class="form-check-label ">
+                                                <input type="checkbox" id="checkbox4" name="gestion" value="1" <?php echo set_checkbox('gestion','1');?> class="form-check-input"> Gestión
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="checkbox4" name="juzgados" value="1" <?php echo set_checkbox('juzgados','1');?> class="form-check-input"> Juzgados
+                                            <label for="checkbox5" class="form-check-label ">
+                                                <input type="checkbox" id="checkbox5" name="cursos" value="1" <?php echo set_checkbox('cursos','1');?> class="form-check-input"> Cursos y Capacitaciones
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="checkbox5" name="rh" value="1" <?php echo set_checkbox('rh','1');?> class="form-check-input"> Recursos Humanos
+                                            <label for="checkbox6" class="form-check-label ">
+                                                <input type="checkbox" id="checkbox6" name="juzgados" value="1" <?php echo set_checkbox('juzgados','1');?> class="form-check-input"> Juzgados
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="checkbox6" name="telefonia" value="1" <?php echo set_checkbox('telefonia','1');?> class="form-check-input"> Telefonía
+                                            <label for="checkbox7" class="form-check-label ">
+                                                <input type="checkbox" id="checkbox7" name="rh" value="1" <?php echo set_checkbox('rh','1');?> class="form-check-input"> Recursos Humanos
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="checkbox7" name="estadistica" value="1" <?php echo set_checkbox('estadistica','1');?> class="form-check-input"> Estadística
+                                            <label for="checkbox8" class="form-check-label ">
+                                                <input type="checkbox" id="checkbox8" name="telefonia" value="1" <?php echo set_checkbox('telefonia','1');?> class="form-check-input"> Telefonía
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbox3" class="form-check-label">
-                                                <input type="checkbox" id="checkbox8" name="ri" value="1" <?php echo set_checkbox('ri','1');?> class="form-check-input"> Relaciones Interinstitucionales
+                                            <label for="checkbox9" class="form-check-label ">
+                                                <input type="checkbox" id="checkbox9" name="estadistica" value="1" <?php echo set_checkbox('estadistica','1');?> class="form-check-input"> Estadística
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbox3" class="form-check-label">
-                                                <input type="checkbox" id="checkbox9" name="boletas" value="1" <?php echo set_checkbox('boletas','1');?> class="form-check-input"> Boletas de Audiencia
+                                            <label for="checkbox10" class="form-check-label">
+                                                <input type="checkbox" id="checkbox10" name="ri" value="1" <?php echo set_checkbox('ri','1');?> class="form-check-input"> Relaciones Interinstitucionales
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbox3" class="form-check-label">
-                                                <input type="checkbox" id="checkbox10" name="conocimiento" value="1" <?php echo set_checkbox('conocimiento','1');?>class="form-check-input"> Copias de Conocimiento
+                                            <label for="checkbox11" class="form-check-label">
+                                                <input type="checkbox" id="checkbox11" name="boletas" value="1" <?php echo set_checkbox('boletas','1');?> class="form-check-input"> Boletas de Audiencia
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label for="checkbox12" class="form-check-label">
+                                                <input type="checkbox" id="checkbox12" name="conocimiento" value="1" <?php echo set_checkbox('conocimiento','1');?>class="form-check-input"> Copias de Conocimiento
                                             </label>
                                         </div>
                                     </div>
@@ -166,48 +166,48 @@
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="inline-checkbox1" class="form-check-label ">
+                                            <label for="inline-checkbox2" class="form-check-label ">
                                                 <input type="checkbox" id="inline-checkbox2" name="toluca" value="1" <?php echo set_checkbox('toluca','1');?> class="form-check-input"> Valle de Toluca
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="inline-checkbox2" class="form-check-label ">
+                                            <label for="inline-checkbox3" class="form-check-label ">
                                                 <input type="checkbox" id="inline-checkbox3" name="mexico" value="1" <?php echo set_checkbox('mexico','1');?> class="form-check-input"> Valle de México
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="inline-checkbox3" class="form-check-label ">
+                                            <label for="inline-checkbox4" class="form-check-label ">
                                                 <input type="checkbox" id="inline-checkbox4" name="zoriente" value="1" <?php echo set_checkbox('zoriente','1');?> class="form-check-input"> Secuestros de Zona Oriente
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="inline-checkbox3" class="form-check-label ">
+                                            <label for="inline-checkbox5" class="form-check-label ">
                                                 <input type="checkbox" id="inline-checkbox5" name="fgeneral" value="1" <?php echo set_checkbox('fgeneral','1');?> class="form-check-input"> Fiscal General
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="inline-checkbox3" class="form-check-label ">
+                                            <label for="inline-checkbox6" class="form-check-label ">
                                                 <input type="checkbox" id="inline-checkbox6" name="vicefiscalia" value="1" <?php echo set_checkbox('vicefiscalia','1');?> class="form-check-input"> Vicefiscalia
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="inline-checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="inline-checkbox6" name="oficialia" value="1" <?php echo set_checkbox('oficialia','1');?> class="form-check-input"> Oficialía Mayor
+                                            <label for="inline-checkbox7" class="form-check-label ">
+                                                <input type="checkbox" id="inline-checkbox7" name="oficialia" value="1" <?php echo set_checkbox('oficialia','1');?> class="form-check-input"> Oficialía Mayor
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="inline-checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="inline-checkbox7" name="informacion" value="1" <?php echo set_checkbox('informacion','1');?> class="form-check-input"> Departamento de Información y Estadistica
+                                            <label for="inline-checkbox8" class="form-check-label ">
+                                                <input type="checkbox" id="inline-checkbox8" name="informacion" value="1" <?php echo set_checkbox('informacion','1');?> class="form-check-input"> Departamento de Información y Estadistica
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="inline-checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="inline-checkbox8" name="central" value="1" <?php echo set_checkbox('central','1');?> class="form-check-input"> Central Jurídico
+                                            <label for="inline-checkbox9" class="form-check-label ">
+                                                <input type="checkbox" id="inline-checkbox9" name="central" value="1" <?php echo set_checkbox('central','1');?> class="form-check-input"> Central Jurídico
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="inline-checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="inline-checkbox9" name="servicio" value="1" <?php echo set_checkbox('servicio','1');?> class="form-check-input"> Servicio Carrera
+                                            <label for="inline-checkbox10" class="form-check-label ">
+                                                <input type="checkbox" id="inline-checkbox10" name="servicio" value="1" <?php echo set_checkbox('servicio','1');?> class="form-check-input"> Servicio Carrera
                                             </label>
                                         </div>
                                         <div class="checkbox">
@@ -222,23 +222,23 @@
                                     <div class="col col-md-9">
                                         <div class="form-check">
                                             <div class="checkbox">
-                                                <label for="checkbox1" class="form-check-label ">
-                                                    <input type="checkbox" id="checkbox1" name="diligencias" value="1" <?php echo set_checkbox('diligencias','1');?> class="form-check-input"> Realizar Diligencias en Vía de Colaboración
+                                                <label for="checkbox13" class="form-check-label ">
+                                                    <input type="checkbox" id="checkbox13" name="diligencias" value="1" <?php echo set_checkbox('diligencias','1');?> class="form-check-input"> Realizar Diligencias en Vía de Colaboración
                                                 </label>
                                             </div>
                                             <div class="checkbox">
-                                                <label for="checkbox2" class="form-check-label ">
-                                                    <input type="checkbox" id="checkbox2" name="personalmente" value="1" <?php echo set_checkbox('personalmente','1');?> class="form-check-input"> Recibir Personalmente en Audiencia e Informar
+                                                <label for="checkbox14" class="form-check-label ">
+                                                    <input type="checkbox" id="checkbox14" name="personalmente" value="1" <?php echo set_checkbox('personalmente','1');?> class="form-check-input"> Recibir Personalmente en Audiencia e Informar
                                                 </label>
                                             </div>
                                             <div class="checkbox">
-                                                <label for="checkbox3" class="form-check-label ">
-                                                    <input type="checkbox" id="checkbox3" name="gestionar" value="1" <?php echo set_checkbox('gestionar','1');?> class="form-check-input"> Gestionar Petición y Permitir Constancias que Acrediten la Atención Brindada
+                                                <label for="checkbox15" class="form-check-label ">
+                                                    <input type="checkbox" id="checkbox15" name="gestionar" value="1" <?php echo set_checkbox('gestionar','1');?> class="form-check-input"> Gestionar Petición y Permitir Constancias que Acrediten la Atención Brindada
                                                 </label>
                                             </div>
                                             <div class="checkbox">
-                                                <label for="checkbox3" class="form-check-label ">
-                                                    <input type="checkbox" id="checkbox4" name="archivo" value="1" <?php echo set_checkbox('archivo','1');?> class="form-check-input"> Archivo
+                                                <label for="checkbox16" class="form-check-label ">
+                                                    <input type="checkbox" id="checkbox16" name="archivo" value="1" <?php echo set_checkbox('archivo','1');?> class="form-check-input"> Archivo
                                                 </label>
                                             </div>
                                             <div class="checkbox">
@@ -253,18 +253,18 @@
                                 <div class="col col-md-9">
                                     <div class="form-check">
                                         <div class="checkbox">
-                                            <label for="checkbox3" class="form-check-label">
-                                                <input type="checkbox" id="checkbox1" name="oficina" value="1" <?php echo set_checkbox('oficina','1');?> class="form-check-input"> Esta Oficina
+                                            <label for="checkbox17" class="form-check-label">
+                                                <input type="checkbox" id="checkbox17" name="oficina" value="1" <?php echo set_checkbox('oficina','1');?> class="form-check-input"> Esta Oficina
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbox3" class="form-check-label">
-                                                <input type="checkbox" id="checkbox2" name="peticionario" value="1" <?php echo set_checkbox('peticionario','1');?> class="form-check-input"> Peticionario
+                                            <label for="checkbox18" class="form-check-label">
+                                                <input type="checkbox" id="checkbox18" name="peticionario" value="1" <?php echo set_checkbox('peticionario','1');?> class="form-check-input"> Peticionario
                                             </label>
                                         </div>
                                         <div class="checkbox">
-                                            <label for="checkbo3" class="form-check-label">
-                                                <input type="checkbox" id="checkbox3" name="requiriente" value="1" <?php echo set_checkbox('requiriente','1');?> class="form-check-input"> Institución Requiriente
+                                            <label for="checkbo19" class="form-check-label">
+                                                <input type="checkbox" id="checkbox19" name="requiriente" value="1" <?php echo set_checkbox('requiriente','1');?> class="form-check-input"> Institución Requiriente
                                             </label>
                                         </div>
                                     </div>

@@ -15,6 +15,12 @@ class Oficio_model extends CI_Model{
     {
         $query = $this->db->query("SELECT id_oficioEntrada, no_oficioEntrada FROM oficio_entrada WHERE id_oficioEntrada = '$id'");
         return $query->result();
+    }    
+    //consulta si el id_oficioEntrada
+    public function entradaSeguimiento($id)
+    {
+        $query = $this->db->query("SELECT id_oficioseg FROM oficio_seguimiento WHERE id_oficioEntrada = '$id'");
+        return $query->result();
     }
     //se obtiene ultima nomenclatura de oficio seguimiento
     public function lastNom(){
@@ -32,15 +38,25 @@ class Oficio_model extends CI_Model{
         return $query->result();
     }
     //llama oficio para insertar oficio seguimiento
-    public function insert_Oficio($oficina,$peticionario,$requiriente,$colaboracion,$amparo,$solicitudes,$gestion,$cursos,$juzgados,$rh,$telefonia,$estadistica,$ri,$boletas,$conocimiento,$conase,$toluca,$mexico,$zoriente,$fgeneral,$vicefiscalia,$oficialia,$informacion,$central,$servicio,$otrad,$diligencia,$personalmente,$gestionar,$archivo,$otrar,$nomenclatura,$fecha, $etiquetas, $termino, $dirigido, $observaciones, $atencion, $ruta, $informar, $asunto, $ide)
+    public function insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha, $termino, $observaciones, $atencion, $asunto, $ide)
     {
-        $query = $this->db->query("SELECT INSERTOFICIO ('$oficina','$peticionario','$requiriente','$colaboracion', '$amparo', '$solicitudes', '$gestion', '$cursos', '$juzgados', '$rh', '$telefonia', '$estadistica', '$ri','$boletas','$conocimiento', '$conase', '$toluca', '$mexico', '$zoriente', '$fgeneral', '$vicefiscalia', '$oficialia', '$informacion', '$central', '$servicio', '$otrad', '$diligencia', '$personalmente', '$gestionar', '$archivo', '$otrar', '$nomenclatura','$fecha','$etiquetas','$termino','$dirigido','$observaciones','$atencion','$ruta','$informar','$asunto','$ide')");
+        $query = $this->db->query("SELECT INSERTOFICIO ('$oficina','$peticionario','$requiriente','$colaboracion', '$amparo', '$solicitudes', '$gestion', '$cursos', '$juzgados', '$rh', '$telefonia', '$estadistica', '$ri','$boletas','$conocimiento', '$conase', '$toluca', '$mexico', '$zoriente', '$fgeneral', '$vicefiscalia', '$oficialia', '$informacion', '$central', '$servicio', '$otrad', '$diligencia', '$personalmente', '$gestionar', '$archivo', '$otrar', '$nomenclatura','$fecha', '$termino', '$observaciones', '$atencion', '$asunto', '$ide')");
+        if($query){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    //obtener el id de oficio seguimiento por medio de nomenclatura
+    public function getIDO($nomenclatura)
+    {
+        $query = $this->db->query("SELECT id_oficioseg FROM oficio_seguimiento WHERE nomenclatura = '$nomenclatura'");
+        return $query->result();
     }
     //consulta oficios donde la fecha, nomenclatura o termino sean igual a la busquedas
     public function searchOficio($search)
     {
         $query = $this->db->query("SELECT o.id_oficioseg,o.nomenclatura, o.fecha, o.asunto, o.termino, o.atencion, o.observaciones, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, usuario AS u WHERE fecha LIKE '%$search%' AND nomenclatura LIKE '%$search%' AND o.id_destinatario = d.id_destinatario AND o.atencion = u.id_usuario ORDER BY termino ASC");
-        
         return $query->result();
     }
     //consulta con la fecha y nomenclatura de oficio
@@ -57,7 +73,7 @@ class Oficio_model extends CI_Model{
     //Obtiene el termino del oficio para modificar o actualizar
     public function get_termino($id)
     {
-        $query = $this->db->query("SELECT termino FROM oficio_seguimiento WHERE id_oficioseg = $id");
+        $query = $this->db->query("SELECT termino FROM oficio_seguimiento WHERE id_oficioseg = '$id'");
         return $query->result();
     }
     //consulta para actualizar

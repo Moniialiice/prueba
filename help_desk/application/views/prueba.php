@@ -45,19 +45,3 @@
         /* Se imprimen los números de página */           
         echo $this->pagination->create_links();
     ?>
-                                
-<!-- carga nomenclatura -->  
-
-                        <form class="search-form" action="nom" method="nom" id="nom">
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Selecciona Oficio</label></div>
-                                <div class="col-12 col-md-9">
-                                    <select name="tipoOficio" id="tipoOficio" class="form-control" OnClick="BusquedaOf();">
-                                        <option  value="0" <?php echo set_select('tipoOficio','0');?>>Cordinador Genaral</option>
-                                        <option  value="1" <?php echo set_select('tipoOficio','1');?>>Secretario Particular</option>
-                                    </select>
-                                </div>
-                            </div>    
-                        </form>
-                        <div  class="card-body card-block" id="consecutivo"></div>                 
-

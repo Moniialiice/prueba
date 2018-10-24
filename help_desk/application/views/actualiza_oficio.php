@@ -361,17 +361,10 @@
                                                     </label>
                                                 </div>";
                                         }
-                                        if($dato->otra != " "){
                                             echo "<div class='checkbox'>
                                                         <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
                                                         <div class='col-12 col-md-9'><textarea name='otrad' id='textarea-input' rows='5' placeholder='' class='form-control' disabled>".$dato->otra."</textarea></div>
                                                    </div>";
-                                        }else{
-                                            echo "<div class='checkbox'>
-                                                        <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
-                                                        <div class='col-12 col-md-9'><textarea name='otrad' id='textarea-input' rows='5' placeholder='' class='form-control disabled'></textarea></div>
-                                                    </div>";
-                                        }
                                         echo "
                                             </div> 
                                         </div>       
@@ -432,18 +425,10 @@
                                                         </label>
                                                     </div>";
                                          }
-                                         if($dato->otras != " "){
                                              echo "<div class='checkbox'>
                                                         <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
-                                                        <div class='col-12 col-md-9'><textarea name='otra' id='textarea-input' rows='5' placeholder='' class='form-control' disabled >".$dato->otras."</textarea></div>
+                                                        <div class='col-12 col-md-9'><textarea name='otrar' id='textarea-input' rows='5' placeholder='' class='form-control' disabled >".$dato->otras."</textarea></div>
                                                     </div>";
-                                         }else{
-                                             echo "<div class='checkbox'>
-                                                        <div class='col col-md-3'><label for='text-input' class='form-control-label'>Otra:</label></div>
-                                                        <div class='col-12 col-md-9'><textarea name='otra' id='textarea-input' rows='5' placeholder='' class='form-control' disabled ></textarea></div>
-                                                    </div>";
-                                         }
-
                                     echo"     
                                                 </div>
                                             </div>        

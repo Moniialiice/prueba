@@ -47,6 +47,7 @@ class Entrada_model extends CI_Model
         $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.peticion, e.arch_entrada, e.fecha_ent, e.atencion, u.nombre FROM oficio_entrada as e, usuario as u WHERE e.atencion = u.id_usuario and e.atencion='$id' ORDER BY id_oficioEntrada ASC");
         return $query->result();
     }
+
     //paginación ejemplo consulta del contador de registros
     public function paginacionEntrada()
     {

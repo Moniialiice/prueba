@@ -29,10 +29,19 @@ class Oficio extends CI_Controller
     public function index($id)
     {
         //$id = $this->encrypt->decode($enID);
-        $datos ['datos'] = $this->Oficio_model->datosEntrada($id);
-        $this->load->view('templates/head');
-        $this->load->view('genera_oficio',$datos);
-        $this->load->view('templates/footer');
+        $datos ['datos'] = $this->Oficio_model->datosEntrada($id); //datos de tabla oficio entrada
+        $eSeguimiento = $this->Oficio_model->entradaSeguimiento($id); //obtiene id de oficio seguimiento
+        //si se ejecuta eSeguimiento 
+        if($eSeguimiento){
+            $idoficio = $eSeguimiento[0]->id_oficioseg; //id de oficioSeguimiento
+            $this->actualizarOficio($idoficio); //carga formulario de actualización
+        }else{            
+            //carga el vista para nuevo oficio seguimiento
+            $this->load->view('templates/head');
+            $this->load->view('genera_oficio',$datos);
+            $this->load->view('templates/footer');
+        }
+        
     }
     //valida los datos para insertar en la base 
     public function createOficioVal()
@@ -41,7 +50,8 @@ class Oficio extends CI_Controller
 
         if($this->input->post())
         {
-            
+            //carga el tipo de nomenclatura
+            $tipoOficio = $this->input->post('tipoOficio');   
             //id del usuario que creo el oficio
             $atencion = $this->input->post('atencion');
             //recibimos datos del formulario
@@ -91,27 +101,43 @@ class Oficio extends CI_Controller
             //sí la validación es correcta procede insetar en la base de datos
             if($this->form_validation->run()==TRUE)
             {   
-                $this->consecutivo();
-
-
-                //$query = $this->Oficio_model->datosEntrada($ide);
-                //inserta en asunto etiquetas
-                //$etiquetas = $this->Oficio_model->insert_etiquetas($colaboracion,$amparo,$solicitudes,$gestion,$cursos,$juzgados,$rh,$estadistica,$telefonia,$ri,$boletas,$conocimiento);
-                //var_dump($etiquetas[0]);
-                //inserta dirigido a
-                // $dirigido = $this->Oficio_model->insert_destinatario($conase,$toluca,$mexico,$zoriente,$fgeneral,$vicefiscalia,$oficialia,$informacion,$central,$servicio,$otrad);
+                $year = date('Y'); //carga el año en curso del servidor     
+                //dependiendo del tipo de oficio carga la nomeclatura   
+                if( $tipoOficio == '400LIA000' ){
+                    $last = $this->Oficio_model->lastNom(); //ultima nomenclatura en la tabla cordinador
+                    $ext = $last[0]->nomenclatura; //toma campo nomenclatura          
+                    $nom = explode("/",$ext); //corta nomenclatura en cada diagonal
+                    $num = $nom[1]; //número consecutivo de la nomenclatura
+                    //$consecutivo = 0000; //si es nuevo folio comentar la linea anterior y posterior dar de alta oficio seguimiento 
+                    $consecutivo = $num + 1;
+                    //$this->generate_numbers($num,'1','4');  
+                    $nomenclatura = '400LIA000/'.$consecutivo.'/'.$year;                               
+                }else{
+                    //oficio secretariado 
+                    $last = $this->Oficio_model->lastNom(); //ultima nomenclatura en la tabla
+                    $ext = $last[0]->nomenclatura;          
+                    $nom = explode("/",$ext); //corta nomenclatura en cada diagonal
+                    $num = $nom[1]; //número consecutivo de la nomenclatura
+                    //$consecutivo = 0000; //si es nuevo folio comentar la linea anterior y posterior dar de alta oficio seguimiento 
+                    $consecutivo = $num + 1;  
+                    $nomenclatura = '400LI0010/'.$consecutivo.'/'.$year;
+                }
+                $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha, $termino, $observaciones, $atencion, $asunto, $ide);
                 
-                //inserta en ruta oficio
-               //$ruta = $this->Oficio_model->insert_ruta($diligencia,$personalmente,$gestionar,$archivo,$otrar);                
-                
-                //insertar informar 
-                //$informar = $this->Oficio_model->insert_informar($oficina,$peticionario,$requiriente);
-                //var_dump($informar);
-                //var_dump($informar[0]->insert_informar($oficina,$peticionario,$requiriente));
-                //insertar en la tabla oficio seguimiento
-                //$query = $this->Oficio_model->createOficio($nomenclatura, $fecha, $etiquetas, $termino, $dirigido, $observaciones, $atencion, $ruta, $informar, $asunto, $ide);
-
-                //si la inserción es correcta carga formulario de actualizar con el id del nuevo oficio
+                if ($insertOficio == true){                    
+                    //id oficio seguimiento 
+                    $idoficio = $this->Oficio_model->getIDO($nomenclatura);
+                    $ido = $idoficio[0]->id_oficioseg;
+                    //una vez insertado muestra datos en actualizar oficio
+                    $this->actualizarOficio($ido);
+                }else{
+                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                    $this->index($ide);
+                }
+                if($insertOficio == false){
+                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                    $this->index($ide);
+                }
                 //$this->actualizarOficio($query);
 
             }else{
@@ -133,10 +159,8 @@ class Oficio extends CI_Controller
         }
     }
     //cargar número consecutivo para nomenclatura dependiendo del último resgstro de la tabla
-    public function consecutivo()
+    public function consecutivo($tipoOficio)
     {
-        //recibe el tipo de oficio (cordinador, secretario particular)
-        $tipoOficio = $this->input->post('tipoOficio');   
         $year = date('Y'); //carga el año en curso del servidor     
         //dependiendo del tipo de oficio carga la nomeclatura   
         if( $tipoOficio == '400LIA000' ){
@@ -147,9 +171,7 @@ class Oficio extends CI_Controller
             //$consecutivo = 0000; //si es nuevo folio comentar la linea anterior y posterior dar de alta oficio seguimiento 
             $consecutivo = $num + 1;
             //$this->generate_numbers($num,'1','4');  
-            $nomenclatura = '400LIA000/'.$consecutivo.'/'.$year;
-            var_dump($nomenclatura);
-                     
+            $nomenclatura = '400LIA000/'.$consecutivo.'/'.$year;                               
         }else{
             //oficio secretariado 
             $last = $this->Oficio_model->lastNom(); //ultima nomenclatura en la tabla
@@ -159,8 +181,8 @@ class Oficio extends CI_Controller
             //$consecutivo = 0000; //si es nuevo folio comentar la linea anterior y posterior dar de alta oficio seguimiento 
             $consecutivo = $num + 1;  
             $nomenclatura = '400LI0010/'.$consecutivo.'/'.$year;
-            var_dump($nomenclatura);
         }
+        return $nomenclatura;
     } 
     //ejemplo consecutivo
     function generate_numbers($start, $count, $digits) 
@@ -171,26 +193,6 @@ class Oficio extends CI_Controller
         }
         return $result;
     }
-    
-    public function prueba()
-    {
-        //recibe el tipo de Oficio    
-        $tipo = $this->input->post('tipoOficio');
-        $last = $this->Oficio_model->lastNom();
-        $ext = $last[0]->nomenclatura;
-        $nom = explode("/",$ext);
-        $num = $nom[1]; //número inicial
-        $digitos = 4;
-        $count = 1;
-        for ($n = $num; $n < $num + $count; $n++)
-        {
-
-        }
-
-
-    }
-
-
     //carga formulario de busqueda
     public function busquedaOficio()
     {
