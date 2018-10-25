@@ -320,7 +320,7 @@ class Oficio extends CI_Controller
         // salida de HTML contenido a pdf
         $pdf->writeHTML($html, true, false, true, false, '');
         //manda a imprimir al cargar el archivo
-        //$pdf->IncludeJS("print();");
+        //$pdf->IncludeJS("print();"); D
         $pdf->Output($pdfFilePath, 'I');
     }
 

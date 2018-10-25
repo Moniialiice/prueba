@@ -92,7 +92,7 @@
                                 <?php
                                 //se toman los datos del usuario de las sesiones
                                     $id = $this->session->userdata('id_usuario');
-                                    $nom = $this->session->userdata('usuario');
+                                    $nom = $this->session->userdata('name');
                                     echo "<div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$nom."' disabled>
                                           <input type='text' id='text-input' name='id' value='".$id."' hidden>
                                           </div>";?>
