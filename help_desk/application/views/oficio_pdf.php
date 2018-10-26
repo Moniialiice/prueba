@@ -112,8 +112,8 @@ h4{
 		<td class="table_cont" colspan="4" >ASUNTO</td>
 	</tr>
 	<tr>	
-		<td class="table_cont"><?=$dato[0]->nomenclatura ?></td>
-		<td class="table_font" colspan="4"> <?=$dato[0]->asunto ?></td>
+		<td class="table_cont"><?php $dato[0]->nomenclatura ?></td>
+		<td class="table_font" colspan="4"> <?php $dato[0]->asunto ?></td>
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 </table>

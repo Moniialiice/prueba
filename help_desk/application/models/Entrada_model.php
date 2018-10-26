@@ -14,9 +14,9 @@ class Entrada_model extends CI_Model
     }
 
     //funcion para dar de alta el oficio de entrada
-    public function createOficio($no_oficio,$firma_origen,$peticion,$arch_entrada,$id_usuario,$fecha,$fecha_r)
+    public function createOficio($no_oficio,$firma_origen,$cargo,$peticion,$arch_entrada,$id_usuario,$fecha, $hora, $fecha_r)
     {
-        $query = $this->db->query("INSERT INTO oficio_entrada(no_oficioEntrada,firma_origen,peticion,arch_entrada,atencion,fecha_ent,fecha_real) VALUES ('$no_oficio','$firma_origen','$peticion','$arch_entrada','$id_usuario',' $fecha','$fecha_r')");
+        $query = $this->db->query("INSERT INTO oficio_entrada(no_oficioEntrada, firma_origen, cargo, peticion, arch_entrada, atencion, fecha_ent, hora_ent, fecha_real) VALUES ('$no_oficio','$firma_origen','$cargo','$peticion','$arch_entrada','$id_usuario','$fecha','$hora','$fecha_r')");
         if ($query) {
             return true;
         }else{
@@ -26,13 +26,7 @@ class Entrada_model extends CI_Model
     //busqueda con fecha y no. de nomenclatura
     public function searchFecha($search,$date1,$date2)
     {
-        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%$search%' AND e.fecha_real BETWEEN '$date1' AND '$date2' AND e.atencion = u.id_usuario ORDER BY e.no_oficioEntrada DESC ");
-        return $query->result();
-    }
-    //busqueda por id del usuario
-    public function searchID($search,$date1,$date2,$id)
-    {
-        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%C0%' AND e.fecha_real BETWEEN '2018-09-01' AND '2018-10-01' AND e.atencion = u.id_usuario AND e.atencion = 1 ORDER BY e.no_oficioEntrada DESC ");
+        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.hora_ent, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%$search%' AND e.fecha_real BETWEEN '$date1' AND '$date2' AND e.atencion = u.id_usuario ORDER BY e.no_oficioEntrada DESC ");
         return $query->result();
     }
     //reporte de los oficios de entrada que el usuario ha creado

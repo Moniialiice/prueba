@@ -1910,3 +1910,298 @@ INFO - 2018-10-25 10:55:19 --> Upload Class Initialized
 INFO - 2018-10-25 10:55:19 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\oficio_pdf.php
 INFO - 2018-10-25 10:55:26 --> Final output sent to browser
 INFO - 2018-10-25 10:55:26 --> Total execution time: 7.1604
+INFO - 2018-10-25 11:09:30 --> Config Class Initialized
+INFO - 2018-10-25 11:09:30 --> Hooks Class Initialized
+INFO - 2018-10-25 11:09:30 --> UTF-8 Support Enabled
+INFO - 2018-10-25 11:09:30 --> Utf8 Class Initialized
+INFO - 2018-10-25 11:09:30 --> URI Class Initialized
+INFO - 2018-10-25 11:09:30 --> Router Class Initialized
+INFO - 2018-10-25 11:09:30 --> Output Class Initialized
+INFO - 2018-10-25 11:09:30 --> Security Class Initialized
+INFO - 2018-10-25 11:09:30 --> Input Class Initialized
+INFO - 2018-10-25 11:09:30 --> Language Class Initialized
+INFO - 2018-10-25 11:09:30 --> Loader Class Initialized
+INFO - 2018-10-25 11:09:30 --> Controller Class Initialized
+INFO - 2018-10-25 11:09:30 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-10-25 11:09:30 --> Pagination Class Initialized
+INFO - 2018-10-25 11:09:30 --> Helper loaded: download_helper
+INFO - 2018-10-25 11:09:30 --> Helper loaded: file_helper
+INFO - 2018-10-25 11:09:30 --> Helper loaded: url_helper
+INFO - 2018-10-25 11:09:30 --> Helper loaded: html_helper
+INFO - 2018-10-25 11:09:30 --> Helper loaded: form_helper
+DEBUG - 2018-10-25 11:09:30 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-10-25 11:09:30 --> Session: Class initialized using 'files' driver.
+INFO - 2018-10-25 11:09:30 --> Encrypt Class Initialized
+INFO - 2018-10-25 11:09:30 --> Database Driver Class Initialized
+INFO - 2018-10-25 11:09:30 --> Model "Oficio_model" initialized
+INFO - 2018-10-25 11:09:30 --> Form Validation Class Initialized
+INFO - 2018-10-25 11:09:30 --> Language file loaded: language/spanish/calendar_lang.php
+INFO - 2018-10-25 11:09:30 --> Calendar Class Initialized
+INFO - 2018-10-25 11:09:30 --> Upload Class Initialized
+INFO - 2018-10-25 11:09:30 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head.php
+INFO - 2018-10-25 11:09:30 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\consulta_oficio.php
+INFO - 2018-10-25 11:09:30 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer.php
+INFO - 2018-10-25 11:09:30 --> Final output sent to browser
+INFO - 2018-10-25 11:09:30 --> Total execution time: 0.0624
+INFO - 2018-10-25 12:27:03 --> Config Class Initialized
+INFO - 2018-10-25 12:27:03 --> Hooks Class Initialized
+INFO - 2018-10-25 12:27:03 --> UTF-8 Support Enabled
+INFO - 2018-10-25 12:27:03 --> Utf8 Class Initialized
+INFO - 2018-10-25 12:27:03 --> URI Class Initialized
+INFO - 2018-10-25 12:27:03 --> Router Class Initialized
+INFO - 2018-10-25 12:27:03 --> Output Class Initialized
+INFO - 2018-10-25 12:27:03 --> Security Class Initialized
+INFO - 2018-10-25 12:27:03 --> Input Class Initialized
+INFO - 2018-10-25 12:27:03 --> Language Class Initialized
+INFO - 2018-10-25 12:27:03 --> Loader Class Initialized
+INFO - 2018-10-25 12:27:03 --> Controller Class Initialized
+INFO - 2018-10-25 12:27:03 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-10-25 12:27:03 --> Pagination Class Initialized
+INFO - 2018-10-25 12:27:03 --> Helper loaded: download_helper
+INFO - 2018-10-25 12:27:03 --> Helper loaded: file_helper
+INFO - 2018-10-25 12:27:03 --> Helper loaded: url_helper
+INFO - 2018-10-25 12:27:03 --> Helper loaded: html_helper
+INFO - 2018-10-25 12:27:03 --> Helper loaded: form_helper
+DEBUG - 2018-10-25 12:27:03 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-10-25 12:27:03 --> Session: Class initialized using 'files' driver.
+INFO - 2018-10-25 12:27:03 --> Encrypt Class Initialized
+INFO - 2018-10-25 12:27:03 --> Database Driver Class Initialized
+INFO - 2018-10-25 12:27:03 --> Model "Entrada_model" initialized
+INFO - 2018-10-25 12:27:03 --> Form Validation Class Initialized
+INFO - 2018-10-25 12:27:03 --> Upload Class Initialized
+INFO - 2018-10-25 12:27:03 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head.php
+INFO - 2018-10-25 12:27:03 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\busqueda_entrada.php
+INFO - 2018-10-25 12:27:03 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer.php
+INFO - 2018-10-25 12:27:03 --> Final output sent to browser
+INFO - 2018-10-25 12:27:03 --> Total execution time: 0.0624
+INFO - 2018-10-25 12:27:16 --> Config Class Initialized
+INFO - 2018-10-25 12:27:16 --> Hooks Class Initialized
+INFO - 2018-10-25 12:27:16 --> UTF-8 Support Enabled
+INFO - 2018-10-25 12:27:16 --> Utf8 Class Initialized
+INFO - 2018-10-25 12:27:16 --> URI Class Initialized
+INFO - 2018-10-25 12:27:16 --> Router Class Initialized
+INFO - 2018-10-25 12:27:16 --> Output Class Initialized
+INFO - 2018-10-25 12:27:16 --> Security Class Initialized
+INFO - 2018-10-25 12:27:16 --> Input Class Initialized
+INFO - 2018-10-25 12:27:16 --> Language Class Initialized
+INFO - 2018-10-25 12:27:16 --> Loader Class Initialized
+INFO - 2018-10-25 12:27:16 --> Controller Class Initialized
+INFO - 2018-10-25 12:27:16 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-10-25 12:27:16 --> Pagination Class Initialized
+INFO - 2018-10-25 12:27:16 --> Helper loaded: download_helper
+INFO - 2018-10-25 12:27:16 --> Helper loaded: file_helper
+INFO - 2018-10-25 12:27:16 --> Helper loaded: url_helper
+INFO - 2018-10-25 12:27:16 --> Helper loaded: html_helper
+INFO - 2018-10-25 12:27:16 --> Helper loaded: form_helper
+DEBUG - 2018-10-25 12:27:16 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-10-25 12:27:16 --> Session: Class initialized using 'files' driver.
+INFO - 2018-10-25 12:27:16 --> Encrypt Class Initialized
+INFO - 2018-10-25 12:27:16 --> Database Driver Class Initialized
+INFO - 2018-10-25 12:27:16 --> Model "Entrada_model" initialized
+INFO - 2018-10-25 12:27:16 --> Form Validation Class Initialized
+INFO - 2018-10-25 12:27:16 --> Upload Class Initialized
+INFO - 2018-10-25 12:27:16 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\all_entrada.php
+INFO - 2018-10-25 12:27:16 --> Final output sent to browser
+INFO - 2018-10-25 12:27:16 --> Total execution time: 0.0468
+INFO - 2018-10-25 12:27:16 --> Config Class Initialized
+INFO - 2018-10-25 12:27:16 --> Hooks Class Initialized
+INFO - 2018-10-25 12:27:16 --> UTF-8 Support Enabled
+INFO - 2018-10-25 12:27:16 --> Utf8 Class Initialized
+INFO - 2018-10-25 12:27:16 --> URI Class Initialized
+INFO - 2018-10-25 12:27:16 --> Router Class Initialized
+INFO - 2018-10-25 12:27:16 --> Output Class Initialized
+INFO - 2018-10-25 12:27:16 --> Security Class Initialized
+INFO - 2018-10-25 12:27:16 --> Input Class Initialized
+INFO - 2018-10-25 12:27:16 --> Language Class Initialized
+INFO - 2018-10-25 12:27:16 --> Loader Class Initialized
+INFO - 2018-10-25 12:27:16 --> Controller Class Initialized
+INFO - 2018-10-25 12:27:16 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-10-25 12:27:16 --> Pagination Class Initialized
+INFO - 2018-10-25 12:27:16 --> Helper loaded: download_helper
+INFO - 2018-10-25 12:27:16 --> Helper loaded: file_helper
+INFO - 2018-10-25 12:27:16 --> Helper loaded: url_helper
+INFO - 2018-10-25 12:27:16 --> Helper loaded: html_helper
+INFO - 2018-10-25 12:27:16 --> Helper loaded: form_helper
+DEBUG - 2018-10-25 12:27:16 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-10-25 12:27:16 --> Session: Class initialized using 'files' driver.
+INFO - 2018-10-25 12:27:16 --> Encrypt Class Initialized
+INFO - 2018-10-25 12:27:16 --> Database Driver Class Initialized
+INFO - 2018-10-25 12:27:16 --> Model "Entrada_model" initialized
+INFO - 2018-10-25 12:27:16 --> Form Validation Class Initialized
+INFO - 2018-10-25 12:27:16 --> Upload Class Initialized
+INFO - 2018-10-25 12:27:16 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\all_entrada.php
+INFO - 2018-10-25 12:27:16 --> Final output sent to browser
+INFO - 2018-10-25 12:27:16 --> Total execution time: 0.0312
+INFO - 2018-10-25 12:27:28 --> Config Class Initialized
+INFO - 2018-10-25 12:27:28 --> Hooks Class Initialized
+INFO - 2018-10-25 12:27:28 --> UTF-8 Support Enabled
+INFO - 2018-10-25 12:27:28 --> Utf8 Class Initialized
+INFO - 2018-10-25 12:27:28 --> URI Class Initialized
+INFO - 2018-10-25 12:27:28 --> Router Class Initialized
+INFO - 2018-10-25 12:27:28 --> Output Class Initialized
+INFO - 2018-10-25 12:27:28 --> Security Class Initialized
+INFO - 2018-10-25 12:27:28 --> Input Class Initialized
+INFO - 2018-10-25 12:27:28 --> Language Class Initialized
+INFO - 2018-10-25 12:27:28 --> Loader Class Initialized
+INFO - 2018-10-25 12:27:28 --> Controller Class Initialized
+INFO - 2018-10-25 12:27:28 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-10-25 12:27:28 --> Pagination Class Initialized
+INFO - 2018-10-25 12:27:28 --> Helper loaded: download_helper
+INFO - 2018-10-25 12:27:28 --> Helper loaded: file_helper
+INFO - 2018-10-25 12:27:28 --> Helper loaded: url_helper
+INFO - 2018-10-25 12:27:28 --> Helper loaded: html_helper
+INFO - 2018-10-25 12:27:28 --> Helper loaded: form_helper
+DEBUG - 2018-10-25 12:27:28 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-10-25 12:27:28 --> Session: Class initialized using 'files' driver.
+INFO - 2018-10-25 12:27:28 --> Encrypt Class Initialized
+INFO - 2018-10-25 12:27:28 --> Database Driver Class Initialized
+INFO - 2018-10-25 12:27:28 --> Model "Oficio_model" initialized
+INFO - 2018-10-25 12:27:28 --> Form Validation Class Initialized
+INFO - 2018-10-25 12:27:28 --> Language file loaded: language/spanish/calendar_lang.php
+INFO - 2018-10-25 12:27:28 --> Calendar Class Initialized
+INFO - 2018-10-25 12:27:28 --> Upload Class Initialized
+INFO - 2018-10-25 12:27:28 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head.php
+INFO - 2018-10-25 12:27:28 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\busqueda_oficio.php
+INFO - 2018-10-25 12:27:28 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer.php
+INFO - 2018-10-25 12:27:28 --> Final output sent to browser
+INFO - 2018-10-25 12:27:28 --> Total execution time: 0.0780
+INFO - 2018-10-25 12:27:35 --> Config Class Initialized
+INFO - 2018-10-25 12:27:35 --> Hooks Class Initialized
+INFO - 2018-10-25 12:27:35 --> UTF-8 Support Enabled
+INFO - 2018-10-25 12:27:35 --> Utf8 Class Initialized
+INFO - 2018-10-25 12:27:35 --> URI Class Initialized
+INFO - 2018-10-25 12:27:35 --> Router Class Initialized
+INFO - 2018-10-25 12:27:35 --> Output Class Initialized
+INFO - 2018-10-25 12:27:35 --> Security Class Initialized
+INFO - 2018-10-25 12:27:35 --> Input Class Initialized
+INFO - 2018-10-25 12:27:35 --> Language Class Initialized
+INFO - 2018-10-25 12:27:35 --> Loader Class Initialized
+INFO - 2018-10-25 12:27:35 --> Controller Class Initialized
+INFO - 2018-10-25 12:27:35 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-10-25 12:27:35 --> Pagination Class Initialized
+INFO - 2018-10-25 12:27:35 --> Helper loaded: download_helper
+INFO - 2018-10-25 12:27:35 --> Helper loaded: file_helper
+INFO - 2018-10-25 12:27:35 --> Helper loaded: url_helper
+INFO - 2018-10-25 12:27:35 --> Helper loaded: html_helper
+INFO - 2018-10-25 12:27:35 --> Helper loaded: form_helper
+DEBUG - 2018-10-25 12:27:35 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-10-25 12:27:35 --> Session: Class initialized using 'files' driver.
+INFO - 2018-10-25 12:27:35 --> Encrypt Class Initialized
+INFO - 2018-10-25 12:27:35 --> Database Driver Class Initialized
+INFO - 2018-10-25 12:27:35 --> Model "Oficio_model" initialized
+INFO - 2018-10-25 12:27:35 --> Form Validation Class Initialized
+INFO - 2018-10-25 12:27:35 --> Language file loaded: language/spanish/calendar_lang.php
+INFO - 2018-10-25 12:27:35 --> Calendar Class Initialized
+INFO - 2018-10-25 12:27:35 --> Upload Class Initialized
+INFO - 2018-10-25 12:27:35 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\all_oficio.php
+INFO - 2018-10-25 12:27:35 --> Final output sent to browser
+INFO - 2018-10-25 12:27:35 --> Total execution time: 0.0624
+INFO - 2018-10-25 12:29:47 --> Config Class Initialized
+INFO - 2018-10-25 12:29:47 --> Hooks Class Initialized
+INFO - 2018-10-25 12:29:47 --> UTF-8 Support Enabled
+INFO - 2018-10-25 12:29:47 --> Utf8 Class Initialized
+INFO - 2018-10-25 12:29:47 --> URI Class Initialized
+INFO - 2018-10-25 12:29:47 --> Router Class Initialized
+INFO - 2018-10-25 12:29:47 --> Output Class Initialized
+INFO - 2018-10-25 12:29:47 --> Security Class Initialized
+INFO - 2018-10-25 12:29:47 --> Input Class Initialized
+INFO - 2018-10-25 12:29:47 --> Language Class Initialized
+INFO - 2018-10-25 12:29:47 --> Loader Class Initialized
+INFO - 2018-10-25 12:29:47 --> Controller Class Initialized
+INFO - 2018-10-25 12:29:47 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-10-25 12:29:47 --> Pagination Class Initialized
+INFO - 2018-10-25 12:29:47 --> Helper loaded: download_helper
+INFO - 2018-10-25 12:29:47 --> Helper loaded: file_helper
+INFO - 2018-10-25 12:29:47 --> Helper loaded: url_helper
+INFO - 2018-10-25 12:29:47 --> Helper loaded: html_helper
+INFO - 2018-10-25 12:29:47 --> Helper loaded: form_helper
+DEBUG - 2018-10-25 12:29:47 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-10-25 12:29:47 --> Session: Class initialized using 'files' driver.
+INFO - 2018-10-25 12:29:47 --> Encrypt Class Initialized
+INFO - 2018-10-25 12:29:47 --> Database Driver Class Initialized
+INFO - 2018-10-25 12:29:47 --> Model "Entrada_model" initialized
+INFO - 2018-10-25 12:29:47 --> Form Validation Class Initialized
+INFO - 2018-10-25 12:29:47 --> Upload Class Initialized
+INFO - 2018-10-25 12:29:47 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head.php
+INFO - 2018-10-25 12:29:47 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\busqueda_entrada.php
+INFO - 2018-10-25 12:29:47 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer.php
+INFO - 2018-10-25 12:29:47 --> Final output sent to browser
+INFO - 2018-10-25 12:29:47 --> Total execution time: 0.0468
+INFO - 2018-10-25 12:29:55 --> Config Class Initialized
+INFO - 2018-10-25 12:29:55 --> Hooks Class Initialized
+INFO - 2018-10-25 12:29:55 --> UTF-8 Support Enabled
+INFO - 2018-10-25 12:29:55 --> Utf8 Class Initialized
+INFO - 2018-10-25 12:29:55 --> URI Class Initialized
+INFO - 2018-10-25 12:29:55 --> Router Class Initialized
+INFO - 2018-10-25 12:29:55 --> Output Class Initialized
+INFO - 2018-10-25 12:29:55 --> Security Class Initialized
+INFO - 2018-10-25 12:29:55 --> Input Class Initialized
+INFO - 2018-10-25 12:29:55 --> Language Class Initialized
+INFO - 2018-10-25 12:29:55 --> Loader Class Initialized
+INFO - 2018-10-25 12:29:55 --> Controller Class Initialized
+INFO - 2018-10-25 12:29:55 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-10-25 12:29:55 --> Pagination Class Initialized
+INFO - 2018-10-25 12:29:55 --> Helper loaded: download_helper
+INFO - 2018-10-25 12:29:55 --> Helper loaded: file_helper
+INFO - 2018-10-25 12:29:55 --> Helper loaded: url_helper
+INFO - 2018-10-25 12:29:55 --> Helper loaded: html_helper
+INFO - 2018-10-25 12:29:55 --> Helper loaded: form_helper
+DEBUG - 2018-10-25 12:29:55 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-10-25 12:29:55 --> Session: Class initialized using 'files' driver.
+INFO - 2018-10-25 12:29:55 --> Encrypt Class Initialized
+INFO - 2018-10-25 12:29:55 --> Database Driver Class Initialized
+INFO - 2018-10-25 12:29:55 --> Model "Entrada_model" initialized
+INFO - 2018-10-25 12:29:55 --> Form Validation Class Initialized
+INFO - 2018-10-25 12:29:55 --> Upload Class Initialized
+INFO - 2018-10-25 12:29:55 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\all_entrada.php
+INFO - 2018-10-25 12:29:55 --> Final output sent to browser
+INFO - 2018-10-25 12:29:55 --> Total execution time: 0.0468
+INFO - 2018-10-25 12:38:48 --> Config Class Initialized
+INFO - 2018-10-25 12:38:48 --> Hooks Class Initialized
+INFO - 2018-10-25 12:38:48 --> UTF-8 Support Enabled
+INFO - 2018-10-25 12:38:48 --> Utf8 Class Initialized
+INFO - 2018-10-25 12:38:48 --> URI Class Initialized
+INFO - 2018-10-25 12:38:48 --> Router Class Initialized
+INFO - 2018-10-25 12:38:48 --> Output Class Initialized
+INFO - 2018-10-25 12:38:48 --> Security Class Initialized
+INFO - 2018-10-25 12:38:48 --> Input Class Initialized
+INFO - 2018-10-25 12:38:48 --> Language Class Initialized
+INFO - 2018-10-25 12:38:48 --> Loader Class Initialized
+INFO - 2018-10-25 12:38:48 --> Controller Class Initialized
+INFO - 2018-10-25 12:38:48 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-10-25 12:38:48 --> Pagination Class Initialized
+INFO - 2018-10-25 12:38:48 --> Helper loaded: url_helper
+INFO - 2018-10-25 12:38:48 --> Helper loaded: form_helper
+DEBUG - 2018-10-25 12:38:48 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-10-25 12:38:48 --> Session: Class initialized using 'files' driver.
+INFO - 2018-10-25 12:38:48 --> Encrypt Class Initialized
+INFO - 2018-10-25 12:38:48 --> Database Driver Class Initialized
+INFO - 2018-10-25 12:38:48 --> Model "Usuario_model" initialized
+INFO - 2018-10-25 12:38:48 --> Form Validation Class Initialized
+INFO - 2018-10-25 12:38:48 --> Config Class Initialized
+INFO - 2018-10-25 12:38:48 --> Hooks Class Initialized
+INFO - 2018-10-25 12:38:48 --> UTF-8 Support Enabled
+INFO - 2018-10-25 12:38:48 --> Utf8 Class Initialized
+INFO - 2018-10-25 12:38:48 --> URI Class Initialized
+INFO - 2018-10-25 12:38:48 --> Router Class Initialized
+INFO - 2018-10-25 12:38:48 --> Output Class Initialized
+INFO - 2018-10-25 12:38:48 --> Security Class Initialized
+INFO - 2018-10-25 12:38:48 --> Input Class Initialized
+INFO - 2018-10-25 12:38:48 --> Language Class Initialized
+INFO - 2018-10-25 12:38:48 --> Loader Class Initialized
+INFO - 2018-10-25 12:38:48 --> Controller Class Initialized
+INFO - 2018-10-25 12:38:48 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-10-25 12:38:48 --> Pagination Class Initialized
+INFO - 2018-10-25 12:38:48 --> Helper loaded: url_helper
+INFO - 2018-10-25 12:38:48 --> Helper loaded: form_helper
+DEBUG - 2018-10-25 12:38:48 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-10-25 12:38:48 --> Session: Class initialized using 'files' driver.
+INFO - 2018-10-25 12:38:48 --> Encrypt Class Initialized
+INFO - 2018-10-25 12:38:48 --> Database Driver Class Initialized
+INFO - 2018-10-25 12:38:48 --> Model "Usuario_model" initialized
+INFO - 2018-10-25 12:38:48 --> Form Validation Class Initialized
+INFO - 2018-10-25 12:38:48 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head1.php
+INFO - 2018-10-25 12:38:48 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\login.php
+INFO - 2018-10-25 12:38:48 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer1.php
+INFO - 2018-10-25 12:38:48 --> Final output sent to browser
+INFO - 2018-10-25 12:38:48 --> Total execution time: 0.0312
