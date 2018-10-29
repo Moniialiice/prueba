@@ -69,13 +69,13 @@
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Selecciona Oficio</label></div>
                                 <div class="col-12 col-md-9">
                                     <select name="tipoOficio" id="tipoOficio" class="form-control" >
-                                        <option  value="400LIA000" <?php echo set_select('tipoOficio','400LIA000');?>>Cordinador General</option>
-                                        <option  value="400LI0010" <?php echo set_select('tipoOficio','400LI0010');?>>Secretario Particular</option>
+                                        <option  value="400LIA000" <?php echo set_select('tipoOficio','400LIA000');?>> COORDINADOR GENERAL</option>
+                                        <option  value="400LI0010" <?php echo set_select('tipoOficio','400LI0010');?>> SECRETARIO PARTICULAR</option>
                                     </select>
                                 </div>
                             </div>  
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Recepción</label></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha De Atención</label></div>
                                 <div class="col-12 col-md-9">
                                     <div class='input-group' >
                                         <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha');?>"  >
@@ -87,7 +87,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Asunto</label></div>
-                                <div class="col-12 col-md-9"><textarea name="asunto" id="textarea-input" rows="5" class="form-control"><?php echo set_value('asunto');?></textarea></div>
+                                <div class="col-12 col-md-9"><textarea name="asunto" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('asunto');?></textarea></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label class=" form-control-label">Etiquetas de Asuntos</label></div>
@@ -212,7 +212,7 @@
                                         </div>
                                         <div class="checkbox">
                                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Otra:</label></div>
-                                            <div class="col-12 col-md-9"><textarea name="otrad" id="textarea-input" rows="5" class="form-control"><?php echo set_value('otrad');?></textarea></div>
+                                            <div class="col-12 col-md-9"><textarea name="otrad" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('otrad');?></textarea></div>
                                         </div>
                                     </div>
                                 </div>
@@ -243,7 +243,7 @@
                                             </div>
                                             <div class="checkbox">
                                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Otra:</label></div>
-                                                <div class="col-12 col-md-9"><textarea name="otrar" id="textarea-input" rows="5" class="form-control"><?php echo set_value('otrar');?></textarea></div>
+                                                <div class="col-12 col-md-9"><textarea name="otrar" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('otrar');?></textarea></div>
                                             </div>
                                     </div>
                                 </div>
@@ -282,7 +282,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-sm-3"><label for="textarea-input" class=" form-control-label">Observaciones</label></div>
-                                <div class="col col-md-9"><textarea name="observaciones" id="textarea-input" rows="9" class="form-control"><?php echo set_value('observaciones');?></textarea></div>
+                                <div class="col col-md-9"><textarea name="observaciones" id="textarea-input" OnKeyUp="Upper(this);" rows="9" class="form-control"><?php echo set_value('observaciones');?></textarea></div>
                             </div>
                             <div class="row form-group">
                                 <div class= "col col-md3"><label for="text-input" class="form-control-label">Atención</label></div>

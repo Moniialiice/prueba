@@ -26,7 +26,7 @@ class Entrada_model extends CI_Model
     //busqueda con fecha y no. de nomenclatura
     public function searchFecha($search,$date1,$date2)
     {
-        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.hora_ent, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%$search%' AND e.fecha_real BETWEEN '$date1' AND '$date2' AND e.atencion = u.id_usuario ORDER BY e.no_oficioEntrada DESC ");
+        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.hora_ent, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%$search%' AND e.fecha_real BETWEEN STR_TO_DATE(REPLACE('$date1','/','-'), GET_FORMAT(date,'ISO')) AND STR_TO_DATE(REPLACE('$date2','/','-'), GET_FORMAT(date, 'ISO')) AND e.atencion = u.id_usuario ORDER BY e.no_oficioEntrada DESC ");
         return $query->result();
     }
     //reporte de los oficios de entrada que el usuario ha creado

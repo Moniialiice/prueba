@@ -25,7 +25,8 @@ if($this->session->flashdata('correcto'))
     <link rel='stylesheet' href='assets/css/themify-icons.css'>
     <link rel='stylesheet' href='assets/css/flag-icon.min.css'>
     <link rel='stylesheet' href='assets/css/cs-skin-elastic.css'>
-
+    <!--libreria datepicker -->
+    <link rel='stylesheet' href='assets/css/bootstrap-datetimepicker.min.css'>
     <!--libreries datepicker -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
@@ -34,7 +35,7 @@ if($this->session->flashdata('correcto'))
     <script>
         $(function Calendario() {
             $( "#datepicker,#datepickerf").datepicker({
-                dateFormat: 'yy-mm-dd',
+                dateFormat: 'dd/mm/yy',
                 changeMonth:true,
                 changeYear:true,
                 firstDay: 1,
@@ -48,11 +49,21 @@ if($this->session->flashdata('correcto'))
             });
         });
     </script>
+    <!--calendario-->
+    <script>
+        $(function() {
+        $('#datetimepicker').datetimepicker({
+            pickTime: false
+           });
+        });
+    </script>
     <!--jquery-->
     <!--link rel='stylesheet' href='assets/css/bootstrap-select.less'> -->
     <link rel='stylesheet' href='assets/scss/style.css'>
     <!--Carga código javascrip del sistema-->
     <script src="assets/js/query.js"></script>
+    <!--libreria js de datepicker-->
+    <script type='text/javascript' src='assets/js/bootstrap-datetimepicker.min.js'></script>
     <!---->
     <script type='text/javascript' src='https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js'></script>
 </head>
@@ -85,11 +96,18 @@ if($this->session->flashdata('correcto'))
                                     <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaEntrada'>Consulta Oficio</a></li>
                                 </ul>
                             </li>
-                            <h3 class='menu-title'>Oficios</h3><!-- /.menu-title -->
+                            <h3 class='menu-title'>Oficio Seguimiento</h3><!-- /.menu-title -->
                             <li class='menu-item-has-children dropdown'>
-                                <a href='' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-file'></i>Oficio</a>
+                                <a href='' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-file'></i>Seguimiento</a>
                                 <ul class='sub-menu children dropdown-menu'>
-                                    <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Oficio</a></li>
+                                    <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Seguimiento</a></li>
+                                </ul>
+                            </li>
+                            <h3 class='menu-title'>Oficio Atendido</h3>
+                            <li class='menu-item-has-children dropdown'>
+                                <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-envelope'></i>Atendido</a>
+                                <ul class='sub-menu children dropdown-menu'>
+                                    <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaUsuario'>Consulta Atendido</a></li>
                                 </ul>
                             </li>
                             <h3 class='menu-title'>Usuarios</h3>
@@ -116,11 +134,18 @@ if($this->session->flashdata('correcto'))
                                     <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaEntrada'>Consulta Oficio</a></li>
                                 </ul>
                             </li>
-                            <h3 class='menu-title'>Oficios</h3><!-- /.menu-title -->
+                            <h3 class='menu-title'>Oficio Seguimiento</h3><!-- /.menu-title -->
                             <li class='menu-item-has-children dropdown'>
-                                <a href='' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-file'></i>Oficio</a>
+                                <a href='' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-file'></i>Seguimiento</a>
                                 <ul class='sub-menu children dropdown-menu'>
-                                    <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Oficio</a></li>
+                                    <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Seguimiento</a></li>
+                                </ul>
+                            </li>
+                            <h3 class='menu-title'>Oficio Atendido</h3><!-- /.menu-title -->
+                            <li class='menu-item-has-children dropdown'>
+                                <a href='' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-envelope'></i>Atendido</a>
+                                <ul class='sub-menu children dropdown-menu'>
+                                    <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Atendido</a></li>
                                 </ul>
                             </li>
                         </ul>

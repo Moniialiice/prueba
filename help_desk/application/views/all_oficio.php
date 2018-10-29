@@ -1,4 +1,3 @@
-               
                     <table class="table">
                         <thead>
                             <tr>
@@ -6,8 +5,10 @@
                                 <th scope="col">Fecha</th>
                                 <th scope="col">A quien se remite</th>
                                 <th scope="col">Solicitud</th>
+                                <th scope="col">Plazo</th>
                                 <th scope="col">Termino</th>
-                                <th scope="col">Atención</th>                             
+                                <th scope="col">Atención</th>
+                                <th scope="col">Imprimir</th>                             
                                 <th scope="col">Opciones</th>
                             </tr>
                         </thead>
@@ -74,7 +75,9 @@
                                 }if($dato->termino == 2){
                                     echo "<td> 48:00 hrs </td>";
                                 }    
-                                echo"<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
+                                echo"<td>Termino</td>".
+                                    "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
+                                    "<td align ='center'><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank' class='fa fa-file fa-1x'></a></td>".
                                     "<td align='center'><a href='muestraOficio/".$dato->id_oficioseg."' class='fa fa-file fa-1x'></a></td>".
                                 "</tr>";
 

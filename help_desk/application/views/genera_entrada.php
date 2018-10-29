@@ -51,7 +51,7 @@
                         <form action="insertaEntrada" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Oficio</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="no_oficio" class="form-control" value="<?php echo set_value('no_oficio'); ?>" ></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="no_oficio" class="form-control" value="<?php echo set_value('no_oficio'); ?>" ></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Recepción</label></div>
@@ -81,17 +81,17 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label"> Firma Origen</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="firma" placeholder="" class="form-control" value="<?php echo set_value('firma'); ?>"></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="firma" placeholder="" class="form-control" value="<?php echo set_value('firma'); ?>"></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label"> Cargo</label></div>
-                                <div class="col-12 col-md-9"><textarea name="cargo" id="textarea-input" rows="1" placeholder="" class="form-control"><?php echo set_value('cargo'); ?></textarea></div>
+                                <div class="col-12 col-md-9"><textarea name="cargo" id="textarea-input" OnKeyUp="Upper(this);" rows="1" placeholder="" class="form-control"><?php echo set_value('cargo'); ?></textarea></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label"> Peticion</label></div>
-                                <div class="col-12 col-md-9"><textarea name="peticion" id="textarea-input" rows="5" placeholder="" class="form-control"><?php echo set_value('peticion'); ?></textarea></div>
+                                <div class="col-12 col-md-9"><textarea name="peticion" id="textarea-input" OnKeyUp="Upper(this);" rows="5" placeholder="" class="form-control"><?php echo set_value('peticion'); ?></textarea></div>
                             </div>
-                            <div><label for='text-input' class='form-control-label fa fa-exclamation' > Archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>
+                            <div><label for='text-input' class='form-control-label fa fa-exclamation' > Nombre de archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>
                             <div class="row form-group">
                                  <div class="col col-md-3"><label for="file-input" class="form-control-label"> Archivo Entrada</label></div>
                                  <div class="col-12 col-md-9"><input id="file-input" name="entrada" class="form-control-file" type="file" ></div>

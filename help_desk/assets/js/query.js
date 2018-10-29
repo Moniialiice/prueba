@@ -1,3 +1,8 @@
+//mayusculas
+function Upper(e){
+    e.value = e.value.toUpperCase();
+}
+
 //búsqueda de Usuario
 function BusquedaUs(){
     var data = $('#usuario').serialize();
@@ -67,3 +72,4 @@ function Paginacion(){
         }
     });
 }
+

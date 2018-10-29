@@ -56,7 +56,16 @@ class OficioEntrada extends CI_Controller
             //** *//                  
             //si existe algun error en los datos que contiene config, carga vista-formulario para mostrar mensaje error al igual que las validaciones
             if ($this->form_validation->run()==TRUE)
-            {              
+            {
+                $date = array();
+                $date = $fecha;
+                $ext = explode("/",$date);
+                $fecha1 = $ext[2]."-".$ext[1]."-".$ext[0];
+                //cambia formato de fechas
+                $date1 = array();
+                $date1 = $fecha;
+                $ext1 = explode("/",$date);
+                $fecha2 = $ext1[2]."-".$ext1[1]."-".$ext1[0];
                     //datos requeridos para subir archivo y ruta a guardar 
                     $config['upload_path'] = $this->folder;
                     $config['allowed_types'] = 'jpg|png|pdf';
@@ -71,8 +80,9 @@ class OficioEntrada extends CI_Controller
                         //toma el nombre del archivo
                         $arch_entrada = $upload_data['file_name'];
                         //envia datos al modelo
-                        $query = $this->Entrada_model->createOficio($no_oficio, $firma, $cargo, $peticion, $arch_entrada, $id_usuario, $fecha, $hora, $fecha_real);
-                            if($query == TRUE)
+                        $query = $this->Entrada_model->createOficio($no_oficio, $firma, $cargo, $peticion, $arch_entrada, $id_usuario, $fecha1, $hora, $fecha2);
+                            
+                        if($query == TRUE)
                             {
                                 $this->session->set_flashdata('Creado','Oficio creado');
                                 $this->generaEntrada();
@@ -105,7 +115,7 @@ class OficioEntrada extends CI_Controller
     {
         $this->load->view('templates/head');
         $this->load->view('busqueda_entrada');
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footer');        
     }
     //arroja el resultado de la busqueda de los oficios
     public function consultaEntrada()
@@ -113,7 +123,7 @@ class OficioEntrada extends CI_Controller
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('datepicker');
         $date2 = $this->input->post('datepickerf');
-        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$date1,$date2);
+        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$date1,$date2);        
         $this->load->view('all_entrada',$datos);
     }
     //función para descagar archivos
