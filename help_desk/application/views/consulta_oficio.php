@@ -19,6 +19,10 @@
 <?php
     foreach ($datos as $dato) 
     {
+        //cambia formato de fecha  
+        $date = $dato->fecha;
+        //corta los datos de d,m,a
+        $ext = explode("-",$date);
         echo"    
         <div class='col-sm-8'>
             <div class='page-header float-right'>
@@ -61,7 +65,7 @@
                                     </div>";
                                 echo "<div class='row form-group'>
                                             <div class='col col-md-3'><label for='fecha' class=' form-control-label'>Fecha</label></div>
-                                            <div class='col-12 col-md-9'><input type='text' id='disable-input' name='fecha' class='form-control' value='".$dato->fecha."' disabled></div>
+                                            <div class='col-12 col-md-9'><input type='text' id='disable-input' name='fecha' class='form-control' value='".$ext[2]."/".$ext[1]."/".$ext[0]."' disabled></div>
                                         </div> ";
                                 echo "<div class='row form-group'>
                                         <div class='col col-md-3'><label class=' form-control-label'>Etiquetas de Asuntos</label></div>
@@ -498,9 +502,7 @@
                                     </div>
                                     <div class='row form-group'>
                                         <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Término</label></div>";
-                                    if($dato->termino == 0){
-                                        echo "<div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control' value='00:00 hrs' disabled></div>";
-                                    }    
+                                        echo "<div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control' value=".$dato->termino." disabled></div>";
                               echo "</div>
                                     <div class='row form-group'>
                                         <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones</label></div>
@@ -515,27 +517,7 @@
                                     <div class='row form-group'>
                                         <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Atención</label></div>
                                         <div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."' disabled></div>
-                                    </div>";  
-                                    if($dato->arch_seguimiento != ""){
-                                        echo"<div class='row form-group'>
-                                                <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label'>Archivo Seguimiento (Opcional):</label></div>
-                                                <div class='col-12 col-md-9'><a href='descargarOficio/".$dato->arch_seguimiento."' class='fa fa-download fa-2x'></a></div>
-                                            </div>";
-                                    }else{
-                                        echo"<div class='row form-group'>
-                                                <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label'>Sin Archivo Seguimiento </label></div>
-                                            </div>";
-                                    }
-                                    if($dato->arch_final != ""){
-                                        echo"<div class='row form-group'>
-                                                <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label' >Archivo final:</label></div>
-                                                <div class='col-12 col-md-9'><a  href='descargarOficio/".$dato->arch_final."' class='fa fa-download fa-2x'></a></div>
-                                            </div>";
-                                    }else{
-                                        echo"<div class='row form-group'>
-                                                <div class='col col-md-3'><label for='arc_entrada' class=' form-control-label' >Sin Archivo final</label></div>
-                                            </div>";
-                                    }                       
+                                    </div>";                     
                                 }
                             
         echo"       </div> <!-- card-body-->

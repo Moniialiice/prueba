@@ -43,29 +43,23 @@ class Usuario extends CI_Controller
             $name = $this->input->post('name');
             $app = $this->input->post('app');
             $apm = $this->input->post('apm');
-            $user = $this->input->post('user');
+            $email = $this->input->post('email');
             $pass = $this->input->post('password');
+            $activo = $this->input->post('activo');
+            $tipoUser = $this->input->post('tipUsuario');
+            $dependencia = $this->input->post('dependencia');
             //inicia las validaciones por cada campo
             $this->form_validation->set_rules('name', 'Nombre', 'required');
             $this->form_validation->set_rules('app', 'Apellido paterno', 'required');
             $this->form_validation->set_rules('apm', 'Apellido materno', 'required');
             //verifica si el usuario existe en la base de datos is_unique[tabla.columna]
-            $this->form_validation->set_rules('user', 'Usuario', 'required|is_unique[usuario.usuario]');
+            $this->form_validation->set_rules('email', 'Correo', 'required|is_unique[usuario.correo]');
             //verifica la confirmación de contraseña coincida con la contraseña 
             $this->form_validation->set_rules('password', 'Contraseña', 'required|matches[passwordr]');
             $this->form_validation->set_rules('passwordr', 'Repetir contraseña', 'required');
                 //Sí la validación es correcta procede a insertar los datos en la base de datos
                 if($this->form_validation->run() == TRUE){
-                    $query = $this->Usuario_model->createUsuario(
-                        $name = $this->input->post('name'),
-                        $app = $this->input->post('app'),
-                        $apm = $this->input->post('apm'),
-                        $user = $this->input->post('user'),
-                        $pass = $this->iput->post('password'),
-                        $passr = $this->iput->post('passwordr'),
-                        $activo = $this->input->post('activo'),
-                        $tipoUser = $this->input->post('tipUsuario'),
-                        $dependencia = $this->input->post('dependencia'));
+                    $query = $this->Usuario_model->createUsuario($name, $app, $apm, $email, $pass, $activo, $tipoUser, $dependencia);
                     //sí se inserto los datos manda mensaje     
                     if($query == true){    
                         $this->session->set_flashdata('Creado','Usuario creado correctamente');
@@ -80,7 +74,7 @@ class Usuario extends CI_Controller
                     $datos['name'] = $name;
                     $datos['app'] = $app;
                     $datos['apm'] = $apm;
-                    $datos['user'] = $user;
+                    $datos['email'] = $email;
                     $datos['password'] = $pass;
                     //consulta el tipo de usuario para mostrar en el formulario
                     $tipo = $this->Usuario_model->tipoUsuario();
@@ -153,15 +147,21 @@ class Usuario extends CI_Controller
         if($this->input->post())
         {
             //recibe campos de formulario
+            $id = $this->input->post('id');
             $name = $this->input->post('name');
             $app = $this->input->post('app');
             $apm = $this->input->post('apm');
-            $user = $this->input->post('user');
+            $activo = $this->input->post('activo');
+            $email = $this->input->post('email');
+            $pass = $this->input->post('password');
+            $passn = $this->input->post('newps');
+            $tipoUser = $this->input->post('tipUsuario');
+            $dependencia = $this->input->post('dependencia');
             //formato para validar los datos del formulario
             $this->form_validation->set_rules('name', 'Nombre', 'required');
             $this->form_validation->set_rules('app', 'Apellido paterno', 'required');
             $this->form_validation->set_rules('apm', 'Apellido materno', 'required');
-            $this->form_validation->set_rules('user', 'Usuario', 'required');
+            $this->form_validation->set_rules('email', 'Correo', 'required');
             //sí la vacidación es correcta
             if( $this->form_validation->run() == TRUE)
             {            
@@ -170,16 +170,7 @@ class Usuario extends CI_Controller
                 {
                     //Sí la validación es correcta procede a insertar los datos en la base de datos
                     if($this->form_validation->run() == TRUE){
-                        $query = $this->Usuario_model->updateUsuario(
-                            $id = $this->input->post('id'),
-                            $name = $this->input->post('name'),
-                            $app = $this->input->post('app'),
-                            $apm = $this->input->post('apm'),
-                            $activo = $this->input->post('activo'),
-                            $user = $this->input->post('user'),
-                            $pass = $this->input->post('password'),
-                            $tipoUser = $this->input->post('tipUsuario'),
-                            $dependencia = $this->input->post('dependencia'));  
+                        $query = $this->Usuario_model->updateUsuario($id, $name, $app, $apm, $activo, $email, $pass, $tipoUser, $dependencia);  
                         //sí se inserto los datos manda mensaje     
                         if($query == true){    
                             $this->session->set_flashdata('Modificado','Usuario creado correctamente');
@@ -198,16 +189,7 @@ class Usuario extends CI_Controller
                     $this->form_validation->set_rules('newpsr', 'Repetir contraseña', 'required');
                     //Sí la validación es correcta procede a insertar los datos en la base de datos
                     if($this->form_validation->run() == TRUE){
-                        $query = $this->Usuario_model->updateUsuario(
-                            $id = $this->input->post('id'),
-                            $name = $this->input->post('name'),
-                            $app = $this->input->post('app'),
-                            $apm = $this->input->post('apm'),
-                            $activo = $this->input->post('activo'),
-                            $user = $this->input->post('user'),
-                            $pass = $this->input->post('newps'),
-                            $tipoUser = $this->input->post('tipUsuario'),
-                            $dependencia = $this->input->post('dependencia'));  
+                        $query = $this->Usuario_model->updateUsuario($id, $name, $app, $apm, $activo, $email, $passn, $tipoUser, $dependencia);  
                         //sí se inserto los datos manda mensaje     
                         if($query == true){    
                             $this->session->set_flashdata('Modificado','Usuario creado correctamente');
@@ -226,7 +208,7 @@ class Usuario extends CI_Controller
                 $datos['name'] = $name;
                 $datos['app'] = $app;
                 $datos['apm'] = $app;
-                $datos['user'] = $user;
+                $datos['email'] = $email;
                 $datos['usuario'] = $this->Usuario_model->muestraUsuario($i);                 
                 $datos['tipu'] = $this->Usuario_model->tipoUsuarioId($i);
                 $datos['dep'] = $this->Usuario_model->dependenciasId($i);

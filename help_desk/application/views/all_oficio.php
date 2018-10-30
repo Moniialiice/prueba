@@ -3,7 +3,7 @@
                             <tr>
                                 <th scope="col">No. Oficio</th>
                                 <th scope="col">Fecha</th>
-                                <th scope="col">A quien se remite</th>
+                                <th scope="col">Se remite</th>
                                 <th scope="col">Solicitud</th>
                                 <th scope="col">Plazo</th>
                                 <th scope="col">Termino</th>
@@ -15,10 +15,14 @@
                             <tbody>
                             <?php
                               foreach ($datos as $dato) {
+                                //cambia formato de fecha  
+                                $date = $dato->fecha;
+                                //corta los datos de d,m,a
+                                $ext = explode("-",$date);
                                 //a quién se remite
                                 echo "<tr>                                
                                     <th scope='row'>".$dato->nomenclatura."</th>".
-                                    "<td>".$dato->fecha."</td>".
+                                    "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".
                                     "<td>";
                                     if ($dato->conase == 1){
                                         echo "CONASE ";
@@ -67,14 +71,8 @@
                                   }
 
                                 echo "</td>".
-                                    "<td>".$dato->asunto."</td>";
-                                if($dato->termino == 0){
-                                    echo "<td> 00:00 hrs </td>";
-                                }if($dato->termino == 1){
-                                    echo "<td> 24:00 hrs </td>";
-                                }if($dato->termino == 2){
-                                    echo "<td> 48:00 hrs </td>";
-                                }    
+                                    "<td>".$dato->asunto."</td>".
+                                    "<td>".$dato->termino."</td>";   
                                 echo"<td>Termino</td>".
                                     "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                                     "<td align ='center'><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank' class='fa fa-file fa-1x'></a></td>".

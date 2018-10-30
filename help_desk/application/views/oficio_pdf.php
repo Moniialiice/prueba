@@ -112,8 +112,8 @@ h4{
 		<td class="table_cont" colspan="4" >ASUNTO</td>
 	</tr>
 	<tr>	
-		<td class="table_cont"><?php $dato[0]->nomenclatura ?></td>
-		<td class="table_font" colspan="4"> <?php $dato[0]->asunto ?></td>
+		<td class="table_cont"><?php echo $dato[0]->nomenclatura; ?></td>
+		<td class="table_font" colspan="4"> <?php echo $dato[0]->asunto; ?></td>
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 </table>
@@ -272,7 +272,7 @@ h4{
 		<td></td>
         <td class="table_font" colspan="3"> ESTA OFICINA </td>
         <td class="table_cont" ><?php if($dato[0]->esta_oficina == 1){ echo " X ";}?></td>
-		<td class="table_cont" ></td>
+		<td class="table_cont" ><?php if($dato[0]->esta_oficina == 1){ echo $dato[0]->termino; }?></td>
 	</tr>
     <tr>
         <td class="table_font" colspan="5"> GESTIONAR PETICIÓN Y REMITIR CONSTANCIAS QUE ACREDITEN LA ATENCIÓN BRINDADA </td>
@@ -280,17 +280,15 @@ h4{
 		<td></td>
         <td class="table_font" colspan="3"> PETICIONARIO </td>
         <td class="table_font"><?php if($dato[0]->peticionario == 1){echo " X ";}?> </td>
-		<td class="table_cont"></td>
+		<td class="table_cont"><?php if($dato[0]->peticionario == 1){ echo $dato[0]->termino; }?></td>
 	</tr>
     <tr>
         <td class="table_font" colspan="5"> ARCHIVO </td>
-        <td class="table_cont">
-			<?php if($dato[0]->archivo == 1){ echo " X ";}?>
-		</td>
+        <td class="table_cont"><?php if($dato[0]->archivo == 1){ echo " X ";}?></td>
 		<td></td>
         <td class="table_font" colspan="3"> INSTITUCIÓN REQUIRENTE </td>
-        <td class="table_font"></td>
 		<td class="table_font"><?php if($dato[0]->institucion_requiriente == 1){ echo " X "; }?></td>
+		<td class="table_font"><?php if($dato[0]->institucion_requiriente == 1){ echo $dato[0]->termino; }?></td> 
 	</tr>
 	<tr>
         <td class="table_font" colspan="6"> OTRAS: <?php if($dato[0]->otras != ""){ echo $dato[0]->otras;}?></td>
@@ -327,5 +325,5 @@ h4{
 </table>
 <table>
 	<tr><td>&nbsp;</td></tr>
-	<tr><td class="table_font" colspan="16"> OBSERVACIONES: <?php if($dato[0]->observaciones != ""){ echo $dato[0]->observaciones;}?></td></tr>
+	<tr><td class="table_font" colspan="16"> OBSERVACIONES: <?php echo $dato[0]->observaciones;?></td></tr>
 </table>

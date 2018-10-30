@@ -271,13 +271,9 @@
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label"> Término:</label></div>
-                                    <div class="col col-md-9">
-                                        <select name="termino" id="termino" class=" form-control">
-                                            <option value="2" <?php echo set_select('termino','2');?>>48:00 hrs</option>
-                                            <option value="1" <?php echo set_select('termino','1');?>>24:00 hrs</option>
-                                            <option value="0" <?php echo set_select('termino','0');?>>00:00 hrs</option>
-                                        </select>    
+                                <div class="col col-md-3"><label for="select" class=" form-control-label"> Término en horas</label></div>
+                                    <div class='col-12 col-md-9'>
+                                        <input type='text' id='text-input' name='termino' value="<?php echo set_value('termino'); ?>">
                                     </div>    
                             </div>
                             <div class="row form-group">
