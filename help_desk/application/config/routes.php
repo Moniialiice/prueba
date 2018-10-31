@@ -78,7 +78,7 @@ $route['descargar/(:any)'] = 'OficioEntrada/descarga/$1';
 $route['muestraEntrada'] = 'OficioEntrada/reportEntradaId';
 
 //rutas de seguimiento oficio
-$route['nuevoSeguimiento/(:any)'] = 'Oficio/index/$1';
+$route['nuevoSeguimiento/(:num)'] = 'Oficio/index/$1';
 $route['insertaOficio'] = 'Oficio/createOficioVal';
 $route['consultaOficio'] = 'Oficio/busquedaOficio';
 $route['resultOficio'] = 'Oficio/consultaOficio';
@@ -86,5 +86,11 @@ $route['muestraOficio/(:num)'] = 'Oficio/actualizarOficio/$1';
 $route['descargarOficio/(:any)'] = 'Oficio/descarga/$1';
 $route['actualizaOficio'] = 'Oficio/modificaOficio';
 $route['imprimirOficio/(:num)'] = 'Oficio/imprimirOficio/$1';
-//consecutivo
-$route['getNomenclatura'] = 'Oficio/consecutivo';
+//rutas de atendido
+$route['nuevoAtendido/(:num)'] = 'Atendido/index/$1';
+$route['insertaAtendidio'] = 'Atendido/createAtendidoVal';
+$route['consultaAtendido'] = 'Atendido/busquedaAtendido';
+$route['resultAtendido'] = 'Atendido/consultaAtendido';
+$route['muestraAtendido/(:num)'] = 'Atendido/';
+$route['descargarAtendido/(:any)'] = 'Atendido/descarga/$1';
+$route['imprimirAtendido/(:num)'] = 'Atendido/imprimirAtendido/$1';

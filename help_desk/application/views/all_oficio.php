@@ -76,7 +76,7 @@
                                 echo"<td>Termino</td>".
                                     "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                                     "<td align ='center'><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank' class='fa fa-file fa-1x'></a></td>".
-                                    "<td align='center'><a href='muestraOficio/".$dato->id_oficioseg."' class='fa fa-file fa-1x'></a></td>".
+                                    "<td align='center'><a href='nuevoAtendido/".$dato->id_oficioseg."' class='fa fa-file fa-1x'></a></td>".
                                 "</tr>";
 
                               }
