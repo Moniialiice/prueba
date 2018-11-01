@@ -88,7 +88,7 @@ $route['actualizaOficio'] = 'Oficio/modificaOficio';
 $route['imprimirOficio/(:num)'] = 'Oficio/imprimirOficio/$1';
 //rutas de atendido
 $route['nuevoAtendido/(:num)'] = 'Atendido/index/$1';
-$route['insertaAtendidio'] = 'Atendido/createAtendidoVal';
+$route['insertarAtendido'] = 'Atendido/createAtendidoVal';
 $route['consultaAtendido'] = 'Atendido/busquedaAtendido';
 $route['resultAtendido'] = 'Atendido/consultaAtendido';
 $route['muestraAtendido/(:num)'] = 'Atendido/';

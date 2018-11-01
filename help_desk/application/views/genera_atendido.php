@@ -39,7 +39,7 @@
                                 echo validation_errors();    
                         ?>
                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div>
-                        <form action="insertaEntrada" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <form action="insertarAtendido" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Oficio Seguimiento</label></div>
                                     <?php

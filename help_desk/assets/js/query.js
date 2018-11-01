@@ -39,6 +39,18 @@ function BusquedaOf(){
         }
     });
 }
+//búsqueda de oficio seguimiento atendido
+function BusquedaAt(){
+    var data = $('#atendido').serialize();
+    $.ajax({
+        url: 'Atendido/consultaAtendido',
+        type: 'post',
+        data: data,
+        success:function(data){
+            $('#ratendido').html(data);
+        }
+    });
+}
 
 //imprime nomenclatura 
 function nomenclatura(){

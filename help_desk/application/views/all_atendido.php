@@ -14,17 +14,16 @@
     <tbody>
         <?php            
             foreach ($datos as $dato) {
-                $date = $dato->fecha_ent;
+                //obtenemos fecha 
+                $date = $dato->fecha_atendido;
                 //corta los datos de d,m,a
                 $ext = explode("-",$date);
-                $date2 = $dato->fecha_real;
-                $ext2 = explode("-",$date2); 
                 echo "<tr>
                 <th scope='row'>".$dato->nomenclatura."</th>".
                 "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".
                 "<td>".$dato->asunto."</td>".
-                "<td>".$dato->nombre." ".$dato->cargo."</td>".
-                "<td>".$dato->descripción."</td>".
+                "<td>".$dato->nombre_aten." ".$dato->cargo_aten."</td>".
+                "<td>".$dato->descripcion."</td>".
                 "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                 "<td align='center'><a href='descargarAtendido/".$dato->arch_atendido."' class='fa fa-download fa-1x'></td>".
                 "<td align='center'><a href='imprimir/".$dato->id_oficioAtendido."' class='fa fa-file fa-1x'></td>".

@@ -26,7 +26,7 @@ class Atendido extends CI_Controller
         //si se ejecuta eSeguimiento 
         if($sAtendido){
             $idatencion = $sAtendido[0]->id_oficioAtendido; //id de oficioSeguimiento
-            $this->actualizar($idatencion); //carga formulario de actualización
+            $this->mostrarAtendido($idatencion); //carga formulario de actualización
         }else{            
             //carga el vista para nuevo oficio seguimiento
             $this->load->view('templates/head');
@@ -38,7 +38,7 @@ class Atendido extends CI_Controller
     public function createAtendidoVal()
     {
         //id de seguimiento
-        $segui = $this->inpur->post('segui');
+        $segui = $this->input->post('segui');
         if($this->input->post())
         { 
             //id del usuario que creo el oficio
@@ -49,7 +49,6 @@ class Atendido extends CI_Controller
             $nombre = $this->input->post('nombre');
             $cargo = $this->input->post('cargo');
             $descripcion = $this->input->post('descripcion');
-            $archivo = $this->input->post('archivo');
             $copia = $this->input->post('copia');
             //valida los datos del formulario
             $this->form_validation->set_rules('fecha','Fecha','required');
@@ -65,22 +64,32 @@ class Atendido extends CI_Controller
                 $date = array();
                 $date = $fecha;
                 $ext = explode('/',$date);
-                $fecha1 = $ext[2]."-".$ext[1]."-".$ext[0]; 
+                $fecha1 = $ext[2]."-".$ext[1]."-".$ext[0];
+                //datos requeridos para subir archivo y ruta a guardar 
+                $config['upload_path'] = $this->folder;
+                $config['allowed_types'] = 'jpg|png|pdf';
+                $config['max_size'] = 1000;
+                //carga libreria archivos e inicializa el array config con los datos del archivo
+                $this->load->library('upload',$config);
+                $this->upload->initialize($config);
+                //toma el datos de archivo entrada
+                $this->upload->do_upload('archivo');                
+                    //carga los datos del archivo
+                    $upload_data = $this->upload->data();
+                    //toma el nombre del archivo
+                    $archivo = $upload_data['file_name']; 
                 $insertOficio = $this->Atendido_model->insert_Atendido($fecha1, $asunto, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion);
                 
                 if ($insertOficio == true){                    
                     //id oficio seguimiento 
-                    $idoficio = $this->Atendido_model->getIDO($nomenclatura);
-                    $ido = $idoficio[0]->id_oficioseg;
+                    $idatendido = $this->Atendido_model->getIDA($segui);
+                    $ida = $idatendido[0]->id_oficioAtendido;
                     //una vez insertado muestra datos en actualizar oficio
-                    $this->actualizarOficio($ido);
+                    $this->session->set_flashdata('Creado','Oficio creado');
+                    $this->mostrarAtendido($segui);
                 }else{
                     $this->session->set_flashdata('Error','Consulta administrador');                    
-                    $this->index($ide);
-                }
-                if($insertOficio == false){
-                    $this->session->set_flashdata('Error','Consulta administrador');                    
-                    $this->index($ide);
+                    $this->index($segui);
                 }
             }else{
                 //tomamos los datos del formulario en un array
@@ -91,10 +100,10 @@ class Atendido extends CI_Controller
                 $datos['cargo'] = $asunto;
                 $datos['descripcion'] = $descripcion;
                 $copia['copia'] = $copia;
-                $datos['datos'] = $this->Atendido_model->datosEntrada($ide);
+                $datos['datos'] = $this->Atendido_model->datosSeguimiento($segui);
                 //envia datos del array a la vista
                 $this->load->view('templates/head');
-                $this->load->view('genera_atencionn',$datos); 
+                $this->load->view('genera_atendido',$datos); 
                 $this->load->view('templates/footer');
             }
         }else{
@@ -107,7 +116,7 @@ class Atendido extends CI_Controller
     public function busquedaAtendido()
     {
         $this->load->view('templates/head');
-        $this->load->view('busqueda_oficio');
+        $this->load->view('busqueda_atendido');
         $this->load->view('templates/footer');
     }
     //muestra consulta de oficio por la búsqueda
@@ -119,13 +128,23 @@ class Atendido extends CI_Controller
         $date2 = $this->input->post('datepickerf');
         //código de la paginación
         //datos de la consulta oficio  
-        $datos['datos'] = $this->Atendido_model->searchDate($search,$date1,$date2);
-        $this->load->view('all_oficio', $datos);
+        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search,$date1,$date2);
+        $this->load->view('all_atendido', $datos);
     }
     //función para descargar archivo seguimiento o final
     public function descargarAtendido($name)
     {
         $data = file_get_contents($this->folder.$name);
         force_download($name,$data);
+    }
+    //consulta de oficio seguimiento atendido
+    public function mostrarAtendido()
+    {
+        //consulta datos del oficio atendido
+        $datos['datos'] = $this->Atendido_model->consultaAtendido($id);
+        //carga vistas, formulario de consulta
+        $this->load->view('templates/head');
+        $this->load->view('consulta_atendido');
+        $this->load->view('templates/footer');
     }
 }

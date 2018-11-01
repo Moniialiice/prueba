@@ -107,7 +107,7 @@ if($this->session->flashdata('correcto'))
                             <li class='menu-item-has-children dropdown'>
                                 <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-envelope'></i>Atendido</a>
                                 <ul class='sub-menu children dropdown-menu'>
-                                    <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaUsuario'>Consulta Atendido</a></li>
+                                    <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaAtendido'>Consulta Atendido</a></li>
                                 </ul>
                             </li>
                             <h3 class='menu-title'>Usuarios</h3>
@@ -145,7 +145,7 @@ if($this->session->flashdata('correcto'))
                             <li class='menu-item-has-children dropdown'>
                                 <a href='' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-envelope'></i>Atendido</a>
                                 <ul class='sub-menu children dropdown-menu'>
-                                    <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Atendido</a></li>
+                                    <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaAtendido'>Consulta Atendido</a></li>
                                 </ul>
                             </li>
                         </ul>

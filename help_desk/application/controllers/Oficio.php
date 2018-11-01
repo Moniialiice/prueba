@@ -145,10 +145,6 @@ class Oficio extends CI_Controller
                     $this->session->set_flashdata('Error','Consulta administrador');                    
                     $this->index($ide);
                 }
-                if($insertOficio == false){
-                    $this->session->set_flashdata('Error','Consulta administrador');                    
-                    $this->index($ide);
-                }
             }else{
                 //tomamos los datos del formulario en un array
                 $datos = array();
