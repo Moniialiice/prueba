@@ -91,6 +91,6 @@ $route['nuevoAtendido/(:num)'] = 'Atendido/index/$1';
 $route['insertarAtendido'] = 'Atendido/createAtendidoVal';
 $route['consultaAtendido'] = 'Atendido/busquedaAtendido';
 $route['resultAtendido'] = 'Atendido/consultaAtendido';
-$route['muestraAtendido/(:num)'] = 'Atendido/';
+$route['muestraAtendido/(:num)'] = 'Atendido/mostrarAtendido/$1';
 $route['descargarAtendido/(:any)'] = 'Atendido/descarga/$1';
 $route['imprimirAtendido/(:num)'] = 'Atendido/imprimirAtendido/$1';

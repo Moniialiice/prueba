@@ -29,6 +29,14 @@ class Oficio extends CI_Controller
     public function index($id)
     {
         //$id = $this->encrypt->decode($enID);
+        $total = 1;
+        $cuenta = 0;
+        for ($n = $cuenta; $n < $total; $n++ )
+        {
+            $datos['prueba'] = $this->generate_numbers(1,$cuenta,4);
+            $cuenta += 1;
+        }
+        //$datos['prueba'] = $this->generate_numbers(2,1,4);
         $datos ['datos'] = $this->Oficio_model->datosEntrada($id); //datos de tabla oficio entrada
         $eSeguimiento = $this->Oficio_model->entradaSeguimiento($id); //obtiene id de oficio seguimiento
         //si se ejecuta eSeguimiento 
@@ -163,7 +171,16 @@ class Oficio extends CI_Controller
             $this->index($ide);
         }
     }
-
+    public function prueba()
+    {
+        $total = 9999;
+        $cuenta = 0;
+        for ($n = $cuenta; $n < $total; $n++ )
+        {
+            $this->generate_numbers();
+            $cuenta += 1;
+        }
+    }
     //ejemplo consecutivo
     function generate_numbers($start, $count, $digits) 
     {
@@ -289,7 +306,6 @@ class Oficio extends CI_Controller
     public function imprimirOficio($id)
     {
         $datos['dato'] = $this->Oficio_model->reportOficio($id);
-        //var_dump($peticiones);
         $html = $this->load->view('oficio_pdf', $datos, true);
         //this the the PDF filename that user will get to download
         $pdfFilePath = "oficio_seguimiento." . "pdf";

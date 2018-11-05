@@ -47,6 +47,11 @@
                                 echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos, consultar administrador.</label></div>";
                             }
                             echo validation_errors();
+                            foreach ($prueba as $p )
+                            {
+                                echo $p;
+
+                            }
                         ?>
                         
                         <form action="insertaOficio" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -54,7 +59,7 @@
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Oficio Recepción</label></div>
                                     <?php
                                         //echo date('l jS \of F Y h:i:s A');
-                                    //oficio entrada e id
+                                    //oficio entrada e id                                       
                                         foreach ($datos as $dato)
                                         {
                                             echo "<div class='col-12 col-md-9'>
@@ -273,7 +278,7 @@
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="select" class=" form-control-label"> Término en horas</label></div>
                                     <div class='col-12 col-md-9'>
-                                        <input type='text' id='text-input' name='termino' value="<?php echo set_value('termino'); ?>">
+                                        <input type='text' id='text-input' class='form-control' name='termino' value="<?php echo set_value('termino'); ?>">
                                     </div>    
                             </div>
                             <div class="row form-group">

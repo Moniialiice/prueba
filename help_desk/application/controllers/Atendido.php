@@ -23,10 +23,11 @@ class Atendido extends CI_Controller
         //$id = $this->encrypt->decode($enID);
         $datos ['datos'] = $this->Atendido_model->datosSeguimiento($id); //datos de tabla oficio entrada
         $sAtendido = $this->Atendido_model->seguimientoAtendido($id); //obtiene id de oficio seguimiento
-        //si se ejecuta eSeguimiento 
+        //si se ejecuta eSeguimiento
         if($sAtendido){
-            $idatencion = $sAtendido[0]->id_oficioAtendido; //id de oficioSeguimiento
-            $this->mostrarAtendido($idatencion); //carga formulario de actualización
+            //$idatencion = $sAtendido[0]->id_oficioseg; //id de oficioSeguimiento
+            $idatendido = $sAtendido[0]->id_oficioAtendido;
+            $this->mostrarAtendido($idatendido); //carga formulario de actualización
         }else{            
             //carga el vista para nuevo oficio seguimiento
             $this->load->view('templates/head');
@@ -132,19 +133,19 @@ class Atendido extends CI_Controller
         $this->load->view('all_atendido', $datos);
     }
     //función para descargar archivo seguimiento o final
-    public function descargarAtendido($name)
+    public function descarga($name)
     {
         $data = file_get_contents($this->folder.$name);
         force_download($name,$data);
     }
     //consulta de oficio seguimiento atendido
-    public function mostrarAtendido()
+    public function mostrarAtendido($id)
     {
         //consulta datos del oficio atendido
         $datos['datos'] = $this->Atendido_model->consultaAtendido($id);
         //carga vistas, formulario de consulta
         $this->load->view('templates/head');
-        $this->load->view('consulta_atendido');
+        $this->load->view('consulta_atendido',$datos);
         $this->load->view('templates/footer');
     }
 }
