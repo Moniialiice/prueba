@@ -33,19 +33,29 @@ class Oficio_model extends CI_Model{
         return $query->result();
     }
     //se obtiene ultima nomenclatura de oficio seguimiento
-    public function nomCordinador(){
-        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='1'");
+    public function lastIS(){
+        $query = $this->db->query("SELECT MAX(id_oficioseg) FROM oficio_seguimientosecretario");
         return $query->result();
     }
     //se obtiene ultima nomenclatura de oficio seguimiento
-    public function nomSecretario(){
-        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='1'");
+    public function nomSecretario($id){
+        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimientosecretario WHERE id_oficioseg='$id'");
         return $query->result();
     }
     //llama oficio para insertar oficio seguimiento
     public function insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha, $termino, $observaciones, $atencion, $asunto, $ide)
     {
         $query = $this->db->query("SELECT INSERTOFICIO ('$oficina','$peticionario','$requiriente','$colaboracion', '$amparo', '$solicitudes', '$gestion', '$cursos', '$juzgados', '$rh', '$telefonia', '$estadistica', '$ri','$boletas','$conocimiento', '$conase', '$toluca', '$mexico', '$zoriente', '$fgeneral', '$vicefiscalia', '$oficialia', '$informacion', '$central', '$servicio', '$otrad', '$diligencia', '$personalmente', '$gestionar', '$archivo', '$otrar', '$nomenclatura','$fecha', '$termino', '$observaciones', '$atencion', '$asunto', '$ide')");
+        if($query){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    //función para insetar tabla oficio seguimiento secretariado INSERTOSEC
+    public function insert_secretario($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha, $termino, $observaciones, $atencion, $asunto, $ide)
+    {
+        $query = $this->db->query("SELECT INSERTOSEC ('$oficina','$peticionario','$requiriente','$colaboracion', '$amparo', '$solicitudes', '$gestion', '$cursos', '$juzgados', '$rh', '$telefonia', '$estadistica', '$ri','$boletas','$conocimiento', '$conase', '$toluca', '$mexico', '$zoriente', '$fgeneral', '$vicefiscalia', '$oficialia', '$informacion', '$central', '$servicio', '$otrad', '$diligencia', '$personalmente', '$gestionar', '$archivo', '$otrar', '$nomenclatura','$fecha', '$termino', '$observaciones', '$atencion', '$asunto', '$ide')");
         if($query){
             return TRUE;
         }else{
@@ -67,12 +77,6 @@ class Oficio_model extends CI_Model{
     public function report($id)
     {
         $query = $this->db->query("SELECT o.id_oficioseg, o.nomenclatura, o.fecha, o.termino, o.observaciones, o.asunto, a.colaboracion, a.amparos, a.solicitudes, a.gestion, a.cursos_capacitaciones, a.juzgados, a.recursos_humanos, a.telefonia, a.estadistica, a.relaciones_interis, a.boletas_audiencia, a.copias_conocimiento, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, i.esta_oficina, i.peticionario, i.institucion_requiriente, r.realiza_diligencias, r.recibir_personalmente, r.gestionar_peticion, r.archivo, r.otras, en.id_oficioEntrada, en.no_oficioEntrada, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, etiquetas_asunto AS a, informar AS i, ruta_oficio AS r, oficio_entrada AS en, usuario AS u WHERE d.id_destinatario = o.id_destinatario AND a.id_etAsunto = o.id_etAsunto AND i.id_informar = o.id_informar AND r.id_ruta = o.id_ruta AND i.id_informar = o.id_informar AND o.id_oficioEntrada = en.id_oficioEntrada AND u.id_usuario = o.atencion AND id_oficioseg = '$id' ");
-        return $query->result();
-    }
-    //Obtiene el termino del oficio para modificar o actualizar
-    public function get_termino($id)
-    {
-        $query = $this->db->query("SELECT termino FROM oficio_seguimiento WHERE id_oficioseg = '$id'");
         return $query->result();
     }
     //consulta para actualizar

@@ -29,14 +29,6 @@ class Oficio extends CI_Controller
     public function index($id)
     {
         //$id = $this->encrypt->decode($enID);
-        $total = 1;
-        $cuenta = 0;
-        for ($n = $cuenta; $n < $total; $n++ )
-        {
-            $datos['prueba'] = $this->generate_numbers(1,$cuenta,4);
-            $cuenta += 1;
-        }
-        //$datos['prueba'] = $this->generate_numbers(2,1,4);
         $datos ['datos'] = $this->Oficio_model->datosEntrada($id); //datos de tabla oficio entrada
         $eSeguimiento = $this->Oficio_model->entradaSeguimiento($id); //obtiene id de oficio seguimiento
         //si se ejecuta eSeguimiento 
@@ -48,7 +40,7 @@ class Oficio extends CI_Controller
             $this->load->view('templates/head');
             $this->load->view('genera_oficio',$datos);
             $this->load->view('templates/footer');
-        }        
+        }                
     }
     //valida los datos para insertar en la base 
     public function createOficioVal()
@@ -108,50 +100,85 @@ class Oficio extends CI_Controller
             //sí la validación es correcta procede insetar en la base de datos
             if($this->form_validation->run()==TRUE)
             {   
-                $year = date('Y'); //carga el año en curso del servidor     
-                //dependiendo del tipo de oficio carga la nomeclatura   
-                if( $tipoOficio == '400LIA000' ){
-                    $LID = $this->Oficio_model->lastID(); //consulta el id del ultimo resgistro de oficio seguimiento
-                    $name = 'MAX(id_oficioseg)'; // nombre de la columna que devuelve consulta
-                    $LIDO = $LID[0]->$name; //se obtiene sólo el id deñ ultimo registro
-                    $last = $this->Oficio_model->lastNom($LIDO); //consulta nomenclatura del ultimo registro 
-                    $ext = $last[0]->nomenclatura; //toma campo nomenclatura          
-                    $nom = explode("/",$ext); //corta nomenclatura en cada diagonal
-                    $num = $nom[1]; //número consecutivo de la nomenclatura
-                    //$consecutivo = 0001; //si es nuevo folio comentar la linea anterior y posterior dar de alta oficio seguimiento 
-                    $consecutivo = $num + 1;
-                    //$this->generate_numbers($num,'1','4');  
-                    $nomenclatura = '400LIA000/'.$consecutivo.'/'.$year;                               
-                }else{
-                    //oficio secretariado 
-                    $LID = $this->Oficio_model->lastID(); //consulta el id del ultimo registro del oficio seguimiento
-                    $name = 'MAX(id_oficioseg)'; //nombre de la columna que devuelve consulta
-                    $LIDO = $LID[0]->$name; //se obtiene sólo el id del ultimo registro 
-                    $last = $this->Oficio_model->lastNom($LIDO); //ultima nomenclatura en la tabla cordinador
-                    $ext = $last[0]->nomenclatura; //toma campo nomenclatura          
-                    $nom = explode("/",$ext); //corta nomenclatura en cada diagonal
-                    $num = $nom[1]; //número consecutivo de la nomenclatura
-                    //$consecutivo = 0000; //si es nuevo folio comentar la linea anterior y posterior dar de alta oficio seguimiento 
-                    $consecutivo = $num + 1;
-                    //$this->generate_numbers($num,'1','4');  
-                    $nomenclatura = '400LI0010/'.$consecutivo.'/'.$year;
-                }
+                $year = date('Y'); //carga el año en curso del servidor
+                $LID = $this->Oficio_model->lastID(); //consulta el id del ultimo resgistro de oficio seguimiento
+                $name = 'MAX(id_oficioseg)'; // nombre de la columna que devuelve consulta
+                $LIDO = $LID[0]->$name; //se obtiene sólo el id del ultimo registro
+                $last = $this->Oficio_model->lastNom($LIDO); //consulta nomenclatura del ultimo registro                                
+                $ext = $last[0]->nomenclatura; //toma campo nomenclatura
+                $nom = explode("/",$ext); //corta nomenclatura en cada diagonal
+                $nomen = $nom[0]; //nomenclatura del ultimo registro
+                $num = $nom[1]; //número consecutivo de la nomenclatura
+                $ans = $nom[2]; //año de nomenclatura del ultimo registro
                 //formato de fecha
-                $date = array();
+                $date = array(); 
                 $date = $fecha;
                 $ext = explode('/',$date);
-                $fecha1 = $ext[2]."-".$ext[1]."-".$ext[0]; 
-                $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $termino, $observaciones, $atencion, $asunto, $ide);
-                
-                if ($insertOficio == true){                    
-                    //id oficio seguimiento 
-                    $idoficio = $this->Oficio_model->getIDO($nomenclatura);
-                    $ido = $idoficio[0]->id_oficioseg;
-                    //una vez insertado muestra datos en actualizar oficio
-                    $this->actualizarOficio($ido);
-                }else{
-                    $this->session->set_flashdata('Error','Consulta administrador');                    
-                    $this->index($ide);
+                $fecha1 = $ext[2]."-".$ext[1]."-".$ext[0];     
+                //dependiendo del tipo de oficio carga nomeclatura
+                switch ($tipoOficio)
+                {
+                    case '400LIA000': 
+                        if($nomen == $tipoOficio && $ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
+                            $consecutivo = $this->generate_numbers($n+1,1,4); //manda datos para generar consecutivo
+                            $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$year; //crea nomenclatura coordinador
+                            //inserta los datos 
+                            $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $termino, $observaciones, $atencion, $asunto, $ide);               
+                            if($insertOficio == true){                    
+                                //id oficio seguimiento 
+                                $idoficio = $this->Oficio_model->getIDO($nomenclatura);
+                                $ido = $idoficio[0]->id_oficioseg;
+                                //una vez insertado muestra datos en actualizar oficio
+                                $this->actualizarOficio($ido);
+                            }else{
+                                $this->session->set_flashdata('Error','Consulta administrador');                    
+                                $this->index($ide);
+                            }
+                        }else{
+                                $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
+                                //llama función para insertar datos
+                                $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $termino, $observaciones, $atencion, $asunto, $ide);               
+                                if($insertOficio == true){                    
+                                    //id oficio seguimiento 
+                                    $idoficio = $this->Oficio_model->getIDO($nomenclatura);
+                                    $ido = $idoficio[0]->id_oficioseg;
+                                    //una vez insertado muestra datos en actualizar oficio
+                                    $this->actualizarOficio($ido);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->index($ide);
+                                }
+                            }
+                        break;    
+                    case '400LI0010':
+                       if($nomen == $tipoOficio && $ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
+                        $consecutivo = $this->generate_numbers($n+1, 1, 4); //manda datos para generar consecutivo                           
+                        $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$year; //genera nomenclatura secretario
+                        $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $termino, $observaciones, $atencion, $asunto, $ide);               
+                        if($insertOficio == true){                    
+                            //id oficio seguimiento 
+                            $idoficio = $this->Oficio_model->getIDO($nomenclatura);
+                            $ido = $idoficio[0]->id_oficioseg;
+                            //una vez insertado muestra datos en actualizar oficio
+                            $this->actualizarOficio($ido);
+                        }else{
+                            $this->session->set_flashdata('Error','Consulta administrador');                    
+                            $this->index($ide);
+                        }}else{
+                            $nomenclatura = '400LI0010/0001/'.$year;
+                            $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $termino, $observaciones, $atencion, $asunto, $ide);               
+                            if($insertOficio == true){                    
+                                //id oficio seguimiento 
+                                $idoficio = $this->Oficio_model->getIDO($nomenclatura);
+                                $ido = $idoficio[0]->id_oficioseg;
+                                //una vez insertado muestra datos en actualizar oficio
+                                $this->actualizarOficio($ido);
+                            }else{
+                                $this->session->set_flashdata('Error','Consulta administrador');                    
+                                $this->index($ide);
+                            }
+                        }
+                    break;    
                 }
             }else{
                 //tomamos los datos del formulario en un array
@@ -171,18 +198,8 @@ class Oficio extends CI_Controller
             $this->index($ide);
         }
     }
-    public function prueba()
-    {
-        $total = 9999;
-        $cuenta = 0;
-        for ($n = $cuenta; $n < $total; $n++ )
-        {
-            $this->generate_numbers();
-            $cuenta += 1;
-        }
-    }
     //ejemplo consecutivo
-    function generate_numbers($start, $count, $digits) 
+    function generate_numbers($start,$count,$digits) 
     {
         $result = array();
         for ($n = $start; $n < $start + $count; $n++) {
@@ -207,7 +224,7 @@ class Oficio extends CI_Controller
         //código de la paginación
         //datos de la consulta oficio  
         $datos['datos'] = $this->Oficio_model->searchDate($search,$date1,$date2);
-        $this->load->view('all_oficio', $datos);
+        $this->load->view('all_oficio', $datos);    
     }
     //carga formulario de actualización
     public function actualizarOficio($id)
