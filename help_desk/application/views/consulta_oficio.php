@@ -502,7 +502,11 @@
                                     </div>
                                     <div class='row form-group'>
                                         <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Término</label></div>";
-                                        echo "<div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control' value=".$dato->termino." disabled></div>";
+                                        $datet = $dato->termino;
+                                        $espaciot = explode(" ", $datet);
+                                        $fect = explode("-", $espaciot[0]);
+                                        $fechat = $fect[2]."/".$fect[1]."/".$fect[0]." ".$espaciot[1];
+                                        echo "<div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control' value='$fechat' disabled></div>";
                               echo "</div>
                                     <div class='row form-group'>
                                         <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones</label></div>

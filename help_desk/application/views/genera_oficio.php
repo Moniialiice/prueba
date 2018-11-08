@@ -79,7 +79,7 @@
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha De Atención</label></div>
                                 <div class="col-12 col-md-9">
                                     <div class='input-group' >
-                                        <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha');?>"  >
+                                        <input type='text-input' class="form-control" id="datepicke" name="fecha" value="<?php echo set_value('fecha');?>"  >
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar" ></span>
                                         </span>
@@ -274,8 +274,13 @@
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="select" class=" form-control-label"> Término en horas</label></div>
                                     <div class='col-12 col-md-9'>
-                                        <input type='text' id='text-input' class='form-control' name='termino' value="<?php echo set_value('termino'); ?>">
-                                    </div>    
+                                    <div class='input-group' >
+                                        <input type='text-input' class="form-control" id="datepicker" name="termino" value="<?php echo set_value('termino');?>"  >
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar" ></span>
+                                        </span>
+                                    </div>
+                                </div>    
                             </div>
                             <div class="row form-group">
                                 <div class="col col-sm-3"><label for="textarea-input" class=" form-control-label">Observaciones</label></div>

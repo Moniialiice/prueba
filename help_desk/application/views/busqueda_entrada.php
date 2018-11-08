@@ -30,9 +30,9 @@
                                 <div class="col col-md-5"><label for="text-input" class="form-control-label" >Número de oficio</label></div>
                                 <div class="col col-md-5"><input class="form-control mr-sm-3" type="text-input" id="busqueda" name='busqueda' OnKeyUp='Upper(this);'></div>
                                 <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Real Inicial</label></div>
-                                <div class="col col-md-5"><input class="form-control mr-sm-3" type='text-input' id="datepicker" name="datepicker"></div>                                    
+                                <div class="col col-md-5"><input class="form-control mr-sm-3" type='text-input' id="datepicke" name="datepicker"></div>                                    
                                 <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Real Final</label></div>
-                                <div class="col col-md-5"><input class="form-control mr-sm-3" type="text-input" id="datepickerf" name="datepickerf">    
+                                <div class="col col-md-5"><input class="form-control mr-sm-3" type="text-input" id="datepickes" name="datepickerf">    
                                     <span class="input-group-addon">
                                         <span class="fa fa-search" OnClick="BusquedaEn();"></span>
                                     </span>

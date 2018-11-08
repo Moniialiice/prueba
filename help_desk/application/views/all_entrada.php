@@ -2,8 +2,8 @@
     <thead>
         <tr>
             <th scope="col">No. Oficio</th>
-            <th scope="col">Fecha Recepción</th>
-            <th scope="col">Hora Recepción</th>
+            <th scope="col">Día y Hora Recepción</th>
+            <th scope="col">Fecha y Hora Recepción</th>
             <th scope="col">Fecha Real</th>
             <th scope="col">Firma Origen</th>
             <th scope="col">Petición</th>
@@ -16,15 +16,23 @@
         <?php            
             foreach ($datos as $dato) {
                 $date = $dato->fecha_ent;
-                //corta los datos de d,m,a
-                $ext = explode("-",$date);
-                $date2 = $dato->fecha_real;
-                $ext2 = explode("-",$date2); 
+                $espacio = explode(" ", $date);
+                $fec = explode("-", $espacio[0]);
+                $fecha1 = $fec[2]."/".$fec[1]."/".$fec[0]." ".$espacio[1];
+                //cambia formato de fecha recepción
+                $date2 = $dato->fecha_rec;
+                $espacio2 = explode(" ", $date2);
+                $fec2 = explode("-", $espacio2[0]);
+                $fecha2 = $fec2[2]."/".$fec2[1]."/".$fec2[0]." ".$espacio2[1];
+                //cambia formato de fecha real
+                $date3 = $dato->fecha_real;
+                $ext = explode('-',$date3);
+                $fecha3 = $ext[2]."/".$ext[1]."/".$ext[0]; 
                 echo "<tr>
                 <th scope='row'>".$dato->no_oficioEntrada."</th>".
-                "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".
-                "<td>".$dato->hora_ent."</td>".
-                "<td>".$ext2[2]."/".$ext2[1]."/".$ext2[0]."</td>".
+                "<td>".$fecha1."</td>".
+                "<td>".$fecha2."</td>".
+                "<td>".$fecha3."</td>".
                 "<td>".$dato->firma_origen." ".$dato->cargo."</td>".
                 "<td>".$dato->peticion."</td>".
                 "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".

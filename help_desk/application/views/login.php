@@ -10,7 +10,7 @@
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-lg-6"-->
-                <div class="card">
+                <!--div class="card"-->
                     <div class="card-header">Iniciar Sesión</div>
                     <div class="card-body card-block">
                         <form action="verificar" method="post" class="">
@@ -32,18 +32,19 @@
                                 <button type="submit" class="btn btn-primary btn-sm">Entrar</button>
                             </div>
                             <div class = "alert alert-heading">
-                            <?php
-                                 echo validation_errors();
-                                if($this->session->flashdata('Activo')){
-                                    echo "Consultar administrador";
-                                }if($this->session->flashdata('Error')){
-                                    echo "Verificar Datos.";
-                                }
-                            ?>
+                                <?php
+                                    if($this->session->flashdata('Activo')){
+                                        echo "Consultar administrador";
+                                    }if($this->session->flashdata('Error')){
+                                        echo "Verificar Datos.";
+                                    }
+                                    echo validation_errors();
+                                ?>
                             </div>
                         </form>
                     </div>
-                </div>
+                    <div class="card-footer" align ="center">Dirección de Tecnologías de la Información de la Fiscalía General de Justicia Estado de México. Tel. 226 16 00 Ext. 3259</div>
+                                    
             <!--/div>
         </div>
     </div>

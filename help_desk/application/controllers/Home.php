@@ -50,21 +50,19 @@ class Home extends CI_Controller {
                     $this->session->set_userdata($data_user);
                     //carga la función inicio, ingresando al sistema
                     redirect('index');
-                }else{
-                        $datos = array();
-                        $datos['email'] = $user;                
-                        //mandamos datos a la vista
-                        //si los datos son incorrectos muestra mensaje
-                        $this->session->set_flashdata('Error', 'Verificar datos');
-                        $this->load->view('templates/head1');
-                        $this->load->view('login',$datos);
-                        $this->load->view('templates/footer1');                         
-                    }                
-            }else{
-                if($this->session->userdata('activo') == 0){
+                }elseif($this->session->userdata('activo') == 0){
                     $this->session->set_flashdata('Activo', 'Consultar administrador');
                     redirect('home');
-                }
+                }                
+            }else{
+                $datos = array();
+                $datos['email'] = $user;                
+                //mandamos datos a la vista
+                //si los datos son incorrectos muestra mensaje
+                $this->session->set_flashdata('Error', 'Verificar datos');
+                $this->load->view('templates/head1');
+                $this->load->view('login',$datos);
+                $this->load->view('templates/footer1');                 
             }
         }else{
             redirect('home');

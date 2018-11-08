@@ -59,7 +59,7 @@
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Atendido</label></div>
                                 <div class="col-12 col-md-9">
                                     <div class='input-group' >                                        
-                                        <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha'); ?>">
+                                        <input type='text-input' class="form-control" id="datepicke" name="fecha" value="<?php echo set_value('fecha'); ?>">
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar"></span>
                                         </span>

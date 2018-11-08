@@ -43,29 +43,34 @@ class OficioEntrada extends CI_Controller
             $peticion = $this->input->post('peticion');
             $id_usuario = $this->input->post('id');
             $fecha = $this->input->post('fecha');
-            $hora = $this->input->post('hora');
+            $fecha_rec = $this->input->post('fecha_rec');
             $fecha_real = $this->input->post('fecha_real');
             //valida los datos del formulario
             $this->form_validation->set_rules('no_oficio', 'No. de Oficio', 'required|is_unique[oficio_entrada.no_oficioEntrada]'); 
             $this->form_validation->set_rules('firma', 'Firma Origen', 'required');
             $this->form_validation->set_rules('cargo', 'Cargo', 'required');
             $this->form_validation->set_rules('peticion', ' Peticion', 'required');
-            $this->form_validation->set_rules('fecha', 'Fecha', 'required');
-            $this->form_validation->set_rules('hora', 'Hora', 'required');
-            $this->form_validation->set_rules('fecha_real', 'Fecha Real', 'required');     
+            $this->form_validation->set_rules('fecha', 'Día Recepción', 'required');           
+            $this->form_validation->set_rules('fecha_rec', 'Fecha Recepción', 'required');
+            $this->form_validation->set_rules('fecha_real', 'Fecha Real', 'required');        
             //** *//                  
             //si existe algun error en los datos que contiene config, carga vista-formulario para mostrar mensaje error al igual que las validaciones
             if ($this->form_validation->run()==TRUE)
             {
-                $date = array();
+                //cambia formato fecha entrada 
                 $date = $fecha;
-                $ext = explode("/",$date);
-                $fecha1 = $ext[2]."-".$ext[1]."-".$ext[0];
-                //cambia formato de fechas
-                $date1 = array();
-                $date1 = $fecha;
-                $ext1 = explode("/",$date);
-                $fecha2 = $ext1[2]."-".$ext1[1]."-".$ext1[0];
+                $espacio = explode(" ", $date);
+                $fec = explode("/", $espacio[0]);
+                $fecha1 = $fec[2]."-".$fec[1]."-".$fec[0]." ".$espacio[1].":00";
+                //cambia formato de fecha recepción
+                $date2 = $fecha_rec;
+                $espacio2 = explode(" ", $date2);
+                $fec2 = explode("/", $espacio2[0]);
+                $fecha2 = $fec2[2]."-".$fec2[1]."-".$fec2[0]." ".$espacio2[1].":00";
+                //cambia formato de fecha real
+                $date3 = $fecha_real;
+                $ext = explode('/',$date3);
+                $fecha3 = $ext[2]."-".$ext[1]."-".$ext[0];
                     //datos requeridos para subir archivo y ruta a guardar 
                     $config['upload_path'] = $this->folder;
                     $config['allowed_types'] = 'jpg|png|pdf';
@@ -80,7 +85,7 @@ class OficioEntrada extends CI_Controller
                         //toma el nombre del archivo
                         $arch_entrada = $upload_data['file_name'];
                         //envia datos al modelo
-                        $query = $this->Entrada_model->createOficio($no_oficio, $firma, $cargo, $peticion, $arch_entrada, $id_usuario, $fecha1, $hora, $fecha2);
+                        $query = $this->Entrada_model->createOficio($no_oficio, $firma, $cargo, $peticion, $arch_entrada, $id_usuario, $fecha1, $fecha2, $fecha3);
                             
                         if($query == TRUE)
                             {
@@ -98,7 +103,7 @@ class OficioEntrada extends CI_Controller
                 $datos['cargo'] = $cargo;
                 $datos['peticion'] = $peticion;
                 $datos['fecha'] = $fecha;
-                $datos['hora'] = $hora;
+                $datos['fecha_rec'] = $fecha_rec;
                 $datos['fecha_real'] = $fecha_real;
                 //mandamos datos a la vista
                 $this->load->view('templates/head');

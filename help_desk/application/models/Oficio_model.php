@@ -32,30 +32,10 @@ class Oficio_model extends CI_Model{
         $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='$id'");
         return $query->result();
     }
-    //se obtiene ultima nomenclatura de oficio seguimiento
-    public function lastIS(){
-        $query = $this->db->query("SELECT MAX(id_oficioseg) FROM oficio_seguimientosecretario");
-        return $query->result();
-    }
-    //se obtiene ultima nomenclatura de oficio seguimiento
-    public function nomSecretario($id){
-        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimientosecretario WHERE id_oficioseg='$id'");
-        return $query->result();
-    }
     //llama oficio para insertar oficio seguimiento
     public function insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha, $termino, $observaciones, $atencion, $asunto, $ide)
     {
         $query = $this->db->query("SELECT INSERTOFICIO ('$oficina','$peticionario','$requiriente','$colaboracion', '$amparo', '$solicitudes', '$gestion', '$cursos', '$juzgados', '$rh', '$telefonia', '$estadistica', '$ri','$boletas','$conocimiento', '$conase', '$toluca', '$mexico', '$zoriente', '$fgeneral', '$vicefiscalia', '$oficialia', '$informacion', '$central', '$servicio', '$otrad', '$diligencia', '$personalmente', '$gestionar', '$archivo', '$otrar', '$nomenclatura','$fecha', '$termino', '$observaciones', '$atencion', '$asunto', '$ide')");
-        if($query){
-            return TRUE;
-        }else{
-            return FALSE;
-        }
-    }
-    //función para insetar tabla oficio seguimiento secretariado INSERTOSEC
-    public function insert_secretario($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha, $termino, $observaciones, $atencion, $asunto, $ide)
-    {
-        $query = $this->db->query("SELECT INSERTOSEC ('$oficina','$peticionario','$requiriente','$colaboracion', '$amparo', '$solicitudes', '$gestion', '$cursos', '$juzgados', '$rh', '$telefonia', '$estadistica', '$ri','$boletas','$conocimiento', '$conase', '$toluca', '$mexico', '$zoriente', '$fgeneral', '$vicefiscalia', '$oficialia', '$informacion', '$central', '$servicio', '$otrad', '$diligencia', '$personalmente', '$gestionar', '$archivo', '$otrar', '$nomenclatura','$fecha', '$termino', '$observaciones', '$atencion', '$asunto', '$ide')");
         if($query){
             return TRUE;
         }else{

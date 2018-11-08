@@ -54,7 +54,7 @@
                                 <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="no_oficio" class="form-control" value="<?php echo set_value('no_oficio'); ?>" ></div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Recepción</label></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Día y Hora Recepción</label></div>
                                 <div class="col-12 col-md-9">
                                     <div class='input-group' >                                        
                                         <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha'); ?>">
@@ -65,16 +65,23 @@
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class="form-control-label"> Hora Recepción</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="hora" placeholder="" class="form-control" value="<?php echo set_value('hora'); ?>"></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha y Hora Recepción</label></div>
+                                <div class="col-12 col-md-9">
+                                    <div class="input-group">                                        
+                                        <input type="text-input" class="form-control" id="datepickerf" name="fecha_rec" value="<?php echo set_value('fecha_rec'); ?>">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Real</label></div>
                                 <div class="col-12 col-md-9">
-                                    <div class="input-group">                                        
-                                        <input type="text-input" class="form-control" id="datepickerf" name="fecha_real" value="<?php echo set_value('fecha_real'); ?>">
+                                    <div class='input-group' >
+                                        <input type='text-input' class="form-control" id="datepicke" name="fecha_real" value="<?php echo set_value('fecha_real');?>"  >
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calendar"></span>
+                                            <span class="fa fa-calendar" ></span>
                                         </span>
                                     </div>
                                 </div>

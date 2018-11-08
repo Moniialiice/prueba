@@ -12,7 +12,7 @@ if($this->session->flashdata('correcto'))
     <base href='<?php echo $this->config->base_url()?>'>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title></title>
+    <title>SIGO</title>
     <meta name='description' content='Sufee Admin - HTML5 Admin Template'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -25,8 +25,6 @@ if($this->session->flashdata('correcto'))
     <link rel='stylesheet' href='assets/css/themify-icons.css'>
     <link rel='stylesheet' href='assets/css/flag-icon.min.css'>
     <link rel='stylesheet' href='assets/css/cs-skin-elastic.css'>
-    <!--libreria datepicker -->
-    <link rel='stylesheet' href='assets/css/bootstrap-datetimepicker.min.css'>
     <!--libreries datepicker -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
@@ -34,7 +32,7 @@ if($this->session->flashdata('correcto'))
             <!--datepicker-->
     <script>
         $(function Calendario() {
-            $( "#datepicker,#datepickerf").datepicker({
+            $( "#datepicke,#datepickes").datepicker({
                 dateFormat: 'dd/mm/yy',
                 changeMonth:true,
                 changeYear:true,
@@ -49,14 +47,57 @@ if($this->session->flashdata('correcto'))
             });
         });
     </script>
-    <!--calendario-->
+    <!--link type="text/css" href="assets/css/jquery-ui-1.8.13.custom.css" rel="stylesheet" /-->
+    <script type="text/javascript" src="assets/js/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui-1.8.14.custom.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui-timepicker-addon.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.ui.datepicker-es"></script>
     <script>
-        $(function() {
-        $('#datetimepicker').datetimepicker({
-            pickTime: false
-           });
+    $(function(){
+            $('#datepicker,#datepickerf').datetimepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth:true,
+                changeYear:true,
+                firstDay: 1,
+                monthNames: ['Enero', 'Febreo', 'Marzo',
+                    'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre',
+                    'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
+            });
+            
         });
-    </script>
+        function countdown(id){
+            var fecha=new Date('<?=$_SESSION['ano']?>','<?=$_SESSION['mes']?>','<?=$_SESSION['dia']?>','<?=$_SESSION['hora']?>','<?=$_SESSION['minuto']?>','<?=$_SESSION['segundo']?>')
+            var hoy=new Date()
+            var dias=0
+            var horas=0
+            var minutos=0
+            var segundos=0
+
+            if (fecha>hoy){
+                    var diferencia=(fecha.getTime()-hoy.getTime())/1000
+                    dias=Math.floor(diferencia/86400)
+                    diferencia=diferencia-(86400*dias)
+                    horas=Math.floor(diferencia/3600)
+                    diferencia=diferencia-(3600*horas)
+                    minutos=Math.floor(diferencia/60)
+                    diferencia=diferencia-(60*minutos)
+                    segundos=Math.floor(diferencia)
+
+                    document.getElementById(id).innerHTML='<span class="element">' + dias + ' dias</span><span class="element">' + horas + ' horas</span><span class="element">' + minutos + ' minutos</span><span class="element">' + segundos + ' segundos</span>'
+
+                    if (dias>0 || horas>0 || minutos>0 || segundos>0){
+                            setTimeout("countdown(\"" + id + "\")",1000)
+                    }
+            }
+            else{
+                    document.getElementById('restante').innerHTML='<span class="element">' + dias + ' dias</span><span class="element">' + horas + ' horas</span><span class="element">' + minutos + ' minutos</span><span class="element">' + segundos + ' segundos</span>'
+            }
+        }
+    </script>    
     <!--jquery-->
     <!--link rel='stylesheet' href='assets/css/bootstrap-select.less'> -->
     <link rel='stylesheet' href='assets/scss/style.css'>
