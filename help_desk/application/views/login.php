@@ -31,12 +31,12 @@
                             <div class="form-actions form-group">
                                 <button type="submit" class="btn btn-primary btn-sm">Entrar</button>
                             </div>
-                            <div class = "alert alert-heading">
+                            <div class = "alert">
                                 <?php
                                     if($this->session->flashdata('Activo')){
                                         echo "Consultar administrador";
                                     }if($this->session->flashdata('Error')){
-                                        echo "Verificar Datos.";
+                                        echo "Verificar correo o contraseña.";
                                     }
                                     echo validation_errors();
                                 ?>
