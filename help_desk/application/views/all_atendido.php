@@ -26,7 +26,7 @@
                 "<td>".$dato->descripcion."</td>".
                 "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                 "<td align='center'><a href='descargarAtendido/".$dato->arch_atendido."' class='fa fa-download fa-1x'></td>".
-                "<td align='center'><a href='imprimir/".$dato->id_oficioAtendido."' class='fa fa-file fa-1x'></td>".
+                "<td align='center'><a href='imprimirAtendido/".$dato->id_oficioAtendido."' class='fa fa-file fa-1x'></td>".
                 "</tr>";
             }
         ?>

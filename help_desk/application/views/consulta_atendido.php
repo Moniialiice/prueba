@@ -41,8 +41,11 @@
                         //echo date('l jS \of F Y h:i:s A');
                         foreach ($datos as $dato)
                         {
-                           
-                echo   "<form action='insertaAtendidio' method='post' enctype='multipart/form-data' class='form-horizontal'>
+                            //cambia formato de fecha  
+                            $date = $dato->fecha_atendido;
+                            //corta los datos de d,m,a
+                            $ext = explode("-",$date);
+                echo   "<form action='#' method='' enctype='multipart/form-data' class='form-horizontal'>
                             <div class='row form-group'>
                                 <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Oficio Seguimiento</label></div>";
                                 echo "<div class='col-12 col-md-9'>
@@ -54,7 +57,7 @@
                                 <div class='col col-md-3'><label for='text-input' class=' form-control-label'> Fecha Atendido</label></div>
                                 <div class='col-12 col-md-9'>
                                     <div class='input-group' >                                        
-                                        <input type='text-input' class='form-control' id='datepicker' name='fecha' value='".$dato->fecha_atendido."' disabled>
+                                        <input type='text-input' class='form-control' id='datepicker' name='fecha' value='".$ext[2]."/".$ext[1]."/".$ext[0]."' disabled>
                                         <span class='input-group-addon'>
                                             <span class='fa fa-calendar'></span>
                                         </span>
@@ -94,14 +97,6 @@
                                 }    
                                 ?>
                         </form>
-                    </div>
-                    <div class='card-footer'>
-                        <button type='submit' class='btn btn-primary btn-sm'>
-                            <i class='fa fa-dot-circle-o'></i> Guardar
-                        </button>
-                        <button type='reset' class='btn btn-danger btn-sm'>
-                            <i class='fa fa-ban'></i> Borrar
-                        </button>
                     </div><!--footer -->
                 </div>
             </div>

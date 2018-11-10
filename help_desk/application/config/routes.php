@@ -93,4 +93,4 @@ $route['consultaAtendido'] = 'Atendido/busquedaAtendido';
 $route['resultAtendido'] = 'Atendido/consultaAtendido';
 $route['muestraAtendido/(:num)'] = 'Atendido/mostrarAtendido/$1';
 $route['descargarAtendido/(:any)'] = 'Atendido/descarga/$1';
-$route['imprimirAtendido/(:num)'] = 'Atendido/imprimirAtendido/$1';
+$route['imprimirAtendido/(:num)'] = 'Atendido/imprimirOficioAtendido/$1';

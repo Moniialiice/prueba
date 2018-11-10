@@ -7,7 +7,7 @@
 	width:100%;
 }
 .reporte th, td{
-	font-size:10px;
+	font-size:8px;
 	font-family:Arial, Helvetica, sans-serif;
 }
 
@@ -79,13 +79,7 @@ h4{
 </style>
 <?php
 	header("Content-Type: text/html;charset=ISO-8859-1");
-	//recibe fecha  
-	$date = $dato[0]->fecha;
-	//corta los datos de d,m,a
-	$ext = explode("-",$date);
-	$year = $ext[0];
-	$mont = $ext[1];
-	$day = $ext[2];
+	
 	//array convierte número de mes en nombre 
 	$months = array (1=>'ENERO',2=>'FEBRERO',3=>'MARZO',4=>'ABRIL',5=>'MAYO', 6=>'JUNIO', 7=>'JULIO', 8=>'AGOSTO', 9=>'SEPTIEMBRE', 10=>'OCTUBRE',11=>'NOVIEMBRE',12=>'DICIEMBRE'); 
 ?>
@@ -99,9 +93,9 @@ h4{
 </table>
 <table>
 	<tr><td>&nbsp;</td></tr>
-	<tr><th align="center"> TRAMITE DE TURNO</th></tr>
+	<tr><th align="center">"AÑO DEL BICENTENARIO DEL NATALICIO DE IGNACIO RAMÍREZ CALZADA, EL NIGROMANTE"</th></tr>
 	<tr><td>&nbsp;</td></tr>
-	<tr><td align="right" class="table_dont">METEPEC, ESTADO DE MEXICO A <?php echo $day." DE ".$months[(int)$mont]." DE ".$year; ?></td></tr>
+	<tr><td align="" class="table_dont">METEPEC, ESTADO DE MEXICO A <?php  ?></td></tr>
 	<tr><td>&nbsp;</td></tr>
 	<tr><td>&nbsp;</td></tr>
 </table>
@@ -112,8 +106,8 @@ h4{
 		<td class="table_cont" colspan="4" >ASUNTO</td>
 	</tr>
 	<tr>	
-		<td class="table_cont"><?php echo $dato[0]->nomenclatura; ?></td>
-		<td class="table_font" colspan="4"> <?php echo $dato[0]->asunto; ?></td>
+		<td class="table_cont"><?php  ?></td>
+		<td class="table_font" colspan="4"> <?php  ?></td>
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 </table>
@@ -125,61 +119,61 @@ h4{
     <tr>
         <td class="table_font" colspan="4"> COLABORACIÓN </td>
         <td class="table_cont">
-			<?php if($dato[0]->colaboracion == 1){echo " X ";} ?>
+			<?php  ?>
         </td>
         <td class="table_font" colspan="4"> RECURSOS HUMANOS </td>
         <td class="table_cont">
-			<?php if($dato[0]->recursos_humanos == 1){echo " X ";}?>
+			<?php ?>
         </td>
 	</tr>
 	<tr>
         <td class="table_font" colspan="4"> BOLETAS DE AUDIENCIA </td>
         <td class="table_cont">
-			<?php if($dato[0]->boletas_audiencia == 1){echo " X ";}?>
+			<?php ?>
         </td>
         <td class="table_font" colspan="4"> TELEFONÍA </td>
         <td class="table_cont">
-			<?php if($dato[0]->telefonia ==1 ){ echo " X ";} ?>
+			<?php  ?>
         </td>
 	</tr>
 	<tr>
         <td class="table_font" colspan="4"> SOLICITUDES </td>
         <td class="table_cont" >
-			<?php if($dato[0]->solicitudes == 1 ){ echo " X "; }?>
+			<?php ?>
         </td>
         <td class="table_font" colspan="4"> ESTADÍSTICA </td>
         <td class="table_cont">
-			<?php if($dato[0]->estadistica == 1){echo " X ";}?>
+			<?php ?>
         </td>
 	</tr>
 	<tr>
         <td class="table_font" colspan="4"> GESTIÓN </td>
         <td class="table_cont" >
-			<?php if($dato[0]->gestion == 1){echo " X ";}?>
+			<?php ?>
         </td>
         <td class="table_font" colspan="4"> RELACIONES INTERINSTITUCIONALES </td>
         <td class="table_cont">
-			<?php if($dato[0]->relaciones_interis == 1){echo " X ";}?>	
+			<?php ?>	
         </td>
 	</tr>
 	<tr>
         <td class="table_font" colspan="4"> CURSOS Y CAPACITACIONES  </td>
         <td class="table_cont" >
-			<?php if($dato[0]->cursos_capacitaciones == 1){echo " X ";}?>
+			<?php ?>
         </td>
         <td class="table_font"  colspan="4"> BOLETAS DE AUDIENCIA  </td>
         <td class="table_cont" >
-			<?php if($dato[0]->boletas_audiencia == 1){echo " X ";}?>
+			<?php ?>
         </td>
 	</tr>
 	<tr>
         <td class="table_font" colspan="4"> JUZGADOS </td>
         <td class="table_cont" >
-			<?php if($dato[0]->juzgados == 1){echo " X ";}?>
+			<?php ?>
         </td>
         <td class="table_font"  colspan="4"> COPIAS DE CONOCIMIENTO   </td>
         <td class="table_cont" >
-			<?php if($dato[0]->copias_conocimiento == 1){echo " X ";}?>
+			<?php ?>
         </td>
 	</tr>
 </table>
@@ -198,55 +192,55 @@ h4{
     <tr>
         <td class="table_font"colspan="4"> CONASE </td>
         <td class="table_cont">
-			<?php if($dato[0]->conase == 1){ echo " X ";}?>
+			<?php ?>
 		</td>
         <td class="table_font"colspan="4"> FISCAL GENERAL </td>
         <td class="table_cont" >
-			<?php if($dato[0]->fiscal_general == 1){ echo " X ";}?>
+			<?php ?>
         </td>
 	</tr>
 	<tr>
         <td class="table_font" colspan="5"> FISCALÍA ESPECIALIZADA DE SECUESTRO DE  </td>
         <td class="table_font" colspan="4"> VICEFISCALIA </td>
         <td class="table_cont" >
-			<?php if($dato[0]->vicefiscalia){echo " X ";}?>
+			<?php ?>
         </td>
 	</tr>
 	<tr>
         <td class="table_font" colspan="4"> VALLE DE TOLUCA </td>
         <td class="table_cont" >
-			<?php if($dato[0]->valle_toluca == 1){echo " X";}?>
+			<?php ?>
         </td>
         <td class="table_font" colspan="4"> OFICIALÍA MAYOR </td>
         <td class="table_cont" >
-			<?php if($dato[0]->oficialia_mayor == 1){echo "X";}?>
+			<?php ?>
         </td>
 	</tr>
 	<tr>
         <td class="table_font" colspan="4"> VALLE DE MÉXICO </td>
         <td class="table_cont" >
-			<?php if($dato[0]->valle_mexico == 1){echo " X ";}?>
+			<?php ?>
         </td>
         <td class="table_font" colspan="4"> DEPARTAMENTO DE INFORMACIÓN Y ESTADÍSTICA </td>
         <td class="table_cont" >
-			<?php if($dato[0]->informacion_estadistica == 1){echo " X ";}?>
+			<?php ?>
         </td>
 	</tr>
 	<tr>
         <td class="table_font" colspan="4"> ZONA ORIENTE </td>
         <td class="table_cont" >
-			<?php if($dato[0]->zona_oriente == 1){echo " X "; }?>
+			<?php ?>
         </td>
         <td class="table_font" colspan="4" > CENTRAL JURÍDICO </td>
         <td class="table_cont" >
-			<?php if($dato[0]->central_juridico == 1){echo " X ";}?>
+			<?php ?>
         </td>
 	</tr>
 	<tr>
-        <td class="table_font" colspan="5"> OTRAS: <?php if($dato[0]->otra != ""){ echo "$dato->otra "; }?></td>
+        <td class="table_font" colspan="5"> OTRAS: ?></td>
         <td class="table_font" colspan="4"> SERVICIO DE CARRERA  </td>
         <td class="table_cont" >
-			<?php if($dato[0]->servicio_carrera == 1){ echo " X ";}?>
+			<?php ?>
         </td>
 	</tr>
 </table>
@@ -257,7 +251,7 @@ h4{
     <tr>
         <td class="table_font" colspan="5"> REALIZAR DILIGENCIAS EN VÍA DE COLABORACIÓN </td>
         <td class="table_cont">
-			<?php if($dato[0]->realiza_diligencias == 1){ echo " X ";}?>
+			<?php ?>
         </td>
 		<td></td>
         <td class="table_font" colspan="3"> INFORMAR A: </td>
@@ -267,31 +261,31 @@ h4{
     <tr>
         <td class="table_font" colspan="5"> RECIBIR PERSONALMENTE EN AUDIENCIA E INFORMAR </td>
         <td class="table_cont" >
-			<?php if($dato[0]->recibir_personalmente==1){echo " X ";}?>	
+			<?php ?>	
 		</td>
 		<td></td>
         <td class="table_font" colspan="3"> ESTA OFICINA </td>
-        <td class="table_cont" ><?php if($dato[0]->esta_oficina == 1){ echo " X ";}?></td>
-		<td class="table_cont" ><?php if($dato[0]->esta_oficina == 1){ echo $dato[0]->termino; }?></td>
+        <td class="table_cont" ><?php?></td>
+		<td class="table_cont" ><?php ?></td>
 	</tr>
     <tr>
         <td class="table_font" colspan="5"> GESTIONAR PETICIÓN Y REMITIR CONSTANCIAS QUE ACREDITEN LA ATENCIÓN BRINDADA </td>
-        <td class="table_cont"><?php if($dato[0]->gestionar_peticion == 1){echo " X ";}?></td>
+        <td class="table_cont"><?php ?></td>
 		<td></td>
         <td class="table_font" colspan="3"> PETICIONARIO </td>
-        <td class="table_font"><?php if($dato[0]->peticionario == 1){echo " X ";}?> </td>
-		<td class="table_cont"><?php if($dato[0]->peticionario == 1){ echo $dato[0]->termino; }?></td>
+        <td class="table_font"><?php ?> </td>
+		<td class="table_cont"><?php ?></td>
 	</tr>
     <tr>
         <td class="table_font" colspan="5"> ARCHIVO </td>
-        <td class="table_cont"><?php if($dato[0]->archivo == 1){ echo " X ";}?></td>
+        <td class="table_cont"><?php ?></td>
 		<td></td>
         <td class="table_font" colspan="3"> INSTITUCIÓN REQUIRENTE </td>
-		<td class="table_font"><?php if($dato[0]->institucion_requiriente == 1){ echo " X "; }?></td>
-		<td class="table_font"><?php if($dato[0]->institucion_requiriente == 1){ echo $dato[0]->termino; }?></td> 
+		<td class="table_font"><?php ?></td>
+		<td class="table_font"><?php ?></td> 
 	</tr>
 	<tr>
-        <td class="table_font" colspan="6"> OTRAS: <?php if($dato[0]->otras != ""){ echo $dato[0]->otras;}?></td>
+        <td class="table_font" colspan="6"> OTRAS: <?php ?></td>
 	</tr>
 </table>
 <table>
@@ -316,7 +310,7 @@ h4{
 	</tr>
 	<tr>
 		<td></td>
-		<td class="table_cont" colspan="5"><?php echo $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom;?> </td>
+		<td class="table_cont" colspan="5"><?php ?> </td>
 		<td colspan="2"></td>
 		<td class="table_cont" colspan = "6"> DR. H. C. RODRIGO ARCHUNDIA BARREINTOS COORDINADOR GENERAL DE COMBATE AL SECUESTRO
 		</td>
@@ -325,5 +319,5 @@ h4{
 </table>
 <table>
 	<tr><td>&nbsp;</td></tr>
-	<tr><td class="table_font" colspan="16"> OBSERVACIONES: <?php echo $dato[0]->observaciones;?></td></tr>
+	<tr><td class="table_font" colspan="16"> OBSERVACIONES: <?php ?></td></tr>
 </table>

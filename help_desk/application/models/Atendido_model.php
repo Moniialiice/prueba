@@ -32,11 +32,12 @@ class Atendido_model extends CI_model
     public function getIDA($id)
     {
         $query = $this->db->query("SELECT id_oficioAtendido FROM oficio_atendido WHERE id_oficioseg='$id' ");
+        return $query->result();
     }  
     //consulta los datos del oficio atendido por id_oficioAtendido, oficio seguimiento y datos de usuario
     public function consultaAtendido($id)
     {
-        $query = $this->db->query("SELECT a.id_oficioAtendido, a.fecha_atendido, a.asunto, a.nombre_aten, a.cargo_aten, a.descripcion, a.arch_atendido, a.copia_a, a.atencion, u.id_usuario, u.nombre, u.apellidop, u.apellidom, s.id_oficioseg, s.nomenclatura FROM oficio_atendido as a, usuario as u, oficio_seguimiento as s WHERE u.id_usuario = a.atencion AND s.id_oficioseg = a.id_oficioseg AND a.id_oficioAtendido = '$id'");
+        $query = $this->db->query("SELECT a.id_oficioAtendido, a.fecha_atendido, a.asunto, a.nombre_aten, a.cargo_aten, a.descripcion, a.arch_atendido, a.copia_a, a.atencion, u.nombre, u.apellidop, u.apellidom, s.id_oficioseg, s.nomenclatura FROM oficio_atendido as a, usuario as u, oficio_seguimiento as s WHERE u.id_usuario = a.atencion AND s.id_oficioseg = a.id_oficioseg AND a.id_oficioAtendido = '$id'");
         return $query->result();
     }
     //consulta por nomenclatura y fecha de atendido

@@ -38,7 +38,7 @@
                             }
                                 echo validation_errors();    
                         ?>
-                        <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div>
+                        <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
                         <form action="insertarAtendido" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Oficio Seguimiento</label></div>
@@ -79,7 +79,7 @@
                                 <div class="col-12 col-md-9"><textarea name="cargo" id="textarea-input" OnKeyUp="Upper(this);" rows="1" placeholder="" class="form-control"><?php echo set_value('cargo'); ?></textarea></div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class="form-control-label"> Descrición del Oficio</label></div>
+                                <div class="col col-md-3"><label for="text-input" class="form-control-label"> Descripción del Oficio</label></div>
                                 <div class="col-12 col-md-9"><textarea name="descripcion" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('descripcion'); ?></textarea></div>
                             </div>
                             <div><label for='text-input' class='form-control-label fa fa-exclamation' > Nombre de archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>

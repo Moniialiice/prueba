@@ -17780,3 +17780,376 @@ INFO - 2018-11-08 14:42:08 --> Upload Class Initialized
 INFO - 2018-11-08 14:42:08 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\all_oficio.php
 INFO - 2018-11-08 14:42:08 --> Final output sent to browser
 INFO - 2018-11-08 14:42:08 --> Total execution time: 0.0468
+INFO - 2018-11-08 17:32:38 --> Config Class Initialized
+INFO - 2018-11-08 17:32:38 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:38 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:38 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:38 --> URI Class Initialized
+INFO - 2018-11-08 17:32:38 --> Router Class Initialized
+INFO - 2018-11-08 17:32:38 --> Output Class Initialized
+INFO - 2018-11-08 17:32:38 --> Security Class Initialized
+INFO - 2018-11-08 17:32:38 --> Input Class Initialized
+INFO - 2018-11-08 17:32:38 --> Language Class Initialized
+INFO - 2018-11-08 17:32:38 --> Loader Class Initialized
+INFO - 2018-11-08 17:32:38 --> Controller Class Initialized
+INFO - 2018-11-08 17:32:38 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-11-08 17:32:38 --> Pagination Class Initialized
+INFO - 2018-11-08 17:32:38 --> Helper loaded: download_helper
+INFO - 2018-11-08 17:32:38 --> Helper loaded: file_helper
+INFO - 2018-11-08 17:32:38 --> Helper loaded: url_helper
+INFO - 2018-11-08 17:32:38 --> Helper loaded: html_helper
+INFO - 2018-11-08 17:32:38 --> Helper loaded: form_helper
+DEBUG - 2018-11-08 17:32:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-11-08 17:32:38 --> Session: Class initialized using 'files' driver.
+INFO - 2018-11-08 17:32:38 --> Encrypt Class Initialized
+INFO - 2018-11-08 17:32:38 --> Database Driver Class Initialized
+INFO - 2018-11-08 17:32:38 --> Model "Entrada_model" initialized
+INFO - 2018-11-08 17:32:38 --> Form Validation Class Initialized
+INFO - 2018-11-08 17:32:38 --> Upload Class Initialized
+ERROR - 2018-11-08 17:32:38 --> Severity: Notice --> Undefined index: ans C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+ERROR - 2018-11-08 17:32:38 --> Severity: Notice --> Undefined index: mes C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+ERROR - 2018-11-08 17:32:38 --> Severity: Notice --> Undefined index: dia C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+ERROR - 2018-11-08 17:32:38 --> Severity: Notice --> Undefined index: hora C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+ERROR - 2018-11-08 17:32:38 --> Severity: Notice --> Undefined index: minuto C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+ERROR - 2018-11-08 17:32:38 --> Severity: Notice --> Undefined index: segundo C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+INFO - 2018-11-08 17:32:38 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head.php
+INFO - 2018-11-08 17:32:38 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\busqueda_entrada.php
+INFO - 2018-11-08 17:32:38 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer.php
+INFO - 2018-11-08 17:32:38 --> Final output sent to browser
+INFO - 2018-11-08 17:32:38 --> Total execution time: 0.0624
+INFO - 2018-11-08 17:32:38 --> Config Class Initialized
+INFO - 2018-11-08 17:32:38 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:38 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:38 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:38 --> URI Class Initialized
+INFO - 2018-11-08 17:32:38 --> Router Class Initialized
+INFO - 2018-11-08 17:32:38 --> Output Class Initialized
+INFO - 2018-11-08 17:32:39 --> Security Class Initialized
+INFO - 2018-11-08 17:32:39 --> Input Class Initialized
+INFO - 2018-11-08 17:32:39 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:39 --> 404 Page Not Found: Assets/js
+INFO - 2018-11-08 17:32:39 --> Config Class Initialized
+INFO - 2018-11-08 17:32:39 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:39 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:39 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:39 --> URI Class Initialized
+INFO - 2018-11-08 17:32:39 --> Router Class Initialized
+INFO - 2018-11-08 17:32:39 --> Output Class Initialized
+INFO - 2018-11-08 17:32:39 --> Security Class Initialized
+INFO - 2018-11-08 17:32:39 --> Input Class Initialized
+INFO - 2018-11-08 17:32:39 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:39 --> 404 Page Not Found: Assets/js
+INFO - 2018-11-08 17:32:39 --> Config Class Initialized
+INFO - 2018-11-08 17:32:39 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:39 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:39 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:39 --> URI Class Initialized
+INFO - 2018-11-08 17:32:39 --> Router Class Initialized
+INFO - 2018-11-08 17:32:39 --> Output Class Initialized
+INFO - 2018-11-08 17:32:39 --> Security Class Initialized
+INFO - 2018-11-08 17:32:39 --> Input Class Initialized
+INFO - 2018-11-08 17:32:39 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:39 --> 404 Page Not Found: Assets/js
+INFO - 2018-11-08 17:32:39 --> Config Class Initialized
+INFO - 2018-11-08 17:32:39 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:39 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:39 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:39 --> URI Class Initialized
+INFO - 2018-11-08 17:32:39 --> Router Class Initialized
+INFO - 2018-11-08 17:32:39 --> Output Class Initialized
+INFO - 2018-11-08 17:32:39 --> Security Class Initialized
+INFO - 2018-11-08 17:32:39 --> Input Class Initialized
+INFO - 2018-11-08 17:32:39 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:39 --> 404 Page Not Found: Assets/js
+INFO - 2018-11-08 17:32:39 --> Config Class Initialized
+INFO - 2018-11-08 17:32:39 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:39 --> Config Class Initialized
+INFO - 2018-11-08 17:32:39 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:39 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:39 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:39 --> URI Class Initialized
+INFO - 2018-11-08 17:32:39 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:39 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:39 --> Router Class Initialized
+INFO - 2018-11-08 17:32:39 --> URI Class Initialized
+INFO - 2018-11-08 17:32:39 --> Output Class Initialized
+INFO - 2018-11-08 17:32:39 --> Router Class Initialized
+INFO - 2018-11-08 17:32:39 --> Security Class Initialized
+INFO - 2018-11-08 17:32:39 --> Output Class Initialized
+INFO - 2018-11-08 17:32:39 --> Input Class Initialized
+INFO - 2018-11-08 17:32:39 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:39 --> 404 Page Not Found: Faviconico/index
+INFO - 2018-11-08 17:32:39 --> Security Class Initialized
+INFO - 2018-11-08 17:32:39 --> Input Class Initialized
+INFO - 2018-11-08 17:32:39 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:39 --> 404 Page Not Found: Apple-iconpng/index
+INFO - 2018-11-08 17:32:42 --> Config Class Initialized
+INFO - 2018-11-08 17:32:42 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:42 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:42 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:42 --> URI Class Initialized
+DEBUG - 2018-11-08 17:32:42 --> No URI present. Default controller set.
+INFO - 2018-11-08 17:32:42 --> Router Class Initialized
+INFO - 2018-11-08 17:32:42 --> Output Class Initialized
+INFO - 2018-11-08 17:32:42 --> Security Class Initialized
+INFO - 2018-11-08 17:32:42 --> Input Class Initialized
+INFO - 2018-11-08 17:32:42 --> Language Class Initialized
+INFO - 2018-11-08 17:32:42 --> Loader Class Initialized
+INFO - 2018-11-08 17:32:42 --> Controller Class Initialized
+INFO - 2018-11-08 17:32:42 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-11-08 17:32:42 --> Pagination Class Initialized
+INFO - 2018-11-08 17:32:42 --> Helper loaded: url_helper
+INFO - 2018-11-08 17:32:42 --> Helper loaded: form_helper
+DEBUG - 2018-11-08 17:32:42 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-11-08 17:32:42 --> Session: Class initialized using 'files' driver.
+INFO - 2018-11-08 17:32:42 --> Encrypt Class Initialized
+INFO - 2018-11-08 17:32:42 --> Database Driver Class Initialized
+INFO - 2018-11-08 17:32:42 --> Model "Usuario_model" initialized
+INFO - 2018-11-08 17:32:42 --> Form Validation Class Initialized
+INFO - 2018-11-08 17:32:42 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head1.php
+INFO - 2018-11-08 17:32:42 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\login.php
+INFO - 2018-11-08 17:32:42 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer1.php
+INFO - 2018-11-08 17:32:42 --> Final output sent to browser
+INFO - 2018-11-08 17:32:42 --> Total execution time: 0.0468
+INFO - 2018-11-08 17:32:43 --> Config Class Initialized
+INFO - 2018-11-08 17:32:43 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:43 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:43 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:43 --> URI Class Initialized
+INFO - 2018-11-08 17:32:43 --> Router Class Initialized
+INFO - 2018-11-08 17:32:43 --> Config Class Initialized
+INFO - 2018-11-08 17:32:43 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:43 --> Output Class Initialized
+INFO - 2018-11-08 17:32:43 --> Security Class Initialized
+INFO - 2018-11-08 17:32:43 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:43 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:43 --> Input Class Initialized
+INFO - 2018-11-08 17:32:43 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:43 --> 404 Page Not Found: Apple-iconpng/index
+INFO - 2018-11-08 17:32:43 --> URI Class Initialized
+INFO - 2018-11-08 17:32:43 --> Router Class Initialized
+INFO - 2018-11-08 17:32:43 --> Output Class Initialized
+INFO - 2018-11-08 17:32:43 --> Security Class Initialized
+INFO - 2018-11-08 17:32:43 --> Input Class Initialized
+INFO - 2018-11-08 17:32:43 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:43 --> 404 Page Not Found: Faviconico/index
+INFO - 2018-11-08 17:32:50 --> Config Class Initialized
+INFO - 2018-11-08 17:32:50 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:50 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:50 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:50 --> URI Class Initialized
+INFO - 2018-11-08 17:32:50 --> Router Class Initialized
+INFO - 2018-11-08 17:32:50 --> Output Class Initialized
+INFO - 2018-11-08 17:32:50 --> Security Class Initialized
+INFO - 2018-11-08 17:32:50 --> Input Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language Class Initialized
+INFO - 2018-11-08 17:32:50 --> Loader Class Initialized
+INFO - 2018-11-08 17:32:50 --> Controller Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-11-08 17:32:50 --> Pagination Class Initialized
+INFO - 2018-11-08 17:32:50 --> Helper loaded: url_helper
+INFO - 2018-11-08 17:32:50 --> Helper loaded: form_helper
+DEBUG - 2018-11-08 17:32:50 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-11-08 17:32:50 --> Session: Class initialized using 'files' driver.
+INFO - 2018-11-08 17:32:50 --> Encrypt Class Initialized
+INFO - 2018-11-08 17:32:50 --> Database Driver Class Initialized
+INFO - 2018-11-08 17:32:50 --> Model "Usuario_model" initialized
+INFO - 2018-11-08 17:32:50 --> Form Validation Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language file loaded: language/spanish/form_validation_lang.php
+INFO - 2018-11-08 17:32:50 --> Config Class Initialized
+INFO - 2018-11-08 17:32:50 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:50 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:50 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:50 --> URI Class Initialized
+INFO - 2018-11-08 17:32:50 --> Router Class Initialized
+INFO - 2018-11-08 17:32:50 --> Output Class Initialized
+INFO - 2018-11-08 17:32:50 --> Security Class Initialized
+INFO - 2018-11-08 17:32:50 --> Input Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language Class Initialized
+INFO - 2018-11-08 17:32:50 --> Loader Class Initialized
+INFO - 2018-11-08 17:32:50 --> Controller Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-11-08 17:32:50 --> Pagination Class Initialized
+INFO - 2018-11-08 17:32:50 --> Helper loaded: url_helper
+INFO - 2018-11-08 17:32:50 --> Helper loaded: form_helper
+DEBUG - 2018-11-08 17:32:50 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-11-08 17:32:50 --> Session: Class initialized using 'files' driver.
+INFO - 2018-11-08 17:32:50 --> Encrypt Class Initialized
+INFO - 2018-11-08 17:32:50 --> Database Driver Class Initialized
+INFO - 2018-11-08 17:32:50 --> Model "Usuario_model" initialized
+INFO - 2018-11-08 17:32:50 --> Form Validation Class Initialized
+ERROR - 2018-11-08 17:32:50 --> Severity: Notice --> Undefined index: ans C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+ERROR - 2018-11-08 17:32:50 --> Severity: Notice --> Undefined index: mes C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+ERROR - 2018-11-08 17:32:50 --> Severity: Notice --> Undefined index: dia C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+ERROR - 2018-11-08 17:32:50 --> Severity: Notice --> Undefined index: hora C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+ERROR - 2018-11-08 17:32:50 --> Severity: Notice --> Undefined index: minuto C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+ERROR - 2018-11-08 17:32:50 --> Severity: Notice --> Undefined index: segundo C:\xampp\htdocs\prueba\help_desk\application\views\templates\head.php 75
+INFO - 2018-11-08 17:32:50 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head.php
+INFO - 2018-11-08 17:32:50 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\inicio.php
+INFO - 2018-11-08 17:32:50 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer.php
+INFO - 2018-11-08 17:32:50 --> Final output sent to browser
+INFO - 2018-11-08 17:32:50 --> Total execution time: 0.0312
+INFO - 2018-11-08 17:32:50 --> Config Class Initialized
+INFO - 2018-11-08 17:32:50 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:50 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:50 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:50 --> URI Class Initialized
+INFO - 2018-11-08 17:32:50 --> Router Class Initialized
+INFO - 2018-11-08 17:32:50 --> Output Class Initialized
+INFO - 2018-11-08 17:32:50 --> Security Class Initialized
+INFO - 2018-11-08 17:32:50 --> Input Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:50 --> 404 Page Not Found: Assets/js
+INFO - 2018-11-08 17:32:50 --> Config Class Initialized
+INFO - 2018-11-08 17:32:50 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:50 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:50 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:50 --> URI Class Initialized
+INFO - 2018-11-08 17:32:50 --> Router Class Initialized
+INFO - 2018-11-08 17:32:50 --> Output Class Initialized
+INFO - 2018-11-08 17:32:50 --> Security Class Initialized
+INFO - 2018-11-08 17:32:50 --> Input Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:50 --> 404 Page Not Found: Assets/js
+INFO - 2018-11-08 17:32:50 --> Config Class Initialized
+INFO - 2018-11-08 17:32:50 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:50 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:50 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:50 --> URI Class Initialized
+INFO - 2018-11-08 17:32:50 --> Router Class Initialized
+INFO - 2018-11-08 17:32:50 --> Output Class Initialized
+INFO - 2018-11-08 17:32:50 --> Security Class Initialized
+INFO - 2018-11-08 17:32:50 --> Input Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:50 --> 404 Page Not Found: Assets/js
+INFO - 2018-11-08 17:32:50 --> Config Class Initialized
+INFO - 2018-11-08 17:32:50 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:50 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:50 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:50 --> URI Class Initialized
+INFO - 2018-11-08 17:32:50 --> Router Class Initialized
+INFO - 2018-11-08 17:32:50 --> Output Class Initialized
+INFO - 2018-11-08 17:32:50 --> Security Class Initialized
+INFO - 2018-11-08 17:32:50 --> Input Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:50 --> 404 Page Not Found: Assets/js
+INFO - 2018-11-08 17:32:50 --> Config Class Initialized
+INFO - 2018-11-08 17:32:50 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:50 --> Config Class Initialized
+INFO - 2018-11-08 17:32:50 --> Hooks Class Initialized
+INFO - 2018-11-08 17:32:50 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:50 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:50 --> UTF-8 Support Enabled
+INFO - 2018-11-08 17:32:50 --> URI Class Initialized
+INFO - 2018-11-08 17:32:50 --> Utf8 Class Initialized
+INFO - 2018-11-08 17:32:50 --> Router Class Initialized
+INFO - 2018-11-08 17:32:50 --> URI Class Initialized
+INFO - 2018-11-08 17:32:50 --> Output Class Initialized
+INFO - 2018-11-08 17:32:50 --> Router Class Initialized
+INFO - 2018-11-08 17:32:50 --> Security Class Initialized
+INFO - 2018-11-08 17:32:50 --> Output Class Initialized
+INFO - 2018-11-08 17:32:50 --> Input Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language Class Initialized
+INFO - 2018-11-08 17:32:50 --> Security Class Initialized
+ERROR - 2018-11-08 17:32:50 --> 404 Page Not Found: Apple-iconpng/index
+INFO - 2018-11-08 17:32:50 --> Input Class Initialized
+INFO - 2018-11-08 17:32:50 --> Language Class Initialized
+ERROR - 2018-11-08 17:32:50 --> 404 Page Not Found: Faviconico/index
+INFO - 2018-11-08 18:02:23 --> Config Class Initialized
+INFO - 2018-11-08 18:02:23 --> Hooks Class Initialized
+INFO - 2018-11-08 18:02:23 --> UTF-8 Support Enabled
+INFO - 2018-11-08 18:02:23 --> Utf8 Class Initialized
+INFO - 2018-11-08 18:02:23 --> URI Class Initialized
+INFO - 2018-11-08 18:02:23 --> Router Class Initialized
+INFO - 2018-11-08 18:02:23 --> Output Class Initialized
+INFO - 2018-11-08 18:02:23 --> Security Class Initialized
+INFO - 2018-11-08 18:02:23 --> Input Class Initialized
+INFO - 2018-11-08 18:02:23 --> Language Class Initialized
+INFO - 2018-11-08 18:02:23 --> Loader Class Initialized
+INFO - 2018-11-08 18:02:23 --> Controller Class Initialized
+INFO - 2018-11-08 18:02:23 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-11-08 18:02:23 --> Pagination Class Initialized
+INFO - 2018-11-08 18:02:23 --> Helper loaded: url_helper
+INFO - 2018-11-08 18:02:23 --> Helper loaded: form_helper
+DEBUG - 2018-11-08 18:02:23 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-11-08 18:02:23 --> Session: Class initialized using 'files' driver.
+INFO - 2018-11-08 18:02:23 --> Encrypt Class Initialized
+INFO - 2018-11-08 18:02:23 --> Database Driver Class Initialized
+INFO - 2018-11-08 18:02:23 --> Model "Usuario_model" initialized
+INFO - 2018-11-08 18:02:23 --> Form Validation Class Initialized
+INFO - 2018-11-08 18:02:23 --> Config Class Initialized
+INFO - 2018-11-08 18:02:23 --> Hooks Class Initialized
+INFO - 2018-11-08 18:02:23 --> UTF-8 Support Enabled
+INFO - 2018-11-08 18:02:23 --> Utf8 Class Initialized
+INFO - 2018-11-08 18:02:23 --> URI Class Initialized
+INFO - 2018-11-08 18:02:23 --> Router Class Initialized
+INFO - 2018-11-08 18:02:23 --> Output Class Initialized
+INFO - 2018-11-08 18:02:23 --> Security Class Initialized
+INFO - 2018-11-08 18:02:23 --> Input Class Initialized
+INFO - 2018-11-08 18:02:23 --> Language Class Initialized
+INFO - 2018-11-08 18:02:23 --> Loader Class Initialized
+INFO - 2018-11-08 18:02:23 --> Controller Class Initialized
+INFO - 2018-11-08 18:02:23 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-11-08 18:02:23 --> Pagination Class Initialized
+INFO - 2018-11-08 18:02:23 --> Helper loaded: url_helper
+INFO - 2018-11-08 18:02:23 --> Helper loaded: form_helper
+DEBUG - 2018-11-08 18:02:23 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-11-08 18:02:23 --> Session: Class initialized using 'files' driver.
+INFO - 2018-11-08 18:02:23 --> Encrypt Class Initialized
+INFO - 2018-11-08 18:02:23 --> Database Driver Class Initialized
+INFO - 2018-11-08 18:02:23 --> Model "Usuario_model" initialized
+INFO - 2018-11-08 18:02:23 --> Form Validation Class Initialized
+INFO - 2018-11-08 18:02:23 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head1.php
+INFO - 2018-11-08 18:02:23 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\login.php
+INFO - 2018-11-08 18:02:23 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer1.php
+INFO - 2018-11-08 18:02:23 --> Final output sent to browser
+INFO - 2018-11-08 18:02:23 --> Total execution time: 0.0468
+INFO - 2018-11-08 18:02:24 --> Config Class Initialized
+INFO - 2018-11-08 18:02:24 --> Hooks Class Initialized
+INFO - 2018-11-08 18:02:24 --> Config Class Initialized
+INFO - 2018-11-08 18:02:24 --> UTF-8 Support Enabled
+INFO - 2018-11-08 18:02:24 --> Utf8 Class Initialized
+INFO - 2018-11-08 18:02:24 --> Hooks Class Initialized
+INFO - 2018-11-08 18:02:24 --> URI Class Initialized
+INFO - 2018-11-08 18:02:24 --> Router Class Initialized
+INFO - 2018-11-08 18:02:24 --> UTF-8 Support Enabled
+INFO - 2018-11-08 18:02:24 --> Utf8 Class Initialized
+INFO - 2018-11-08 18:02:24 --> URI Class Initialized
+INFO - 2018-11-08 18:02:24 --> Output Class Initialized
+INFO - 2018-11-08 18:02:24 --> Router Class Initialized
+INFO - 2018-11-08 18:02:24 --> Security Class Initialized
+INFO - 2018-11-08 18:02:24 --> Input Class Initialized
+INFO - 2018-11-08 18:02:24 --> Output Class Initialized
+INFO - 2018-11-08 18:02:24 --> Language Class Initialized
+INFO - 2018-11-08 18:02:24 --> Security Class Initialized
+ERROR - 2018-11-08 18:02:24 --> 404 Page Not Found: Apple-iconpng/index
+INFO - 2018-11-08 18:02:24 --> Input Class Initialized
+INFO - 2018-11-08 18:02:24 --> Language Class Initialized
+ERROR - 2018-11-08 18:02:24 --> 404 Page Not Found: Faviconico/index
+INFO - 2018-11-08 18:02:27 --> Config Class Initialized
+INFO - 2018-11-08 18:02:27 --> Hooks Class Initialized
+INFO - 2018-11-08 18:02:27 --> UTF-8 Support Enabled
+INFO - 2018-11-08 18:02:27 --> Utf8 Class Initialized
+INFO - 2018-11-08 18:02:27 --> URI Class Initialized
+INFO - 2018-11-08 18:02:27 --> Router Class Initialized
+INFO - 2018-11-08 18:02:27 --> Output Class Initialized
+INFO - 2018-11-08 18:02:27 --> Security Class Initialized
+INFO - 2018-11-08 18:02:27 --> Input Class Initialized
+INFO - 2018-11-08 18:02:27 --> Language Class Initialized
+INFO - 2018-11-08 18:02:27 --> Loader Class Initialized
+INFO - 2018-11-08 18:02:27 --> Controller Class Initialized
+INFO - 2018-11-08 18:02:27 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-11-08 18:02:27 --> Pagination Class Initialized
+INFO - 2018-11-08 18:02:27 --> Helper loaded: url_helper
+INFO - 2018-11-08 18:02:27 --> Helper loaded: form_helper
+DEBUG - 2018-11-08 18:02:27 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-11-08 18:02:27 --> Session: Class initialized using 'files' driver.
+INFO - 2018-11-08 18:02:27 --> Encrypt Class Initialized
+INFO - 2018-11-08 18:02:27 --> Database Driver Class Initialized
+INFO - 2018-11-08 18:02:27 --> Model "Usuario_model" initialized
+INFO - 2018-11-08 18:02:27 --> Form Validation Class Initialized
+INFO - 2018-11-08 18:02:27 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head1.php
+INFO - 2018-11-08 18:02:27 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\login.php
+INFO - 2018-11-08 18:02:27 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer1.php
+INFO - 2018-11-08 18:02:27 --> Final output sent to browser
+INFO - 2018-11-08 18:02:27 --> Total execution time: 0.0468

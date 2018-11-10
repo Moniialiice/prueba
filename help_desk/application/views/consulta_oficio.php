@@ -52,7 +52,7 @@
                     }if($this->session->flashdata('Error')){
                         echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Consultar administrador.</label></div>";
                     }
-            echo"<br>    <form action='#' method='post' enctype='multipart/form-data' class='form-horizontal'>";
+            echo"<br>    <form action='#' method='' enctype='multipart/form-data' class='form-horizontal'>";
                                 echo "<div class='row form-group'>
                                         <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Nomenclatura</label></div>
                                         <div class='col-12 col-md-9'>

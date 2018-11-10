@@ -79,7 +79,7 @@ class Atendido extends CI_Controller
                     $upload_data = $this->upload->data();
                     //toma el nombre del archivo
                     $archivo = $upload_data['file_name']; 
-                $insertOficio = $this->Atendido_model->insert_Atendido($fecha1, $asunto, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion);
+                    $insertOficio = $this->Atendido_model->insert_Atendido($fecha1, $asunto, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion);
                 
                 if ($insertOficio == true){                    
                     //id oficio seguimiento 
@@ -87,7 +87,7 @@ class Atendido extends CI_Controller
                     $ida = $idatendido[0]->id_oficioAtendido;
                     //una vez insertado muestra datos en actualizar oficio
                     $this->session->set_flashdata('Creado','Oficio creado');
-                    $this->mostrarAtendido($segui);
+                    $this->mostrarAtendido($ida);
                 }else{
                     $this->session->set_flashdata('Error','Consulta administrador');                    
                     $this->index($segui);
@@ -131,13 +131,7 @@ class Atendido extends CI_Controller
         //datos de la consulta oficio  
         $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search,$date1,$date2);
         $this->load->view('all_atendido', $datos);
-    }
-    //función para descargar archivo seguimiento o final
-    public function descarga($name)
-    {
-        $data = file_get_contents($this->folder.$name);
-        force_download($name,$data);
-    }
+    }    
     //consulta de oficio seguimiento atendido
     public function mostrarAtendido($id)
     {
@@ -148,4 +142,39 @@ class Atendido extends CI_Controller
         $this->load->view('consulta_atendido',$datos);
         $this->load->view('templates/footer');
     }
+    //función para descargar archivo seguimiento o final
+    public function descarga($name)
+    {
+        $data = file_get_contents($this->folder.$name);
+        force_download($name,$data);
+    }
+    //función para generar pdf de oficio atendid
+    public function imprimirOficioAtendido($id)
+    {
+        //$datos['dato'] = $this->Oficio_model->reportOficio($id);
+        $html = $this->load->view('atendido_pdf', true);
+        //this the the PDF filename that user will get to download
+        $pdfFilePath = "oficio_atendido." . "pdf";
+        //load TCPDF library
+        $this->load->library('Pdf');
+        //Tamaño de pdf
+        //var_dump($data);
+        $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
+        $pdf->segundaHoja = false;
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetHeaderMargin(20);
+        $pdf->SetTopMargin(20);
+        $pdf->setFooterMargin(15);
+        $pdf->SetAutoPageBreak(true);
+        $pdf->SetAuthor('FGJEM');
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->AddPage('P', 'LETTER');
+        // salida de HTML contenido a pdf
+        $pdf->writeHTML($html, true, false, true, false, '');
+        //manda a imprimir al cargar el archivo
+        //$pdf->IncludeJS("print();"); D
+        $pdf->Output($pdfFilePath, 'I');
+    }
+
 }
