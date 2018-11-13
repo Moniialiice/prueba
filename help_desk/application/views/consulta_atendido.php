@@ -52,7 +52,11 @@
                                         <input type='text' id='text-input' value='".$dato->nomenclatura."' class='form-control' disabled>
                                         <input type='text' id='text-input' name='segui' value='".$dato->id_oficioseg."' hidden>
                                       </div>
-                            </div>";              
+                            </div>";
+                            echo "<div class='row form-group'>
+                            <div class='col col-md-3'><label for='text-input' class='form-control-label'>  Asunto</label></div>
+                            <div class='col-12 col-md-9'><textarea name='asunto' id='textarea-input' rows='5' class='form-control' disabled>".$dato->asunto."</textarea></div>
+                        </div>";              
                 echo        "<div class='row form-group'>
                                 <div class='col col-md-3'><label for='text-input' class=' form-control-label'> Fecha Atendido</label></div>
                                 <div class='col-12 col-md-9'>
@@ -63,10 +67,6 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class='row form-group'>
-                                <div class='col col-md-3'><label for='text-input' class='form-control-label'>  Asunto</label></div>
-                                <div class='col-12 col-md-9'><textarea name='asunto' id='textarea-input' rows='5' class='form-control' disabled>".$dato->asunto."</textarea></div>
                             </div>
                             <div class='row form-group'>
                                 <div class='col col-md-3'><label for='text-input' class='form-control-label'> Nombre</label></div>

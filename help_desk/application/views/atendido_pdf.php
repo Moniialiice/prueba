@@ -2,7 +2,7 @@
 /*
 * Estilo para las tablas PDF
 */
-.reporte, .encabezado {
+.reporte {
 	/*border-collapse:collapse;*/
 	width:100%;
 }
@@ -15,7 +15,6 @@
 	width: 70%;
 	border: 0.0px solid white
 }
-
 
 .datos{
 	width: 70%;
@@ -34,22 +33,36 @@
 	border: 0.5px solid black
 }
 .table_cont{
+	text-align: justify;
+	height: 15px;
+	font-size: 10px;
+}
+.table_footer{
 	text-align: center;
-	border: 0.5px solid black;
 	height: 15px;
 	font-size: 9px;
-	text-transform: uppercase;
+	font-weight: bold;
 }
-.table_font{
-	text-align: left;
-	border: 0.5px solid black;
+.div_conten{
+}
+.label_encabezado{
+	text-align: center;
 	height: 15px;
 	font-size: 8px;
+	font-weight: bold;
 }
-.table_dont{
+.label_presente{
 	text-align: left;
 	height: 15px;
-	font-size: 8px;
+	font-size: 9px;
+	font-weight: bold;
+}
+p{
+	text-align: right;
+	height: 15px;
+	font-size: 9px;
+	font-weight: bold;
+	margin-right: 50px;
 }
 .hid_tr{
 	text-align: center;
@@ -62,11 +75,6 @@
 	border: 0.5px solid black;
 }
 
-.table_styles{
-	text-align: left;
-	border: 0.5px solid black;
-	height: 15px
-}
 /*estilo con lineas*/
 h4{
 	text-align:center;
@@ -74,12 +82,17 @@ h4{
 /*
 * fin estilo para tablas de PDF
 *
-* Reporte para liberacion de combustible
+*
 */
 </style>
 <?php
 	header("Content-Type: text/html;charset=ISO-8859-1");
-	
+	$date = $dato[0]->fecha_atendido;
+	//corta los datos de d,m,a
+	$ext = explode("-",$date);
+	$year = $ext[0];
+	$mont = $ext[1];
+	$day = $ext[2];
 	//array convierte número de mes en nombre 
 	$months = array (1=>'ENERO',2=>'FEBRERO',3=>'MARZO',4=>'ABRIL',5=>'MAYO', 6=>'JUNIO', 7=>'JULIO', 8=>'AGOSTO', 9=>'SEPTIEMBRE', 10=>'OCTUBRE',11=>'NOVIEMBRE',12=>'DICIEMBRE'); 
 ?>
@@ -90,234 +103,50 @@ h4{
 		<td colspan="20"></td>
 		<td colspan="6"><img src="assets/img/logo_fgj.png" width="40" height="40"></td>
 	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-	<tr><th align="center">"AÑO DEL BICENTENARIO DEL NATALICIO DE IGNACIO RAMÍREZ CALZADA, EL NIGROMANTE"</th></tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr><td align="" class="table_dont">METEPEC, ESTADO DE MEXICO A <?php  ?></td></tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr><td>&nbsp;</td></tr>
-</table>
+</table><br><br><br>
 
-<table>
-	<tr>
-		<td class="table_cont"> NO. OFICIO</td>
-		<td class="table_cont" colspan="4" >ASUNTO</td>
-	</tr>
-	<tr>	
-		<td class="table_cont"><?php  ?></td>
-		<td class="table_font" colspan="4"> <?php  ?></td>
-	</tr>
+<label class="label_encabezado">"AÑO DEL BICENTENARIO DEL NATALICIO DE IGNACIO RAMÍREZ CALZADA, EL NIGROMANTE"</label>
+<br><br><br>
+<p class="p_font">FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO.<br>COORDINACIÓN GENERAL DE COMBATE AL SECUESTRO.<br>
+METEPEC, ESTADO DE MEXICO A <?php echo $day." DE ".$months[(int)$mont]." DE ".$year."."; ?><br>OFICIO<?php echo $dato[0]->nomenclatura.".";?></p><br><br><br>
+<label class="label_presente"><?php echo $dato[0]->nombre_aten."<br>".$dato[0]->cargo_aten."<br>PRESENTE.";?></label>
+<br><br><br>
+<table class="table_cont">
+	<tr><td><?php echo nl2br($dato[0]->descripcion);?></td></tr>
 	<tr><td>&nbsp;</td></tr>
-</table>
-<table>
-	<tr><td class="table_dont">ETIQUETAS DE ASUNTOS:</td></tr>
+	<tr><td>&nbsp;</td></tr>
 	<tr><td>&nbsp;</td></tr>
 </table>	
-<table>
-    <tr>
-        <td class="table_font" colspan="4"> COLABORACIÓN </td>
-        <td class="table_cont">
-			<?php  ?>
-        </td>
-        <td class="table_font" colspan="4"> RECURSOS HUMANOS </td>
-        <td class="table_cont">
-			<?php ?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> BOLETAS DE AUDIENCIA </td>
-        <td class="table_cont">
-			<?php ?>
-        </td>
-        <td class="table_font" colspan="4"> TELEFONÍA </td>
-        <td class="table_cont">
-			<?php  ?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> SOLICITUDES </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-        <td class="table_font" colspan="4"> ESTADÍSTICA </td>
-        <td class="table_cont">
-			<?php ?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> GESTIÓN </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-        <td class="table_font" colspan="4"> RELACIONES INTERINSTITUCIONALES </td>
-        <td class="table_cont">
-			<?php ?>	
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> CURSOS Y CAPACITACIONES  </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-        <td class="table_font"  colspan="4"> BOLETAS DE AUDIENCIA  </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> JUZGADOS </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-        <td class="table_font"  colspan="4"> COPIAS DE CONOCIMIENTO   </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-</table>		
-<table>
-	<tr>
-		<td class="table_dont" colspan="5">EL COORDINADOR GENERAL DE COMBATE AL SECUESTRO DE LA FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO INSTRUYE SE TURNE A: </td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-</table>
-<table>
-    <tr>
-        <td class="table_font"colspan="4"> CONASE </td>
-        <td class="table_cont">
-			<?php ?>
-		</td>
-        <td class="table_font"colspan="4"> FISCAL GENERAL </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="5"> FISCALÍA ESPECIALIZADA DE SECUESTRO DE  </td>
-        <td class="table_font" colspan="4"> VICEFISCALIA </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> VALLE DE TOLUCA </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-        <td class="table_font" colspan="4"> OFICIALÍA MAYOR </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> VALLE DE MÉXICO </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-        <td class="table_font" colspan="4"> DEPARTAMENTO DE INFORMACIÓN Y ESTADÍSTICA </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> ZONA ORIENTE </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-        <td class="table_font" colspan="4" > CENTRAL JURÍDICO </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="5"> OTRAS: ?></td>
-        <td class="table_font" colspan="4"> SERVICIO DE CARRERA  </td>
-        <td class="table_cont" >
-			<?php ?>
-        </td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-</table>
-<table>
-    <tr>
-        <td class="table_font" colspan="5"> REALIZAR DILIGENCIAS EN VÍA DE COLABORACIÓN </td>
-        <td class="table_cont">
-			<?php ?>
-        </td>
-		<td></td>
-        <td class="table_font" colspan="3"> INFORMAR A: </td>
-        <td class="table_cont" ></td>
-		<td class="table_font" > TERMINO</td>
-	</tr>
-    <tr>
-        <td class="table_font" colspan="5"> RECIBIR PERSONALMENTE EN AUDIENCIA E INFORMAR </td>
-        <td class="table_cont" >
-			<?php ?>	
-		</td>
-		<td></td>
-        <td class="table_font" colspan="3"> ESTA OFICINA </td>
-        <td class="table_cont" ><?php?></td>
-		<td class="table_cont" ><?php ?></td>
-	</tr>
-    <tr>
-        <td class="table_font" colspan="5"> GESTIONAR PETICIÓN Y REMITIR CONSTANCIAS QUE ACREDITEN LA ATENCIÓN BRINDADA </td>
-        <td class="table_cont"><?php ?></td>
-		<td></td>
-        <td class="table_font" colspan="3"> PETICIONARIO </td>
-        <td class="table_font"><?php ?> </td>
-		<td class="table_cont"><?php ?></td>
-	</tr>
-    <tr>
-        <td class="table_font" colspan="5"> ARCHIVO </td>
-        <td class="table_cont"><?php ?></td>
-		<td></td>
-        <td class="table_font" colspan="3"> INSTITUCIÓN REQUIRENTE </td>
-		<td class="table_font"><?php ?></td>
-		<td class="table_font"><?php ?></td> 
-	</tr>
-	<tr>
-        <td class="table_font" colspan="6"> OTRAS: <?php ?></td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr><td>&nbsp;</td></tr>
-</table>
-<table>
+<br><br><br><br><br>
+<table class="table_footer" >
 	<tr>
 		<td></td>
-		<td class="table_cont" colspan="5" > ELABORO:</td>
-		<td colspan="2"></td>
-		<td class="table_cont" colspan="6"> Vo. Bo.</td>
+		<td colspan="6">ATENTAMENTE<br><br><br></td>
 		<td  colspan="2"></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td class="table_cont" colspan="5"><br><br><br></td>
-		<td colspan="2"></td>
-		<td class="table_cont" colspan="6"></td>
+		<td colspan="6"></td>
 		<td colspan="2"></td>
 	</tr>
 	<tr>
 		<td></td>
-		<td class="table_cont" colspan="5"><?php ?> </td>
-		<td colspan="2"></td>
-		<td class="table_cont" colspan = "6"> DR. H. C. RODRIGO ARCHUNDIA BARREINTOS COORDINADOR GENERAL DE COMBATE AL SECUESTRO
-		</td>
-		<td colspan="3"></td>
+		<?php
+		$nom = $dato[0]->nomenclatura;
+		$cut = explode("/",$nom);
+		if($cut[0] = "400LIA000"){
+			echo "<td colspan = '6'>ANTONIO MARTIN TORRES BALLESTEROS<br>SECRETARIO PARTICULAR DEL COORDINADOR<br>GENERAL DE COMBATE AL SECUESTRO</td>";
+		}elseif($cut[0] = "400LI0010"){
+			echo "<td colspan = '6'>ANTONIO MARTIN TORRES BALLESTEROS<br>COORDINADOR GENERAL DE COMBATE AL SECUESTRO</td>";	
+		}
+		?>
+		<td colspan='3'></td>
 	</tr>
 </table>
-<table>
+<table class="table_cont">
 	<tr><td>&nbsp;</td></tr>
-	<tr><td class="table_font" colspan="16"> OBSERVACIONES: <?php ?></td></tr>
+	<tr><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td></tr>
+	<tr><td></td></tr>
 </table>

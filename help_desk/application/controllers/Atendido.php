@@ -151,9 +151,9 @@ class Atendido extends CI_Controller
     //función para generar pdf de oficio atendid
     public function imprimirOficioAtendido($id)
     {
-        //$datos['dato'] = $this->Oficio_model->reportOficio($id);
-        $html = $this->load->view('atendido_pdf', true);
-        //this the the PDF filename that user will get to download
+        $datos['dato'] = $this->Atendido_model->reportOficioAtendido($id);
+        $html = $this->load->view('atendido_pdf', $datos, true);
+        //this the the PDF filename that user will get to download  
         $pdfFilePath = "oficio_atendido." . "pdf";
         //load TCPDF library
         $this->load->library('Pdf');

@@ -40,21 +40,25 @@
                         ?>
                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
                         <form action="insertarAtendido" method="post" enctype="multipart/form-data" class="form-horizontal">
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Oficio Seguimiento</label></div>
-                                    <?php
-                                        //echo date('l jS \of F Y h:i:s A');
-                                    //oficio entrada e id
-                                        foreach ($datos as $dato)
-                                        {
-                                            echo "<div class='col-12 col-md-9'>
-                                            <input type='text' id='text-input' value='".$dato->nomenclatura."' class='form-control' disabled>
-                                            <input type='text' id='text-input' name='segui' value='".$dato->id_oficioseg."' hidden>
-                                            </div>";
-                                        }
-                                        
-                                    ?>
-                            </div>
+                            <?php
+                                //echo date('l jS \of F Y h:i:s A');
+                                //oficio entrada e id
+                                foreach ($datos as $dato)
+                                {
+                                    echo "<div class='row form-group'>
+                                            <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Oficio Seguimiento</label></div>
+                                            <div class='col-12 col-md-9'>
+                                                <input type='text' id='text-input' value='".$dato->nomenclatura."' class='form-control' disabled>
+                                                <input type='text' id='text-input' name='segui' value='".$dato->id_oficioseg."' hidden>
+                                            </div>
+                                          </div>";                
+                                    echo "
+                                    <div class='row form-group'>
+                                        <div class='col col-md-3'><label for='text-input' class='form-control-label'>  Asunto</label></div>
+                                        <div class='col-12 col-md-9'><textarea name='asunto' id='textarea-input' rows='5' class='form-control' disabled>".$dato->asunto."</textarea></div>
+                                    </div>";
+                                        }                                        
+                            ?>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Atendido</label></div>
                                 <div class="col-12 col-md-9">
@@ -67,10 +71,6 @@
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class="form-control-label">  Asunto</label></div>
-                                <div class="col-12 col-md-9"><textarea name="asunto" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('asunto'); ?></textarea></div>
-                            </div>
-                            <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label"> Nombre</label></div>
                                 <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="nombre" placeholder="" class="form-control" value="<?php echo set_value('nombre'); ?>"></div>
                             </div>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label"> Descripción del Oficio</label></div>
-                                <div class="col-12 col-md-9"><textarea name="descripcion" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('descripcion'); ?></textarea></div>
+                                <div class="col-12 col-md-9"><textarea name="descripcion" id="textarea-input" rows="5" class="form-control"><?php echo set_value('descripcion'); ?></textarea></div>
                             </div>
                             <div><label for='text-input' class='form-control-label fa fa-exclamation' > Nombre de archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>
                             <div class="row form-group">
