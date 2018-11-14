@@ -89,7 +89,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label"> Con copia a </label></div>
-                                <div class="col-12 col-md-9"><textarea name="copia" id="textarea-input" OnKeyUp="Upper(this);" rows="3" class="form-control"><?php echo set_value('copia'); ?></textarea></div>
+                                <div class="col-12 col-md-9"><textarea name="copia" id="textarea-input" rows="3" class="form-control"><?php echo set_value('copia'); ?></textarea></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label"> Atención</label></div>
