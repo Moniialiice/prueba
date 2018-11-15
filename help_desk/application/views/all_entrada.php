@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table animated fadeIn">
     <thead>
         <tr>
             <th scope="col">No. Oficio</th>

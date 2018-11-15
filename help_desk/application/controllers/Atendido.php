@@ -57,7 +57,6 @@ class Atendido extends CI_Controller
             $this->form_validation->set_rules('nombre','Nombre', 'required');
             $this->form_validation->set_rules('cargo','Cargo','required');
             $this->form_validation->set_rules('descripcion','Descripción','required');
-            $this->form_validation->set_rules('copia','Con copia a', 'required');
             //sí la validación es correcta procede insetar en la base de datos
             if($this->form_validation->run()==TRUE)
             {   

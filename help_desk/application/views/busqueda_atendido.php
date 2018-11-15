@@ -39,8 +39,8 @@
                                 </div>
                             </form>
                         </div>
+                    <div  class="card-body card-block" id="ratendido"></div>
                 </div>
-                <div  class="card-body card-block" id="ratendido"></div>
             </div>
         </div>
       </div>

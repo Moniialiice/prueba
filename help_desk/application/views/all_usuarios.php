@@ -3,7 +3,7 @@
         <span class="fa fa-file" OnClick="();"></span>
     </span>                          
 </div>
-<table class="table">
+<table class="table animated fadeIn">
     <thead>
     <tr>
         <th scope="col">ID</th>

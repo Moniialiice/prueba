@@ -24,7 +24,7 @@
                 <div class="card-header">
                     <strong class="card-title">Búsqueda Oficio Recepción</strong>
                 </div>
-                <div class="card-body">
+                <div class="card-body card-block" >
                         <div class="form-inline">
                             <form class="search-form" method="post" id="entrada" name='entrada' enctype="multipart/form-data">
                                 <div class="col col-md-5"><label for="text-input" class="form-control-label" >Número de oficio</label></div>

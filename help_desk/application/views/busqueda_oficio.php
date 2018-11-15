@@ -24,7 +24,7 @@
                 <div class="card-header">
                     <strong class="card-title">Búsqueda Oficio Seguimiento</strong>
                 </div>
-                <div class="card-body">
+                <div class="card-body card-block">
                     <div class="form-inline">
                         <form class="search-form" action="resultOficio" method="post" id="oficio">
                             <div class="col col-md-5"><label for="text-input" class="form-control-label" >Búsqueda por número de oficio</label></div>
@@ -39,8 +39,8 @@
                             </div>    
                         </form>
                     </div>
-                    <div  class="card-body card-block" id="roficio"></div>
                 </div>
+                <div  class="card-body card-block" id="roficio"></div>
             </div>
         </div>
       </div>
