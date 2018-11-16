@@ -22,6 +22,8 @@ class OficioEntrada extends CI_Controller
         //$this->load->library('curl');
         $this->load->library('upload');
         $this->folder = 'document/';
+        //use PhpOffice\PhpSpreadsheet\Spreadsheet;
+        //use PhpOffice\PhpSpreadsheet\Writer\Xls;
     }
     //muestra el formulario de oficio entrada
     public function generaEntrada()
@@ -146,4 +148,11 @@ class OficioEntrada extends CI_Controller
         $this->load->view('report_entrada',$datos);
         $this->load->view('templates/footer');
     }
+    //ejemplo de excel
+    public function example()
+    {
+        $this->load->view('example');
+        
+    }
+
 }
