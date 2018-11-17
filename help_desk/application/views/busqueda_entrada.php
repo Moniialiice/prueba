@@ -37,10 +37,11 @@
                                         <span class="fa fa-search" OnClick="BusquedaEn();"></span>
                                     </span>
                                 </div>
-                            </form>
+                            
                         </div>
                 </div>
                 <div  class="card-body card-block" id="rentrada"></div>
+                </form>
             </div>
         </div>
       </div>

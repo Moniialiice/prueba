@@ -7,7 +7,6 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 //object of the Spreadsheet class to create the excel data
 $spreadsheet = new Spreadsheet();
-
 //add some data in excel cells
 $spreadsheet->setActiveSheetIndex(0)
  ->setCellValue('A1', 'No. Oficio')
@@ -15,17 +14,9 @@ $spreadsheet->setActiveSheetIndex(0)
  ->setCellValue('C1', 'Fecha y Hora Recepción')
  ->setCellValue('D1', 'Fecha Real')
  ->setCellValue('E1', 'Firma Origen')
- ->setCellValue('F1', 'Petición')
- ->setCellValue('G1', 'Atención');
-
-$spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A1', 'No. Oficio')
-->setCellValue('B1', 'Día y Hora Recepción')
-->setCellValue('C1', 'Fecha y Hora Recepción')
-->setCellValue('D1', 'Fecha Real')
-->setCellValue('E1', 'Firma Origen')
-->setCellValue('F1', 'Petición')
-->setCellValue('G1', 'Atención');
+ ->setCellValue('F1', 'Cargo')
+ ->setCellValue('G1', 'Petición')
+ ->setCellValue('H1', 'Atención');
 
 //set style for A1,B1,C1 cells
 $cell_st =[
@@ -33,7 +24,7 @@ $cell_st =[
  'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
  'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
 ];
-$spreadsheet->getActiveSheet()->getStyle('A1:G1')->applyFromArray($cell_st);
+$spreadsheet->getActiveSheet()->getStyle('A1:H1')->applyFromArray($cell_st);
 
 //set columns width
 $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(16);
@@ -43,9 +34,25 @@ $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(16);
 $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(16);
 $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(16);
 $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(16);
+$spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(20);
 
 $spreadsheet->getActiveSheet()->setTitle('Simple'); //set a title for Worksheet
 
+foreach ($datos as $dato){
+    $total = count($datos);
+    var_dump($total);
+    for ($i = 0; $i < $total; $i++){
+
+    $arrayData = [$dato->no_oficioEntrada, $dato->fecha_ent, $dato->fecha_rec, $dato->fecha_real, $dato->firma_origen, $dato->cargo, $dato->peticion, $dato->nombre];
+    $spreadsheet->getActiveSheet()
+        ->fromArray(
+            $arrayData,  // The data to set
+            NULL,        // Array values with this value will not be set
+            'A2'         // Top left coordinate of the worksheet range where
+                        //    we want to set these values (default is A1)
+        );
+    }    
+}
 //make object of the Xlsx class to save the excel file
 $writer = new Xlsx($spreadsheet);
 $fxls ='excel-file_1.xlsx';

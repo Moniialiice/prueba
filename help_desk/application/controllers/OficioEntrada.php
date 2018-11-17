@@ -151,7 +151,11 @@ class OficioEntrada extends CI_Controller
     //ejemplo de excel
     public function example()
     {
-        $this->load->view('example');
+        $search = $this->input->post('busqueda');
+        $date1 = $this->input->post('datepicker');
+        $date2 = $this->input->post('datepickerf');
+        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$date1,$date2);        
+        $this->load->view('example',$datos);
         
     }
 

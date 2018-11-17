@@ -27,6 +27,19 @@ function BusquedaEn(){
         }
     });
 }
+//búsqueda de Oficio Entrada
+function ReportEn(){
+    var data = $('#entrada').serialize();
+    $.ajax({
+        url: 'OficioEntrada/example',
+        type: 'post',
+        data: data,
+        success:function(data){
+            $('#rentrada').html(data);
+        }
+    });
+}
+
 //búsqueda de Oficio seguimiento
 function BusquedaOf(){
     var data = $('#oficio').serialize();

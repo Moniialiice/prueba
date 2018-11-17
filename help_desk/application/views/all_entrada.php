@@ -10,9 +10,9 @@
 			<div class="page-header float-right">
 				<div class="page-title">
 					<ol class="breadcrumb text-right">
-                        <?php
-					    	echo "<li><a href='example/".$datos."'>example</a></li>";
-                         ?>   
+                        <span class="input-group-addon">
+                            <span class="fa " OnClick="ReportEn();">example</span>
+                        </span>  
                     </ol>
 				</div>
 			</div>
