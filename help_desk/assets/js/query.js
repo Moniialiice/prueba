@@ -33,10 +33,7 @@ function ReportEn(){
     $.ajax({
         url: 'OficioEntrada/example',
         type: 'post',
-        data: data,
-        success:function(data){
-            $('#rentrada').html(data);
-        }
+        data: data
     });
 }
 
@@ -52,6 +49,16 @@ function BusquedaOf(){
         }
     });
 }
+//manda datos para general excel
+function ReportOS(){
+    var data = $('#oficio').serialize();
+    $.ajax({
+        url: 'Oficio/reportExcelOS',
+        type: 'post',
+        data: data
+    });
+}
+
 //búsqueda de oficio seguimiento atendido
 function BusquedaAt(){
     var data = $('#atendido').serialize();
@@ -62,6 +69,15 @@ function BusquedaAt(){
         success:function(data){
             $('#ratendido').html(data);
         }
+    });
+}
+//manda datos para generar excel
+function ReportAt (){
+    var data = $('#atendido').serialize();
+    $.ajax({
+        url: 'Atendido/reportExcelA',
+        type: 'post',
+        data: data
     });
 }
 

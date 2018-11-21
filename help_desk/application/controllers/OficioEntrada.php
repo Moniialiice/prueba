@@ -22,8 +22,6 @@ class OficioEntrada extends CI_Controller
         //$this->load->library('curl');
         $this->load->library('upload');
         $this->folder = 'document/';
-        //use PhpOffice\PhpSpreadsheet\Spreadsheet;
-        //use PhpOffice\PhpSpreadsheet\Writer\Xls;
     }
     //muestra el formulario de oficio entrada
     public function generaEntrada()
@@ -156,7 +154,6 @@ class OficioEntrada extends CI_Controller
         $date2 = $this->input->post('datepickerf');
         $datos ['datos'] = $this->Entrada_model->searchFecha($search,$date1,$date2);        
         $this->load->view('example',$datos);
-        
     }
 
 }

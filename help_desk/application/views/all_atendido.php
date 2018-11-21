@@ -1,3 +1,23 @@
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1> </h1>
+            </div>
+        </div>
+    </div>
+	<div class="col-sm-8">
+		<div class="page-header float-right">
+			<div class="page-title">
+				<ol class="breadcrumb text-right">
+                    <span class="input-group-addon">
+                        <span class="fa " target='_blank' OnClick="ReportAt();">example</span>
+                    </span>  
+                </ol>
+			</div>
+		</div>
+	</div>
+</div>
 <table class="table animated fadeIn">
     <thead>
         <tr>

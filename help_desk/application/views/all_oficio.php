@@ -1,18 +1,38 @@
-                    <table class="table animated fadeIn">
-                        <thead>
-                            <tr>
-                                <th scope="col">No. Oficio</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Se remite</th>
-                                <th scope="col">Solicitud</th>
-                                <th scope="col">Plazo</th>
-                                <th scope="col">Término</th>
-                                <th scope="col">Atención</th>
-                                <th scope="col">Imprimir</th>                             
-                                <th scope="col">Opciones</th>
-                            </tr>
-                        </thead>
-                            <tbody>
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1> </h1>
+            </div>
+        </div>
+    </div>
+	<div class="col-sm-8">
+		<div class="page-header float-right">
+			<div class="page-title">
+				<ol class="breadcrumb text-right">
+                    <span class="input-group-addon">
+                        <span class="fa " target='_blank' OnClick="ReportOS();">example</span>
+                    </span>  
+                </ol>
+			</div>
+		</div>
+	</div>
+</div>                    
+<table class="table animated fadeIn">
+    <thead>
+        <tr>
+        <th scope="col">No. Oficio</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Se remite</th>
+        <th scope="col">Solicitud</th>
+        <th scope="col">Plazo</th>
+        <th scope="col">Término</th>
+        <th scope="col">Atención</th>
+        <th scope="col">Imprimir</th>                             
+        <th scope="col">Opciones</th>
+        </tr>
+    </thead>
+        <tbody>
                             <?php
                               foreach ($datos as $dato) {
                                 //cambia formato de fecha  

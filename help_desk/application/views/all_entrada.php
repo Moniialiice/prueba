@@ -6,17 +6,17 @@
             </div>
         </div>
     </div>
-		<div class="col-sm-8">
-			<div class="page-header float-right">
-				<div class="page-title">
-					<ol class="breadcrumb text-right">
-                        <span class="input-group-addon">
-                            <span class="fa " OnClick="ReportEn();">example</span>
-                        </span>  
-                    </ol>
-				</div>
+	<div class="col-sm-8">
+		<div class="page-header float-right">
+			<div class="page-title">
+				<ol class="breadcrumb text-right">
+                    <span class="input-group-addon">
+                        <span class="fa " target='_blank' OnClick="ReportEn();">example</span>
+                    </span>  
+                </ol>
 			</div>
 		</div>
+	</div>
 </div>
 <table class="table animated fadeIn">
     <thead>

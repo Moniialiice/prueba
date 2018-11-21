@@ -353,5 +353,14 @@ class Oficio extends CI_Controller
         //$pdf->IncludeJS("print();"); D
         $pdf->Output($pdfFilePath, 'I');
     }
+     //reporte en excel
+    public function reportExcelOS()
+    {
+        $search = $this->input->post('busqueda');
+        $date1 = $this->input->post('datepicker');
+        $date2 = $this->input->post('datepickerf');
+        $datos['datos'] = $this->Oficio_model->searchDate($search,$date1,$date2);
+        $this->load->view('excelOficioS',$datos);
+    }
 
 }
