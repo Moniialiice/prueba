@@ -50,7 +50,7 @@ foreach ($datos as $dato){
 }
 //make object of the Xlsx class to save the excel file
 $writer = new Xlsx($spreadsheet);
-$fxls ='excel-file_1.xlsx';
+$fxls ='excel_recepcion.xlsx';
 $writer->save($fxls);
 
 //check if excel created

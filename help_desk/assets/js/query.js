@@ -31,7 +31,7 @@ function BusquedaEn(){
 function ReportEn(){
     var data = $('#entrada').serialize();
     $.ajax({
-        url: 'OficioEntrada/example',
+        url: 'OficioEntrada/reportExcelAt',
         type: 'post',
         data: data
     });

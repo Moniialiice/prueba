@@ -147,13 +147,13 @@ class OficioEntrada extends CI_Controller
         $this->load->view('templates/footer');
     }
     //ejemplo de excel
-    public function example()
+    public function reportExcelAt()
     {
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('datepicker');
         $date2 = $this->input->post('datepickerf');
         $datos ['datos'] = $this->Entrada_model->searchFecha($search,$date1,$date2);        
-        $this->load->view('example',$datos);
+        $this->load->view('excelEntrada',$datos);
     }
 
 }

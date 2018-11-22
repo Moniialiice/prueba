@@ -53,5 +53,3 @@ $fxls ='excel_OSeguimiento.xlsx';
 $writer->save($fxls);
 
 //check if excel created
-if(file_exists($fxls)) echo $fxls .' succesfully created';
-else echo 'Unable to write: '. $fxls;

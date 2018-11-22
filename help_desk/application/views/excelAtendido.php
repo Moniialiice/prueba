@@ -34,7 +34,6 @@ $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(16);
 
 $spreadsheet->getActiveSheet()->setTitle('Simple'); //set a title for Worksheet
 
-var_dump($datos);
 foreach ($datos as $dato){
     $arrayData = [$dato->nomenclatura, $dato->fecha_atendido, $dato->nombre_aten, $dato->cargo_aten, $dato->descripcion, $dato->nombre];
     $spreadsheet->getActiveSheet()
@@ -47,7 +46,7 @@ foreach ($datos as $dato){
 }
 //make object of the Xlsx class to save the excel file
 $writer = new Xlsx($spreadsheet);
-$fxls ='excel-atendido.xlsx';
+$fxls ='excel_atendido.xlsx';
 $writer->save($fxls);
 
 //check if excel created

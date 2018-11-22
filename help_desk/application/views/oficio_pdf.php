@@ -76,7 +76,7 @@ h4{
 *
 * Reporte para liberacion de combustible
 */
-</style>
+</style></header>
 <?php
 	header("Content-Type: text/html;charset=ISO-8859-1");
 	//recibe fecha  
@@ -243,7 +243,7 @@ h4{
         </td>
 	</tr>
 	<tr>
-        <td class="table_font" colspan="5"> OTRAS: <?php if($dato[0]->otra != ""){ echo "$dato->otra "; }?></td>
+        <td class="table_font" colspan="5"> OTRAS: <?php if($dato[0]->otra != ""){ echo $dato[0]->otra; }?></td>
         <td class="table_font" colspan="4"> SERVICIO DE CARRERA  </td>
         <td class="table_cont" >
 			<?php if($dato[0]->servicio_carrera == 1){ echo " X ";}?>
@@ -279,7 +279,7 @@ h4{
         <td class="table_cont"><?php if($dato[0]->gestionar_peticion == 1){echo " X ";}?></td>
 		<td></td>
         <td class="table_font" colspan="3"> PETICIONARIO </td>
-        <td class="table_font"><?php if($dato[0]->peticionario == 1){echo " X ";}?> </td>
+        <td class="table_cont"><?php if($dato[0]->peticionario == 1){echo " X ";}?> </td>
 		<td class="table_cont"><?php if($dato[0]->peticionario == 1){ echo $dato[0]->termino; }?></td>
 	</tr>
     <tr>
@@ -287,8 +287,8 @@ h4{
         <td class="table_cont"><?php if($dato[0]->archivo == 1){ echo " X ";}?></td>
 		<td></td>
         <td class="table_font" colspan="3"> INSTITUCIÓN REQUIRENTE </td>
-		<td class="table_font"><?php if($dato[0]->institucion_requiriente == 1){ echo " X "; }?></td>
-		<td class="table_font"><?php if($dato[0]->institucion_requiriente == 1){ echo $dato[0]->termino; }?></td> 
+		<td class="table_cont"><?php if($dato[0]->institucion_requiriente == 1){ echo " X "; }?></td>
+		<td class="table_cont"><?php if($dato[0]->institucion_requiriente == 1){ echo $dato[0]->termino; }?></td> 
 	</tr>
 	<tr>
         <td class="table_font" colspan="6"> OTRAS: <?php if($dato[0]->otras != ""){ echo $dato[0]->otras;}?></td>
