@@ -65,8 +65,7 @@ $route['muestraUsuario'] = 'Usuario/consultaUsuario';
 $route['datosUsuario/(:num)'] = 'Usuario/actualizarUsuario/$1';
 $route['actualizaUsuario'] = 'Usuario/modificaUsuarioVal';
 //paginación
-$route['usuario/pagina'] = 'Usuario/ejemplo';
-$route['usuario/pagina/(:num)'] = 'Usuario/ejemplo';
+$route['usuario/pagina/(:num)'] = 'Usuario/ejemplo/$1';
 
 //rutas oficio de entrada
 $route['nuevaEntrada'] = 'OficioEntrada/generaEntrada';

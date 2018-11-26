@@ -46,7 +46,7 @@ if($this->session->flashdata('correcto'))
                 dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
             });
         });
-    </script>
+    </script> 
     <!--link type="text/css" href="assets/css/jquery-ui-1.8.13.custom.css" rel="stylesheet" /-->
     <script type="text/javascript" src="assets/js/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery-ui-1.8.14.custom.min.js"></script>
@@ -71,6 +71,15 @@ if($this->session->flashdata('correcto'))
         });
     </script>
     <script>
+        $(document).ready(function(){
+            $(document).OnClick("#paginacion", function(e){
+                e.preventDefault();
+                var href = $(this).attr("href");
+                $("#results").load(href);
+            });
+        });
+    </script>
+    <script>
     function Countdown('countdown'){
             var fecha=new Date('<?=$_SESSION['ans']?>','<?=$_SESSION['mes']?>','<?=$_SESSION['dia']?>','<?=$_SESSION['hora']?>','<?=$_SESSION['minuto']?>','<?=$_SESSION['segundo']?>')
             var hoy=new Date()
@@ -87,7 +96,6 @@ if($this->session->flashdata('correcto'))
                     minutos=Math.floor(diferencia/60)
                     diferencia=diferencia-(60*minutos)
                     segundos=Math.floor(diferencia)
-
                     document.getElementById(id).innerHTML='<span class="element">' + dias + ' dias</span><span class="element">' + horas + ' horas</span><span class="element">' + minutos + ' minutos</span><span class="element">' + segundos + ' segundos</span>'
 
                     if (dias>0 || horas>0 || minutos>0 || segundos>0){

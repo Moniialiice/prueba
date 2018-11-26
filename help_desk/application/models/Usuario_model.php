@@ -89,7 +89,7 @@ class Usuario_model extends CI_Model
     
     //obtenemos el total de filas para hacer la paginación
 	function filas($search) {
-        $this->db->like('usuario', $search);
+        $this->db->like('correo', $search);
         $consulta = $this->db->get('usuario');
         return $consulta->num_rows();
     }      
@@ -97,7 +97,7 @@ class Usuario_model extends CI_Model
     //total_posts_paginados pasando la cantidad por página y el segmento
     //como parámetros de la misma
 	function total_paginados($search, $por_pagina, $segmento) {
-        $this->db->like('usuario', $search);
+        $this->db->like('correo', $search);
         $consulta = $this->db->get('usuario', $por_pagina, $segmento);
         if ($consulta->num_rows() > 0) {
             foreach ($consulta->result() as $fila) {

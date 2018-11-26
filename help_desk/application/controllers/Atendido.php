@@ -126,9 +126,20 @@ class Atendido extends CI_Controller
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('datepicker');
         $date2 = $this->input->post('datepickerf');
+        //cambiamos formato de fecha
+        $ext = explode("/",$date1);
+        $year = $ext[2];
+        $mont = $ext[1];
+        $day = $ext[0];
+        $fecha1 = $year."-".$mont."-".$day;
+        $ext2 = explode("/",$date2);
+        $year2 = $ext2[2];
+        $mont2 = $ext2[1];
+        $day2 = $ext2[0];
+        $fecha2 = $year2."-".$mont2."-".$day2;
         //código de la paginación
         //datos de la consulta oficio  
-        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search,$date1,$date2);
+        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search,$fecha1,$fecha2);
         $this->load->view('all_atendido', $datos);
     }    
     //consulta de oficio seguimiento atendido

@@ -1,16 +1,31 @@
-<div class="card-body card-block">
-    <span>
-        <span class="fa fa-file" OnClick="();"></span>
-    </span>                          
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1> </h1>
+            </div>
+        </div>
+    </div>
+	<div class="col-sm-8">
+		<div class="page-header float-right">
+			<div class="page-title">
+				<ol class="breadcrumb text-right">
+                    <span class="input-group-addon">
+                        <span class="fa " target='_blank' OnClick="ReportOS();">example</span>
+                    </span>  
+                </ol>
+			</div>
+		</div>
+	</div>
 </div>
-<table class="table">
+
+<table class="table animated fadeIn">
     <thead>
     <tr>
         <th scope="col">ID</th>
         <th scope="col">Nombre</th>
         <th scope="col">Correo Electrónico</th>
         <th scope="col">Activo</th>
-        <th scope="col">Tipo Usuario</th>
         <th scope="col">Modificar</th>
     </tr>
     </thead>

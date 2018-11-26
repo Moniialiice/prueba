@@ -15,6 +15,7 @@ function BusquedaUs(){
         }
     });
 }
+
 //búsqueda de Oficio Entrada
 function BusquedaEn(){
     var data = $('#entrada').serialize();
