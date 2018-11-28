@@ -122,25 +122,43 @@ class Atendido extends CI_Controller
     //muestra consulta de oficio por la búsqueda
     public function consultaAtendido()
     {
-        //recibe datos del formulario
-        $search = $this->input->post('busqueda');
-        $date1 = $this->input->post('datepicker');
-        $date2 = $this->input->post('datepickerf');
-        //cambiamos formato de fecha
-        $ext = explode("/",$date1);
-        $year = $ext[2];
-        $mont = $ext[1];
-        $day = $ext[0];
-        $fecha1 = $year."-".$mont."-".$day;
-        $ext2 = explode("/",$date2);
-        $year2 = $ext2[2];
-        $mont2 = $ext2[1];
-        $day2 = $ext2[0];
-        $fecha2 = $year2."-".$mont2."-".$day2;
-        //código de la paginación
-        //datos de la consulta oficio  
-        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search,$fecha1,$fecha2);
-        $this->load->view('all_atendido', $datos);
+        if($this->input->post())
+        {
+            //recibe datos del formulario
+            $search = $this->input->post('busqueda');
+            $date1 = $this->input->post('datepicker');
+            $date2 = $this->input->post('datepickerf');
+            //valida campos vacios
+            $this->form_validation->set_rules('datepicker','Fecha Atendido Inicio','required');
+            $this->form_validation->set_rules('datepickerf','Fecha Atendido Final','required');
+            //si la validación es correcta 
+            if($this->form_validation->run()==true)
+            {
+                //cambiamos formato de fecha
+                $ext = explode("/",$date1);
+                $year = $ext[2];
+                $mont = $ext[1];
+                $day = $ext[0];
+                $fecha1 = $year."-".$mont."-".$day;
+                $ext2 = explode("/",$date2);
+                $year2 = $ext2[2];
+                $mont2 = $ext2[1];
+                $day2 = $ext2[0];
+                $fecha2 = $year2."-".$mont2."-".$day2;
+                //datos de la consulta oficio  
+                $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search,$fecha1,$fecha2);
+                $this->load->view('all_atendido', $datos);               
+            }else{
+                $datos = array();
+                $datos['datepicker'] = $date1;
+                $datos['datepickerf'] = $date2;
+                //manda datos de la búsqueda al formulario
+                $this->load->view('all_atendido', $datos);
+            }            
+        }else{
+            //mensaje de error si  la inserción no se realiza
+            $this->session->set_flashdata('Error','Consultar administrador');
+        }        
     }    
     //consulta de oficio seguimiento atendido
     public function mostrarAtendido($id)
@@ -192,7 +210,18 @@ class Atendido extends CI_Controller
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('datepicker');
         $date2 = $this->input->post('datepickerf');
-        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search,$date1,$date2);
+        //cambia formato de fecha
+        $ext = explode("/",$date1);
+        $year = $ext[2];
+        $mont = $ext[1];
+        $day = $ext[0];
+        $fecha1 = $year."-".$mont."-".$day;
+        $ext2 = explode("/",$date2);
+        $year2 = $ext2[2];
+        $mont2 = $ext2[1];
+        $day2 = $ext2[0];
+        $fecha2 = $year2."-".$mont2."-".$day2;
+        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search,$fecha1,$fecha2);
         $this->load->view('excelAtendido',$datos);
     }
 

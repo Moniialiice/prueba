@@ -1,3 +1,9 @@
+<?php
+    if($this->session->flashdata('Error')){
+        echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos</label></div>";
+    }
+    echo validation_errors();
+?>
 <div class="breadcrumbs">
     <div class="col-sm-4">
         <div class="page-header float-left">
@@ -31,7 +37,9 @@
         </tr>
     </thead>
     <tbody>
-        <?php            
+        <?php
+        if($this->form_validation->run()==true)
+        {     
             foreach ($datos as $dato) {
                 //obtenemos fecha 
                 $date = $dato->fecha_atendido;
@@ -49,6 +57,7 @@
                 "<td align='center'><a href='descargarAtendido/".$dato->arch_atendido."' class='fa fa-download fa-1x'></td>".               
                 "<td align='center'><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' class='fa fa-file fa-1x'></td>"; //".$dato->id_oficioAtendido."
             }
+        }        
         ?>
     </tbody>
 </table>

@@ -223,14 +223,38 @@ class Oficio extends CI_Controller
     //muestra consulta de oficio por la búsqueda
     public function consultaOficio()
     {
-        //recibe datos del formulario
-        $search = $this->input->post('busqueda');
-        $date1 = $this->input->post('datepicker');
-        $date2 = $this->input->post('datepickerf');
-        //código de la paginación
-        //datos de la consulta oficio  
-        $datos['datos'] = $this->Oficio_model->searchDate($search,$date1,$date2);
-        $this->load->view('all_oficio', $datos);    
+        if($this->input->post()){
+            //recibe datos del formulario
+            $search = $this->input->post('busqueda');
+            $date1 = $this->input->post('datepicker');
+            $date2 = $this->input->post('datepickerf');
+            //valida que los campos feccha no esten vacios
+            $this->form_validation->set_rules('datepicker','Fecha Oficio Inicio','required');
+            $this->form_validation->set_rules('datepickerf','Fecha Oficio Final','required');
+            if($this->form_validation->run()==true){
+                //cambiamos formato de fecha
+                $ext = explode("/",$date1);
+                $year = $ext[2];
+                $mont = $ext[1];
+                $day = $ext[0];
+                $fecha1 = $year."-".$mont."-".$day;
+                $ext2 = explode("/",$date2);
+                $year2 = $ext2[2];
+                $mont2 = $ext2[1];
+                $day2 = $ext2[0];
+                $fecha2 = $year2."-".$mont2."-".$day2;
+                $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
+                $this->load->view('all_oficio', $datos);
+            }else{
+                $datos = array();
+                $datos['datepicker'] = $date1;
+                $datos['datepickerf'] = $date2;
+                $this->load->view('all_oficio',$datos);
+            }
+        }else{
+            //mensaje de error si  la inserción no se realiza
+            $this->session->set_flashdata('Error','Consultar administrador');
+        }    
     }
     //carga formulario de actualización
     public function actualizarOficio($id)
@@ -359,7 +383,18 @@ class Oficio extends CI_Controller
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('datepicker');
         $date2 = $this->input->post('datepickerf');
-        $datos['datos'] = $this->Oficio_model->searchDate($search,$date1,$date2);
+        //cambiamos formato de fecha
+        $ext = explode("/",$date1);
+        $year = $ext[2];
+        $mont = $ext[1];
+        $day = $ext[0];
+        $fecha1 = $year."-".$mont."-".$day;
+        $ext2 = explode("/",$date2);
+        $year2 = $ext2[2];
+        $mont2 = $ext2[1];
+        $day2 = $ext2[0];
+        $fecha2 = $year2."-".$mont2."-".$day2;
+        $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
         $this->load->view('excelOficioS',$datos);
     }
 

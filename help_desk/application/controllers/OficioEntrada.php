@@ -125,11 +125,41 @@ class OficioEntrada extends CI_Controller
     //arroja el resultado de la busqueda de los oficios
     public function consultaEntrada()
     {
-        $search = $this->input->post('busqueda');
-        $date1 = $this->input->post('datepicker');
-        $date2 = $this->input->post('datepickerf');
-        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$date1,$date2);        
-        $this->load->view('all_entrada',$datos);
+        if($this->input->post())
+        {
+            //recibe datos de la búsqueda
+            $search = $this->input->post('busqueda');
+            $date1 = $this->input->post('datepicker');
+            $date2 = $this->input->post('datepickerf');
+            //valida campos vacios
+            $this->form_validation->set_rules('datepicker','Fecha Real Inicio','required');
+            $this->form_validation->set_rules('datepickerf','Fecha Real Final','required');
+            //cambia formato de fecha 
+            if($this->form_validation->run()==true)
+            {
+                $ext = explode("/",$date1);
+                $year = $ext[2];
+                $mont = $ext[1];
+                $day = $ext[0];
+                $fecha1 = $year."-".$mont."-".$day;
+                $ext2 = explode("/",$date2);
+                $year2 = $ext2[2];
+                $mont2 = $ext2[1];
+                $day2 = $ext2[0];
+                $fecha2 = $year2."-".$mont2."-".$day2;
+                $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);
+                $this->load->view('all_entrada',$datos);
+            }else{
+                $datos = array();
+                $datos['datepicker'] = $date1;
+                $datos['datepickerf'] = $date2;
+                //manda datos al formulario de búsqueda 
+                $this->load->view('all_entrada',$datos);
+            }    
+        }else{
+            //menssaje de error sí no recibe datos
+            $this->session->set_flashdata('Error', 'Consultar administrador');
+        }
     }
     //función para descagar archivos
     public function descarga($name)
@@ -152,7 +182,18 @@ class OficioEntrada extends CI_Controller
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('datepicker');
         $date2 = $this->input->post('datepickerf');
-        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$date1,$date2);        
+        //cambiamos formato de fecha
+        $ext = explode("/",$date1);
+        $year = $ext[2];
+        $mont = $ext[1];
+        $day = $ext[0];
+        $fecha1 = $year."-".$mont."-".$day;
+        $ext2 = explode("/",$date2);
+        $year2 = $ext2[2];
+        $mont2 = $ext2[1];
+        $day2 = $ext2[0];
+        $fecha2 = $year2."-".$mont2."-".$day2;
+        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);        
         $this->load->view('excelEntrada',$datos);
     }
 

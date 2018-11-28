@@ -24,14 +24,14 @@
                 <div class="card-header">
                     <strong class="card-title">Búsqueda Oficio Seguimiento Atendido</strong>
                 </div>
-                <div class="card-body">
+                <div class="card-body">                    
                         <div class="form-inline">
                             <form class="search-form" method="post" id="atendido" name='atendido' enctype="multipart/form-data">
                                 <div class="col col-md-5"><label for="text-input" class="form-control-label" >Número de oficio seguimiento</label></div>
                                 <div class="col col-md-5"><input class="form-control mr-sm-3" type="text-input" id="busqueda" name='busqueda' OnKeyUp='Upper(this);'></div>
-                                <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Atendido</label></div>
+                                <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Atendido Inicial</label></div>
                                 <div class="col col-md-5"><input class="form-control mr-sm-3" type='text-input' id="datepicke" name="datepicker"></div>                                    
-                                <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Atendido</label></div>
+                                <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Atendido Final</label></div>
                                 <div class="col col-md-5"><input class="form-control mr-sm-3" type="text-input" id="datepickes" name="datepickerf">    
                                     <span class="input-group-addon">
                                         <span class="fa fa-search" OnClick="BusquedaAt();"></span>
