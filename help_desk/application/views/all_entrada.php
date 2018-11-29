@@ -17,7 +17,7 @@
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
                     <span class="input-group-addon">
-                        <span class="fa " target='_blank' OnClick="ReportEn();">example</span>
+                        <span class="fa " target='_blank' OnClick="reportEn();">example</span>
                     </span>  
                 </ol>
 			</div>

@@ -54,8 +54,8 @@
                 "<td>".$dato->nombre_aten." ".$dato->cargo_aten."</td>".
                 "<td>".$dato->descripcion."</td>".
                 "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
-                "<td align='center'><a href='descargarAtendido/".$dato->arch_atendido."' class='fa fa-download fa-1x'></td>".               
-                "<td align='center'><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' class='fa fa-file fa-1x'></td>"; //".$dato->id_oficioAtendido."
+                "<td align='center'><a href='descargarAtendido/".$dato->arch_atendido."' class='fa fa-download fa-1x'></a></td>".               
+                "<td align='center'><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' class='fa fa-file fa-1x'></a></td>"; //".$dato->id_oficioAtendido."
             }
         }        
         ?>

@@ -1,6 +1,9 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Atendido extends CI_Controller
 {
@@ -205,12 +208,12 @@ class Atendido extends CI_Controller
         $pdf->Output($pdfFilePath, 'I');
     }
      //reporte en excel
-    public function reportExcelA()
+    public function reportExcelA2()
     {
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('datepicker');
         $date2 = $this->input->post('datepickerf');
-        //cambia formato de fecha
+        //cambiamos formato de fecha
         $ext = explode("/",$date1);
         $year = $ext[2];
         $mont = $ext[1];
@@ -221,8 +224,78 @@ class Atendido extends CI_Controller
         $mont2 = $ext2[1];
         $day2 = $ext2[0];
         $fecha2 = $year2."-".$mont2."-".$day2;
-        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search,$fecha1,$fecha2);
+        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);        
         $this->load->view('excelAtendido',$datos);
+    
     }
+    //reporte en excel 
+    public function reportExcelA()
+    {
+        if($this->input->post())
+        {
+            $search = $this->input->post('busqueda');
+            $date1 = $this->input->post('datepicker');
+            $date2 = $this->input->post('datepickerf'); 
+            var_dump($date2);
+            //creamos objeto de spreadsheet para excel 
+            $spreadsheet = new Spreadsheet();
+            //agrega columnas de encabezado
+            $spreadsheet->setActiveSheetIndex(0)        
+            ->setCellValue('A1', 'NO. OFICIO')
+            ->setCellValue('B1', 'FECHA ATENDIDO')
+            ->setCellValue('C1', 'DIRIGIDO A')
+            ->setCellValue('D1', 'CARGO')
+            ->setCellValue('E1', 'DESCRIPCIÓN')
+            ->setCellValue('F1', 'ATENCIÓN');
+            //se madan estilos para las colunas A1,B1,C1 cells
+            $cell_st =[
+            'font' =>['bold' => true],
+            'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
+            'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
+            ];
+            $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($cell_st);
+            
+            //tamaño de las celdas 
+            $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
+            $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(16);
+            $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(22);
+            $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(22);
+            $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
+            $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(16);
+
+            //se crea objeto para guardar archivo xls
+            $writer = new Xlsx($spreadsheet);
+            //nombre del archivo a descargar 
+            $filename = 'excel_atendido';
+            header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+            header('Cache-Control: max-age=0');
+            //linea que descarga el archivo
+            $writer->save('php://output');
+        }else{
+            $this->busquedaAtendido();
+        }
+    }
+
+    //descargar archivo excel con php spreadsheet
+    public function download()
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'Hello World !');
+        
+        $writer = new Xlsx($spreadsheet);
+ 
+        $filename = 'name-of-the-generated-file';
+ 
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        header('Cache-Control: max-age=0');
+        
+        $writer->save('php://output'); // download file 
+ 
+    }
+
+
 
 }

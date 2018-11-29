@@ -29,10 +29,10 @@ function BusquedaEn(){
     });
 }
 //búsqueda de Oficio Entrada
-function ReportEn(){
+function reportEn(){
     var data = $('#entrada').serialize();
     $.ajax({
-        url: 'OficioEntrada/reportExcelAt',
+        url: 'OficioEntrada/reportExcelEn',
         type: 'post',
         data: data
     });
@@ -76,11 +76,12 @@ function BusquedaAt(){
 function ReportAt (){
     var data = $('#atendido').serialize();
     $.ajax({
-        url: 'Atendido/reportExcelA',
+        url: 'Atendido/download',
         type: 'post',
         data: data
     });
 }
+
 
 //imprime nomenclatura 
 function nomenclatura(){

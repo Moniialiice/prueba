@@ -177,7 +177,7 @@ class OficioEntrada extends CI_Controller
         $this->load->view('templates/footer');
     }
     //ejemplo de excel
-    public function reportExcelAt()
+    public function reportExcelEn()
     {
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('datepicker');
