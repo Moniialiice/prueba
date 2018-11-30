@@ -48,10 +48,12 @@ foreach ($datos as $dato){
                         //    we want to set these values (default is A1)
         );
 }
-//nombre del archivo a descargar 
-$filename = 'excel_entrada';
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
-header('Cache-Control: max-age=0');
-//linea que descarga el archivo
-$writer->save('php://output');
+
+//make object of the Xlsx class to save the excel file
+$writer = new Xlsx($spreadsheet);
+$fxls ='excel-file_1.xlsx';
+$writer->save($fxls);
+
+//check if excel created
+if(file_exists($fxls)) echo $fxls .' succesfully created';
+else echo 'Unable to write: '. $fxls;

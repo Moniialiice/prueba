@@ -129,11 +129,11 @@ class Atendido extends CI_Controller
         {
             //recibe datos del formulario
             $search = $this->input->post('busqueda');
-            $date1 = $this->input->post('datepicker');
-            $date2 = $this->input->post('datepickerf');
+            $date1 = $this->input->post('date1');
+            $date2 = $this->input->post('date2');
             //valida campos vacios
-            $this->form_validation->set_rules('datepicker','Fecha Atendido Inicio','required');
-            $this->form_validation->set_rules('datepickerf','Fecha Atendido Final','required');
+            $this->form_validation->set_rules('date1','Fecha Atendido Inicio','required');
+            $this->form_validation->set_rules('date2','Fecha Atendido Final','required');
             //si la validación es correcta 
             if($this->form_validation->run()==true)
             {
@@ -153,8 +153,8 @@ class Atendido extends CI_Controller
                 $this->load->view('all_atendido', $datos);               
             }else{
                 $datos = array();
-                $datos['datepicker'] = $date1;
-                $datos['datepickerf'] = $date2;
+                $datos['date1'] = $date1;
+                $datos['date2'] = $date2;
                 //manda datos de la búsqueda al formulario
                 $this->load->view('all_atendido', $datos);
             }            
@@ -207,12 +207,38 @@ class Atendido extends CI_Controller
         //$pdf->IncludeJS("print();"); D
         $pdf->Output($pdfFilePath, 'I');
     }
-     //reporte en excel
-    public function reportExcelA2()
+    //reporte en excel 
+    public function reportExcelA()
     {
         $search = $this->input->post('busqueda');
-        $date1 = $this->input->post('datepicker');
-        $date2 = $this->input->post('datepickerf');
+        $date1 = $this->input->post('date1');
+        $date2 = $this->input->post('date2'); 
+        //creamos objeto de spreadsheet para excel 
+        $spreadsheet = new Spreadsheet();
+        //agrega columnas de encabezado
+        $spreadsheet->setActiveSheetIndex(0)        
+        ->setCellValue('A1', 'NO. OFICIO')
+        ->setCellValue('B1', 'FECHA ATENDIDO')
+        ->setCellValue('C1', 'DIRIGIDO A')
+        ->setCellValue('D1', 'CARGO')
+        ->setCellValue('E1', 'DESCRIPCIÓN')
+        ->setCellValue('F1', 'ATENCIÓN');
+        //se madan estilos para las colunas A1,B1,C1 cells
+        $cell_st =[
+        'font' =>['bold' => true],
+        'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
+        'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
+        ];
+        $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($cell_st);
+            
+        //tamaño de las celdas 
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(22);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(22);
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(16);
+        
         //cambiamos formato de fecha
         $ext = explode("/",$date1);
         $year = $ext[2];
@@ -224,78 +250,27 @@ class Atendido extends CI_Controller
         $mont2 = $ext2[1];
         $day2 = $ext2[0];
         $fecha2 = $year2."-".$mont2."-".$day2;
-        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);        
-        $this->load->view('excelAtendido',$datos);
-    
-    }
-    //reporte en excel 
-    public function reportExcelA()
-    {
-        if($this->input->post())
-        {
-            $search = $this->input->post('busqueda');
-            $date1 = $this->input->post('datepicker');
-            $date2 = $this->input->post('datepickerf'); 
-            var_dump($date2);
-            //creamos objeto de spreadsheet para excel 
-            $spreadsheet = new Spreadsheet();
-            //agrega columnas de encabezado
-            $spreadsheet->setActiveSheetIndex(0)        
-            ->setCellValue('A1', 'NO. OFICIO')
-            ->setCellValue('B1', 'FECHA ATENDIDO')
-            ->setCellValue('C1', 'DIRIGIDO A')
-            ->setCellValue('D1', 'CARGO')
-            ->setCellValue('E1', 'DESCRIPCIÓN')
-            ->setCellValue('F1', 'ATENCIÓN');
-            //se madan estilos para las colunas A1,B1,C1 cells
-            $cell_st =[
-            'font' =>['bold' => true],
-            'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
-            'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
-            ];
-            $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($cell_st);
-            
-            //tamaño de las celdas 
-            $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
-            $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(16);
-            $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(22);
-            $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(22);
-            $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
-            $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(16);
 
-            //se crea objeto para guardar archivo xls
-            $writer = new Xlsx($spreadsheet);
-            //nombre del archivo a descargar 
-            $filename = 'excel_atendido';
-            header('Content-Type: application/vnd.ms-excel');
-            header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
-            header('Cache-Control: max-age=0');
-            //linea que descarga el archivo
-            $writer->save('php://output');
-        }else{
-            $this->busquedaAtendido();
+        $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
+        foreach ($datos as $dato){
+            $rowArray = [$dato->nomenclatura, $dato->fecha_atendido, $dato->nombre_atendido, $dato->cargo_aten, $dato->descripcion, $dato->nombre];
+            $spreadsheet->getActiveSheet()
+                ->fromArray(
+                    $rowArray,   // The data to set
+                    NULL,        // Array values with this value will not be set
+                    'A2'         // Top left coordinate of the worksheet range where
+                                //    we want to set these values (default is A1)
+                );
         }
-    }
 
-    //descargar archivo excel con php spreadsheet
-    public function download()
-    {
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Hello World !');
-        
+        //se crea objeto para guardar archivo xls
         $writer = new Xlsx($spreadsheet);
- 
-        $filename = 'name-of-the-generated-file';
- 
+        //nombre del archivo a descargar 
+        $filename = 'excel_atendido';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
         header('Cache-Control: max-age=0');
-        
-        $writer->save('php://output'); // download file 
- 
+        //linea que descarga el archivo
+        $writer->save('php://output');
     }
-
-
-
 }

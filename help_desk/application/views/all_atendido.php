@@ -17,7 +17,7 @@
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
                     <span class="input-group-addon">
-                        <span class="fa " target='_blank' OnClick="ReportAt();">example</span>
+                        <span class='fa fa-download' target='_blank' OnClick='reportes_excel();'></span>
                     </span>  
                 </ol>
 			</div>

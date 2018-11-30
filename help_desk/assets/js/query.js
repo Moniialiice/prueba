@@ -73,15 +73,23 @@ function BusquedaAt(){
     });
 }
 //manda datos para generar excel
-function ReportAt (){
-    var data = $('#atendido').serialize();
-    $.ajax({
-        url: 'Atendido/download',
-        type: 'post',
-        data: data
-    });
-}
+function reportes_excel() {
+    var nomenclatura = $('#busqueda').val();
+    var date1 = $("#datepicker").val();
+    var date2 = $("#datepikerf").val();
+    if (date1 == "" || date2 == "") {
+        $.sweetModal({
+            content: 'Favor de Llenar todos los campos',
+            icon: $.sweetModal.ICON_WARNING
+        });
+    } else {
+        var form = document.getElementById("atendido");
+        form.action = "Atendido/reportExcelA";
+        form.setAttribute("target", "_blank");
+        form.submit();
+    }
 
+}
 
 //imprime nomenclatura 
 function nomenclatura(){
@@ -97,7 +105,7 @@ function nomenclatura(){
 }
 
 $(function (e) {
-    $('#not').submit(function (e) {
+    $('#not').onclick(function (e) {
         e.preventDefault()
         $('#nott').load('buscanoticia.php?' + $('#not').serialize())
     })

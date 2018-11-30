@@ -32,7 +32,7 @@ if($this->session->flashdata('correcto'))
             <!--datepicker-->
     <script>
         $(function Calendario() {
-            $( "#datepicke,#datepickes").datepicker({
+            $( "#date1,#date2").datepicker({
                 dateFormat: 'dd/mm/yy',
                 changeMonth:true,
                 changeYear:true,
