@@ -79,7 +79,7 @@
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Real</label></div>
                                 <div class="col-12 col-md-9">
                                     <div class='input-group' >
-                                        <input type='text-input' class="form-control" id="datepicke" name="fecha_real" value="<?php echo set_value('fecha_real');?>"  >
+                                        <input type='text-input' class="form-control" id="date1" name="fecha_real" value="<?php echo set_value('fecha_real');?>"  >
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar" ></span>
                                         </span>

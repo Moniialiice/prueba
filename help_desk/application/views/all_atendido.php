@@ -17,7 +17,7 @@
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
                     <span class="input-group-addon">
-                        <span class='fa fa-download' target='_blank' OnClick='reportes_excel();'></span>
+                        <span class='fa fa-download' target='_blank' OnClick='excelAtendido();'></span>
                     </span>  
                 </ol>
 			</div>
@@ -39,7 +39,9 @@
     <tbody>
         <?php
         if($this->form_validation->run()==true)
-        {     
+        {   
+            $row = count($datos);
+            var_dump($row);  
             foreach ($datos as $dato) {
                 //obtenemos fecha 
                 $date = $dato->fecha_atendido;

@@ -1,12 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: MesaAyuda
- * Date: 28/08/2018
- * Time: 01:41 PM
- */
-
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class OficioEntrada extends CI_Controller
 {
@@ -129,11 +126,11 @@ class OficioEntrada extends CI_Controller
         {
             //recibe datos de la búsqueda
             $search = $this->input->post('busqueda');
-            $date1 = $this->input->post('datepicker');
-            $date2 = $this->input->post('datepickerf');
+            $date1 = $this->input->post('date1');
+            $date2 = $this->input->post('date2');
             //valida campos vacios
-            $this->form_validation->set_rules('datepicker','Fecha Real Inicio','required');
-            $this->form_validation->set_rules('datepickerf','Fecha Real Final','required');
+            $this->form_validation->set_rules('date1','Fecha Real Inicio','required');
+            $this->form_validation->set_rules('date2','Fecha Real Final','required');
             //cambia formato de fecha 
             if($this->form_validation->run()==true)
             {
@@ -151,8 +148,8 @@ class OficioEntrada extends CI_Controller
                 $this->load->view('all_entrada',$datos);
             }else{
                 $datos = array();
-                $datos['datepicker'] = $date1;
-                $datos['datepickerf'] = $date2;
+                $datos['date1'] = $date1;
+                $datos['date2'] = $date2;
                 //manda datos al formulario de búsqueda 
                 $this->load->view('all_entrada',$datos);
             }    
@@ -180,8 +177,8 @@ class OficioEntrada extends CI_Controller
     public function reportExcelEn()
     {
         $search = $this->input->post('busqueda');
-        $date1 = $this->input->post('datepicker');
-        $date2 = $this->input->post('datepickerf');
+        $date1 = $this->input->post('date1');
+        $date2 = $this->input->post('date2');
         //cambiamos formato de fecha
         $ext = explode("/",$date1);
         $year = $ext[2];
@@ -194,7 +191,43 @@ class OficioEntrada extends CI_Controller
         $day2 = $ext2[0];
         $fecha2 = $year2."-".$mont2."-".$day2;
         $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);        
-        $this->load->view('excelEntrada',$datos);
+        //creamos objeto de spreadsheet 
+        $spreadsheet = new Spreadsheet();
+        //agrega columnas de encabezado
+        $spreadsheet->setActiveSheetIndex(0)
+        ->setCellValue('A1', 'NO. OFICIO')
+        ->setCellValue('B1', 'DÍA Y HORA RECEPCIÓN')
+        ->setCellValue('C1', 'FECHA Y HORA RECEPCIÓN')
+        ->setCellValue('D1', 'FECHA REAL')
+        ->setCellValue('E1', 'FIRMA ORIGEN')
+        ->setCellValue('F1', 'CARGO')
+        ->setCellValue('G1', 'PETICIÓN')
+        ->setCellValue('H1', 'ATENCIÓN');
+        //se madan estilos para las colunas A1,B1,C1 cells
+        $cell_st =[
+        'font' =>['bold' => true],
+        'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
+        'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
+        ];
+        $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($cell_st);
+                
+        //tamaño de las celdas 
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(22);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(22);
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(16);
+         
+        //se crea objeto para guardar archivo xlsx
+        $writer = new Xlsx($spreadsheet);
+        //nombre del archivo a descargar
+        $filename = 'excel_entrada';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        header('Cache-Control: max-age=0');
+        //linea que descarga el archivo
+        $writer->save('php://output');    
     }
 
 }

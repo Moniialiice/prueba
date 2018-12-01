@@ -28,14 +28,22 @@ function BusquedaEn(){
         }
     });
 }
-//búsqueda de Oficio Entrada
-function reportEn(){
-    var data = $('#entrada').serialize();
-    $.ajax({
-        url: 'OficioEntrada/reportExcelEn',
-        type: 'post',
-        data: data
-    });
+//manda datos para generar excel
+function excelEntrada() {
+    var nomenclatura = $('#busqueda').val();
+    var date1 = $("#date1").val();
+    var date2 = $("#date2").val();
+    if (date1 == "" || date2 == "") {
+        $.sweetModal({
+            content: 'Favor de Llenar todos los campos',
+            icon: $.sweetModal.ICON_WARNING
+        });
+    } else {
+        var form = document.getElementById("entrada");
+        form.action = "OficioEntrada/reportExcelEn";
+        form.setAttribute("target", "_blank");
+        form.submit();
+    }
 }
 
 //búsqueda de Oficio seguimiento
@@ -50,14 +58,22 @@ function BusquedaOf(){
         }
     });
 }
-//manda datos para general excel
-function ReportOS(){
-    var data = $('#oficio').serialize();
-    $.ajax({
-        url: 'Oficio/reportExcelOS',
-        type: 'post',
-        data: data
-    });
+//manda datos para generar excel
+function excelOficio() {
+    var nomenclatura = $('#busqueda').val();
+    var date1 = $("#date1").val();
+    var date2 = $("#date2").val();
+    if (date1 == "" || date2 == "") {
+        $.sweetModal({
+            content: 'Favor de Llenar todos los campos',
+            icon: $.sweetModal.ICON_WARNING
+        });
+    }else{
+        var form = document.getElementById("oficio");
+        form.action = "Oficio/reportExcelOS";
+        form.setAttribute("target", "_blank");
+        form.submit();
+    }
 }
 
 //búsqueda de oficio seguimiento atendido
@@ -73,10 +89,10 @@ function BusquedaAt(){
     });
 }
 //manda datos para generar excel
-function reportes_excel() {
+function excelAtendido() {
     var nomenclatura = $('#busqueda').val();
-    var date1 = $("#datepicker").val();
-    var date2 = $("#datepikerf").val();
+    var date1 = $("#date1").val();
+    var date2 = $("#date2").val();
     if (date1 == "" || date2 == "") {
         $.sweetModal({
             content: 'Favor de Llenar todos los campos',
@@ -88,7 +104,6 @@ function reportes_excel() {
         form.setAttribute("target", "_blank");
         form.submit();
     }
-
 }
 
 //imprime nomenclatura 

@@ -48,14 +48,14 @@ class Atendido extends CI_Controller
             //id del usuario que creo el oficio
             $atencion = $this->input->post('atencion');
             //recibimos datos del formulario
-            $fecha = $this->input->post('fecha');
+            $fecha = $this->input->post('date1');
             $asunto = $this->input->post('asunto');
             $nombre = $this->input->post('nombre');
             $cargo = $this->input->post('cargo');
             $descripcion = $this->input->post('descripcion');
             $copia = $this->input->post('copia');
             //valida los datos del formulario
-            $this->form_validation->set_rules('fecha','Fecha','required');
+            $this->form_validation->set_rules('date1','Fecha','required');
             $this->form_validation->set_rules('asunto','Asunto','required');
             $this->form_validation->set_rules('nombre','Nombre', 'required');
             $this->form_validation->set_rules('cargo','Cargo','required');
@@ -97,7 +97,7 @@ class Atendido extends CI_Controller
             }else{
                 //tomamos los datos del formulario en un array
                 $datos = array();
-                $datos['fecha'] = $fecha;
+                $datos['date1'] = $fecha;
                 $datos['asunto'] = $asunto;
                 $datos['nombre'] = $nombre;
                 $datos['cargo'] = $asunto;
@@ -252,15 +252,22 @@ class Atendido extends CI_Controller
         $fecha2 = $year2."-".$mont2."-".$day2;
 
         $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
-        foreach ($datos as $dato){
-            $rowArray = [$dato->nomenclatura, $dato->fecha_atendido, $dato->nombre_atendido, $dato->cargo_aten, $dato->descripcion, $dato->nombre];
-            $spreadsheet->getActiveSheet()
-                ->fromArray(
-                    $rowArray,   // The data to set
-                    NULL,        // Array values with this value will not be set
-                    'A2'         // Top left coordinate of the worksheet range where
-                                //    we want to set these values (default is A1)
-                );
+        for ($n = $start; $n < $start + $count; $n++) {
+            $result[] = str_pad($n, $digits, "0", STR_PAD_LEFT);
+         }
+
+        foreach ($datos as $dato)
+        {   
+            //var_dump($datos);
+            $row = count($count);
+            $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A'.$row, $dato->nomenclatura)
+            ->setCellValue('B'.$row, $dato->fecha_atendido)
+            ->setCellValue('C'.$row, $dato->nombre_aten)
+            ->setCellValue('D'.$row, $dato->cargo_aten)
+            ->setCellValue('E'.$row, $dato->descripcion)
+            ->setCellValue('F'.$row, $dato->nombre); 
+            $row ++;
         }
 
         //se crea objeto para guardar archivo xls
