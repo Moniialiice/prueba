@@ -43,24 +43,11 @@
                 if($this->form_validation->run()==true)
                 {
                               foreach ($datos as $dato) {
-                                //cambia formato de fecha  
+                                //cambia formato de fecha  <td>".$dato->termino."</td>"."<td><div ><button id='countdown' class='btn btn-success btn-sm'></button></div>
                                 $date = $dato->fecha;
                                 //corta los datos de d,m,a
                                 $ext = explode("-",$date);
                                 //código para cuanta atras
-                                $varray = $dato->termino;
-                                $partes = explode(' ',$varray);
-                                $dmy = explode('-', $partes[0]);
-                                $_SESSION['ans'] = $dmy[0];
-                                $mes = (int)$dmy[1];
-                                var_dump($mes);
-                                $_SESSION['mes'] = $mes-1;
-                                $_SESSION['dia'] = $dmy[2];
-                                $h = explode(':', $partes[1]);
-                                var_dump($h);
-                                $_SESSION['hora'] = $h[0];
-                                $_SESSION['minuto'] = $h[1];
-                                $_SESSION['segundo'] = '00';
                                 echo "<tr>                                
                                     <th scope='row'>".$dato->nomenclatura."</th>".
                                     "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".
@@ -82,7 +69,7 @@
                                     }else{
                                         echo "";                                       
                                     }if($dato->fiscal_general == 1){
-                                        echo "Fiscal General";
+                                        echo "Fiscal General ";
                                     }else{
                                         echo "";
                                     }if($dato->vicefiscalia == 1){
@@ -113,7 +100,7 @@
 
                                 echo "</td>".
                                     "<td>".$dato->asunto."</td>".
-                                    "<td>".$dato->termino."</td>"."<td><div OnLoad='Couldown();' ></div>";      
+                                    "<td>".$dato->termino."</td>"."<td><div id='countdown'></div>";      
                                 echo"</td><td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                                     "<td align ='center'><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank' class='fa fa-file fa-1x'></a></td>".
                                     "<td align='center'><a href='nuevoAtendido/".$dato->id_oficioseg."' class='fa fa-file fa-1x'></a></td>".

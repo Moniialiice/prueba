@@ -401,8 +401,7 @@ class Oficio extends CI_Controller
         ->setCellValue('C1', 'SE REMITE')
         ->setCellValue('D1', 'SOLICITUD')
         ->setCellValue('E1', 'PLAZO')
-        ->setCellValue('F1', 'CARGO')
-        ->setCellValue('H1', 'ATENCIÓN');
+        ->setCellValue('F1', 'ATENCIÓN');
         //se madan estilos para las colunas A1,B1,C1 cells
         $cell_st =[
         'font' =>['bold' => true],
@@ -410,7 +409,7 @@ class Oficio extends CI_Controller
         'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
         ];
         $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($cell_st);
-                
+       
         //tamaño de las celdas 
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
         $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(16);
@@ -419,6 +418,20 @@ class Oficio extends CI_Controller
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(16);
          
+        foreach ($datos as $dato)
+        {
+            
+            $row = count($dato);
+            $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A'.$row, $dato[0]->nomenclatura)
+            ->setCellValue('B'.$row, $dato[0]->fecha)
+            ->setCellValue('C'.$row, '')
+            ->setCellValue('D'.$row, $dato[0]->asunto)
+            ->setCellValue('E'.$row, $dato[0]->termino)
+            ->setCellValue('F'.$row, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom);
+            $row ++;
+        }
+
         //se crea objeto para guardar archivo xlsx
         $writer = new Xlsx($spreadsheet);
         //nombre del archivo a descargar

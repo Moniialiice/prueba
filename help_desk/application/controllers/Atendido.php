@@ -222,7 +222,7 @@ class Atendido extends CI_Controller
         ->setCellValue('C1', 'DIRIGIDO A')
         ->setCellValue('D1', 'CARGO')
         ->setCellValue('E1', 'DESCRIPCIÓN')
-        ->setCellValue('F1', 'ATENCIÓN');
+        ->setCellValue('F1', 'NOMBRE');
         //se madan estilos para las colunas A1,B1,C1 cells
         $cell_st =[
         'font' =>['bold' => true],
@@ -232,12 +232,12 @@ class Atendido extends CI_Controller
         $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($cell_st);
             
         //tamaño de las celdas 
-        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(20);
         $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(22);
-        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(22);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(26);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(26);
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
-        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(60);
         
         //cambiamos formato de fecha
         $ext = explode("/",$date1);
@@ -252,22 +252,21 @@ class Atendido extends CI_Controller
         $fecha2 = $year2."-".$mont2."-".$day2;
 
         $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
-        for ($n = $start; $n < $start + $count; $n++) {
-            $result[] = str_pad($n, $digits, "0", STR_PAD_LEFT);
-         }
-
         foreach ($datos as $dato)
         {   
-            //var_dump($datos);
-            $row = count($count);
-            $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A'.$row, $dato->nomenclatura)
-            ->setCellValue('B'.$row, $dato->fecha_atendido)
-            ->setCellValue('C'.$row, $dato->nombre_aten)
-            ->setCellValue('D'.$row, $dato->cargo_aten)
-            ->setCellValue('E'.$row, $dato->descripcion)
-            ->setCellValue('F'.$row, $dato->nombre); 
-            $row ++;
+            $row = count($dato);
+            for($n = 2; $n <= $row; $n++){
+                //var_dump($datos);
+                $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue('A'.$n, $dato[0]->nomenclatura)
+                ->setCellValue('B'.$n, $dato[0]->fecha_atendido)
+                ->setCellValue('C'.$n, $dato[0]->nombre_aten)  
+                ->setCellValue('D'.$n, $dato[0]->cargo_aten)
+                ->setCellValue('E'.$n, $dato[0]->descripcion)
+                ->setCellValue('F'.$n, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom); 
+                $n ++;
+            }
+
         }
 
         //se crea objeto para guardar archivo xls

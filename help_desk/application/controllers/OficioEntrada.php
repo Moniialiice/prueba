@@ -199,9 +199,9 @@ class OficioEntrada extends CI_Controller
         ->setCellValue('B1', 'DÍA Y HORA RECEPCIÓN')
         ->setCellValue('C1', 'FECHA Y HORA RECEPCIÓN')
         ->setCellValue('D1', 'FECHA REAL')
-        ->setCellValue('E1', 'FIRMA ORIGEN')
-        ->setCellValue('F1', 'CARGO')
-        ->setCellValue('G1', 'PETICIÓN')
+        ->setCellValue('E1', 'PETICIÓN')
+        ->setCellValue('F1', 'FIRMA ORIGEN')
+        ->setCellValue('G1', 'CARGO')
         ->setCellValue('H1', 'ATENCIÓN');
         //se madan estilos para las colunas A1,B1,C1 cells
         $cell_st =[
@@ -209,16 +209,32 @@ class OficioEntrada extends CI_Controller
         'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
         'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
         ];
-        $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($cell_st);
+        $spreadsheet->getActiveSheet()->getStyle('A1:H1')->applyFromArray($cell_st);
                 
         //tamaño de las celdas 
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
-        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(22);
-        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(22);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(18);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(18);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
-        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(16);
-         
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(26);        
+        $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(22);
+        
+        foreach ($datos as $dato) {
+            $row = count($dato);
+            
+            $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A'.$row, $dato[0]->no_oficioEntrada)
+            ->setCellValue('B'.$row, $dato[0]->fecha_rec)
+            ->setCellValue('C'.$row, $dato[0]->fecha_ent)
+            ->setCellValue('D'.$row, $dato[0]->fecha_real)
+            ->setCellValue('E'.$row, $dato[0]->peticion)
+            ->setCellValue('F'.$row, $dato[0]->firma_origen)
+            ->setCellValue('G'.$row, $dato[0]->cargo)
+            ->setCellValue('H'.$row, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom);
+        }
+        
         //se crea objeto para guardar archivo xlsx
         $writer = new Xlsx($spreadsheet);
         //nombre del archivo a descargar
