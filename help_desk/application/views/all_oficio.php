@@ -43,7 +43,12 @@
                 if($this->form_validation->run()==true)
                 {
                               foreach ($datos as $dato) {
+                                ?>
+                                  
+                                <?php
                                 //cambia formato de fecha  <td>".$dato->termino."</td>"."<td><div ><button id='countdown' class='btn btn-success btn-sm'></button></div>
+                                $_SESSION['termino'] = $dato->termino;
+                                $fechat = $dato->termino;
                                 $date = $dato->fecha;
                                 //corta los datos de d,m,a
                                 $ext = explode("-",$date);
@@ -100,7 +105,10 @@
 
                                 echo "</td>".
                                     "<td>".$dato->asunto."</td>".
-                                    "<td>".$dato->termino."</td>"."<td><div id='countdown'></div>";      
+                                    "<td>".$dato->termino."</td>";
+                                //termino                                
+                                echo"<td><div id='countdown'></div>";      
+                                echo"<td><div id='countdown'></div>";      
                                 echo"</td><td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                                     "<td align ='center'><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank' class='fa fa-file fa-1x'></a></td>".
                                     "<td align='center'><a href='nuevoAtendido/".$dato->id_oficioseg."' class='fa fa-file fa-1x'></a></td>".
