@@ -255,18 +255,18 @@ class Atendido extends CI_Controller
         foreach ($datos as $dato)
         {   
             $row = count($dato);
-            for($n = 2; $n <= $row; $n++){
+            for($n = 0; $n <= $row; $n++){
                 //var_dump($datos);
+                $cell = 2;    
                 $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A'.$n, $dato[0]->nomenclatura)
-                ->setCellValue('B'.$n, $dato[0]->fecha_atendido)
-                ->setCellValue('C'.$n, $dato[0]->nombre_aten)  
-                ->setCellValue('D'.$n, $dato[0]->cargo_aten)
-                ->setCellValue('E'.$n, $dato[0]->descripcion)
-                ->setCellValue('F'.$n, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom); 
-                $n ++;
+                ->setCellValue('A'.$cell, $dato[$n]->nomenclatura)
+                ->setCellValue('B'.$cell, $dato[$n]->fecha_atendido)
+                ->setCellValue('C'.$cell, $dato[$n]->nombre_aten)  
+                ->setCellValue('D'.$cell, $dato[$n]->cargo_aten)
+                ->setCellValue('E'.$cell, $dato[$n]->descripcion)
+                ->setCellValue('F'.$cell, $dato[$n]->nombre." ".$dato[$n]->apellidop." ".$dato[$n]->apellidom);
+                $n ++; 
             }
-
         }
 
         //se crea objeto para guardar archivo xls

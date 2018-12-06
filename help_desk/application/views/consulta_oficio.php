@@ -65,8 +65,16 @@
                                     </div>";
                                 echo "<div class='row form-group'>
                                             <div class='col col-md-3'><label for='fecha' class=' form-control-label'>Fecha</label></div>
-                                            <div class='col-12 col-md-9'><input type='text' id='disable-input' name='fecha' class='form-control' value='".$ext[2]."/".$ext[1]."/".$ext[0]."' disabled></div>
+                                            <div class='col-12 col-md-9' ><input type='text' id='disable-input' name='fecha' class='form-control' value='".$ext[2]."/".$ext[1]."/".$ext[0]."' disabled></div>
                                         </div> ";
+                                echo "<div class='row form-group'>
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Plazo Finalizado</label></div>";
+                                        $datet = $dato->termino;
+                                        $espaciot = explode(" ", $datet);
+                                        $fect = explode("-", $espaciot[0]);
+                                        $fechat = $fect[2]."/".$fect[1]."/".$fect[0]." ".$espaciot[1];
+                                        echo "<div class='col-12 col-md-9'><input type='text' id='text-input' name='plazo' class='form-control' value='".$fechat."' disabled></div>
+                                    </div>";            
                                 echo "<div class='row form-group'>
                                         <div class='col col-md-3'><label class=' form-control-label'>Etiquetas de Asuntos</label></div>
                                         <div class='col col-md-9'>
@@ -499,15 +507,8 @@
                                  echo"    
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Término</label></div>";
-                                        $datet = $dato->termino;
-                                        $espaciot = explode(" ", $datet);
-                                        $fect = explode("-", $espaciot[0]);
-                                        $fechat = $fect[2]."/".$fect[1]."/".$fect[0]." ".$espaciot[1];
-                                        echo "<div class='col-12 col-md-9'><input type='text' id='text-input' name='termino' class='form-control' value='$fechat' disabled></div>";
-                              echo "</div>
+                                    </div>";    
+                                echo "</div>
                                     <div class='row form-group'>
                                         <div class='col col-sm-3'><label for='textarea-input' class=' form-control-label'>Observaciones</label></div>
                                         <div class='col-12 col-md-9'><textarea name='observaciones' id='textarea-input' rows='9' class='form-control' disabled>".$dato->observaciones."</textarea></div>

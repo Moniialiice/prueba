@@ -42,14 +42,27 @@
             <?php
                 if($this->form_validation->run()==true)
                 {
-                              foreach ($datos as $dato) {
-                                ?>
-                                  
-                                <?php
-                                //cambia formato de fecha  <td>".$dato->termino."</td>"."<td><div ><button id='countdown' class='btn btn-success btn-sm'></button></div>
-                                $_SESSION['termino'] = $dato->termino;
-                                $fechat = $dato->termino;
+                              foreach ($datos as $dato) {  
+                                $plazo = $dato->termino;
                                 $date = $dato->fecha;
+                                //corta termino para obtener fecha y hora
+                                $res = explode(" ",$plazo);  
+                                $f = $res[0]; //fecha de termino
+                                $h = $res[1]; //hora termino 
+                                //corta fecha para cambiar formato
+                                $termino = explode("-",$f);
+                                $pyear = $termino[0]; 
+                                $pmont = $termino[1];
+                                $pday = $termino[2];        
+                                //creamos objeto fecha: termino, actual                        
+                                $date1 = new DateTime("$plazo");
+                                $date2 = new DateTime("now");
+                                //calcula la diferencias entre fechas 
+                                $intervalo = date_diff($date1, $date2);
+                                //de la diferencia obtenemos dias, horas, minutos
+                                $dias = $intervalo->d; //dias restantes
+                                $horas = $intervalo->h; //horas restantes
+                                $minutos = $intervalo->i; //minutos restantes
                                 //corta los datos de d,m,a
                                 $ext = explode("-",$date);
                                 //código para cuanta atras
@@ -105,10 +118,13 @@
 
                                 echo "</td>".
                                     "<td>".$dato->asunto."</td>".
-                                    "<td>".$dato->termino."</td>";
+                                    "<td>".$pday."/".$pmont."/".$pyear." ".$h."</td>";
+                                if($date1 > $date2){ //sí la fecha termino es mayor a fecha actual    
+                                    echo "<td>Quedan ".$dias." días ".$horas." horas ".$minutos." minutos</td>"; //muestra los dias, horas y minutos restantes 
+                                }else{
+                                    echo "<td>Finalizado</td>"; //si la fecha termino es menor
+                                }
                                 //termino                                
-                                echo"<td><div id='countdown'></div>";      
-                                echo"<td><div id='countdown'></div>";      
                                 echo"</td><td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                                     "<td align ='center'><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank' class='fa fa-file fa-1x'></a></td>".
                                     "<td align='center'><a href='nuevoAtendido/".$dato->id_oficioseg."' class='fa fa-file fa-1x'></a></td>".
