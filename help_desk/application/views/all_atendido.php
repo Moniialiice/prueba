@@ -40,8 +40,7 @@
         <?php
         if($this->form_validation->run()==true)
         {   
-            $row = count($datos);
-            var_dump($row);  
+            //var_dump($row);  
             foreach ($datos as $dato) {
                 //obtenemos fecha 
                 $date = $dato->fecha_atendido;

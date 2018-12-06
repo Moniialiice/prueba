@@ -420,12 +420,23 @@ class Oficio extends CI_Controller
          
         foreach ($datos as $dato)
         {
-            
             $row = count($dato);
+            if($dato[0]->conase == 1){ $conase = 'CONASE';}else{ $conase = '';}
+            if($dato[0]->fiscal_general == 1){ $fgeneral = 'FISCAL GENERAL';}else{ $fgeneral = '';}
+            if($dato[0]->vicefiscalia){ $vfisccalia = 'VICEFISCALIA';}else{ $vfisccalia='';}
+            if($dato[0]->zona_oriente == 1){ $zo = 'ZONA ORIENTE'; }else{$zo='';}
+            if($dato[0]->valle_toluca == 1){ $vt = 'VALLE DE TOLUCA';}else{$vt='';}
+            if($dato[0]->oficialia_mayor == 1){ $om = 'OFICIALIA MAYOR';}else{$om = '';}
+            if($dato[0]->valle_mexico == 1){ $vm = 'VALLE DE MÉXICO';}else{$vm='';}
+            if($dato[0]->informacion_estadistica == 1){ $infoe = 'DEPARTAMENTO DE INFORMACIÓN Y ESTADÍSTICA';}else{$infoe='';}
+            if($dato[0]->central_juridico == 1){ $centralj = 'CENTRAL JURÍDICO';}else{$centralj='';}
+            if($dato[0]->servicio_carrera == 1){ $servicioc = 'SERVICIO DE CARRERA';}else{$servicioc='';}
+            if($dato[0]->otra != ""){ $otra = $dato[0]->otra; }else{$otra = '';}
+
             $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A'.$row, $dato[0]->nomenclatura)
             ->setCellValue('B'.$row, $dato[0]->fecha)
-            ->setCellValue('C'.$row, '')
+            ->setCellValue('C'.$row, $conase." ".$fgeneral." ".$vfisccalia." ".$zo." ".$vt." ".$om." ".$vm." ".$infoe." ".$centralj." ".$servicioc." ".$otra)
             ->setCellValue('D'.$row, $dato[0]->asunto)
             ->setCellValue('E'.$row, $dato[0]->termino)
             ->setCellValue('F'.$row, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom);

@@ -252,21 +252,18 @@ class Atendido extends CI_Controller
         $fecha2 = $year2."-".$mont2."-".$day2;
 
         $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
+        $row = count($datos);
         foreach ($datos as $dato)
         {   
-            $row = count($dato);
-            for($n = 0; $n <= $row; $n++){
                 //var_dump($datos);
-                $cell = 2;    
                 $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A'.$cell, $dato[$n]->nomenclatura)
-                ->setCellValue('B'.$cell, $dato[$n]->fecha_atendido)
-                ->setCellValue('C'.$cell, $dato[$n]->nombre_aten)  
-                ->setCellValue('D'.$cell, $dato[$n]->cargo_aten)
-                ->setCellValue('E'.$cell, $dato[$n]->descripcion)
-                ->setCellValue('F'.$cell, $dato[$n]->nombre." ".$dato[$n]->apellidop." ".$dato[$n]->apellidom);
-                $n ++; 
-            }
+                ->setCellValue('A'.$row, $dato[0]->nomenclatura)
+                ->setCellValue('B'.$row, $dato[0]->fecha_atendido)
+                ->setCellValue('C'.$row, $dato[0]->nombre_aten)  
+                ->setCellValue('D'.$row, $dato[0]->cargo_aten)
+                ->setCellValue('E'.$row, $dato[0]->descripcion)
+                ->setCellValue('F'.$row, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom);
+            $row ++;
         }
 
         //se crea objeto para guardar archivo xls
