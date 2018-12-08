@@ -34,9 +34,10 @@
                             <div class = "alert">
                                 <?php
                                     if($this->session->flashdata('Activo')){
-                                        echo "Consultar administrador";
-                                    }if($this->session->flashdata('Error')){
-                                        echo "Verificar correo o contraseña.";
+                                        echo "Consultar administrador <br>";
+                                    }
+                                    if($this->session->flashdata('Error')){
+                                        echo "Verificar correo o contraseña. <br>";
                                     }
                                     echo validation_errors();
                                 ?>

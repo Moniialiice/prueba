@@ -7717,3 +7717,31 @@ INFO - 2018-12-06 14:55:30 --> Language file loaded: language/spanish/form_valid
 INFO - 2018-12-06 14:55:30 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\all_atendido.php
 INFO - 2018-12-06 14:55:30 --> Final output sent to browser
 INFO - 2018-12-06 14:55:30 --> Total execution time: 0.0624
+INFO - 2018-12-06 15:50:59 --> Config Class Initialized
+INFO - 2018-12-06 15:50:59 --> Hooks Class Initialized
+INFO - 2018-12-06 15:50:59 --> UTF-8 Support Enabled
+INFO - 2018-12-06 15:50:59 --> Utf8 Class Initialized
+INFO - 2018-12-06 15:50:59 --> URI Class Initialized
+INFO - 2018-12-06 15:50:59 --> Router Class Initialized
+INFO - 2018-12-06 15:50:59 --> Output Class Initialized
+INFO - 2018-12-06 15:50:59 --> Security Class Initialized
+INFO - 2018-12-06 15:50:59 --> Input Class Initialized
+INFO - 2018-12-06 15:50:59 --> Language Class Initialized
+INFO - 2018-12-06 15:50:59 --> Loader Class Initialized
+INFO - 2018-12-06 15:50:59 --> Controller Class Initialized
+INFO - 2018-12-06 15:50:59 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-12-06 15:50:59 --> Pagination Class Initialized
+INFO - 2018-12-06 15:50:59 --> Helper loaded: download_helper
+INFO - 2018-12-06 15:50:59 --> Helper loaded: file_helper
+INFO - 2018-12-06 15:50:59 --> Helper loaded: url_helper
+INFO - 2018-12-06 15:50:59 --> Helper loaded: html_helper
+INFO - 2018-12-06 15:50:59 --> Helper loaded: form_helper
+DEBUG - 2018-12-06 15:50:59 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-12-06 15:50:59 --> Session: Class initialized using 'files' driver.
+INFO - 2018-12-06 15:50:59 --> Encrypt Class Initialized
+INFO - 2018-12-06 15:50:59 --> Database Driver Class Initialized
+INFO - 2018-12-06 15:50:59 --> Model "Atendido_model" initialized
+INFO - 2018-12-06 15:50:59 --> Form Validation Class Initialized
+INFO - 2018-12-06 15:50:59 --> Upload Class Initialized
+INFO - 2018-12-06 15:50:59 --> Final output sent to browser
+INFO - 2018-12-06 15:50:59 --> Total execution time: 0.1404

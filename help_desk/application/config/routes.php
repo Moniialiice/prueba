@@ -94,4 +94,5 @@ $route['muestraAtendido/(:num)'] = 'Atendido/mostrarAtendido/$1';
 $route['descargarAtendido/(:any)'] = 'Atendido/descarga/$1';
 $route['imprimirAtendido/(:num)'] = 'Atendido/imprimirOficioAtendido/$1';
 $route['reporte_excel/(:any)'] = 'Atendido/download/$1';
-
+//rutas de captura
+$route['nuevaCaptura'] = 'Captura/index';
