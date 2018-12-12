@@ -64,6 +64,8 @@ $route['consultaUsuario'] = 'Usuario/busquedaUsuario';
 $route['muestraUsuario'] = 'Usuario/consultaUsuario';
 $route['datosUsuario/(:num)'] = 'Usuario/actualizarUsuario/$1';
 $route['actualizaUsuario'] = 'Usuario/modificaUsuarioVal';
+$route['misDatos/(:num)'] = 'Usuario/perfilUsuario/$1';
+$route['actializaMisDatos']= 'Usuario/cambiarpass';
 //paginación
 $route['usuario/pagina/(:num)'] = 'Usuario/ejemplo/$1';
 

@@ -5693,3 +5693,74 @@ INFO - 2018-12-07 17:42:18 --> Security Class Initialized
 INFO - 2018-12-07 17:42:18 --> Input Class Initialized
 INFO - 2018-12-07 17:42:18 --> Language Class Initialized
 ERROR - 2018-12-07 17:42:18 --> 404 Page Not Found: Apple-iconpng/index
+INFO - 2018-12-07 18:04:09 --> Config Class Initialized
+INFO - 2018-12-07 18:04:09 --> Hooks Class Initialized
+INFO - 2018-12-07 18:04:09 --> UTF-8 Support Enabled
+INFO - 2018-12-07 18:04:09 --> Utf8 Class Initialized
+INFO - 2018-12-07 18:04:09 --> URI Class Initialized
+INFO - 2018-12-07 18:04:09 --> Router Class Initialized
+INFO - 2018-12-07 18:04:09 --> Output Class Initialized
+INFO - 2018-12-07 18:04:09 --> Security Class Initialized
+INFO - 2018-12-07 18:04:09 --> Input Class Initialized
+INFO - 2018-12-07 18:04:09 --> Language Class Initialized
+INFO - 2018-12-07 18:04:09 --> Loader Class Initialized
+INFO - 2018-12-07 18:04:09 --> Controller Class Initialized
+INFO - 2018-12-07 18:04:09 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-12-07 18:04:09 --> Pagination Class Initialized
+INFO - 2018-12-07 18:04:09 --> Helper loaded: url_helper
+INFO - 2018-12-07 18:04:09 --> Helper loaded: form_helper
+DEBUG - 2018-12-07 18:04:09 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-12-07 18:04:09 --> Session: Class initialized using 'files' driver.
+INFO - 2018-12-07 18:04:09 --> Encrypt Class Initialized
+INFO - 2018-12-07 18:04:09 --> Database Driver Class Initialized
+INFO - 2018-12-07 18:04:09 --> Model "Usuario_model" initialized
+INFO - 2018-12-07 18:04:09 --> Form Validation Class Initialized
+INFO - 2018-12-07 18:04:09 --> Config Class Initialized
+INFO - 2018-12-07 18:04:09 --> Hooks Class Initialized
+INFO - 2018-12-07 18:04:09 --> UTF-8 Support Enabled
+INFO - 2018-12-07 18:04:09 --> Utf8 Class Initialized
+INFO - 2018-12-07 18:04:09 --> URI Class Initialized
+INFO - 2018-12-07 18:04:09 --> Router Class Initialized
+INFO - 2018-12-07 18:04:09 --> Output Class Initialized
+INFO - 2018-12-07 18:04:09 --> Security Class Initialized
+INFO - 2018-12-07 18:04:09 --> Input Class Initialized
+INFO - 2018-12-07 18:04:09 --> Language Class Initialized
+INFO - 2018-12-07 18:04:09 --> Loader Class Initialized
+INFO - 2018-12-07 18:04:09 --> Controller Class Initialized
+INFO - 2018-12-07 18:04:09 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2018-12-07 18:04:09 --> Pagination Class Initialized
+INFO - 2018-12-07 18:04:10 --> Helper loaded: url_helper
+INFO - 2018-12-07 18:04:10 --> Helper loaded: form_helper
+DEBUG - 2018-12-07 18:04:10 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2018-12-07 18:04:10 --> Session: Class initialized using 'files' driver.
+INFO - 2018-12-07 18:04:10 --> Encrypt Class Initialized
+INFO - 2018-12-07 18:04:10 --> Database Driver Class Initialized
+INFO - 2018-12-07 18:04:10 --> Model "Usuario_model" initialized
+INFO - 2018-12-07 18:04:10 --> Form Validation Class Initialized
+INFO - 2018-12-07 18:04:10 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head1.php
+INFO - 2018-12-07 18:04:10 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\login.php
+INFO - 2018-12-07 18:04:10 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer1.php
+INFO - 2018-12-07 18:04:10 --> Final output sent to browser
+INFO - 2018-12-07 18:04:10 --> Total execution time: 0.0480
+INFO - 2018-12-07 18:04:10 --> Config Class Initialized
+INFO - 2018-12-07 18:04:10 --> Hooks Class Initialized
+INFO - 2018-12-07 18:04:10 --> Config Class Initialized
+INFO - 2018-12-07 18:04:10 --> Hooks Class Initialized
+INFO - 2018-12-07 18:04:10 --> UTF-8 Support Enabled
+INFO - 2018-12-07 18:04:10 --> Utf8 Class Initialized
+INFO - 2018-12-07 18:04:10 --> UTF-8 Support Enabled
+INFO - 2018-12-07 18:04:10 --> Utf8 Class Initialized
+INFO - 2018-12-07 18:04:10 --> URI Class Initialized
+INFO - 2018-12-07 18:04:10 --> URI Class Initialized
+INFO - 2018-12-07 18:04:10 --> Router Class Initialized
+INFO - 2018-12-07 18:04:10 --> Router Class Initialized
+INFO - 2018-12-07 18:04:10 --> Output Class Initialized
+INFO - 2018-12-07 18:04:10 --> Output Class Initialized
+INFO - 2018-12-07 18:04:10 --> Security Class Initialized
+INFO - 2018-12-07 18:04:10 --> Security Class Initialized
+INFO - 2018-12-07 18:04:10 --> Input Class Initialized
+INFO - 2018-12-07 18:04:10 --> Language Class Initialized
+INFO - 2018-12-07 18:04:10 --> Input Class Initialized
+INFO - 2018-12-07 18:04:10 --> Language Class Initialized
+ERROR - 2018-12-07 18:04:10 --> 404 Page Not Found: Faviconico/index
+ERROR - 2018-12-07 18:04:10 --> 404 Page Not Found: Apple-iconpng/index

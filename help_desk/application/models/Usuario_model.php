@@ -13,9 +13,10 @@ class Usuario_model extends CI_Model
     }
     public function getDatos($user,$pass)
     {
+        $p = base64_encode($pass); //se encripta contraseña por medio de base64
         $this->db->select('id_usuario, nombre, id_tipoUsuario, activo');
         $this->db->from('usuario');
-        $this->db->where('password', $pass);
+        $this->db->where('password', $p);
         $this->db->where('correo',$user);
         $this->db->where('activo', 1);
         $query = $this->db->get();
@@ -45,7 +46,8 @@ class Usuario_model extends CI_Model
     //inserta los datos del usuario
     public function createUsuario($name,$app,$apm,$email,$pass,$activo,$tipoUser,$dependencia)
     {
-        $query = $this->db->query("INSERT INTO usuario (nombre, apellidop, apellidom, activo, correo, password, id_tipoUsuario, id_dependencias) VALUES ('$name','$app','$apm','$activo','$email','$pass','$tipoUser','$dependencia')");
+        $p = base64_encode($pass); //encripta contraseña en base64
+        $query = $this->db->query("INSERT INTO usuario (nombre, apellidop, apellidom, activo, correo, password, id_tipoUsuario, id_dependencias) VALUES ('$name','$app','$apm','$activo','$email','$p','$tipoUser','$dependencia')");
         if($query){
             return true;
         }else{
@@ -71,22 +73,32 @@ class Usuario_model extends CI_Model
         return $query->result();
     }
     //modifica los datos del usuario
-    public  function updateUsuario($id,$name,$app,$apm,$activo,$email,$password,$tipoUser,$dependencia)
+    public function updateUsuario($id,$name,$app,$apm,$activo,$email,$password,$tipoUser,$dependencia)
     {
-        $query = $this->db->query("UPDATE usuario SET nombre = '$name', apellidop = '$app', apellidom = '$apm', activo = '$activo', correo = '$email', password = '$password', id_tipoUsuario = '$tipoUser', id_dependencias = '$dependencia' WHERE id_usuario = '$id'");
+        $p = base64_encode($password); //encripta contraseña en base64
+        $query = $this->db->query("UPDATE usuario SET nombre = '$name', apellidop = '$app', apellidom = '$apm', activo = '$activo', correo = '$email', password = '$p', id_tipoUsuario = '$tipoUser', id_dependencias = '$dependencia' WHERE id_usuario = '$id'");
         if($query){
             return TRUE;
         }else{
             return FALSE;
         }
     }
-    //Función para eliminar usuario, no se usa ya que los oficios tienen registrado el usuario  que lo creó
+    //modifica sólo contraseña del usuario (perfil)
+    public function updatePassword($pass,$id)
+    {
+        $p = base64_encode($pass); //encripta contraseña en base64
+        $query = $this->db->query("UPDATE usuario as u SET u.password = '$p' WHERE u.id_usuario = '$id'");
+        if($query){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }    //Función para eliminar usuario, no se usa ya que los oficios tienen registrado el usuario  que lo creó
     public function deleteUsuario($id_usuario)
     {
         $query = $this->db->query("DELETE from usuario WHERE id_usuario = '$id_usuario'");
         return $query->result();
-    }
-    
+    }    
     //obtenemos el total de filas para hacer la paginación
 	function filas($search) {
         $this->db->like('correo', $search);

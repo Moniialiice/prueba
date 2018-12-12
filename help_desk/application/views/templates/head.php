@@ -182,8 +182,7 @@ if($this->session->flashdata('correcto'))
                       </div><!-- /.navbar-collapse -->";
 
                             }if($id == 3){
-                                echo "
-                                <!--div main menu collapse -->
+                                echo "<!--div main menu collapse -->
                                 <div id='main-menu' class='main-menu collapse navbar-collapse'>
                                 <ul class='nav navbar-nav'>                    <!--h3 class='menu-title'>UI elements</h3><!-- /.menu-title -->    
                                     <h3 class='menu-title'>Oficio Recepción</h3><!-- /.menu-title -->
@@ -195,7 +194,22 @@ if($this->session->flashdata('correcto'))
                                         </ul>
                                     </li>
                                 </ul>
-                            </div><!-- /.navbar-collapse -->    ";
+                            </div><!-- /.navbar-collapse -->"  ;
+                        }if($id == 4){
+                            echo " 
+                            <!--div main menu collapse -->
+                                <div id='main-menu' class='main-menu collapse navbar-collapse'>
+                                <ul class='nav navbar-nav'>                    <!--h3 class='menu-title'>UI elements</h3><!-- /.menu-title -->    
+                                    <h3 class='menu-title'>Módulo Captura</h3>
+                                    <li class='menu-item-has-children dropdown'>
+                                        <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-list'></i>Captura</a>
+                                        <ul class='sub-menu children dropdown-menu'>
+                                            <li><i class='menu-icon fa fa-file'></i><a href='nuevaCaptura'>Alta</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div><!-- /.navbar-collapse -->  
+                            ";
                         }
             ?>
         </nav>
@@ -223,10 +237,9 @@ if($this->session->flashdata('correcto'))
                             <?php echo $name = $this->session->userdata('name'); ?>
                         </a>
                         <div class='user-menu dropdown-menu'>
-                            <!--a class='nav-link' href='#'><i class='fa fa- user'></i>Mi Perfil</a-->
-                            <a class='nav-link' href='close'><i class='fa fa-power -off'></i>Cerrar Sesión</a>
-                        </div>
-                        
+                            <?php echo "<a class='nav-link' href='misDatos/".$this->session->userdata('id_usuario')."'><i class='fa fa-user'></i>  Mi Perfil</a>"?>
+                            <a class='nav-link' href='close'><i class='fa fa-power-off'></i>  Cerrar Sesión</a>
+                        </div>                        
                     </div>
                 </div>
             </div>

@@ -30,17 +30,17 @@
                     <div class="card-body card-block">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Recepción</a>
+                                <a class="nav-link active" id="recepcion-tab" data-toggle="tab" href="#recepcion" role="tab" aria-controls="recepcion" aria-selected="true">Recepción</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Seguimiento</a>
+                                <a class="nav-link" id="seguimiento-tab" data-toggle="tab" href="#seguimiento" role="tab" aria-controls="seguimiento" aria-selected="false">Seguimiento</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Atendido</a>
+                                <a class="nav-link" id="atendido-tab" data-toggle="tab" href="#atendido" role="tab" aria-controls="atendido" aria-selected="false">Atendido</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="tab-pane fade show active" id="recepcion" role="tabpanel" aria-labelledby="recepcion-tab">
                                 <div class="card-body card-block">
                                     <?php
                                         //Mensajes
@@ -132,7 +132,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">                   
+                            <div class="tab-pane fade" id="seguimiento" role="tabpanel" aria-labelledby="seguimiento-tab">                   
                             <div class="card-body card-block">
                                 <div class="error"></div>
                                     <?php
@@ -386,7 +386,7 @@
                                     </button>
                                 </div>
                                 </div>
-                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">            
+                            <div class="tab-pane fade" id="atendido" role="tabpanel" aria-labelledby="atendido-tab">            
                                 <div class="card-body card-block">
                                     <?php
                                         //Mensajes

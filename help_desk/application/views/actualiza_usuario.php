@@ -61,7 +61,7 @@
                                     </div>
                                     <div class='row form-group'>
                                         <div class='col col-md-3'><label for='' class='form-control-label'>Correo Electrónico</label></div>
-                                        <div class='col-12 col-md-9'><input type='text' id='text-input' name='user' class='form-control' value='".$dato->correo."'></div>
+                                        <div class='col-12 col-md-9'><input type='text' id='text-input' name='email' class='form-control' value='".$dato->correo."'></div>
                                     </div>
                                     <div class='row form-group'>
                                         <div class='col col-md-3'><label for='' class='form-control-label'>Contraseña</label></div>

@@ -55,7 +55,7 @@ class Usuario extends CI_Controller
             //verifica si el usuario existe en la base de datos is_unique[tabla.columna]
             $this->form_validation->set_rules('email', 'Correo', 'required|is_unique[usuario.correo]');
             //verifica la confirmación de contraseña coincida con la contraseña 
-            $this->form_validation->set_rules('password', 'Contraseña', 'required|matches[passwordr]');
+            $this->form_validation->set_rules('password', 'Contraseña', 'min_length[8]|max_length[12]|required|matches[passwordr]');
             $this->form_validation->set_rules('passwordr', 'Repetir contraseña', 'required');
                 //Sí la validación es correcta procede a insertar los datos en la base de datos
                 if($this->form_validation->run() == TRUE){
@@ -112,7 +112,6 @@ class Usuario extends CI_Controller
     {
         $search = $this->input->post('busqueda');
         $pages = 2; //Número de registros mostrados por páginas
-        $this->load->library('pagination'); //Cargamos la librería de paginación
         $config['base_url'] = base_url() . 'usuario/pagina'; // parametro base de la aplicación, si tenemos un .htaccess nos evitamos el index.php
         $config['total_rows'] = $this->Usuario_model->filas($search); //calcula el número de filas
         $config['per_page'] = $pages; //Número de registros mostrados por páginas
@@ -185,7 +184,7 @@ class Usuario extends CI_Controller
                 //si es nueva contraseña procede a validar    
                 }else{
                     //verifica la confirmación de contraseña coincida con la contraseña 
-                    $this->form_validation->set_rules('newps', 'Contraseña', 'required|matches[newpsr]');
+                    $this->form_validation->set_rules('newps', 'Contraseña', 'min_length[8]|max_length[12]|required|matches[newpsr]');
                     $this->form_validation->set_rules('newpsr', 'Repetir contraseña', 'required');
                     //Sí la validación es correcta procede a insertar los datos en la base de datos
                     if($this->form_validation->run() == TRUE){
@@ -221,5 +220,54 @@ class Usuario extends CI_Controller
             $this->session->set_flashdata('Error', 'Consultar administrador');
             $this->actualizarUsuario($i);
         }
+    }
+    //muestra datos para modificar y actualizar contraseña
+    public function perfilUsuario($id){
+        //consulta los datos de usuario 
+        $datos['usuario'] = $this->Usuario_model->muestraUsuario($id);                 
+        $this->load->view('templates/head');
+        $this->load->view('perfil',$datos);
+        $this->load->view('templates/footer');
+    }
+    //modifica las contraseñas del usuario
+    public function cambiarpass(){
+        //recibe el id del usuario
+        $i = $this->input->post('id');
+        if($this->input->post())
+        {
+            //recibe campos de formulario
+            $id = $this->input->post('id');
+            $pass = $this->input->post('newps');
+            $passn = $this->input->post('newpsr');
+            //formato para validar los datos del formulario      
+            //verifica la confirmación de contraseña coincida con la contraseña 
+            $this->form_validation->set_rules('newps', 'Contraseña', 'min_length[8]|max_length[12]|required|matches[newpsr]');
+            $this->form_validation->set_rules('newpsr', 'Repetir contraseña', 'required');
+            //Sí la validación es correcta procede a insertar los datos en la base de datos
+            if($this->form_validation->run() == TRUE){
+                $query = $this->Usuario_model->updatePassword($passn,$id);  
+                //sí se inserto los datos manda mensaje     
+                if($query == true){    
+                    $this->session->set_flashdata('Modificado','Contraseña actualizada correctamente');
+                    $this->perfilUsuario($i);
+                }else{
+                    $this->session->set_flashdata('No', 'Datos no ingresados');
+                    $this->perfilUsuario($i);
+                }      
+            }else{
+                //tomamos los datos en un array para emviar a la vista
+                $datos=array();
+                $datos['usuario'] = $this->Usuario_model->muestraUsuario($i);                 
+                //envia los datos al formulario en la vista
+                $this->load->view('templates/head');
+                $this->load->view('perfil',$datos);
+                $this->load->view('templates/footer');
+            }                  
+        }else{
+            $this->session->set_flashdata('Error', 'Consultar administrador');
+            $this->actualizarUsuario($i);
+        }
     } 
+
+     
 }
