@@ -36,7 +36,7 @@
                                 <a class="nav-link" id="seguimiento-tab" data-toggle="tab" href="#seguimiento" role="tab" aria-controls="seguimiento" aria-selected="false">Seguimiento</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="atendido-tab" data-toggle="tab" href="#atendido" role="tab" aria-controls="atendido" aria-selected="false">Atendido</a>
+                                <a class="nav-link" id="atendido-tab" dafta-toggle="tab" href="#atendido" role="tab" aria-controls="atendido" aria-selected="false">Atendido</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
@@ -53,19 +53,22 @@
                                         if($this->session->flashdata('Error')){
                                             echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos</label></div>";
                                         }
-                                            echo validation_errors();    
+                                           //echo validation_errors(); 
                                     ?>
                                     <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
-                                    <form action="insertaCaptura" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <form action="insertCaptura" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        <?php
+                                            echo validation_errors();
+                                        ?>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Oficio</label></div>
+                                            <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Oficio Entrada</label></div>
                                             <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="no_oficio" class="form-control" value="<?php echo set_value('no_oficio'); ?>" ></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Día y Hora Recepción</label></div>
                                             <div class="col-12 col-md-9">
                                                 <div class='input-group' >                                        
-                                                    <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha'); ?>">
+                                                    <input type='text-input' class="form-control" id="datepicker" name="fecha_r" value="<?php echo set_value('fecha_r'); ?>">
                                                     <span class="input-group-addon">
                                                         <span class="fa fa-calendar"></span>
                                                     </span>
@@ -96,32 +99,21 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input" class="form-control-label"> Firma Origen</label></div>
-                                            <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="firma" placeholder="" class="form-control" value="<?php echo set_value('firma'); ?>"></div>
+                                            <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="firma_r" class="form-control" value="<?php echo set_value('firma_r'); ?>"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input" class="form-control-label"> Cargo</label></div>
-                                            <div class="col-12 col-md-9"><textarea name="cargo" id="textarea-input" OnKeyUp="Upper(this);" rows="1" placeholder="" class="form-control"><?php echo set_value('cargo'); ?></textarea></div>
+                                            <div class="col-12 col-md-9"><textarea name="cargo_r" id="textarea-input" OnKeyUp="Upper(this);" rows="1" class="form-control"><?php echo set_value('cargo_r'); ?></textarea></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input" class="form-control-label"> Peticion</label></div>
-                                            <div class="col-12 col-md-9"><textarea name="peticion" id="textarea-input" OnKeyUp="Upper(this);" rows="5" placeholder="" class="form-control"><?php echo set_value('peticion'); ?></textarea></div>
+                                            <div class="col-12 col-md-9"><textarea name="peticion_r" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('peticion_r'); ?></textarea></div>
                                         </div>
                                         <div><label for='text-input' class='form-control-label fa fa-exclamation' > Nombre de archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="file-input" class="form-control-label"> Archivo Entrada</label></div>
                                             <div class="col-12 col-md-9"><input id="file-input" name="entrada" class="form-control-file" type="file" ></div>
                                         </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="text-input" class="form-control-label"> Atención</label></div>
-                                            <?php
-                                            //se toman los datos del usuario de las sesiones
-                                                $id = $this->session->userdata('id_usuario');
-                                                $nom = $this->session->userdata('name');
-                                                echo "<div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$nom."' disabled>
-                                                    <input type='text' id='text-input' name='id' value='".$id."' hidden>
-                                                    </div>";?>
-                                    </div>
-                                    <!--/form-->
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary btn-sm">
@@ -131,6 +123,7 @@
                                         <i class="fa fa-ban"></i> Borrar
                                     </button>
                                 </div>
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="seguimiento" role="tabpanel" aria-labelledby="seguimiento-tab">                   
                             <div class="card-body card-block">
@@ -145,10 +138,13 @@
                                         if($this->session->flashdata('Error')){
                                             echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos, consultar administrador.</label></div>";
                                         }
-                                        echo validation_errors();                                        
+                                        //echo validation_errors();                                        
                                     ?>
                                     <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>                                    
-                                    <form action="insertaCaptura" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <form action="insertaCaptura2" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        <?php
+                                            echo validation_errors();
+                                        ?>
                                         <div class='row form-group'>
                                             <div class='col col-md-3'><label for='text-input' class=' form-control-label'>No Oficio Seguimiento</label></div>
                                             <div class='col-12 col-md-9'><input type='text-input' id="text-input" name='nomenclatura' class='form-control' ></div>
@@ -376,7 +372,6 @@
                                         </div>
                                     <!-- form-->
                                 </div> <!-- card-body-->
-
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary btn-sm">
                                         <i class="fa fa-dot-circle-o"></i> Guardar
@@ -385,6 +380,7 @@
                                         <i class="fa fa-ban"></i> Borrar
                                     </button>
                                 </div>
+                                </form>    
                                 </div>
                             <div class="tab-pane fade" id="atendido" role="tabpanel" aria-labelledby="atendido-tab">            
                                 <div class="card-body card-block">
@@ -411,7 +407,7 @@
                                             <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Atendido</label></div>
                                             <div class="col-12 col-md-9">
                                                 <div class='input-group' >                                        
-                                                    <input type='text-input' class="form-control" id="date1" name="date1" value="<?php echo set_value('date1'); ?>">
+                                                    <input type='text-input' class="form-control" id="date1" name="fecha_at" value="<?php echo set_value('fecha_at'); ?>">
                                                     <span class="input-group-addon">
                                                         <span class="fa fa-calendar"></span>
                                                     </span>
@@ -420,15 +416,15 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input" class="form-control-label"> Nombre</label></div>
-                                            <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="nombre" placeholder="" class="form-control" value="<?php echo set_value('nombre'); ?>"></div>
+                                            <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="nombre_at" class="form-control" value="<?php echo set_value('nombre_at'); ?>"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input" class="form-control-label"> Cargo</label></div>
-                                            <div class="col-12 col-md-9"><textarea name="cargo" id="textarea-input" OnKeyUp="Upper(this);" rows="1" placeholder="" class="form-control"><?php echo set_value('cargo'); ?></textarea></div>
+                                            <div class="col-12 col-md-9"><textarea name="cargo_at" id="textarea-input" OnKeyUp="Upper(this);" rows="1" class="form-control"><?php echo set_value('cargo_at'); ?></textarea></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input" class="form-control-label"> Descripción del Oficio</label></div>
-                                            <div class="col-12 col-md-9"><textarea name="descripcion" id="textarea-input" rows="5" class="form-control"><?php echo set_value('descripcion'); ?></textarea></div>
+                                            <div class="col-12 col-md-9"><textarea name="descripcion_at" id="textarea-input" rows="5" class="form-control"><?php echo set_value('descripcion_at'); ?></textarea></div>
                                         </div>
                                         <div><label for='text-input' class='form-control-label fa fa-exclamation' > Nombre de archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>
                                         <div class="row form-group">
@@ -437,7 +433,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input" class="form-control-label"> Con copia a </label></div>
-                                            <div class="col-12 col-md-9"><textarea name="copia" id="textarea-input" rows="3" class="form-control"><?php echo set_value('copia'); ?></textarea></div>
+                                            <div class="col-12 col-md-9"><textarea name="copia_at" id="textarea-input" rows="3" class="form-control"><?php echo set_value('copia_at'); ?></textarea></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input" class="form-control-label"> Atención</label></div>

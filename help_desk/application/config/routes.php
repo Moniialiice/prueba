@@ -98,3 +98,5 @@ $route['imprimirAtendido/(:num)'] = 'Atendido/imprimirOficioAtendido/$1';
 $route['reporte_excel/(:any)'] = 'Atendido/download/$1';
 //rutas de captura
 $route['nuevaCaptura'] = 'Captura/index';
+$route['insertCaptura'] = 'Captura/altaCaptura';
+$route['insertaCaptura2'] = 'Captura/altaCaptura2';

@@ -126,8 +126,8 @@
                                 }
                                 //termino                                
                                 echo"</td><td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
-                                    "<td align ='center'><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank' class='fa fa-file fa-1x'></a></td>".
-                                    "<td align='center'><a href='nuevoAtendido/".$dato->id_oficioseg."' class='fa fa-file fa-1x'></a></td>".
+                                    "<td align ='center'><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank' class='fa fa-print fa-1x'></a></td>".
+                                    "<td align='center'><a href='nuevoAtendido/".$dato->id_oficioseg."' class='fa fa-plus fa-1x'></a></td>".
                                 "</tr>";
                               }
                 }              

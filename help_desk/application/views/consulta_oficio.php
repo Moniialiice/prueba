@@ -28,7 +28,7 @@
             <div class='page-header float-right'>
                 <div class='page-title'>
                     <ol class='breadcrumb text-right'>
-                        <li><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank' class='fa fa-external-link fa-1x'></a></li>
+                        <li><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank' class='fa fa-print fa-2x'></a></li>
                     </ol>
                 </div>
             </div>

@@ -421,6 +421,7 @@ class Oficio extends CI_Controller
         foreach ($datos as $dato)
         {
             $row = count($dato);
+            //dirigido a 
             if($dato[0]->conase == 1){ $conase = 'CONASE';}else{ $conase = '';}
             if($dato[0]->fiscal_general == 1){ $fgeneral = 'FISCAL GENERAL';}else{ $fgeneral = '';}
             if($dato[0]->vicefiscalia){ $vfisccalia = 'VICEFISCALIA';}else{ $vfisccalia='';}

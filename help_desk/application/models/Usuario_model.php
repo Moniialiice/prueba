@@ -93,7 +93,8 @@ class Usuario_model extends CI_Model
         }else{
             return FALSE;
         }
-    }    //Función para eliminar usuario, no se usa ya que los oficios tienen registrado el usuario  que lo creó
+    }    
+    //Función para eliminar usuario, no se usa ya que los oficios tienen registrado el usuario  que lo creó
     public function deleteUsuario($id_usuario)
     {
         $query = $this->db->query("DELETE from usuario WHERE id_usuario = '$id_usuario'");

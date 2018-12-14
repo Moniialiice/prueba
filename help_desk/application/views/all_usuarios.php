@@ -30,7 +30,7 @@
                     echo    "<td>Inactivo</td>".
                             "<td>".$dato->tipoUsuario."</td>";
                 }    
-                    echo    "<td align='center'><a href='datosUsuario/".$dato->id_usuario."' class='fa fa-file fa-1x'></a></td>".
+                    echo    "<td align='center'><a href='datosUsuario/".$dato->id_usuario."' class='fa fa-plus fa-1x'></a></td>".
                            "</tr>";
             }
         }    

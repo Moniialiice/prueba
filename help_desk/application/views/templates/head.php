@@ -70,16 +70,6 @@ if($this->session->flashdata('correcto'))
             
         });
     </script>
-    <script>
-        $(document).ready(function(){
-            $(document).OnClick("#paginacion", function(e){
-                e.preventDefault();
-                var href = $(this).attr("href");
-                $("#results").load(href);
-            });
-        });
-    </script>
-  
     <!--jquery-->
     <!--link rel='stylesheet' href='assets/css/bootstrap-select.less'> -->
     <link rel='stylesheet' href='assets/scss/style.css'>
