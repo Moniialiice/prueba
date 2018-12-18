@@ -65,7 +65,7 @@ if($this->session->flashdata('correcto'))?>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Correo Electronico</label></div>
-                                <div class="col-12 col-md-12"><input type="text" id="text-input" name="email" OnKeyUp="Upper(this);" class="form-control" value="<?php echo set_value('email');?>"></div>
+                                <div class="col-12 col-md-12"><input type="text" id="text-input" name="email" class="form-control" value="<?php echo set_value('email');?>"></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Contraseña</label></div>

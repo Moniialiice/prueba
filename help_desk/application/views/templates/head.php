@@ -123,19 +123,19 @@ if($this->session->flashdata('correcto'))
                                     <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaAtendido'>Consulta Atendido</a></li>
                                 </ul>
                             </li>
+                            <h3 class='menu-title'>Captura</h3>
+                            <li class='menu-item-has-children dropdown'>
+                                <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-list'></i>Captura</a>
+                                <ul class='sub-menu children dropdown-menu'>
+                                    <li><i class='menu-icon fa fa-file'></i><a href='nuevaCaptura'>Alta</a></li>
+                                </ul>
+                            </li>
                             <h3 class='menu-title'>Usuarios</h3>
                             <li class='menu-item-has-children dropdown'>
                                 <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-user'></i>Usuario</a>
                                 <ul class='sub-menu children dropdown-menu'>
                                     <li><i class='menu-icon fa fa-user-plus'></i><a href='nuevoUsuario'>Alta</a></li>
                                     <li><i class='menu-icon fa fa-users'></i><a href='consultaUsuario'>Consulta</a></li>
-                                </ul>
-                            </li>
-                            <h3 class='menu-title'>Captura</h3>
-                            <li class='menu-item-has-children dropdown'>
-                                <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-list'></i>Captura</a>
-                                <ul class='sub-menu children dropdown-menu'>
-                                    <li><i class='menu-icon fa fa-file'></i><a href='nuevaCaptura'>Alta</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -170,7 +170,6 @@ if($this->session->flashdata('correcto'))
                             </li>
                         </ul>
                       </div><!-- /.navbar-collapse -->";
-
                             }if($id == 3){
                                 echo "<!--div main menu collapse -->
                                 <div id='main-menu' class='main-menu collapse navbar-collapse'>
@@ -180,7 +179,7 @@ if($this->session->flashdata('correcto'))
                                         <a href='' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-file'></i>Oficio</a>
                                         <ul class='sub-menu children dropdown-menu'>
                                             <li><i class='menu-icon fa ti-file'></i><a href='nuevaEntrada'>Oficio Recepción</a></li>
-                                            <li><i class='menu-icon fa ti-files'></i><a href='muestraEntrada'>Consulta Oficio</a></li>
+                                            <li><i class='menu-icon fa ti-list-alt'></i><a href='muestraEntrada'>Consulta Oficio</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -198,8 +197,33 @@ if($this->session->flashdata('correcto'))
                                         </ul>
                                     </li>
                                 </ul>
-                            </div><!-- /.navbar-collapse -->  
-                            ";
+                            </div><!-- /.navbar-collapse -->";
+                        }if($id == 5){
+                            echo " 
+                            <!--div main menu collapse -->
+                                <div id='main-menu' class='main-menu collapse navbar-collapse'>
+                                <ul class='nav navbar-nav'>                    <!--h3 class='menu-title'>UI elements</h3><!-- /.menu-title -->    
+                                    <h3 class='menu-title'>Módulo Consulta</h3>
+                                    <li class='menu-item-has-children dropdown'>
+                                        <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-search'></i>Recepción</a>
+                                        <ul class='sub-menu children dropdown-menu'>
+                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaEntrada'>Consulta Recepción</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class='menu-item-has-children dropdown'>    
+                                        <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-search'></i>Seguimiento</a>
+                                        <ul class='sub-menu children dropdown-menu'>
+                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Seguimiento</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class='menu-item-has-children dropdown'>    
+                                        <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-search'></i>Atendido</a>
+                                        <ul class='sub-menu children dropdown-menu'>
+                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Atendido</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div><!-- /.navbar-collapse -->";
                         }
             ?>
         </nav>
@@ -220,7 +244,6 @@ if($this->session->flashdata('correcto'))
                     <h2>Sistema de Gestión de Oficios</h2>
                     <a id='menuToggle' class='menutoggle pull-left'><i class='fa fa fa-tasks'></i></a>
                 </div>
-
                 <div class='col-sm-5'>
                     <div class='user-area dropdown float-right'>
                         <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>

@@ -99,7 +99,8 @@
                                     $nom = $this->session->userdata('name');
                                     echo "<div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$nom."' disabled>
                                           <input type='text' id='text-input' name='atencion' value='".$id."' hidden>
-                                          </div>";?>
+                                          </div>";
+                                ?>
                            </div>
                         <!--/form-->
                     </div>

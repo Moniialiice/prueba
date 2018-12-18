@@ -48,7 +48,7 @@
                                         "<td align='center'><a href='descargar/".$dato->arch_entrada."' class='fa fa-download fa-1x'></a></td>".
                                         "</tr>";
                               }
-                             ?>
+                            ?>
                         </tbody>
                     </table>
                 </div>

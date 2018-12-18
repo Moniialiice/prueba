@@ -202,7 +202,7 @@ class Usuario extends CI_Controller
                     }
                 }    
             }else{
-                //tomamos los datos en un array para emviar a la vista
+                //tomamos los datos en un array para enviar a la vista
                 $datos=array();
                 $datos['name'] = $name;
                 $datos['app'] = $app;
@@ -267,7 +267,5 @@ class Usuario extends CI_Controller
             $this->session->set_flashdata('Error', 'Consultar administrador');
             $this->actualizarUsuario($i);
         }
-    } 
-
-     
+    }  
 }

@@ -122,7 +122,7 @@ class Oficio extends CI_Controller
                 {
                     case '400LIA000': 
                         if($nomen == $tipoOficio && $ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
-                            $consecutivo = $this->generate_numbers($num+1,1,4); //manda datos para generar consecutivo
+                            $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
                             $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$year; //crea nomenclatura coordinador
                             //inserta los datos 
                             $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $fechat, $observaciones, $atencion, $asunto, $ide);               
@@ -154,7 +154,7 @@ class Oficio extends CI_Controller
                         break;    
                     case '400LI0010':
                        if($nomen == $tipoOficio && $ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
-                        $consecutivo = $this->generate_numbers($num+1, 1, 4); //manda datos para generar consecutivo                           
+                        $consecutivo = $this->generaNomenclatura($num+1, 1, 4); //manda datos para generar consecutivo                           
                         $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$year; //genera nomenclatura secretario
                         $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $fechat, $observaciones, $atencion, $asunto, $ide);               
                         if($insertOficio == true){                    
@@ -182,18 +182,18 @@ class Oficio extends CI_Controller
                         }
                     break;    
                 }
-            }else{
-                //tomamos los datos del formulario en un array
-                $datos = array();
-                $datos['fecha'] = $fecha;
-                $datos['asunto'] = $asunto;
-                $datos['observaciones'] = $observaciones;                
-                $datos['termino'] = $termino;
-                $datos['datos'] = $this->Oficio_model->datosEntrada($ide);
-                //envia datos del array a la vista
-                $this->load->view('templates/head');
-                $this->load->view('genera_oficio',$datos); 
-                $this->load->view('templates/footer');
+            }else{ 
+                    //tomamos los datos del formulario en un array
+                    $datos = array();
+                    $datos['fecha'] = $fecha;
+                    $datos['asunto'] = $asunto;
+                    $datos['observaciones'] = $observaciones;                
+                    $datos['termino'] = $termino;
+                    $datos['datos'] = $this->Oficio_model->datosEntrada($ide);
+                    //envia datos del array a la vista
+                    $this->load->view('templates/head');
+                    $this->load->view('genera_oficio',$datos); 
+                    $this->load->view('templates/footer');
             }
         }else{
             //mensaje de error si  la inserción no se realiza
@@ -201,8 +201,18 @@ class Oficio extends CI_Controller
             $this->index($ide);
         }
     }
+    //prueba nocmenclatura
+    public function numeracion(){
+        $inicio = "0001";
+        $contador = '0';
+        $digitos = '4'; 
+
+            $query = $this->Oficio_model->pruebaNom(1);
+          
+    }
+
     //ejemplo consecutivo
-    function generate_numbers($start,$count,$digits) 
+    function generaNomenclatura($start,$count,$digits) 
     {
         $result = array();
         for ($n = $start; $n < $start + $count; $n++) {
