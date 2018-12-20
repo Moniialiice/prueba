@@ -89,7 +89,7 @@ class Usuario extends CI_Controller
                 }
         }else{
             $this->session->flashdata('Error','Consultar administrador');
-            }
+        }
     }
     //carga vista de busqueda de usuario
     public function busquedaUsuario()

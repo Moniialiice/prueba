@@ -207,8 +207,9 @@ class Oficio extends CI_Controller
         $contador = '0';
         $digitos = '4'; 
 
-            $query = $this->Oficio_model->pruebaNom(1);
-          
+        $query = $this->Oficio_model->pruebaNom(1);
+        
+        
     }
 
     //ejemplo consecutivo
@@ -265,7 +266,7 @@ class Oficio extends CI_Controller
     }
     //carga formulario de actualización
     public function actualizarOficio($id)
-    {
+    { 
         //consulta los datos del oficio por el id de oficio
         $datos ['datos'] = $this->Oficio_model->report($id);
         //manda datos de la consulta a la vista para mostrar el formulario correspondiente 
