@@ -34,26 +34,29 @@ class Home extends CI_Controller {
             $this->form_validation->set_rules('email', 'Correo', 'required');
             $this->form_validation->set_rules('password', 'Contraseña', 'required');
             //Sino estan vacios los campos, se consulta los datos del usuario
-            if ($this->form_validation->run() == TRUE)
-            {
+            if ($this->form_validation->run() == TRUE){                
                 $query = $this->Usuario_model->getDatos($user,$pass);
                 //Sí se ejecuta con exito la consulta se almacenan los datos en un array
-                if ($query) {
-                         $data_user = array(
+                if($query){
+                        $data_user = array(
                         'id_usuario' => $query->id_usuario,
                         'name' => $query->nombre,
                         'id_tipoUsuario' => $query->id_tipoUsuario,
                         'activo' => $query->activo,
                         'correcto' => TRUE
-                    );
-                    //los datos del usuario se almacenan en un array en la función set_userdata de libreria session
-                    $this->session->set_userdata($data_user);
-                    //carga la función inicio, ingresando al sistema
-                    redirect('index');
-                }elseif($this->session->userdata('activo') == 0){
-                    $this->session->set_flashdata('Activo', 'Consultar administrador');
+                        );
+                    /*if($active != 1){                
+                        $this->session->set_flashdata('Activo','Usuario Inactivo');
+                        redirect('home');        
+                    }else{*/
+                        //los datos del usuario se almacenan en un array en la función set_userdata de libreria session
+                        $this->session->set_userdata($data_user);
+                        //carga la función inicio, ingresando al sistema
+                        redirect('index');               
+                }else{
+                    $this->session->set_flashdata('UP', 'Correo o Contraseña incorrectos');
                     redirect('home');
-                }                
+                    }                                
             }else{
                 $datos = array();
                 $datos['email'] = $user;                
@@ -63,7 +66,7 @@ class Home extends CI_Controller {
                 $this->load->view('templates/head1');
                 $this->load->view('login',$datos);
                 $this->load->view('templates/footer1');                 
-            }
+            }            
         }else{
             redirect('home');
         }

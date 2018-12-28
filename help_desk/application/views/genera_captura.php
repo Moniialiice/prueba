@@ -41,19 +41,6 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="recepcion" role="tabpanel" aria-labelledby="recepcion-tab">
                                     <div class="card-body card-block">
-                                        <?php
-                                        //Mensajes
-                                        if($this->session->flashdata('Creado')){
-                                            echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción creado correctamente.</label></div>";
-                                        }
-                                        if($this->session->flashdata('No')){
-                                            echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción no creado.</label></div>";                            
-                                        }
-                                        if($this->session->flashdata('Error')){
-                                            echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos</label></div>";
-                                        }
-                                        //echo validation_errors(); 
-                                        ?>
                                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
                                             <form action="insertCaptura" method="post" enctype="multipart/form-data" class="form-horizontal">
                                                 <?php
@@ -116,28 +103,13 @@
                                             </form> 
                                     </div>                                                
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i> Guardar
-                                        </button>
-                                        <button type="reset" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-ban"></i> Borrar
+                                        <button type="button" class="btn btn-success btn-sm">
+                                            <i class="fa fa-arrow"></i> Siguiente
                                         </button>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="seguimiento" role="tabpanel" aria-labelledby="seguimiento-tab">
                                     <div class="card-body card-block">
-                                        <?php
-                                        if($this->session->flashdata('Creado')){
-                                            echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Datos ingredos correctamente.</label></div>";
-                                        }
-                                        if($this->session->flashdata('No')){
-                                            echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no ingresados.</label></div>";    
-                                        }
-                                        if($this->session->flashdata('Error')){
-                                            echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos, consultar administrador.</label></div>";
-                                        }
-                                        //echo validation_errors();                                        
-                                        ?>
                                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>                                    
                                         <form action="insertaCaptura2" method="post" enctype="multipart/form-data" class="form-horizontal">
                                             <?php
@@ -371,29 +343,13 @@
                                         </form><!-- form-->
                                     </div> <!-- card-body-->
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i> Guardar
-                                        </button>
-                                        <button type="reset" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-ban"></i> Borrar
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i> Siguiente
                                         </button>
                                     </div>  
                                 </div>        
                                 <div class="tab-pane fade" id="atendido" role="tabpanel" aria-labelledby="atendido-tab">
                                     <div class="card-body card-block">
-                                        <?php
-                                            //Mensajes
-                                            if($this->session->flashdata('Creado')){
-                                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción creado correctamente.</label></div>";
-                                            }
-                                            if($this->session->flashdata('No')){
-                                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción no creado.</label></div>";                            
-                                            }
-                                            if($this->session->flashdata('Error')){
-                                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos</label></div>";
-                                            }
-                                                echo validation_errors();    
-                                        ?>
                                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
                                         <form action="insertarCaptura" method="post" enctype="multipart/form-data" class="form-horizontal">
                                             <?php
@@ -444,11 +400,8 @@
                                         </form><!--/form--> 
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i> Guardar
-                                        </button>
-                                        <button type="reset" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-ban"></i> Borrar
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i>  
                                         </button>
                                     </div>
                                 </div>

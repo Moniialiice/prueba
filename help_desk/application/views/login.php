@@ -34,10 +34,13 @@
                             <div class = "alert">
                                 <?php
                                     if($this->session->flashdata('Activo')){
-                                        echo "Consultar administrador <br>";
+                                        echo "Usuario inactivo, consultar administrador <br>";
                                     }
                                     if($this->session->flashdata('Error')){
                                         echo "Verificar correo o contraseña. <br>";
+                                    }
+                                    if($this->session->flashdata('UP')){
+                                        echo "Usuario o Contraseña Incorrectos";
                                     }
                                     echo validation_errors();
                                 ?>
