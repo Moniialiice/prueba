@@ -43,11 +43,8 @@
                                     <div class="card-body card-block">
                                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
                                             <form action="insertCaptura" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                                <?php
-                                                    echo validation_errors();
-                                                ?>
                                                 <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Oficio Entrada</label></div>
+                                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Oficio Recepción</label></div>
                                                     <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="no_oficio" class="form-control" value="<?php echo set_value('no_oficio'); ?>" ></div>
                                                 </div>
                                                 <div class="row form-group">
@@ -100,21 +97,18 @@
                                                     <div class="col col-md-3"><label for="file-input" class="form-control-label"> Archivo Entrada</label></div>
                                                     <div class="col-12 col-md-9"><input id="file-input" name="entrada" class="form-control-file" type="file" ></div>
                                                 </div>
-                                            </form> 
-                                    </div>                                                
-                                    <div class="card-footer">
+                                            <!--/form--> 
+                                    </div>                                               
+                                    <!--div class="card-footer">
                                         <button type="button" class="btn btn-success btn-sm">
                                             <i class="fa fa-arrow"></i> Siguiente
                                         </button>
-                                    </div>
+                                    </div-->
                                 </div>
                                 <div class="tab-pane fade" id="seguimiento" role="tabpanel" aria-labelledby="seguimiento-tab">
                                     <div class="card-body card-block">
                                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>                                    
-                                        <form action="insertaCaptura2" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                            <?php
-                                                echo validation_errors();
-                                            ?>
+                                        <!--form action="insertaCaptura2" method="post" enctype="multipart/form-data" class="form-horizontal"-->
                                                 <div class='row form-group'>
                                                     <div class='col col-md-3'><label for='text-input' class=' form-control-label'>No Oficio Seguimiento</label></div>
                                                     <div class='col-12 col-md-9'><input type='text-input' id="text-input" name='nomenclatura' class='form-control' ></div>
@@ -340,18 +334,18 @@
                                                                 <input type='text' id='text-input' name='atencion' value='".$id."' hidden>
                                                                 </div>";?>    
                                                     </div>
-                                        </form><!-- form-->
+                                        <!--/form>< form-->
                                     </div> <!-- card-body-->
-                                    <div class="card-footer">
+                                    <!--div class="card-footer">
                                         <button type="submit" class="btn btn-success btn-sm">
                                             <i class="fa fa-dot-circle-o"></i> Siguiente
                                         </button>
-                                    </div>  
+                                    </div-->  
                                 </div>        
                                 <div class="tab-pane fade" id="atendido" role="tabpanel" aria-labelledby="atendido-tab">
                                     <div class="card-body card-block">
                                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
-                                        <form action="insertarCaptura" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        <!--form action="insertCaptura" method="post" enctype="multipart/form-data" class="form-horizontal"-->
                                             <?php
                                                 //echo date('l jS \of F Y h:i:s A');
                                                 //oficio entrada e id                                       
@@ -397,11 +391,15 @@
                                                     echo "<div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$nom."' disabled>
                                                         <input type='text' id='text-input' name='atencion' value='".$id."' hidden>
                                                         </div>";?>
-                                        </form><!--/form--> 
-                                    </div>
+                                        <!--/form><--/form-->
+                                            
+                                    </div>                                    
+                                        <?php
+                                            echo validation_errors();
+                                        ?>  
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-success btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i>  
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-dot-circle-o">Guardar</i>  
                                         </button>
                                     </div>
                                 </div>

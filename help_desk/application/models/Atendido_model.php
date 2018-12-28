@@ -21,7 +21,7 @@ class Atendido_model extends CI_model
     //inserción de datos atendido
     public function insert_Atendido($fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion)
     {
-        $query = $this->db->query("INSERT INTO oficio_atendido (fecha_atendido, nombre_aten, cargo_aten, descripcion, arch_atendido, copia_a, id_oficioseg, atencion) VALUES ('$fecha1', '$asunto', '$nombre', '$cargo', '$descripcion', '$archivo', '$copia', '$segui', '$atencion')");
+        $query = $this->db->query("INSERT INTO oficio_atendido (fecha_atendido, nombre_aten, cargo_aten, descripcion, arch_atendido, copia_a, id_oficioseg, atencion) VALUES ('$fecha1', '$nombre', '$cargo', '$descripcion', '$archivo', '$copia', '$segui', '$atencion')");
         if($query){
             return true;
         }else{

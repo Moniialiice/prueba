@@ -49,14 +49,12 @@ class Atendido extends CI_Controller
             $atencion = $this->input->post('atencion');
             //recibimos datos del formulario
             $fecha = $this->input->post('date1');
-            $asunto = $this->input->post('asunto');
             $nombre = $this->input->post('nombre');
             $cargo = $this->input->post('cargo');
             $descripcion = $this->input->post('descripcion');
             $copia = $this->input->post('copia');
             //valida los datos del formulario
             $this->form_validation->set_rules('date1','Fecha','required');
-            $this->form_validation->set_rules('asunto','Asunto','required');
             $this->form_validation->set_rules('nombre','Nombre', 'required');
             $this->form_validation->set_rules('cargo','Cargo','required');
             $this->form_validation->set_rules('descripcion','Descripción','required');
@@ -81,7 +79,7 @@ class Atendido extends CI_Controller
                     $upload_data = $this->upload->data();
                     //toma el nombre del archivo
                     $archivo = $upload_data['file_name']; 
-                    $insertOficio = $this->Atendido_model->insert_Atendido($fecha1, $asunto, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion);
+                    $insertOficio = $this->Atendido_model->insert_Atendido($fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion);
                 
                 if ($insertOficio == true){                    
                     //id oficio seguimiento 
@@ -98,9 +96,8 @@ class Atendido extends CI_Controller
                 //tomamos los datos del formulario en un array
                 $datos = array();
                 $datos['date1'] = $fecha;
-                $datos['asunto'] = $asunto;
                 $datos['nombre'] = $nombre;
-                $datos['cargo'] = $asunto;
+                $datos['cargo'] = $cargo;
                 $datos['descripcion'] = $descripcion;
                 $copia['copia'] = $copia;
                 $datos['datos'] = $this->Atendido_model->datosSeguimiento($segui);
