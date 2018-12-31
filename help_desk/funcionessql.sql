@@ -76,7 +76,7 @@ END
 //
 
 DELIMITER //
-CREATE FUNCTION INSERTCAPTURA (oficio_rec VARCHAR(100), firma_origen_rec VARCHAR(200), cargo_rec LONGTEXT, peticion_rec LONGTEXT, entrada LONGTEXT, fecha_r DATETIME, fecha_rec DATETIME, fecha_recr DATE, oficina INT, peticionario INT, requiriente INT, colaboracion INT, amparo INT, solicitudes INT, gestion INT, cursos INT, juzgados INT, rh INT, telefonia INT, estadistica INT, ri INT, boletas INT, conocimiento INT
+CREATE FUNCTION INSERTCAPTURA (oficio_rec VARCHAR(100), firma_origen_rec VARCHAR(200), cargo_rec LONGTEXT, peticion_rec LONGTEXT, entrada LONGTEXT, fecha_r DATETIME, fecha_rec DATETIME, fecha_recr DATE, oficina INT, peticionario INT, requiriente INT, colaboracion INT, amparo INT, solicitudes INT, gestion INT, cursos INT, juzgados INT, rh INT, telefonia INT, estadistica INT, ri INT, boletas INT, conocimiento INT,
 conase INT, toluca INT, mexico INT, zoriente INT, fgeneral INT, vicefiscalia INT, oficialia INT, informacion INT, central INT, servicio INT, otrad LONGTEXT, diligencia INT, personalmente INT, gestionar INT, archivo INT, otrar LONGTEXT, nomenclatura VARCHAR(100), fecha DATE, termino DATETIME, observaciones LONGTEXT, atencion INT, asunto LONGTEXT, fecha_aten DATE, nombre_aten VARCHAR(100), cargo_aten VARCHAR(100), descripcion_aten LONGTEXT, archivo_aten VARCHAR(100), copia_aten LONGTEXT)
 RETURNS INT
 BEGIN
@@ -91,10 +91,19 @@ DECLARE IDENT, IDI, IDE, IDD, IDR, IDO, IDA INT;
     	SELECT LAST_INSERT_ID() INTO IDD;
 	INSERT INTO ruta_oficio (realiza_diligencias, recibir_personalmente, gestionar_peticion, archivo, otras) VALUES (diligencia, personalmente, gestionar, archivo, otrar);
         SELECT LAST_INSERT_ID() INTO IDR;
-    INSERT INTO oficio_seguimiento (nomenclatura, fecha, id_etAsunto, termino, id_destinatario, observaciones, atencion, id_ruta, id_informar, asunto, id_oficioEntrada) VALUES (nomenclatura, fecha, IDE, termino, IDD, observaciones, atencion, IDR, IDI, asunto, IDENT);
+    INSERT INTO captura (nomen_ofseg, fecha_ofseg, id_etA_ofseg, termino_ofseg, id_dest_ofseg, obs_ofseg, aten_ofseg, id_ruta_ofseg, id_inf_ofseg, asunto_ofseg, id_oficioEntrada_ofseg) VALUES (nomenclatura, fecha, IDE, termino, IDD, observaciones, atencion, IDR, IDI, asunto, IDENT);
         SELECT LAST_INSERT_ID() INTO IDO; 
 	INSERT INTO oficio_atendido (fecha_atendido, nombre_aten, cargo_aten, descripcion, arch_atendido, copia_a, id_oficioseg, atencion) VALUES (fecha_aten, nombre_aten, cargo_aten, descripcion_aten, archivo_aten, copia_aten, IDO, atencion);
     	SELECT LAST_INSERT_ID() INTO IDA;
 RETURN IDO;
 END
 //
+
+SELECT INSERTCAPTURA 
+('ENPRUEBA31122018', 'LIC MARCELO GUZAMN GARCIA', 'MINISTERIO PUBLICO', 'REALIZAR PRUEBA EN BASE A LA CAPTURA DE LOS TRES OFICIOS CREADOS', '', '2018-12-31 10:28:00', '2018-12-31 10:28:00', '2018-12-31',
+0, 1, 0,
+1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+1, 1, 1, 1, 0, 0, 0, 0, 0, 0, '',
+1, 1, 0, 0, '', 
+'400LIA000/0022/2018', '2018-12-31', '2018-12-31 17:30:00', 'PRUEBA DE LA INSERCIÓN DE LOS TRES OFICIOS, RECEPCIÓN, SEGUIMIENTO Y ATENDIDO', 1, 
+'CREACIÓN DE OFICIO RECEPCIÓN, SEGUIMIENTO Y ATENDIDO', '2018-12-31', 'ADMINISTRADOR', 'CARGO ADMINISTRADOR', 'VERIFICACIÓN DE LA CREACIÓN DE OFICIO RECEPCIÓN, SEGUIMIENTO Y ATENDIDO', '', 'C.c. CORDINADOR')

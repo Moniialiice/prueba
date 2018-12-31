@@ -201,17 +201,6 @@ class Oficio extends CI_Controller
             $this->index($ide);
         }
     }
-    //prueba nocmenclatura
-    public function numeracion(){
-        $inicio = "0001";
-        $contador = '0';
-        $digitos = '4'; 
-
-        $query = $this->Oficio_model->pruebaNom(1);
-        
-        
-    }
-
     //ejemplo consecutivo
     function generaNomenclatura($start,$count,$digits) 
     {

@@ -43,8 +43,10 @@ class Captura extends CI_Controller
         $fecha_seg = $this->input->post('fecha');
         $asunto_seg = $this->input->post('asunto');
         $observaciones = $this->input->post('observaciones');
-        
         $termino = $this->input->post('termino');
+        $insertCaptura = $this->Captura_model->insertaCaptura($oficio_rec, $fecha_r, $fecha_rec, 
+        $fecha_recr, $firma_origen_rec, $cargo_rec, $peticion_rec, $entrada, $oficina, $peticionario, $requiriente );
+
         //etiquedas 
         $colaboracion = $this->input->post('colaboracion');
         $amparo = $this->input->post('amparos');
@@ -134,91 +136,6 @@ class Captura extends CI_Controller
             $this->load->view('templates/footer');
         }
     }
-    //prueba al recibir los datos par ala validación
-    public function altaCaptura2(){
-        $nomenclatura = $this->input->post('nomenclatura');
-        $fecha_seg = $this->input->post('fecha');
-        $asunto_seg = $this->input->post('asunto');
-        $observaciones = $this->input->post('observaciones');
-        $termino = $this->input->post('termino');
-        //etiquedas 
-        $colaboracion = $this->input->post('colaboracion');
-        $amparo = $this->input->post('amparos');
-        $solicitudes = $this->input->post('solicitudes');
-        $gestion = $this->input->post('gestion');
-        $cursos = $this->input->post('cursos');
-        $juzgados = $this->input->post('juzgados');
-        $rh = $this->input->post('rh');
-        $estadistica = $this->input->post('estadistica');
-        $telefonia = $this->input->post('telefonia');
-        $ri = $this->input->post('ri');
-        $boletas = $this->input->post('boletas');
-        $conocimiento = $this->input->post('conocimiento');
-        //dirigido a
-        $conase = $this->input->post('conase');
-        $toluca = $this->input->post('toluca');
-        $mexico = $this->input->post('mexico');
-        $zoriente = $this->input->post('zoriente');
-        $fgeneral = $this->input->post('fgeneral');
-        $vicefiscalia = $this->input->post('vicefiscalia');
-        $oficialia = $this->input->post('oficialia');
-        $informacion = $this->input->post('informacion');
-        $central = $this->input->post('central');
-        $servicio = $this->input->post('servicio');
-        $otrad = $this->input->post('otrad');
-        //ruta oficio
-        $diligencia = $this->input->post('diligencias');
-        $personalmente = $this->input->post('personalmente');
-        $gestionar = $this->input->post('gestionar');
-        $archivo = $this->input->post('archivo');
-        $otrar = $this->input->post('otrar');
-        //informar a
-        $oficina = $this->input->post('oficina');
-        $peticionario = $this->input->post('peticionario');
-        $requiriente = $this->input->post('requiriente');
-        //validamos los campos 
-        $this->form_validation->set_rules('nomenclatura', 'Nomenclatura','required|is_unique[oficio_seguimiento.nomenclatura]|min_length[19]|max_length[19]');
-        $this->form_validation->set_rules('fecha', 'Fecha Oficio Seguimiento','required');
-        $this->form_validation->set_rules('asunto', 'Asunto', 'required');
-        $this->form_validation->set_rules('observaciones', 'Observaciones','required');
-        $this->form_validation->set_rules('termino', 'Plazo', 'required');
-        if($this->form_validation->run()==TRUE){
-
-        }else{
-            $datos = array();
-            $datos['nomenclatura'] = $nomenclatura;
-            $datos['fecha'] = $fecha_seg;
-            $datos['asunto'] = $asunto_seg;
-            $datos['observaciones'] = $observaciones;
-            $datos['termino'] = $termino; 
-            $this->load->view('templates/head');
-            $this->load->view('genera_captura');
-            $this->load->view('templates/footer');
-        }
-
-    }
-    //prueba de validación al recibir 
-    public function altaCapturaAnt(){
-        $fecha_aten = $this->input->post('fecha_at');
-        $cargo_aten = $this->input->post('cargo_at');
-        $descripcion_aten = $this->input->post('descripcion_at');
-        $copia_aten = $this->input->post('copia_at');
-        //inicia validación
-        $this->form_validation->set_rules('fecha_at','Fecha Atendido','required');
-        $this->form_validation->set_rules('cargo_at','Cargo Atendido','required');
-        $this->form_validation->set_rules('descripcion_at','Descrión atendido','required');
-        if($this->form_validation->run()==TRUE){
-
-        }else{
-            $datos = array();
-            $datos['fecha_at'] = $fecha_aten;
-            $datos['cargo_at'] = $cargo_aten;
-            $datos['descripcion_at'] = $descripcion_aten;
-            $datos['copia_at'] = $copia_aten;
-            $this->load->view('templates/head');
-            $this->load->view('genera_captura');
-            $this->load->view('templates/footer');
-        }
-    }
+    
 
 }

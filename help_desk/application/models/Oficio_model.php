@@ -32,15 +32,6 @@ class Oficio_model extends CI_Model{
         $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='$id'");
         return $query->result();
     }
-    //prueba para contador 
-    public function pruebaNom($id){
-        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='$id'");
-        if($query){
-            return TRUE;
-        }else{
-            return FALSE;
-        }
-    }
     //llama oficio para insertar oficio seguimiento
     public function insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha, $termino, $observaciones, $atencion, $asunto, $ide)
     {
