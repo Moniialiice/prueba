@@ -27,6 +27,14 @@
                         <strong>Datos </strong>
                     </div>
                     <div class="card-body card-block">
+                        <?php
+                             if($this->session->flashdata('Creado')){
+                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción creado correctamente.</label></div>";
+                            }
+                            if($this->session->flashdata('No')){
+                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción no creado.</label></div>";                            
+                            }
+                        ?>
                             <ul class="nav nav-tabs" id="Tab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="recepcion-tab" data-toggle="tab" href="#recepcion" role="tab" aria-controls="recepcion" aria-selected="true">Recepción</a>
@@ -117,7 +125,7 @@
                                                         <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha De Atención</label></div>
                                                         <div class="col-12 col-md-9">
                                                             <div class='input-group' >
-                                                                <input type='text-input' class="form-control" id="date1" name="fecha" value="<?php echo set_value('fecha');?>"  >
+                                                                <input type='text-input' class="form-control" id="date2" name="fecha" value="<?php echo set_value('fecha');?>"  >
                                                                 <span class="input-group-addon">
                                                                     <span class="fa fa-calendar" ></span>
                                                                 </span>
@@ -313,7 +321,7 @@
                                                         <div class="col col-md-3"><label for="select" class=" form-control-label"> Término en horas</label></div>
                                                             <div class='col-12 col-md-9'>
                                                             <div class='input-group' >
-                                                                <input type='text-input' class="form-control" id="datepicker" name="termino" value="<?php echo set_value('termino');?>"  >
+                                                                <input type='text-input' class="form-control" id="datepickert" name="termino" value="<?php echo set_value('termino');?>"  >
                                                                 <span class="input-group-addon">
                                                                     <span class="fa fa-calendar" ></span>
                                                                 </span>
@@ -323,16 +331,6 @@
                                                     <div class="row form-group">
                                                         <div class="col col-sm-3"><label for="textarea-input" class=" form-control-label">Observaciones</label></div>
                                                         <div class="col col-md-9"><textarea name="observaciones" id="textarea-input" OnKeyUp="Upper(this);" rows="9" class="form-control"><?php echo set_value('observaciones');?></textarea></div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class= "col col-md3"><label for="text-input" class="form-control-label">Atención</label></div>
-                                                        <?php
-                                                        //se toman los datos del usuario de las sesiones
-                                                            $id = $this->session->userdata('id_usuario');
-                                                            $nom = $this->session->userdata('name');
-                                                            echo "<div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$nom."' disabled>
-                                                                <input type='text' id='text-input' name='atencion' value='".$id."' hidden>
-                                                                </div>";?>    
                                                     </div>
                                         <!--/form>< form-->
                                     </div> <!-- card-body-->
@@ -354,7 +352,7 @@
                                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Atendido</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <div class='input-group' >                                        
-                                                        <input type='text-input' class="form-control" id="date1" name="fecha_at" value="<?php echo set_value('fecha_at'); ?>">
+                                                        <input type='text-input' class="form-control" id="date3" name="fecha_at" value="<?php echo set_value('fecha_at'); ?>">
                                                         <span class="input-group-addon">
                                                             <span class="fa fa-calendar"></span>
                                                         </span>

@@ -16,10 +16,16 @@ class Oficio_model extends CI_Model{
         $query = $this->db->query("SELECT id_oficioEntrada, no_oficioEntrada FROM oficio_entrada WHERE id_oficioEntrada = '$id'");
         return $query->result();
     }    
-    //consulta si el id_oficioEntrada
+    //consulta si el id_oficioseg existe 
     public function entradaSeguimiento($id)
     {
         $query = $this->db->query("SELECT id_oficioseg FROM oficio_seguimiento WHERE id_oficioEntrada = '$id'");
+        return $query->result();
+    }
+    //consulta si el id_oficioseg existe en la tabla captura
+    public function capturaSeguimiento($id)
+    {
+        $query = $this->db->query("SELECT id_ofseg FROM captura WHERE id_oficioEntrada_ofseg = '$id'");
         return $query->result();
     }
     //se obtiene ultima nomenclatura de oficio seguimiento
@@ -58,6 +64,12 @@ class Oficio_model extends CI_Model{
     public function report($id)
     {
         $query = $this->db->query("SELECT o.id_oficioseg, o.nomenclatura, o.fecha, o.termino, o.observaciones, o.asunto, a.colaboracion, a.amparos, a.solicitudes, a.gestion, a.cursos_capacitaciones, a.juzgados, a.recursos_humanos, a.telefonia, a.estadistica, a.relaciones_interis, a.boletas_audiencia, a.copias_conocimiento, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, i.esta_oficina, i.peticionario, i.institucion_requiriente, r.realiza_diligencias, r.recibir_personalmente, r.gestionar_peticion, r.archivo, r.otras, en.id_oficioEntrada, en.no_oficioEntrada, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, etiquetas_asunto AS a, informar AS i, ruta_oficio AS r, oficio_entrada AS en, usuario AS u WHERE d.id_destinatario = o.id_destinatario AND a.id_etAsunto = o.id_etAsunto AND i.id_informar = o.id_informar AND r.id_ruta = o.id_ruta AND i.id_informar = o.id_informar AND o.id_oficioEntrada = en.id_oficioEntrada AND u.id_usuario = o.atencion AND id_oficioseg = '$id' ");
+        return $query->result();
+    }
+    //consulta de Oficio mediante id, muestra todos los datos de oficio en captura (usuario, entrada,) 
+    public function reportCaptura($id)
+    {
+        $query = $this->db->query("SELECT c.id_ofseg, c.nomen_ofseg, c.fecha_ofseg, c.termino_ofseg, c.asunto_ofseg, c.obs_ofseg, a.colaboracion, a.amparos, a.solicitudes, a.gestion, a.cursos_capacitaciones, a.juzgados, a.recursos_humanos, a.telefonia, a.estadistica, a.relaciones_interis, a.boletas_audiencia, a.copias_conocimiento, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, i.esta_oficina, i.peticionario, i.institucion_requiriente, r.realiza_diligencias, r.recibir_personalmente, r.gestionar_peticion, r.archivo, r.otras, en.id_oficioEntrada, en.no_oficioEntrada, u.nombre, u.apellidop, u.apellidom FROM captura AS c, destinatario AS d, etiquetas_asunto AS a, informar AS i, ruta_oficio AS r, oficio_entrada AS en, usuario AS u WHERE d.id_destinatario = c.id_dest_ofseg AND a.id_etAsunto = c.id_etA_ofseg AND i.id_informar = c.id_inf_ofseg AND r.id_ruta = c.id_ruta_ofseg AND i.id_informar = c.id_inf_ofseg AND c.id_etA_ofseg = en.id_oficioEntrada AND u.id_usuario = c.aten_ofseg AND id_ofseg = '1'");
         return $query->result();
     }
     //consulta para actualizar

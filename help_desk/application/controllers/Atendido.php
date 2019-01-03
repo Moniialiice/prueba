@@ -79,9 +79,7 @@ class Atendido extends CI_Controller
                     $upload_data = $this->upload->data();
                     //toma el nombre del archivo
                     $archivo = $upload_data['file_name']; 
-                    $insertOficio = $this->Atendido_model->insert_Atendido($fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion);
-                
-                if ($insertOficio == true){                    
+                    $insertOficio = $this->Atendido_model->insert_Atendido($fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion);                if ($insertOficio == true){                    
                     //id oficio seguimiento 
                     $idatendido = $this->Atendido_model->getIDA($segui);
                     $ida = $idatendido[0]->id_oficioAtendido;

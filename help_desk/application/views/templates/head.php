@@ -32,7 +32,7 @@ if($this->session->flashdata('correcto'))
             <!--datepicker-->
     <script>
         $(function Calendario() {
-            $( "#date1,#date2").datepicker({
+            $( "#date1,#date2,#date3").datepicker({
                 dateFormat: 'dd/mm/yy',
                 changeMonth:true,
                 changeYear:true,
@@ -54,7 +54,7 @@ if($this->session->flashdata('correcto'))
     <script type="text/javascript" src="assets/js/jquery.ui.datepicker-es"></script>
     <script>
     $(function(){
-            $('#datepicker,#datepickerf').datetimepicker({
+            $('#datepicker,#datepickerf,#datepickert').datetimepicker({
                 dateFormat: 'dd/mm/yy',
                 changeMonth:true,
                 changeYear:true,
@@ -128,6 +128,7 @@ if($this->session->flashdata('correcto'))
                                 <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-list'></i>Captura</a>
                                 <ul class='sub-menu children dropdown-menu'>
                                     <li><i class='menu-icon fa ti-file'></i><a href='nuevaCaptura'>Alta</a></li>
+                                    <li><i class='menu-icon fa ti-file'></i><a href='consultaCaptura'>Consulta</a></li>
                                 </ul>
                             </li>
                             <h3 class='menu-title'>Usuarios</h3>

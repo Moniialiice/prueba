@@ -28,10 +28,14 @@ class Oficio extends CI_Controller
         //$id = $this->encrypt->decode($enID);
         $datos ['datos'] = $this->Oficio_model->datosEntrada($id); //datos de tabla oficio entrada
         $eSeguimiento = $this->Oficio_model->entradaSeguimiento($id); //obtiene id de oficio seguimiento
+        $eCaptura = $this->Oficio_model->capturaSeguimiento($id); //verifica si oficio seg existe en tabla captura
         //si se ejecuta eSeguimiento 
         if($eSeguimiento){
             $idoficio = $eSeguimiento[0]->id_oficioseg; //id de oficioSeguimiento
             $this->actualizarOficio($idoficio); //carga formulario de actualización
+        }elseif($eCaptura){
+            $idcaptura = $eCaptura[0]->id_ofseg;
+            $this->actualizarOficioCaptura($idcaptura);
         }else{            
             //carga el vista para nuevo oficio seguimiento
             $this->load->view('templates/head');
@@ -214,7 +218,7 @@ class Oficio extends CI_Controller
     public function busquedaOficio()
     {
         $this->load->view('templates/head');
-        $this->load->view('busqueda_oficio');
+        $this->load->view('busqueda_oficioCaptura');
         $this->load->view('templates/footer');
     }
     //muestra consulta de oficio por la búsqueda
@@ -244,6 +248,7 @@ class Oficio extends CI_Controller
                 $this->load->view('all_oficio', $datos);
             }else{
                 $datos = array();
+                $datos['busqueda'] = $search;
                 $datos['date1'] = $date1;
                 $datos['date2'] = $date2;
                 $this->load->view('all_oficio',$datos);
@@ -255,6 +260,16 @@ class Oficio extends CI_Controller
     }
     //carga formulario de actualización
     public function actualizarOficio($id)
+    { 
+        //consulta los datos del oficio por el id de oficio
+        $datos ['datos'] = $this->Oficio_model->report($id);
+        //manda datos de la consulta a la vista para mostrar el formulario correspondiente 
+            $this->load->view('templates/head');
+            $this->load->view('consulta_oficio',$datos); //formulario para visualizar oficio e imprimir
+            $this->load->view('templates/footer');    
+    }
+    //carga formulario de oficio seguimiento con datos de captura
+    public function actualizarOficioCaptura($id)
     { 
         //consulta los datos del oficio por el id de oficio
         $datos ['datos'] = $this->Oficio_model->report($id);
