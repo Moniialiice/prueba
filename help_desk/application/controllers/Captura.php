@@ -19,7 +19,7 @@ class Captura extends CI_Controller
         $this->load->library('calendar');
         $this->load->library('upload');
         //$this->load->library('curl');
-        $this->folder = 'documentc/';
+        $this->folder = 'captura/';
     }
     //función para cargar vista de captura
     public function index(){
@@ -39,7 +39,19 @@ class Captura extends CI_Controller
         $firma_origen_rec = $this->input->post('firma_r');
         $cargo_rec = $this->input->post('cargo_r');
         $peticion_rec = $this->input->post('peticion_r');
-        $entrada = $this->input->post('entrada');
+        //datos requeridos para subir archivo y ruta a guardar 
+        $config['upload_path'] = $this->folder;
+        $config['allowed_types'] = 'jpg|png|pdf';
+        $config['max_size'] = 1000;
+        //carga libreria archivos e inicializa el array config con los datos del archivo
+        $this->load->library('upload',$config);
+        $this->upload->initialize($config);
+        //toma el datos de archivo entrada
+        $this->upload->do_upload('entrada');                
+        //carga los datos del archivo
+        $upload_data = $this->upload->data();
+        //toma el nombre del archivo
+        $entrada = $upload_data['file_name'];
         //recibe datos de oficio seguimiento para insertar en la tabla de captura
         $nomenclatura = $this->input->post('nomenclatura');
         $fecha_seg = $this->input->post('fecha');
@@ -85,9 +97,21 @@ class Captura extends CI_Controller
         $fecha_aten = $this->input->post('fecha_at');
         $nombre_aten = $this->input->post('nombre_at');
         $cargo_aten = $this->input->post('cargo_at');
-        $archivo_aten = $this->input->post('archivo');
         $descripcion_aten = $this->input->post('descripcion_at');
         $copia_aten = $this->input->post('copia_at');
+        //datos requeridos para subir archivo y ruta a guardar 
+        $config['upload_path'] = $this->folder;
+        $config['allowed_types'] = 'jpg|png|pdf';
+        $config['max_size'] = 1000;
+        //carga libreria archivos e inicializa el array config con los datos del archivo
+        $this->load->library('upload',$config);
+        $this->upload->initialize($config);
+        //toma el datos de archivo entrada
+        $this->upload->do_upload('archivo');                
+        //carga los datos del archivo
+        $upload_data = $this->upload->data();
+        //toma el nombre del archivo
+        $archivo_aten = $upload_data['file_name'];
         //valida los datos recibidos de oficio recepción
             $this->form_validation->set_rules('no_oficio', 'No. de Oficio Recepción', 'required|is_unique[oficio_entrada.no_oficioEntrada]');
             $this->form_validation->set_rules('fecha_r', 'Día y Hora Recepción','required');
@@ -135,7 +159,7 @@ class Captura extends CI_Controller
             $date6 = $fecha_aten;
             $space6 = explode('/',$date6);
             $fecha6 = $space6[2]."-".$space6[1]."-".$space6[0];
-
+            
             $insertCaptura = $this->Captura_model->insertaCaptura($oficio_rec, $fecha1, $fecha2, $fecha3, $firma_origen_rec, $cargo_rec, 
             $peticion_rec, $entrada, $oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, 
             $rh, $estadistica, $telefonia, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia,
@@ -216,7 +240,7 @@ class Captura extends CI_Controller
                 $this->load->view('all_oficio',$datos);
             }
         }else{
-            //mensaje de error si  la inserción no se realiza
+            //mensaje de error 
             $this->session->set_flashdata('Error','Consultar administrador');
         }    
     }

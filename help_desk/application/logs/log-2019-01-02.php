@@ -3287,3 +3287,52 @@ INFO - 2019-01-02 17:50:58 --> Security Class Initialized
 INFO - 2019-01-02 17:50:58 --> Input Class Initialized
 INFO - 2019-01-02 17:50:58 --> Language Class Initialized
 ERROR - 2019-01-02 17:50:58 --> 404 Page Not Found: Assets/js
+INFO - 2019-01-02 18:00:32 --> Config Class Initialized
+INFO - 2019-01-02 18:00:32 --> Hooks Class Initialized
+INFO - 2019-01-02 18:00:32 --> UTF-8 Support Enabled
+INFO - 2019-01-02 18:00:32 --> Utf8 Class Initialized
+INFO - 2019-01-02 18:00:32 --> URI Class Initialized
+INFO - 2019-01-02 18:00:32 --> Router Class Initialized
+INFO - 2019-01-02 18:00:32 --> Output Class Initialized
+INFO - 2019-01-02 18:00:32 --> Security Class Initialized
+INFO - 2019-01-02 18:00:32 --> Input Class Initialized
+INFO - 2019-01-02 18:00:32 --> Language Class Initialized
+INFO - 2019-01-02 18:00:32 --> Loader Class Initialized
+INFO - 2019-01-02 18:00:32 --> Controller Class Initialized
+INFO - 2019-01-02 18:00:32 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2019-01-02 18:00:32 --> Pagination Class Initialized
+INFO - 2019-01-02 18:00:32 --> Helper loaded: url_helper
+INFO - 2019-01-02 18:00:32 --> Helper loaded: form_helper
+DEBUG - 2019-01-02 18:00:32 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2019-01-02 18:00:32 --> Session: Class initialized using 'files' driver.
+INFO - 2019-01-02 18:00:32 --> Encrypt Class Initialized
+INFO - 2019-01-02 18:00:32 --> Database Driver Class Initialized
+INFO - 2019-01-02 18:00:32 --> Model "Usuario_model" initialized
+INFO - 2019-01-02 18:00:32 --> Form Validation Class Initialized
+INFO - 2019-01-02 18:00:32 --> Config Class Initialized
+INFO - 2019-01-02 18:00:32 --> Hooks Class Initialized
+INFO - 2019-01-02 18:00:32 --> UTF-8 Support Enabled
+INFO - 2019-01-02 18:00:32 --> Utf8 Class Initialized
+INFO - 2019-01-02 18:00:32 --> URI Class Initialized
+INFO - 2019-01-02 18:00:32 --> Router Class Initialized
+INFO - 2019-01-02 18:00:32 --> Output Class Initialized
+INFO - 2019-01-02 18:00:32 --> Security Class Initialized
+INFO - 2019-01-02 18:00:32 --> Input Class Initialized
+INFO - 2019-01-02 18:00:32 --> Language Class Initialized
+INFO - 2019-01-02 18:00:32 --> Loader Class Initialized
+INFO - 2019-01-02 18:00:32 --> Controller Class Initialized
+INFO - 2019-01-02 18:00:32 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2019-01-02 18:00:32 --> Pagination Class Initialized
+INFO - 2019-01-02 18:00:32 --> Helper loaded: url_helper
+INFO - 2019-01-02 18:00:32 --> Helper loaded: form_helper
+DEBUG - 2019-01-02 18:00:32 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2019-01-02 18:00:32 --> Session: Class initialized using 'files' driver.
+INFO - 2019-01-02 18:00:32 --> Encrypt Class Initialized
+INFO - 2019-01-02 18:00:32 --> Database Driver Class Initialized
+INFO - 2019-01-02 18:00:32 --> Model "Usuario_model" initialized
+INFO - 2019-01-02 18:00:32 --> Form Validation Class Initialized
+INFO - 2019-01-02 18:00:32 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head1.php
+INFO - 2019-01-02 18:00:32 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\login.php
+INFO - 2019-01-02 18:00:32 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer1.php
+INFO - 2019-01-02 18:00:32 --> Final output sent to browser
+INFO - 2019-01-02 18:00:32 --> Total execution time: 0.0380

@@ -18,9 +18,7 @@ class Oficio extends CI_Controller
         $this->load->model('Oficio_model');
         $this->load->library(array('form_validation'));
         $this->load->library('calendar');
-        $this->load->library('upload');
         //$this->load->library('curl');
-        $this->folder = 'documents/';
     }
     //función carga templates, el formulario para generar oficio con el $id del oficio entrada
     public function index($id)
@@ -268,98 +266,15 @@ class Oficio extends CI_Controller
             $this->load->view('consulta_oficio',$datos); //formulario para visualizar oficio e imprimir
             $this->load->view('templates/footer');    
     }
-    //carga formulario de oficio seguimiento con datos de captura
+    //carga formulario de datos oficio seguimiento de captura
     public function actualizarOficioCaptura($id)
     { 
         //consulta los datos del oficio por el id de oficio
-        $datos ['datos'] = $this->Oficio_model->report($id);
+        $datos ['datos'] = $this->Oficio_model->reportCaptura($id);
         //manda datos de la consulta a la vista para mostrar el formulario correspondiente 
             $this->load->view('templates/head');
-            $this->load->view('consulta_oficio',$datos); //formulario para visualizar oficio e imprimir
+            $this->load->view('consulta_captura',$datos); //formulario para visualizar oficio e imprimir
             $this->load->view('templates/footer');    
-    }
-    //función para descargar archivo seguimiento o final
-    public function descarga($name)
-    {
-        $data = file_get_contents($this->folder.$name);
-        force_download($name,$data);
-    }
-    //función de actualización dependiendo del termino del Oficio
-    public function modificaOficio()
-    {
-        //recibe id de oficio seguimiento
-        $id_oficio = $this->input->post('id_oficio');
-        //
-        if($this->input->post()){                       
-            //valida si archivo opcional existe
-            if( ! $this->input->post('opcional') ){
-                //datos requeridos para subir archivo y ruta a guardar 
-                $config['upload_path'] = $this->folder;
-                $config['allowed_types'] = 'jpg|png|pdf';
-                $config['max_size'] = 1000;
-                //carga libreria archivos e inicializa el array config con los datos del archivo
-                $this->load->library('upload',$config);
-                $this->upload->initialize($config); 
-                //recibe archivo opcional
-                $this->upload->do_upload('opcional');
-                //carga los datos del archivo
-                $upload_data = $this->upload->data();            
-                //toma el nombre del archivo opcional
-                $arch_opcional = $upload_data['file_name'];
-                //recibe archivo final
-                $this->upload->do_upload('final');
-                //carga datos del archivo final
-                $upload_data1 = $this->upload->data();
-                //toma el nombre del archivo final
-                $arch_final = $upload_data1['file_name'];
-                //datos del opficio enviados en el modelo para modificar
-                $query = $this->Oficio_model->updateOficio(
-                    $observaciones = $this->input->post('observaciones'),
-                    $termino = $this->input->post('termino'),
-                    $arch_opcional,
-                    $arch_final,
-                    $id_oficio); 
-                if($query){
-                    $this->session->set_flashdata('Modificado','Creado Correctamente');
-                    $this->actualizarOficio($id_oficio);
-                }else{
-                    $this->session->set_flashdata('No','No creado');
-                    $this->actualizarOficio($id_oficio);
-                }                            
-            }else{
-                //datos requeridos para subir archivoa y ruta a guardar
-                $config['upload_path'] = $this->folder;
-                $config['allowed_types'] = 'jpg|png|pdf';
-                $config['max_size'] = 1000;
-                //libreria archivos e inicializa el array config con datos requeridos
-                $this->load->library('upload',$config);
-                $this->upload->initialize($config);
-                //recibe archivo final
-                $this->upload->do_upload('final');
-                //carga datos del archivo final
-                $upload_data1 = $this->upload->data();
-                //toma el nombre del archivo final
-                $arch_final = $upload_data1['file_name'];
-                //datos del opficio enviados en el modelo para modificar
-                $query = $this->Oficio_model->updateOficio(
-                    $observaciones = $this->input->post('observaciones'),
-                    $termino = $this->input->post('termino'),
-                    $arch_opcional = $this->input->post('opcional'),
-                    $arch_final,
-                    $id_oficio); 
-                if($query){
-                    $this->session->set_flashdata('Modificado','Creado Correctamente');
-                    $this->actualizarOficio($id_oficio);
-                }else{
-                    $this->session->set_flashdata('No','No creado');
-                    $this->actualizarOficio($id_oficio);
-                }
-            }                    
-        }else{
-            //recibe formulario vacio
-            $this->session->set_flashdata('Error','datos no recibidos');    
-            $this->index($id_oficio);
-        }
     }
     //función para craar pdf
     public function imprimirOficio($id)
