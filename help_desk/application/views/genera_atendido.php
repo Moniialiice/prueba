@@ -49,6 +49,7 @@
                                             <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Oficio Seguimiento</label></div>
                                             <div class='col-12 col-md-9'>
                                                 <input type='text' id='text-input' value='".$dato->nomenclatura."' class='form-control' disabled>
+                                                <input name= 'nomen' value='".$dato->nomenclatura."' hidden>
                                                 <input type='text' id='text-input' name='segui' value='".$dato->id_oficioseg."' hidden>
                                             </div>
                                           </div>";                

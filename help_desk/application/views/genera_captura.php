@@ -119,7 +119,7 @@
                                         <!--form action="insertaCaptura2" method="post" enctype="multipart/form-data" class="form-horizontal"-->
                                                 <div class='row form-group'>
                                                     <div class='col col-md-3'><label for='text-input' class=' form-control-label'>No Oficio Seguimiento</label></div>
-                                                    <div class='col-12 col-md-9'><input type='text-input' id="text-input" name='nomenclatura' class='form-control' ></div>
+                                                    <div class='col-12 col-md-9'><input type='text-input' id="text-input" name='nomenclatura' class='form-control' value="<?php echo set_value('nomenclatura');?>"></div>
                                                 </div>
                                                     <div class="row form-group">
                                                         <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha De Atención</label></div>

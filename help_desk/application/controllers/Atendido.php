@@ -18,7 +18,7 @@ class Atendido extends CI_Controller
         $this->load->model('Atendido_model');
         $this->load->library(array('form_validation','upload'));
         //$this->load->library('curl');
-        $this->folder = 'documenta/';
+        $this->folder = 'document/atendido/';
     }
     //función carga templates, el formulario para generar oficio con el $id del oficio entrada
     public function index($id)
@@ -45,6 +45,8 @@ class Atendido extends CI_Controller
         $segui = $this->input->post('segui');
         if($this->input->post())
         { 
+            //nomenclatura para colocarlo al archivo atendido
+            $nomen = $this->input->post('nomen');
             //id del usuario que creo el oficio
             $atencion = $this->input->post('atencion');
             //recibimos datos del formulario
@@ -70,6 +72,7 @@ class Atendido extends CI_Controller
                 $config['upload_path'] = $this->folder;
                 $config['allowed_types'] = 'jpg|png|pdf';
                 $config['max_size'] = 1000;
+                $config['file_name'] = $nomen.$fecha;
                 //carga libreria archivos e inicializa el array config con los datos del archivo
                 $this->load->library('upload',$config);
                 $this->upload->initialize($config);

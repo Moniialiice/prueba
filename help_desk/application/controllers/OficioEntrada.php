@@ -18,7 +18,7 @@ class OficioEntrada extends CI_Controller
         $this->load->library('form_validation');
         //$this->load->library('curl');
         $this->load->library('upload');
-        $this->folder = 'document/';
+        $this->folder = 'document/recepcion/';
     }
     //muestra el formulario de oficio entrada
     public function generaEntrada()
@@ -72,6 +72,7 @@ class OficioEntrada extends CI_Controller
                     $config['upload_path'] = $this->folder;
                     $config['allowed_types'] = 'jpg|png|pdf';
                     $config['max_size'] = 1000;
+                    $config['file_name'] = $no_oficio;
                     //carga libreria archivos e inicializa el array config con los datos del archivo
                     $this->load->library('upload',$config);
                     $this->upload->initialize($config);

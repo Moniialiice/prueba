@@ -19,7 +19,6 @@ class Captura extends CI_Controller
         $this->load->library('calendar');
         $this->load->library('upload');
         //$this->load->library('curl');
-        $this->folder = 'captura/';
     }
     //función para cargar vista de captura
     public function index(){
@@ -40,18 +39,19 @@ class Captura extends CI_Controller
         $cargo_rec = $this->input->post('cargo_r');
         $peticion_rec = $this->input->post('peticion_r');
         //datos requeridos para subir archivo y ruta a guardar 
-        $config['upload_path'] = $this->folder;
-        $config['allowed_types'] = 'jpg|png|pdf';
-        $config['max_size'] = 1000;
+        $config_e['upload_path'] = './document/recepcion/.';
+        $config_e['allowed_types'] = 'jpg|png|pdf';
+        $config_e['max_size'] = 1000;
+        $config_e['file_name'] = $oficio_rec;
         //carga libreria archivos e inicializa el array config con los datos del archivo
-        $this->load->library('upload',$config);
-        $this->upload->initialize($config);
+        $this->load->library('upload',$config_e);
+        $this->upload->initialize($config_e);
         //toma el datos de archivo entrada
         $this->upload->do_upload('entrada');                
         //carga los datos del archivo
-        $upload_data = $this->upload->data();
+        $upload_entrada = $this->upload->data();
         //toma el nombre del archivo
-        $entrada = $upload_data['file_name'];
+        $entrada = $upload_entrada['file_name'];
         //recibe datos de oficio seguimiento para insertar en la tabla de captura
         $nomenclatura = $this->input->post('nomenclatura');
         $fecha_seg = $this->input->post('fecha');
@@ -100,18 +100,19 @@ class Captura extends CI_Controller
         $descripcion_aten = $this->input->post('descripcion_at');
         $copia_aten = $this->input->post('copia_at');
         //datos requeridos para subir archivo y ruta a guardar 
-        $config['upload_path'] = $this->folder;
-        $config['allowed_types'] = 'jpg|png|pdf';
-        $config['max_size'] = 1000;
+        $config_aten['upload_path'] = './document/atendido/.';
+        $config_aten['allowed_types'] = 'jpg|png|pdf';
+        $config_aten['max_size'] = 1000;
+        $config_aten['file_name'] = $nomenclatura.$fecha_aten;
         //carga libreria archivos e inicializa el array config con los datos del archivo
-        $this->load->library('upload',$config);
-        $this->upload->initialize($config);
+        $this->load->library('upload',$config_aten);
+        $this->upload->initialize($config_aten);
         //toma el datos de archivo entrada
         $this->upload->do_upload('archivo');                
         //carga los datos del archivo
-        $upload_data = $this->upload->data();
+        $upload_aten = $this->upload->data();
         //toma el nombre del archivo
-        $archivo_aten = $upload_data['file_name'];
+        $archivo_aten = $upload_aten['file_name'];
         //valida los datos recibidos de oficio recepción
             $this->form_validation->set_rules('no_oficio', 'No. de Oficio Recepción', 'required|is_unique[oficio_entrada.no_oficioEntrada]');
             $this->form_validation->set_rules('fecha_r', 'Día y Hora Recepción','required');
