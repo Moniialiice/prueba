@@ -93,13 +93,13 @@ DECLARE IDENT, IDI, IDE, IDD, IDR, IDO, IDA INT;
         SELECT LAST_INSERT_ID() INTO IDR;
     INSERT INTO captura (nomen_ofseg, fecha_ofseg, id_etA_ofseg, termino_ofseg, id_dest_ofseg, obs_ofseg, aten_ofseg, id_ruta_ofseg, id_inf_ofseg, asunto_ofseg, id_oficioEntrada_ofseg) VALUES (nomenclatura, fecha, IDE, termino, IDD, observaciones, atencion, IDR, IDI, asunto, IDENT);
         SELECT LAST_INSERT_ID() INTO IDO; 
-	INSERT INTO oficio_atendido (fecha_atendido, nombre_aten, cargo_aten, descripcion, arch_atendido, copia_a, id_oficioseg, atencion) VALUES (fecha_aten, nombre_aten, cargo_aten, descripcion_aten, archivo_aten, copia_aten, IDO, atencion);
+	INSERT INTO captura_atendido (fecha_atenCap, nombre_atenCap, cargo_atenCap, descCap, arch_atenCap, copia_aCap, id_ofseg, atencionCap) VALUES (fecha_aten, nombre_aten, cargo_aten, descripcion_aten, archivo_aten, copia_aten, IDO, atencion);
     	SELECT LAST_INSERT_ID() INTO IDA;
 RETURN IDO;
 END
 //
 
-SELECT INSERTCAPTURA 
+SELECT INSERTCAPTURA
 ('ENPRUEBA31122018', 'LIC MARCELO GUZAMN GARCIA', 'MINISTERIO PUBLICO', 'REALIZAR PRUEBA EN BASE A LA CAPTURA DE LOS TRES OFICIOS CREADOS', '', '2018-12-31 10:28:00', '2018-12-31 10:28:00', '2018-12-31',
 0, 1, 0,
 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 

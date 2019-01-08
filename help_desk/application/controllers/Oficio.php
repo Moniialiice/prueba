@@ -203,20 +203,11 @@ class Oficio extends CI_Controller
             $this->index($ide);
         }
     }
-    //ejemplo consecutivo
-    function generaNomenclatura($start,$count,$digits) 
-    {
-        $result = array();
-        for ($n = $start; $n < $start + $count; $n++) {
-           $result[] = str_pad($n, $digits, "0", STR_PAD_LEFT);
-        }
-        return $result;
-    }
     //carga formulario de busqueda
     public function busquedaOficio()
     {
         $this->load->view('templates/head');
-        $this->load->view('busqueda_oficioCaptura');
+        $this->load->view('busqueda_oficio');
         $this->load->view('templates/footer');
     }
     //muestra consulta de oficio por la búsqueda

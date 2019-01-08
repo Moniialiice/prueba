@@ -31,7 +31,7 @@ class Captura_model extends CI_model
     }
     //consulta datos de oficio seguimiento de la tabla captura 
     public function consultaOSCaptura($search, $date1, $date2){
-        $query = $this->db->query("SELECT c.id_ofseg, c.nomen_ofseg, c.fecha_ofseg, c.aten_ofseg, c.termino_ofseg, c.obs_ofseg, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM captura AS c, destinatario AS d, usuario AS u WHERE c.fecha_ofseg BETWEEN '$date1' AND '$date2' AND c.nomen_ofseg LIKE '%$search%' AND c.id_dest_ofseg = d.id_destinatario AND c.aten_ofseg = u.id_usuario ORDER BY c.fecha_ofseg ");
+        $query = $this->db->query("SELECT c.id_ofseg, c.nomen_ofseg, c.asunto_ofseg, c.fecha_ofseg, c.aten_ofseg, c.termino_ofseg, c.obs_ofseg, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM captura AS c, destinatario AS d, usuario AS u WHERE c.fecha_ofseg BETWEEN '$date1' AND '$date2' AND c.nomen_ofseg LIKE '%$search%' AND c.id_dest_ofseg = d.id_destinatario AND c.aten_ofseg = u.id_usuario ORDER BY c.fecha_ofseg ");
         return $query->result();
     }
 

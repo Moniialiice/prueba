@@ -26,7 +26,7 @@
                 </div>
                 <div class="card-body card-block">
                     <div class="form-inline">
-                        <form class="search-form" action="resultOficio" method="post" id="oficio">
+                        <form class="search-form" action="resultCaptura" method="post" id="captura">
                             <div class="col col-md-5"><label for="text-input" class="form-control-label" >Búsqueda por número de oficio</label></div>
                             <div class="col col-md-5"><input class="form-control mr-sm-3" type="text-input" OnKeyUp="Upper(this);" id="busqueda" name='busqueda'></div>
                             <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Oficio Inicial</label></div>
@@ -34,13 +34,13 @@
                             <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Oficio Final</label></div>
                             <div class="col col-md-5"><input class="form-control mr-sm-3" type="text-input" class="form-control" id="date2" name="date2">
                                 <span class="input-group-addon">
-                                    <span class="fa fa-search" OnClick="BusquedaOf();"></span>
+                                    <span class="fa fa-search" OnClick="BusquedaCap();"></span>
                                 </span>
                             </div>    
                         </form>
                     </div>
                 </div>
-                <div  class="card-body card-block" id="roficio"></div>
+                <div  class="card-body card-block" id="rcaptura"></div>
             </div>
         </div>
       </div>

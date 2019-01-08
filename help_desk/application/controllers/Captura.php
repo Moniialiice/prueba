@@ -209,7 +209,7 @@ class Captura extends CI_Controller
         $this->load->view('busqueda_oficioCaptura');
         $this->load->view('templates/footer');
     }
-    public function consultaOficioSeguimiento()
+    public function consultaCapturaOS()
     {
         if($this->input->post()){
             //recibe datos del formulario
@@ -231,14 +231,14 @@ class Captura extends CI_Controller
                 $mont2 = $ext2[1];
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
-                $datos['datos'] = $this->Captura_model->searchDate($search,$fecha1,$fecha2);
-                $this->load->view('all_oficio', $datos);
+                $datos['datos'] = $this->Captura_model->consultaOSCaptura($search,$fecha1,$fecha2);
+                $this->load->view('all_oficioseg_Captura', $datos);
             }else{
                 $datos = array();
                 $datos['busqueda'] = $search;
                 $datos['date1'] = $date1;
                 $datos['date2'] = $date2;
-                $this->load->view('all_oficio',$datos);
+                $this->load->view('all_oficioseg_Captura',$datos);
             }
         }else{
             //mensaje de error 

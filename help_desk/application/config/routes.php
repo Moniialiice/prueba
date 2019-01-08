@@ -100,3 +100,4 @@ $route['reporte_excel/(:any)'] = 'Atendido/download/$1';
 $route['nuevaCaptura'] = 'Captura/index';
 $route['insertCaptura'] = 'Captura/altaCaptura';
 $route['consultaCaptura'] = 'Captura/busquedaOficioSeguimiento';
+$route['resultCaptura'] = 'Captura/consultaOficioSeguimiento';
