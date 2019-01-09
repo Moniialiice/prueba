@@ -16,9 +16,7 @@
 		<div class="page-header float-right">
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
-                    <span class="input-group-addon">
-                        <span class="fa fa-download" target='_blank' OnClick="excelOficio();"></span>
-                    </span>  
+                
                 </ol>
 			</div>
 		</div>
@@ -35,7 +33,6 @@
         <th scope="col">Término</th>
         <th scope="col">Atención</th>
         <th scope="col">Imprimir</th>                             
-        <th scope="col">Opciones</th>
         </tr>
     </thead>
         <tbody>
@@ -126,8 +123,7 @@
                                 }
                                 //termino                                
                                 echo"</td><td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
-                                    "<td align ='center'><a href='imprimirOficio/".$dato->id_ofseg."' target='_blank' class='fa fa-print fa-1x'></a></td>".
-                                    "<td align='center'><a href='nuevoAtendido/".$dato->id_ofseg."' class='fa fa-plus fa-1x'></a></td>".
+                                    "<td align ='center'><a href='imprimirCapSeguimiento/".$dato->id_ofseg."' target='_blank' class='fa fa-print fa-1x'></a></td>".
                                 "</tr>";
                               }
                 }              

@@ -34,6 +34,23 @@ class Captura_model extends CI_model
         $query = $this->db->query("SELECT c.id_ofseg, c.nomen_ofseg, c.asunto_ofseg, c.fecha_ofseg, c.aten_ofseg, c.termino_ofseg, c.obs_ofseg, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM captura AS c, destinatario AS d, usuario AS u WHERE c.fecha_ofseg BETWEEN '$date1' AND '$date2' AND c.nomen_ofseg LIKE '%$search%' AND c.id_dest_ofseg = d.id_destinatario AND c.aten_ofseg = u.id_usuario ORDER BY c.fecha_ofseg ");
         return $query->result();
     }
+    //consulta para la impresión de oficio seguimiento pdf
+    public function reportOficioCap($id)
+    {
+        $query = $this->db->query("SELECT c.id_ofseg, c.nomen_ofseg, c.fecha_ofseg, c.termino_ofseg, c.obs_ofseg, c.asunto_ofseg, a.colaboracion, a.amparos, a.solicitudes, a.gestion, a.cursos_capacitaciones, a.juzgados, a.recursos_humanos, a.telefonia, a.estadistica, a.relaciones_interis, a.boletas_audiencia, a.copias_conocimiento, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, i.esta_oficina, i.peticionario, i.institucion_requiriente, r.realiza_diligencias, r.recibir_personalmente, r.gestionar_peticion, r.archivo, r.otras, u.nombre, u.apellidop, u.apellidom FROM captura as c, etiquetas_asunto AS a, destinatario as d, informar as i, ruta_oficio as r, usuario as u WHERE c.id_etA_ofseg = a.id_etAsunto AND c.id_dest_ofseg = d.id_destinatario AND c.id_inf_ofseg = i.id_informar AND c.id_ruta_ofseg = r.id_ruta AND c.aten_ofseg = u.id_usuario AND c.id_ofseg = $id ");
+        return $query->result();
+    }
+    //consulta de tabla captura atención
+    public function consultaAtenCap($search, $date1, $date2){
+        $query = $this->db->query("SELECT a.id_ofAtenCap, a.fecha_atenCap, a.nombre_atenCap, a.cargo_atenCap, a.descCap, a.arch_atenCap, a.copia_aCap, c.nomen_ofseg, u.nombre, u.apellidop, u.apellidom, u.activo FROM captura_atendido as a, captura as c, usuario as u WHERE c.nomen_ofseg LIKE '%$search%' AND a.fecha_atenCap BETWEEN '$date1' AND '$date2' AND a.atencionCap = u.id_usuario");
+        return $query->result();
+    }
+    //consulta de atendido para obtener datos para el oficio en pdf
+    public function reportAtendidoCap($id){
+        $query = $this->db->query("SELECT a.fecha_atenCap, a.nombre_atenCap, a.cargo_atenCap, a.descCap, a.copia_aCap, a.atencionCap, a.id_ofseg, c.nomen_ofseg FROM captura_atendido as a, captura as c WHERE c.id_ofseg = a.id_ofseg AND a.id_ofAtenCap = $id");
+        return $query->result();
+    }
+     
 
 }    
 

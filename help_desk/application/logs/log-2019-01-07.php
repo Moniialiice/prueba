@@ -8618,3 +8618,52 @@ INFO - 2019-01-07 17:47:20 --> Language file loaded: language/spanish/form_valid
 INFO - 2019-01-07 17:47:20 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\all_oficioseg_Captura.php
 INFO - 2019-01-07 17:47:20 --> Final output sent to browser
 INFO - 2019-01-07 17:47:20 --> Total execution time: 0.0624
+INFO - 2019-01-07 18:02:37 --> Config Class Initialized
+INFO - 2019-01-07 18:02:37 --> Hooks Class Initialized
+INFO - 2019-01-07 18:02:37 --> UTF-8 Support Enabled
+INFO - 2019-01-07 18:02:37 --> Utf8 Class Initialized
+INFO - 2019-01-07 18:02:37 --> URI Class Initialized
+INFO - 2019-01-07 18:02:37 --> Router Class Initialized
+INFO - 2019-01-07 18:02:37 --> Output Class Initialized
+INFO - 2019-01-07 18:02:37 --> Security Class Initialized
+INFO - 2019-01-07 18:02:37 --> Input Class Initialized
+INFO - 2019-01-07 18:02:37 --> Language Class Initialized
+INFO - 2019-01-07 18:02:37 --> Loader Class Initialized
+INFO - 2019-01-07 18:02:37 --> Controller Class Initialized
+INFO - 2019-01-07 18:02:37 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2019-01-07 18:02:37 --> Pagination Class Initialized
+INFO - 2019-01-07 18:02:37 --> Helper loaded: url_helper
+INFO - 2019-01-07 18:02:37 --> Helper loaded: form_helper
+DEBUG - 2019-01-07 18:02:37 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2019-01-07 18:02:37 --> Session: Class initialized using 'files' driver.
+INFO - 2019-01-07 18:02:37 --> Encrypt Class Initialized
+INFO - 2019-01-07 18:02:37 --> Database Driver Class Initialized
+INFO - 2019-01-07 18:02:37 --> Model "Usuario_model" initialized
+INFO - 2019-01-07 18:02:37 --> Form Validation Class Initialized
+INFO - 2019-01-07 18:02:37 --> Config Class Initialized
+INFO - 2019-01-07 18:02:37 --> Hooks Class Initialized
+INFO - 2019-01-07 18:02:37 --> UTF-8 Support Enabled
+INFO - 2019-01-07 18:02:37 --> Utf8 Class Initialized
+INFO - 2019-01-07 18:02:37 --> URI Class Initialized
+INFO - 2019-01-07 18:02:37 --> Router Class Initialized
+INFO - 2019-01-07 18:02:37 --> Output Class Initialized
+INFO - 2019-01-07 18:02:37 --> Security Class Initialized
+INFO - 2019-01-07 18:02:37 --> Input Class Initialized
+INFO - 2019-01-07 18:02:37 --> Language Class Initialized
+INFO - 2019-01-07 18:02:37 --> Loader Class Initialized
+INFO - 2019-01-07 18:02:37 --> Controller Class Initialized
+INFO - 2019-01-07 18:02:37 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2019-01-07 18:02:37 --> Pagination Class Initialized
+INFO - 2019-01-07 18:02:37 --> Helper loaded: url_helper
+INFO - 2019-01-07 18:02:37 --> Helper loaded: form_helper
+DEBUG - 2019-01-07 18:02:37 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2019-01-07 18:02:37 --> Session: Class initialized using 'files' driver.
+INFO - 2019-01-07 18:02:37 --> Encrypt Class Initialized
+INFO - 2019-01-07 18:02:37 --> Database Driver Class Initialized
+INFO - 2019-01-07 18:02:37 --> Model "Usuario_model" initialized
+INFO - 2019-01-07 18:02:37 --> Form Validation Class Initialized
+INFO - 2019-01-07 18:02:37 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head1.php
+INFO - 2019-01-07 18:02:37 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\login.php
+INFO - 2019-01-07 18:02:37 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer1.php
+INFO - 2019-01-07 18:02:37 --> Final output sent to browser
+INFO - 2019-01-07 18:02:37 --> Total execution time: 0.0468

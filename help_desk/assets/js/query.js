@@ -106,7 +106,7 @@ function excelAtendido() {
     }
 }
 
-//búsqueda de oficio seguimiento atendido
+//búsqueda de oficio seguimiento captura
 function BusquedaCap(){
     var data = $('#captura').serialize();
     $.ajax({
@@ -118,6 +118,20 @@ function BusquedaCap(){
         }
     });
 }
+
+//búsqueda de oficio atendido captura
+function BusquedaAtenCap(){
+    var data = $('#atendido').serialize();
+    $.ajax({
+        url: 'Captura/consultaCapturaAten', 
+        type: 'post',
+        data: data,
+        success:function(data){
+            $('#ratendido').html(data);
+        }
+    });
+}
+
 //imprime nomenclatura 
 function nomenclatura(){
     var data = $('#nom').serialize();

@@ -44,8 +44,7 @@ class Oficio extends CI_Controller
     //valida los datos para insertar en la base 
     public function createOficioVal()
     {
-        $ide = $this->input->post('entrada');   
-
+        $ide = $this->input->post('entrada');
         if($this->input->post())
         {
             //carga el tipo de nomenclatura

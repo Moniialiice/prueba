@@ -23,7 +23,7 @@ class Captura extends CI_Controller
     //función para cargar vista de captura
     public function index(){
         $this->load->view('templates/head');
-        $this->load->view('genera_captura');
+        $this->load->view('captura/genera_captura');
         $this->load->view('templates/footer');
     }
     //función para dar de alta nuevo registro
@@ -206,7 +206,7 @@ class Captura extends CI_Controller
     //consulta datos de oficio seguimiento en la tabla de captura
     public function busquedaOficioSeguimiento(){
         $this->load->view('templates/head');
-        $this->load->view('busqueda_oficioCaptura');
+        $this->load->view('captura/busqueda_oficioCaptura');
         $this->load->view('templates/footer');
     }
     public function consultaCapturaOS()
@@ -232,18 +232,121 @@ class Captura extends CI_Controller
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
                 $datos['datos'] = $this->Captura_model->consultaOSCaptura($search,$fecha1,$fecha2);
-                $this->load->view('all_oficioseg_Captura', $datos);
+                $this->load->view('captura/all_oficioseg_Captura', $datos);
             }else{
                 $datos = array();
                 $datos['busqueda'] = $search;
                 $datos['date1'] = $date1;
                 $datos['date2'] = $date2;
-                $this->load->view('all_oficioseg_Captura',$datos);
+                $this->load->view('captura/all_oficioseg_Captura',$datos);
             }
         }else{
             //mensaje de error 
             $this->session->set_flashdata('Error','Consultar administrador');
         }    
     }
+    //carga vista de busqueda atendido
+    public function busquedaAtendido (){
+        $this->load->view('templates/head');
+        $this->load->view('captura/busqueda_atendidoCaptura');
+        $this->load->view('templates/footer');
+    }
+    //prueba
+    public function prueba(){
+        $this->load->view('captura/genera_captura');
+    }
+    //consulta atendido de captura
+    public function consultaCapturaAten(){
+        if($this->input->post()){
+            //recibe datos de la busqueda
+            $search = $this->input->post('busqueda');
+            $date1 = $this->input->post('date1');
+            $date2 = $this->input->post('date2');
+            //valida que los datos no esten vacios
+            $this->form_validation->set_rules('date1', 'Fecha Atendido Inicio', 'required');
+            $this->form_validation->set_rules('date2', 'Fecha Atendido Final', 'required');
+            if($this->form_validation->run()==true){
+                //cambiamos formato de fecha
+                $ext = explode("/",$date1);
+                $year = $ext[2];
+                $mont = $ext[1];
+                $day = $ext[0];
+                $fecha1 = $year."-".$mont."-".$day;
+                $ext2 = explode("/",$date2);
+                $year2 = $ext2[2];
+                $mont2 = $ext2[1];
+                $day2 = $ext2[0];
+                $fecha2 = $year2."-".$mont2."-".$day2;
+                $datos['datos'] = $this->Captura_model->consultaAtenCap($search,$fecha1,$fecha2); 
+                $this->load->view('captura/all_atendido_Captura',$datos);
+            }else{
+                $datos = array();
+                $datos['busqueda'] = $search;
+                $datos['date1'] = $date1;
+                $datos['date2'] = $date2;
+                $this->load->view('captura/all_atendido_Captura',$datos);
+            }
+        }else{
+            //mensaje de error
+            $this->session->set_flashdata('Error','Consultar administrador');
+        }
+    }
+    //función para craar pdf
+    public function imprimirOficioCap($id)
+    {
+        $datos['dato'] = $this->Captura_model->reportOficioCap($id);
+        $html = $this->load->view('captura/oficio_pdf', $datos, true);
+        //this the the PDF filename that user will get to download
+        $pdfFilePath = "CapturaOficio_seguimiento." . "pdf";
+        //load TCPDF library
+        $this->load->library('Pdf');
+        //Tamaño de pdf
+        //var_dump($data);
+        $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
+        $pdf->segundaHoja = false;
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetHeaderMargin(20);
+        $pdf->SetTopMargin(20);
+        $pdf->setFooterMargin(15);
+        $pdf->SetAutoPageBreak(true);
+        $pdf->SetAuthor('FGJEM');
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->AddPage('P', 'LETTER');
+        // salida de HTML contenido a pdf
+        $pdf->writeHTML($html, true, false, true, false, '');
+        //manda a imprimir al cargar el archivo
+        //$pdf->IncludeJS("print();"); D
+        $pdf->Output($pdfFilePath, 'I');
+    }
+    //función para generar pdf de oficio atendid
+    public function imprimirAtendidoCap($id)
+    {
+        $datos['dato'] = $this->Captura_model->reportAtendidoCap($id);
+        $html = $this->load->view('captura/atendido_pdf', $datos, true);
+        //this the the PDF filename that user will get to download  
+        $pdfFilePath = "CapturaOficio_atendido." . "pdf";
+        //load TCPDF library
+        $this->load->library('Pdf');
+        //Tamaño de pdf
+        //var_dump($data);
+        $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
+        $pdf->segundaHoja = false;
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetHeaderMargin(20);
+        $pdf->SetTopMargin(20);
+        $pdf->setFooterMargin(15);
+        $pdf->SetAutoPageBreak(true);
+        $pdf->SetAuthor('FGJEM');
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->AddPage('P', 'LETTER');
+        // salida de HTML contenido a pdf
+        $pdf->writeHTML($html, true, false, true, false, '');
+        //manda a imprimir al cargar el archivo
+        //$pdf->IncludeJS("print();"); D
+        $pdf->Output($pdfFilePath, 'I');
+    }    
+
 
 }
