@@ -83,7 +83,24 @@ p{
 </table>
 </div>
 <div class="body">
-<label class="label_encabezado">"AÑO DEL BICENTENARIO DEL NATALICIO DE IGNACIO RAMÍREZ CALZADA, EL NIGROMANTE"</label>
+	<label class="label_encabezado">
+	<?php 
+		switch($year){ 
+			case '2016':
+				echo "\"2016. AÑO DEL CENTENARIO DE LAS CONSTITUCIONES MEXICANA Y MEXIQUENSE DE 1017\".";
+			break;
+			case '2017':
+				echo "\"2017. AÑO DEL CENTENARIO DE LA INSTALACIÓN DEL CONGRESO CONSTITUYENTE\".";
+			break;
+			case '2018':
+				echo "\"2018. AÑO DEL BICENTENARIO DEL NATALICIO DE IGNACIO RAMÍREZ CALZADA, EL NIGROMANTE\".";
+			break;
+			case '2019':
+				echo "\" 2019. AÑO DEL CENTÉSIMO ANIVERSARIO LUCTUOSO DE EMILIANO ZAPATA SALAZAR, EL CAUDILLO DEL SUR\".";
+			break;
+		}	
+	?>
+	</label>
 <br><br><br>
 <table>
 	<tr><td colspan="2"></td><td colspan="6"><p>FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO.<br>COORDINACIÓN GENERAL DE COMBATE AL SECUESTRO.<br>
@@ -102,7 +119,7 @@ p{
 	<tr><td>&nbsp;</td></tr>
 </table>
 <br><br><br><br>
-<label class="label_encabezado">ATENTAMENTE</label><br><br><br>
+<label class="label_encabezado">ATENTAMENTE</label><br><br><br><br><br>
 <label class="label_encabezado">
 	<?php 
 		$nom = $dato[0]->nomenclatura; 

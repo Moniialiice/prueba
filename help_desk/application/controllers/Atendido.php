@@ -203,7 +203,7 @@ class Atendido extends CI_Controller
         $pdf->writeHTML($html, true, false, true, false, '');
         //manda a imprimir al cargar el archivo
         //$pdf->IncludeJS("print();"); D
-        $pdf->Output($pdfFilePath, 'I');
+        $pdf->Output($pdfFilePath, 'D');
     }
     //reporte en excel 
     public function reportExcelA()

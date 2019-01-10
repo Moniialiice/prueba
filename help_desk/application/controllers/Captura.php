@@ -246,14 +246,10 @@ class Captura extends CI_Controller
         }    
     }
     //carga vista de busqueda atendido
-    public function busquedaAtendido (){
+    public function busquedaAtendido(){
         $this->load->view('templates/head');
         $this->load->view('captura/busqueda_atendidoCaptura');
         $this->load->view('templates/footer');
-    }
-    //prueba
-    public function prueba(){
-        $this->load->view('captura/genera_captura');
     }
     //consulta atendido de captura
     public function consultaCapturaAten(){
@@ -291,7 +287,7 @@ class Captura extends CI_Controller
             $this->session->set_flashdata('Error','Consultar administrador');
         }
     }
-    //función para craar pdf
+    //función para craar pdf de oficio seguimiento 
     public function imprimirOficioCap($id)
     {
         $datos['dato'] = $this->Captura_model->reportOficioCap($id);
@@ -317,7 +313,7 @@ class Captura extends CI_Controller
         $pdf->writeHTML($html, true, false, true, false, '');
         //manda a imprimir al cargar el archivo
         //$pdf->IncludeJS("print();"); D
-        $pdf->Output($pdfFilePath, 'I');
+        $pdf->Output($pdfFilePath, 'D');
     }
     //función para generar pdf de oficio atendid
     public function imprimirAtendidoCap($id)
@@ -345,7 +341,7 @@ class Captura extends CI_Controller
         $pdf->writeHTML($html, true, false, true, false, '');
         //manda a imprimir al cargar el archivo
         //$pdf->IncludeJS("print();"); D
-        $pdf->Output($pdfFilePath, 'I');
+        $pdf->Output($pdfFilePath, 'D');
     }    
 
 

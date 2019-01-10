@@ -103,5 +103,5 @@ $route['consultaCaptura'] = 'Captura/busquedaOficioSeguimiento';
 $route['imprimirCapSeguimiento/(:num)'] = 'Captura/imprimirOficioCap/$1'; 
 $route['resultCaptura'] = 'Captura/consultaOficioSeguimiento';
 $route['consultaAtendidoCap'] = 'Captura/busquedaAtendido';
-$route['imprimirCapAtendido/(:num)'] = 'Captura/imprimirAtendidoCap/$1';
+$route['imprimirCapAtendido/(:any)'] = 'Captura/imprimirAtendidoCap/$1';
 $route['resultAtendido'] = 'Captura/consultaCapturaAten';

@@ -45,6 +45,7 @@
                 //corta los datos de d,m,a
                 $ext = explode("-",$date);
                 //obtenemos los datos
+                //$pr = base64_encode($dato->id_ofAtenCap);
                 echo "<tr>
                 <th scope='row'>".$dato->nomen_ofseg."</th>".
                 "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".

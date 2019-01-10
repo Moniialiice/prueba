@@ -87,16 +87,16 @@ p{
 	<?php 
 		switch($year){ 
 			case '2016':
-				echo "\"Año del Centenario de las Constituciones Mexicana y Mexiquense de 1017\"";
+				echo "\"2016. AÑO DEL CENTENARIO DE LAS CONSTITUCIONES MEXICANA Y MEXIQUENSE DE 1017\".";
 			break;
 			case '2017':
-				echo "\"Año del Centenario de la Instalación del Congreso Constituyente\"";
+				echo "\"2017. AÑO DEL CENTENARIO DE LA INSTALACIÓN DEL CONGRESO CONSTITUYENTE\".";
 			break;
 			case '2018':
-				echo "\"Año del Bicentenario Del Natalicio De Ignacio Ramírez Calzada, El Nigromante\"";
+				echo "\"2018. AÑO DEL BICENTENARIO DEL NATALICIO DE IGNACIO RAMÍREZ CALZADA, EL NIGROMANTE\".";
 			break;
 			case '2019':
-				echo "\"nothing\"";
+				echo "\" 2019. AÑO DEL CENTÉSIMO ANIVERSARIO LUCTUOSO DE EMILIANO ZAPATA SALAZAR, EL CAUDILLO DEL SUR\".";
 			break;
 		}	
 	?>
@@ -119,7 +119,7 @@ p{
 	<tr><td>&nbsp;</td></tr>
 </table>
 <br><br><br><br>
-<label class="label_encabezado">ATENTAMENTE</label><br><br><br>
+<label class="label_encabezado">ATENTAMENTE</label><br><br><br><br><br>
 <label class="label_encabezado">
 	<?php 
 		$nom = $dato[0]->nomen_ofseg; 
