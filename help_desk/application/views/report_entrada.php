@@ -51,6 +51,10 @@
                             ?>
                         </tbody>
                     </table>
+                    <?php
+                        /* Se imprimen los números de página */          
+                        echo $this->pagination->create_links();
+                    ?>
                 </div>
             </div>
         </div>

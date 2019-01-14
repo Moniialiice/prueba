@@ -56,7 +56,7 @@
         ?>
     </tbody>
 </table>
-<nav aria-label="Page navigation ">
+<!--nav aria-label="Page navigation ">
   <ul class="pagination">
     <li class="page-item">
       <a class="page-link" href="#results" aria-label="Previous">
@@ -74,8 +74,8 @@
       </a>
     </li>
   </ul>
-</nav>
+</nav-->
     <?php
         /* Se imprimen los números de página */           
-        //echo $this->pagination->create_links();
+        echo $this->pagination->create_links();
     ?>

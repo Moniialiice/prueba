@@ -102,14 +102,13 @@ class Usuario_model extends CI_Model
     }    
     //obtenemos el total de filas para hacer la paginación
 	function filas($search) {
-        $this->db->like('correo', $search);
-        $consulta = $this->db->get('usuario');
-        return $consulta->num_rows();
+        $query = $this->db->query("SELECT u.id_usuario, u.correo, u.nombre, u.apellidop, u.apellidom, u.activo, u.id_tipoUsuario, t.tipoUsuario FROM usuario AS u, tipousuario as t WHERE u.correo LIKE '%$search%' AND u.id_tipoUsuario=t.id_tipoUsuario ORDER BY id_usuario ASC ");
+        return $query->num_rows();
     }      
     //obtenemos todas las provincias a paginar con la función
     //total_posts_paginados pasando la cantidad por página y el segmento
     //como parámetros de la misma
-	function total_paginados($search, $por_pagina, $segmento) {
+	function total_paginados($search, $por_pagina, $segmento){
         $this->db->like('correo', $search);
         $consulta = $this->db->get('usuario', $por_pagina, $segmento);
         if ($consulta->num_rows() > 0) {

@@ -41,34 +41,23 @@ class Entrada_model extends CI_Model
         $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, e.atencion, u.nombre FROM oficio_entrada as e, usuario as u WHERE e.atencion = u.id_usuario and e.atencion='$id' ORDER BY id_oficioEntrada ASC");
         return $query->result();
     }
-
-    //paginación ejemplo consulta del contador de registros
-    public function paginacionEntrada()
-    {
-        $query = $this->db->query("");
-        return $query->result();
-    }
-    //ejemplo de la paginación
-    public function get_current_page_records($limit, $start)
-    {
-        $this->db->limit($limit, $start);
-        $query = $this->db->get("oficio_entrada");
-
-        if ($query->num_rows() > 0)
-        {
-            foreach ($query->result() as $row)
-            {
-                $data[] = $row;
+    //obtenemos el total de filas para hacer la paginación
+	function filas($id) {
+        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, e.atencion, u.nombre FROM oficio_entrada as e, usuario as u WHERE e.atencion = u.id_usuario and e.atencion='$id' ORDER BY id_oficioEntrada ASC");
+        return $query->num_rows();
+    }      
+    //obtenemos todas las provincias a paginar con la función
+    //total_posts_paginados pasando la cantidad por página y el segmento
+    //como parámetros de la misma
+	function total_paginados($id, $por_pagina, $segmento){
+        $this->db->where('atencion', $id);
+        $consulta = $this->db->get('oficio_entrada', $por_pagina, $segmento);
+        if ($consulta->num_rows() > 0) {
+            foreach ($consulta->result() as $fila) {
+            $data[] = $fila;
             }
-
             return $data;
         }
-        return false;
-    }
-
-    public function get_total()
-    {
-        return $this->db->count_all("oficio_entrada");
     }
 
 }

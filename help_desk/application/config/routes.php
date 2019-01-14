@@ -77,6 +77,7 @@ $route['resultEntrada'] = 'OficioEntrada/consultaEntrada';
 $route['descargar/(:any)'] = 'OficioEntrada/descarga/$1';
 //lvl 3 - secretariado
 $route['muestraEntrada'] = 'OficioEntrada/reportEntradaId';
+$route['entrada/pagina/(:num)'] = 'Entrada/pagEntrada/$1';
 
 //rutas de seguimiento oficio
 $route['nuevoSeguimiento/(:num)'] = 'Oficio/index/$1';

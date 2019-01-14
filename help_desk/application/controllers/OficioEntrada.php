@@ -174,6 +174,27 @@ class OficioEntrada extends CI_Controller
         $this->load->view('report_entrada',$datos);
         $this->load->view('templates/footer');
     }
+    //ejemplo de paginacion
+    public function pagEntrada()
+    {
+        $id = $this->session->userdata('id_usuario');
+        $pages = 1; //Número de registros mostrados por páginas
+        $config['base_url'] = base_url() . 'entrada/pagina'; // parametro base de la aplicación, si tenemos un .htaccess nos evitamos el index.php
+        $config['total_rows'] = $this->Entrada_model->filas($id); //calcula el número de filas
+        $config['per_page'] = $pages; //Número de registros mostrados por páginas
+        $config['num_links'] = 200; //Número de links mostrados en la paginación
+        $config['first_link'] = 'Primera'; //primer link
+        $config['last_link'] = ' Última'; //último link
+        $config['next_link'] = ' Siguiente '; //siguiente link
+        $config['prev_link'] = ' Anterior '; //anterior link
+        $config['full_tag_open'] = '<div id="paginacion">'; //el div que debemos maquetar si queremos
+        $config['full_tag_close'] = '</div>'; //el cierre del div de la paginación
+        $this->pagination->initialize($config); //inicializamos la paginación
+        //el array con los datos a paginar ya preparados
+        $datos["datos"] = $this->Entrada_model->total_paginados($id, $config['per_page'], $this->uri->segment(3));
+        //cargamos la vista y el array data
+        $this->load->view('report_entrada', $datos);
+    }
     //ejemplo de excel
     public function reportExcelEn()
     {
