@@ -38,16 +38,21 @@
                         </thead>
                         <tbody>
                             <?php
-                              foreach ($datos as $dato) {
-                                echo "<tr>
-                                        <th scope='row'>".$dato->no_oficioEntrada."</th>".
-                                        "<td>".$dato->fecha_ent."</td>".
-                                        "<td>".$dato->firma_origen."</td>".
-                                        "<td>".$dato->peticion."</td>".
-                                        "<td>".$dato->nombre."</td>".
-                                        "<td align='center'><a href='descargar/".$dato->arch_entrada."' class='fa fa-download fa-1x'></a></td>".
-                                        "</tr>";
-                              }
+                                foreach ($datos as $dato) {
+                                    //cambiamos formato de fecha
+                                    $date = $dato->fecha_ent;
+                                    $espacio = explode(" ", $date);
+                                    $fec = explode("-", $espacio[0]);
+                                    $fecha1 = $fec[2]."/".$fec[1]."/".$fec[0]." ".$espacio[1];
+                                    echo "<tr>
+                                            <th scope='row'>".$dato->no_oficioEntrada."</th>".
+                                            "<td>".$fecha1."</td>".
+                                            "<td>".$dato->firma_origen." ".$dato->cargo."</td>".
+                                            "<td>".$dato->peticion."</td>".
+                                            "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
+                                            "<td align='center'><a href='descargar/".$dato->arch_entrada."' class='fa fa-download fa-1x'></a></td>".
+                                            "</tr>";
+                                }
                             ?>
                         </tbody>
                     </table>

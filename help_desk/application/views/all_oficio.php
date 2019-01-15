@@ -65,7 +65,7 @@
                                 $minutos = $intervalo->i; //minutos restantes
                                 //corta los datos de d,m,a
                                 $ext = explode("-",$date);
-                                //código para cuanta atras
+                                //código para cuenta atras
                                 echo "<tr>                                
                                     <th scope='row'>".$dato->nomenclatura."</th>".
                                     "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".

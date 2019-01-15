@@ -84,7 +84,6 @@ class OficioEntrada extends CI_Controller
                         $arch_entrada = $upload_data['file_name'];
                         //envia datos al modelo
                         $query = $this->Entrada_model->createOficio($no_oficio, $firma, $cargo, $peticion, $arch_entrada, $id_usuario, $fecha1, $fecha2, $fecha3);
-                            
                         if($query == TRUE)
                             {
                                 $this->session->set_flashdata('Creado','Oficio creado');
@@ -191,7 +190,7 @@ class OficioEntrada extends CI_Controller
         $config['full_tag_close'] = '</div>'; //el cierre del div de la paginación
         $this->pagination->initialize($config); //inicializamos la paginación
         //el array con los datos a paginar ya preparados
-        $datos["datos"] = $this->Entrada_model->total_paginados($id, $config['per_page'], $this->uri->segment(3));
+        $datos["datos"] = $this->Entrada_model->total_paginados($id, $config['per_page'], $this->uri->segment(1));
         //cargamos la vista y el array data
         $this->load->view('report_entrada', $datos);
     }
@@ -255,8 +254,7 @@ class OficioEntrada extends CI_Controller
             ->setCellValue('F'.$row, $dato[0]->firma_origen)
             ->setCellValue('G'.$row, $dato[0]->cargo)
             ->setCellValue('H'.$row, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom);
-        }
-        
+        }        
         //se crea objeto para guardar archivo xlsx
         $writer = new Xlsx($spreadsheet);
         //nombre del archivo a descargar

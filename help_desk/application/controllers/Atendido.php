@@ -251,17 +251,17 @@ class Atendido extends CI_Controller
 
         $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
         $row = count($datos);
-        foreach ($datos as $dato)
+        for ($n=2; $n <= $row; $n++)
         {   
                 //var_dump($datos);
                 $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A'.$row, $dato[0]->nomenclatura)
-                ->setCellValue('B'.$row, $dato[0]->fecha_atendido)
-                ->setCellValue('C'.$row, $dato[0]->nombre_aten)  
-                ->setCellValue('D'.$row, $dato[0]->cargo_aten)
-                ->setCellValue('E'.$row, $dato[0]->descripcion)
-                ->setCellValue('F'.$row, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom);
-            $row ++;
+                ->setCellValue('A'.$n, $dato[0]->nomenclatura)
+                ->setCellValue('B'.$n, $dato[0]->fecha_atendido)
+                ->setCellValue('C'.$n, $dato[0]->nombre_aten)  
+                ->setCellValue('D'.$n, $dato[0]->cargo_aten)
+                ->setCellValue('E'.$n, $dato[0]->descripcion)
+                ->setCellValue('F'.$n, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom);
+            $n ++;
         }
 
         //se crea objeto para guardar archivo xls

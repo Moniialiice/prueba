@@ -181,7 +181,7 @@ if($this->session->flashdata('correcto'))
                                         <a href='' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-file'></i>Oficio</a>
                                         <ul class='sub-menu children dropdown-menu'>
                                             <li><i class='menu-icon fa ti-file'></i><a href='nuevaEntrada'>Oficio Recepción</a></li>
-                                            <li><i class='menu-icon fa ti-list-alt'></i><a href='muestraEntrada'>Consulta Oficio</a></li>
+                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='muestraEntrada'>Consulta Oficio</a></li>
                                         </ul>
                                     </li>
                                 </ul>
