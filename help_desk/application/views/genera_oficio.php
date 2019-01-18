@@ -48,8 +48,7 @@
                             }
                             echo validation_errors();
                             
-                        ?>
-                        
+                        ?>                        
                         <form action="insertaOficio" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Oficio Recepción</label></div>

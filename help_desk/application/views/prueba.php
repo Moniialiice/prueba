@@ -18,7 +18,6 @@
 		</div>
 	</div>
 </div>
-
 <table class="table animated fadeIn">
     <thead>
     <tr>

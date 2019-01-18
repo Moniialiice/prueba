@@ -1,5 +1,8 @@
 <?php
 if($this->session->flashdata('correcto'))
+if( !$this->session->userdata['correcto']){
+    redirect('home');
+}
 
 ?>
 <!doctype html>
@@ -46,6 +49,8 @@ if($this->session->flashdata('correcto'))
                 dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
             });
         });
+    </script>
+    <script>
     </script> 
     <!--link type="text/css" href="assets/css/jquery-ui-1.8.13.custom.css" rel="stylesheet" /-->
     <script type="text/javascript" src="assets/js/jquery-1.5.1.min.js"></script>
