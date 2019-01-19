@@ -1,5 +1,5 @@
 <?php
-if($this->session->flashdata('correcto'))
+//if($this->session->flashdata('correcto'))
 if( !$this->session->userdata['correcto']){
     redirect('home');
 }
@@ -71,8 +71,7 @@ if( !$this->session->userdata['correcto']){
                 monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
                     'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
                 dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-            });
-            
+            });            
         });
     </script>
     <!--jquery-->
