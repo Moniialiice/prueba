@@ -144,8 +144,18 @@ class OficioEntrada extends CI_Controller
                 $mont2 = $ext2[1];
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
-                $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);
-                $this->load->view('all_entrada',$datos);
+                switch ($this->session->userdata('id_tipoUsuario')){
+                    case '2':
+                        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);
+                        $this->load->view('all_entrada',$datos);
+                    break;
+                    case '5':
+                        $id = $this->session->userdata('id_usuario');
+                        $datos ['datos'] = $this->Entrada_model->searchFecha($search, $fecha1 ,$fecha2, $id);
+                        $this->load->view('all_entrada',$datos);
+                    break;
+                }
+                
             }else{
                 $datos = array();
                 $datos['date1'] = $date1;

@@ -23,7 +23,7 @@ class Entrada_model extends CI_Model
             return false;
         }
     }
-    //busqueda con fecha y no. de nomenclatura
+    //busqueda con fecha y no. de nomenclatura del oficio entrada muestra datos y para general excel
     public function searchFecha($search,$date1,$date2)
     {
         $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%$search%' AND e.fecha_real BETWEEN '$date1' AND '$date2' AND e.atencion = u.id_usuario ORDER BY e.fecha_rec DESC");
@@ -35,12 +35,12 @@ class Entrada_model extends CI_Model
         $query = $this->db->query("SELECT id_oficioEntrada, no_oficioEntrada, firma_origen, peticion, arch_entrada, fecha_ent, fecha_rec, fecha_real, u.nombre FROM oficio_entrada as e, usuario as u WHERE e.atencion = u.id_usuario");
         return $query->result();
     }
-    //consulta de los oficios de entrada con el id de quien atendio el oficio
+    //consulta de los oficios de entrada con el id de quien atendio el oficio para mostrara datos 
     public function reportEntradaId($id)
     {
         $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, e.atencion, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.atencion = u.id_usuario and e.atencion='$id' ORDER BY id_oficioEntrada ASC");
         return $query->result();
-    }
+    }    
     //obtenemos el total de filas para hacer la paginación
 	function filas($id) {
         $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, e.atencion, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.atencion = u.id_usuario and e.atencion='$id' ORDER BY id_oficioEntrada ASC");

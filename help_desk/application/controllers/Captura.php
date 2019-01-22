@@ -342,7 +342,24 @@ class Captura extends CI_Controller
         //manda a imprimir al cargar el archivo
         //$pdf->IncludeJS("print();"); D
         $pdf->Output($pdfFilePath, 'D');
-    }    
+    }
+    //consulta oficio seguimiento por id del usuario
+    public function consultaCapID(){
+        $id = $this->session->userdata('id_usuario');
+        $datos['datos'] = $this->Captura_model->reportOficioID($id);
+        $this->load->view('templates/head');
+        $this->load->view('report_seguimiento',$datos);
+        $this->load->view('templates/footer');
+    }
+    //consulta oficio atendido por el id del usuario
+    public function consultaAtenId(){
+        $id = $this->session->userdata('id_usuario');
+        $datos['datos'] = $this->Captura_model->reportAtendidoID($id);
+        $this->load->view('templates/head');
+        $this->load->view('report_atendido',$datos); 
+        $this->load->view('templates/footer');
+    }
+
 
 
 }

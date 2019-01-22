@@ -202,34 +202,65 @@ if( !$this->session->userdata['correcto']){
                                             <li><i class='menu-icon fa ti-file'></i><a href='nuevaCaptura'>Alta</a></li>
                                         </ul>
                                     </li>
-                                </ul>
-                            </div><!-- /.navbar-collapse -->";
-                        }if($id == 5){
-                            echo " 
-                            <!--div main menu collapse -->
-                                <div id='main-menu' class='main-menu collapse navbar-collapse'>
-                                <ul class='nav navbar-nav'>                    <!--h3 class='menu-title'>UI elements</h3><!-- /.menu-title -->    
                                     <h3 class='menu-title'>Módulo Consulta</h3>
                                     <li class='menu-item-has-children dropdown'>
                                         <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-search'></i>Recepción</a>
                                         <ul class='sub-menu children dropdown-menu'>
-                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaEntrada'>Consulta Recepción</a></li>
+                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='muestraEntrada'>Consulta Recepción</a></li>
                                         </ul>
                                     </li>
                                     <li class='menu-item-has-children dropdown'>    
                                         <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-search'></i>Seguimiento</a>
                                         <ul class='sub-menu children dropdown-menu'>
-                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Seguimiento</a></li>
+                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='muestraSeguimiento'>Consulta Seguimiento</a></li>
                                         </ul>
                                     </li>
                                     <li class='menu-item-has-children dropdown'>    
                                         <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-search'></i>Atendido</a>
                                         <ul class='sub-menu children dropdown-menu'>
-                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Atendido</a></li>
+                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='muestraAtendidos'>Consulta Atendido</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </div><!-- /.navbar-collapse -->";
+                        }if($id == 5){
+                            echo " 
+                            <!--div main menu collapse -->
+                        <div id='main-menu' class='main-menu collapse navbar-collapse'>   
+                            <ul class='nav navbar-nav'>                     <!--h3 class='menu-title'>UI elements</h3><!-- /.menu-title -->
+                                <h3 class='menu-title'>Oficio Recepción</h3><!-- /.menu-title -->
+                                <li class='menu-item-has-children dropdown'>
+                                    <a href='' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-envelope'></i>Recepción</a>
+                                    <ul class='sub-menu children dropdown-menu'>
+                                        <li><i class='menu-icon fa ti-file'></i><a href='nuevaEntrada'>Oficio Recepción</a></li>
+                                        <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaEntrada'>Consulta Oficio</a></li>
+                                    </ul>
+                                </li>
+                                <h3 class='menu-title'>Oficio Seguimiento</h3><!-- /.menu-title -->
+                                <li class='menu-item-has-children dropdown'>
+                                    <a href='' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-file'></i>Seguimiento</a>
+                                    <ul class='sub-menu children dropdown-menu'>
+                                        <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaOficio'>Consulta Seguimiento</a></li>
+                                    </ul>
+                                </li>
+                                <h3 class='menu-title'>Oficio Atendido</h3>
+                                <li class='menu-item-has-children dropdown'>
+                                    <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <i class='menu-icon ti-envelope'></i>Atendido</a>
+                                    <ul class='sub-menu children dropdown-menu'>
+                                        <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaAtendido'>Consulta Atendido</a></li>
+                                    </ul>
+                                </li>
+                                <h3 class='menu-title'>Captura</h3>
+                                <li class='menu-item-has-children dropdown'>
+                                    <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-list'></i>Captura</a>
+                                    <ul class='sub-menu children dropdown-menu'>
+                                        <li><i class='menu-icon fa ti-file'></i><a href='nuevaCaptura'>Alta</a></li>
+                                        <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaCaptura'>Consulta Seguimiento</a></li>
+                                        <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaAtendidoCap'>Consulta Atendido</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->";
                         }
             ?>
         </nav>

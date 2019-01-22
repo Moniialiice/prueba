@@ -2,7 +2,7 @@
     <div class="col-sm-4">
 		<div class="page-header float-left">
 			<div class="page-title">
-				<h1> Oficios de Entrada</h1>
+				<h1> Oficio Atendido</h1>
 			</div>
 		</div>
 	</div>
@@ -22,7 +22,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Oficios Entrada</strong>
+                    <strong class="card-title">Oficio Atendido</strong>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -37,23 +37,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                foreach ($datos as $dato) {
-                                    //cambiamos formato de fecha
-                                    $date = $dato->fecha_ent;
-                                    $espacio = explode(" ", $date);
-                                    $fec = explode("-", $espacio[0]);
-                                    $fecha1 = $fec[2]."/".$fec[1]."/".$fec[0]." ".$espacio[1];
-                                    echo "<tr>
-                                            <th scope='row'>".$dato->no_oficioEntrada."</th>".
-                                            "<td>".$fecha1."</td>".
-                                            "<td>".$dato->firma_origen." ".$dato->cargo."</td>".
-                                            "<td>".$dato->peticion."</td>".
-                                            "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
-                                            "<td align='center'><a href='descargar/".$dato->arch_entrada."' class='fa fa-download fa-1x'></a></td>".
-                                            "</tr>";
-                                }
-                            ?>
+                        <?php
+                            //var_dump($row);  
+                            foreach ($datos as $dato) {
+                                //obtenemos fecha 
+                                $date = $dato->fecha_atendido;
+                                //corta los datos de d,m,a
+                                $ext = explode("-",$date);
+                                //obtenemos el tipo de oficio
+                                $nomenclatura = $dato->nomenclatura;
+                                echo "<tr>
+                                <th scope='row'>".$dato->nomenclatura."</th>".
+                                "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".
+                                "<td>".$dato->nombre_aten." ".$dato->cargo_aten."</td>".
+                                "<td>".$dato->descripcion."</td>".
+                                "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
+                                "<td align='center'><a href='descargarAtendido/".$dato->arch_atendido."' class='fa fa-download fa-1x'></a></td>".               
+                                "<td align='center'><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' class='fa fa-plus fa-1x'></a></td>"; //".$dato->id_oficioAtendido."
+                            }        
+                        ?>
                         </tbody>
                     </table>
                     <?php
