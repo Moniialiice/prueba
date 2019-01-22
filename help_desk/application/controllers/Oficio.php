@@ -242,8 +242,17 @@ class Oficio extends CI_Controller
                 $mont2 = $ext2[1];
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
-                $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
-                $this->load->view('all_oficio', $datos);
+                switch($this->session->userdata('id_tipoUsuario')){
+                    case '2':
+                        $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
+                        $this->load->view('all_oficio', $datos);
+                    break;
+                    case '5':
+                        $id = $this->session->userdata('id_usuario');
+                        $datos['datos'] = $this->Oficio_model->searchDI($search,$fecha1,$fecha2,$id);
+                        $this->load->view('all_oficio', $datos);
+                    break;
+                }                
             }else{
                 $datos = array();
                 $datos['busqueda'] = $search;
@@ -321,7 +330,6 @@ class Oficio extends CI_Controller
         $mont2 = $ext2[1];
         $day2 = $ext2[0];
         $fecha2 = $year2."-".$mont2."-".$day2;
-        $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
         //creamos objeto de spreadsheet 
         $spreadsheet = new Spreadsheet();
         //agrega columnas de encabezado
@@ -341,37 +349,48 @@ class Oficio extends CI_Controller
         $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($cell_st);
        
         //tamaño de las celdas 
-        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
-        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(13);
         $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(60);
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(100);
-        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(16);
-         
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(40);
+        //validamos el tipo de usuario para la consulta de oficio seguimiento
+        switch ($this->session->userdata('id_tipoUsuario')){
+            case '2':
+                $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
+            break;
+            case '5':
+                $id = $this->session->userdata('id_usuario');
+                $datos['datos'] = $this->Oficio_model->searchDI($search,$fecha1,$fecha2,$id);
+            break;
+        }
+        //muestra los datos de un array
         foreach ($datos as $dato)
         {
             $row = count($dato);
+            for ($n=2; $n<=$row+1; $n++){
             //dirigido a 
-            if($dato[0]->conase == 1){ $conase = 'CONASE';}else{ $conase = '';}
-            if($dato[0]->fiscal_general == 1){ $fgeneral = 'FISCAL GENERAL';}else{ $fgeneral = '';}
-            if($dato[0]->vicefiscalia){ $vfisccalia = 'VICEFISCALIA';}else{ $vfisccalia='';}
-            if($dato[0]->zona_oriente == 1){ $zo = 'ZONA ORIENTE'; }else{$zo='';}
-            if($dato[0]->valle_toluca == 1){ $vt = 'VALLE DE TOLUCA';}else{$vt='';}
-            if($dato[0]->oficialia_mayor == 1){ $om = 'OFICIALIA MAYOR';}else{$om = '';}
-            if($dato[0]->valle_mexico == 1){ $vm = 'VALLE DE MÉXICO';}else{$vm='';}
-            if($dato[0]->informacion_estadistica == 1){ $infoe = 'DEPARTAMENTO DE INFORMACIÓN Y ESTADÍSTICA';}else{$infoe='';}
-            if($dato[0]->central_juridico == 1){ $centralj = 'CENTRAL JURÍDICO';}else{$centralj='';}
-            if($dato[0]->servicio_carrera == 1){ $servicioc = 'SERVICIO DE CARRERA';}else{$servicioc='';}
-            if($dato[0]->otra != ""){ $otra = $dato[0]->otra; }else{$otra = '';}
+            if($dato[$n-2]->conase == 1){ $conase = 'CONASE';}else{ $conase = '';}
+            if($dato[$n-2]->fiscal_general == 1){ $fgeneral = 'FISCAL GENERAL';}else{ $fgeneral = '';}
+            if($dato[$n-2]->vicefiscalia){ $vfisccalia = 'VICEFISCALIA';}else{ $vfisccalia='';}
+            if($dato[$n-2]->zona_oriente == 1){ $zo = 'ZONA ORIENTE'; }else{$zo='';}
+            if($dato[$n-2]->valle_toluca == 1){ $vt = 'VALLE DE TOLUCA';}else{$vt='';}
+            if($dato[$n-2]->oficialia_mayor == 1){ $om = 'OFICIALIA MAYOR';}else{$om = '';}
+            if($dato[$n-2]->valle_mexico == 1){ $vm = 'VALLE DE MÉXICO';}else{$vm='';}
+            if($dato[$n-2]->informacion_estadistica == 1){ $infoe = 'DEPARTAMENTO DE INFORMACIÓN Y ESTADÍSTICA';}else{$infoe='';}
+            if($dato[$n-2]->central_juridico == 1){ $centralj = 'CENTRAL JURÍDICO';}else{$centralj='';}
+            if($dato[$n-2]->servicio_carrera == 1){ $servicioc = 'SERVICIO DE CARRERA';}else{$servicioc='';}
+            if($dato[$n-2]->otra != ""){ $otra = $dato[$n-2]->otra; }else{$otra = '';}
 
             $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A'.$row, $dato[0]->nomenclatura)
-            ->setCellValue('B'.$row, $dato[0]->fecha)
-            ->setCellValue('C'.$row, $conase." ".$fgeneral." ".$vfisccalia." ".$zo." ".$vt." ".$om." ".$vm." ".$infoe." ".$centralj." ".$servicioc." ".$otra)
-            ->setCellValue('D'.$row, $dato[0]->asunto)
-            ->setCellValue('E'.$row, $dato[0]->termino)
-            ->setCellValue('F'.$row, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom);
-            $row ++;
+            ->setCellValue('A'.$n, $dato[$n-2]->nomenclatura)
+            ->setCellValue('B'.$n, $dato[$n-2]->fecha)
+            ->setCellValue('C'.$n, $conase." ".$fgeneral." ".$vfisccalia." ".$zo." ".$vt." ".$om." ".$vm." ".$infoe." ".$centralj." ".$servicioc." ".$otra)
+            ->setCellValue('D'.$n, $dato[$n-2]->asunto)
+            ->setCellValue('E'.$n, $dato[$n-2]->termino)
+            ->setCellValue('F'.$n, $dato[$n-2]->nombre." ".$dato[$n-2]->apellidop." ".$dato[$n-2]->apellidom);
+            }   
         }
 
         //se crea objeto para guardar archivo xlsx

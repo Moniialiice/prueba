@@ -146,9 +146,18 @@ class Atendido extends CI_Controller
                 $mont2 = $ext2[1];
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
-                //datos de la consulta oficio  
-                $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search,$fecha1,$fecha2);
-                $this->load->view('all_atendido', $datos);               
+                switch($this->session->userdata('id_tipoUsuario')){
+                    case '2':
+                        //datos de la consulta oficio  
+                        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $fecha1, $fecha2);
+                        $this->load->view('all_atendido', $datos);
+                    break;
+                    case '5':
+                        //datos de la consulta oficio
+                        $id = $this->session->userdata('id_usuario');  
+                        $datos['datos'] = $this->Atendido_model->searchAtenFI($search, $fecha1, $fecha2, $id);
+                        $this->load->view('all_atendido', $datos);
+                }                               
             }else{
                 $datos = array();
                 $datos['date1'] = $date1;
@@ -235,7 +244,7 @@ class Atendido extends CI_Controller
         $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(26);
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(26);
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
-        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(60);
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(40);
         
         //cambiamos formato de fecha
         $ext = explode("/",$date1);
@@ -249,21 +258,30 @@ class Atendido extends CI_Controller
         $day2 = $ext2[0];
         $fecha2 = $year2."-".$mont2."-".$day2;
 
-        $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
-        $row = count($datos);
-        for ($n=2; $n <= $row; $n++)
-        {   
+        //valida el tipo de consulta para obtener los datos deacuerdo al id del usuario        
+        switch ($this->session->userdata('id_tipoUsuario')){
+            case '2':
+                $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
+            break;
+            case '5':
+                $id = $this->session->userdata('id_usuario');
+                $datos['datos'] = $this->Atendido_model->searchAtenFI($search,$fecha1,$fecha2,$id);
+            break;    
+        }   
+        foreach($datos as $dato){ 
+            $row = count($dato);
+            for ($n=2; $n<=$row+1; $n++)
+            {      
                 //var_dump($datos);
                 $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A'.$n, $dato[0]->nomenclatura)
-                ->setCellValue('B'.$n, $dato[0]->fecha_atendido)
-                ->setCellValue('C'.$n, $dato[0]->nombre_aten)  
-                ->setCellValue('D'.$n, $dato[0]->cargo_aten)
-                ->setCellValue('E'.$n, $dato[0]->descripcion)
-                ->setCellValue('F'.$n, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom);
-            $n ++;
+                ->setCellValue('A'.$n, $dato[$n-2]->nomenclatura)
+                ->setCellValue('B'.$n, $dato[$n-2]->fecha_atendido)
+                ->setCellValue('C'.$n, $dato[$n-2]->nombre_aten)  
+                ->setCellValue('D'.$n, $dato[$n-2]->cargo_aten)
+                ->setCellValue('E'.$n, $dato[$n-2]->descripcion)
+                ->setCellValue('F'.$n, $dato[$n-2]->nombre." ".$dato[$n-2]->apellidop." ".$dato[$n-2]->apellidom);
+            }
         }
-
         //se crea objeto para guardar archivo xls
         $writer = new Xlsx($spreadsheet);
         //nombre del archivo a descargar 

@@ -151,11 +151,10 @@ class OficioEntrada extends CI_Controller
                     break;
                     case '5':
                         $id = $this->session->userdata('id_usuario');
-                        $datos ['datos'] = $this->Entrada_model->searchFecha($search, $fecha1 ,$fecha2, $id);
+                        $datos ['datos'] = $this->Entrada_model->reportFI($search, $fecha1 ,$fecha2, $id);
                         $this->load->view('all_entrada',$datos);
                     break;
-                }
-                
+                }                
             }else{
                 $datos = array();
                 $datos['date1'] = $date1;
@@ -221,7 +220,6 @@ class OficioEntrada extends CI_Controller
         $mont2 = $ext2[1];
         $day2 = $ext2[0];
         $fecha2 = $year2."-".$mont2."-".$day2;
-        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);        
         //creamos objeto de spreadsheet 
         $spreadsheet = new Spreadsheet();
         //agrega columnas de encabezado
@@ -240,30 +238,40 @@ class OficioEntrada extends CI_Controller
         'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
         'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
         ];
-        $spreadsheet->getActiveSheet()->getStyle('A1:H1')->applyFromArray($cell_st);
-                
+        $spreadsheet->getActiveSheet()->getStyle('A1:H1')->applyFromArray($cell_st);                
         //tamaño de las celdas 
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
         $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(18);
         $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(18);
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
-        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(26);        
-        $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(20);
-        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(22);
-        
-        foreach ($datos as $dato) {
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(40);        
+        $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(40);
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(40);
+        //valida que tipo de consulta realizará deacuerdo al tipo de usuario
+        switch ($this->session->userdata('id_tipoUsuario')){
+            case '2':
+                $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);        
+            break;
+            case '5':
+                $id = $this->session->userdata('id_usuario');
+                $datos ['datos'] = $this->Entrada_model->reportFI($search,$fecha1,$fecha2,$id);        
+            break;    
+        }
+
+        foreach ($datos as $dato) {            
             $row = count($dato);
-            
-            $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A'.$row, $dato[0]->no_oficioEntrada)
-            ->setCellValue('B'.$row, $dato[0]->fecha_rec)
-            ->setCellValue('C'.$row, $dato[0]->fecha_ent)
-            ->setCellValue('D'.$row, $dato[0]->fecha_real)
-            ->setCellValue('E'.$row, $dato[0]->peticion)
-            ->setCellValue('F'.$row, $dato[0]->firma_origen)
-            ->setCellValue('G'.$row, $dato[0]->cargo)
-            ->setCellValue('H'.$row, $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom);
+            for ($n=2; $n<=$row+1; $n++){
+                $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue('A'.$n, $dato[$n-2]->no_oficioEntrada)
+                ->setCellValue('B'.$n, $dato[$n-2]->fecha_ent)
+                ->setCellValue('C'.$n, $dato[$n-2]->fecha_rec)
+                ->setCellValue('D'.$n, $dato[$n-2]->fecha_real)
+                ->setCellValue('E'.$n, $dato[$n-2]->peticion)
+                ->setCellValue('F'.$n, $dato[$n-2]->firma_origen)
+                ->setCellValue('G'.$n, $dato[$n-2]->cargo)
+                ->setCellValue('H'.$n, $dato[$n-2]->nombre." ".$dato[$n-2]->apellidop." ".$dato[$n-2]->apellidom);
+            }
         }        
         //se crea objeto para guardar archivo xlsx
         $writer = new Xlsx($spreadsheet);

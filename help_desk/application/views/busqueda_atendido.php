@@ -2,7 +2,7 @@
     <div class="col-sm-4">
         <div class="page-header float-left">
             <div class="page-title">
-                <h1> Consulta Oficio Seguimiento Atendido</h1>
+                <h1> Consulta Oficio Atendido</h1>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Búsqueda Oficio Seguimiento Atendido</strong>
+                    <strong class="card-title">Búsqueda Oficio Atendido</strong>
                 </div>
                 <div class="card-body">                    
                         <div class="form-inline">

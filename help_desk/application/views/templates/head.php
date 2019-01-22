@@ -250,15 +250,6 @@ if( !$this->session->userdata['correcto']){
                                         <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaAtendido'>Consulta Atendido</a></li>
                                     </ul>
                                 </li>
-                                <h3 class='menu-title'>Captura</h3>
-                                <li class='menu-item-has-children dropdown'>
-                                    <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-list'></i>Captura</a>
-                                    <ul class='sub-menu children dropdown-menu'>
-                                        <li><i class='menu-icon fa ti-file'></i><a href='nuevaCaptura'>Alta</a></li>
-                                        <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaCaptura'>Consulta Seguimiento</a></li>
-                                        <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaAtendidoCap'>Consulta Atendido</a></li>
-                                    </ul>
-                                </li>
                             </ul>
                         </div><!-- /.navbar-collapse -->";
                         }
