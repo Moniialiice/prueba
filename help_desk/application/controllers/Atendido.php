@@ -147,6 +147,11 @@ class Atendido extends CI_Controller
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
                 switch($this->session->userdata('id_tipoUsuario')){
+                    case '1':
+                        //datos de la consulta oficio  
+                        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $fecha1, $fecha2);
+                        $this->load->view('all_atendido', $datos);
+                    break;
                     case '2':
                         //datos de la consulta oficio  
                         $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $fecha1, $fecha2);
@@ -260,6 +265,9 @@ class Atendido extends CI_Controller
 
         //valida el tipo de consulta para obtener los datos deacuerdo al id del usuario        
         switch ($this->session->userdata('id_tipoUsuario')){
+            case '1':
+                $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
+            break;
             case '2':
                 $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
             break;

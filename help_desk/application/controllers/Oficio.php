@@ -243,6 +243,10 @@ class Oficio extends CI_Controller
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
                 switch($this->session->userdata('id_tipoUsuario')){
+                    case '1':
+                        $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
+                        $this->load->view('all_oficio', $datos);
+                    break;
                     case '2':
                         $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
                         $this->load->view('all_oficio', $datos);
@@ -356,7 +360,10 @@ class Oficio extends CI_Controller
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(20);
         $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(40);
         //validamos el tipo de usuario para la consulta de oficio seguimiento
-        switch ($this->session->userdata('id_tipoUsuario')){
+        switch ($this->session->userdata('id_tipoUsuario')){            
+            case '1':
+                $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
+            break;
             case '2':
                 $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
             break;

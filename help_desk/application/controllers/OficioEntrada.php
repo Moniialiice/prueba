@@ -145,6 +145,10 @@ class OficioEntrada extends CI_Controller
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
                 switch ($this->session->userdata('id_tipoUsuario')){
+                    case '1':
+                        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);
+                        $this->load->view('all_entrada',$datos);
+                    break;
                     case '2':
                         $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);
                         $this->load->view('all_entrada',$datos);
@@ -203,7 +207,7 @@ class OficioEntrada extends CI_Controller
         //cargamos la vista y el array data
         $this->load->view('report_entrada', $datos);
     }
-    //ejemplo de excel
+    //función para reporte excel de los oficios recepción
     public function reportExcelEn()
     {
         $search = $this->input->post('busqueda');
@@ -241,15 +245,18 @@ class OficioEntrada extends CI_Controller
         $spreadsheet->getActiveSheet()->getStyle('A1:H1')->applyFromArray($cell_st);                
         //tamaño de las celdas 
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
-        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(18);
-        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(18);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(22);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(25);
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
         $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(40);        
         $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(40);
-        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(40);
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(30);
         //valida que tipo de consulta realizará deacuerdo al tipo de usuario
         switch ($this->session->userdata('id_tipoUsuario')){
+            case '1':
+                $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);        
+            break;
             case '2':
                 $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);        
             break;
@@ -258,7 +265,6 @@ class OficioEntrada extends CI_Controller
                 $datos ['datos'] = $this->Entrada_model->reportFI($search,$fecha1,$fecha2,$id);        
             break;    
         }
-
         foreach ($datos as $dato) {            
             $row = count($dato);
             for ($n=2; $n<=$row+1; $n++){

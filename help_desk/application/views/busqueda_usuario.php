@@ -26,7 +26,7 @@
                 </div>
                 <div class="card-body">
                         <div class="form-inline">
-                            <form class="search-form" method="post" id="usuario" name="usuario">
+                            <form class="search-form" method="post" id="usuario" >
                                 <div class="col col-md-3"><label for="text-input" class="form-control-label" >Correo Electrónico</label></div>
                                 <div class="col col-md-8"><input class="form-control mr-sm-3" type="text-input" id="busqueda" name='busqueda'>
                                     <span class="input-group-addon">

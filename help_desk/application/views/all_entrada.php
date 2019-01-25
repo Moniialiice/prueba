@@ -16,9 +16,9 @@
 		<div class="page-header float-right">
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
-                    <span class="input-group-addon">
-                        <span class="fa fa-download" target='_blank' OnClick="excelEntrada();"></span>
-                    </span>  
+                    <span> 
+                        <img src="assets/img/excel.png" width="35" height="35" target='_blank' OnClick="excelEntrada();">
+                    </span>
                 </ol>
 			</div>
 		</div>
@@ -39,7 +39,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php
+        <?php //excel.png
         if($this->form_validation->run()==true){         
             foreach ($datos as $dato) {
                 $date = $dato->fecha_ent;

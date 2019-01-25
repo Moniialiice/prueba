@@ -53,10 +53,12 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 //rutas del controlador Home
-$route['home'] = 'Home/index';
+$route['inicio'] = 'Home/index';
 $route['verificar'] = 'home/validaDatos';
 $route['index'] = 'Home/inicio';
 $route['close'] = 'Home/cerrarSesion';
+//rutas de herramientas
+$route['respaldo'] = 'Home/respaldo';
 //Usuario
 $route['nuevoUsuario'] = 'Usuario/generaUsuario';
 $route['insertaU'] = 'Usuario/altaUsuarioVal';

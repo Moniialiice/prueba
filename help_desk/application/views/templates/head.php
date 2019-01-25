@@ -1,7 +1,7 @@
 <?php
 //if($this->session->flashdata('correcto'))
 if( !$this->session->userdata['correcto']){
-    redirect('home');
+    redirect('inicio');
 }
 
 ?>
@@ -142,6 +142,14 @@ if( !$this->session->userdata['correcto']){
                                 <ul class='sub-menu children dropdown-menu'>
                                     <li><i class='menu-icon fa fa-user-plus'></i><a href='nuevoUsuario'>Alta</a></li>
                                     <li><i class='menu-icon fa fa-users'></i><a href='consultaUsuario'>Consulta</a></li>
+                                </ul>
+                            </li>
+                            <h3 class='menu-title'>Herramientas</h3>
+                            <li class='menu-item-has-children dropdown'>
+                                <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon fa fa-cog'></i>Herramientas</a>
+                                <ul class='sub-menu children dropdown-menu'>
+                                    <li><i class='menu-icon fa fa-save'></i><a href='respaldo'>Respaldo</a></li>
+                                    <li><i class='menu-icon fa fa-pincel'></i><a href=''>Bit</a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -7,6 +7,9 @@
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Usuario extends CI_Controller
 {
@@ -104,7 +107,6 @@ class Usuario extends CI_Controller
         $search = $this->input->post('busqueda');
         //var_dump($search);
         $datos['datos'] = $this->Usuario_model->search_usuario($search);
-        //$datos['datos'] = $this->Usuario_model->search_usuario($search);        
         $this->load->view('all_usuarios',$datos);    
     }
     //ejemplo de paginacion
@@ -120,7 +122,7 @@ class Usuario extends CI_Controller
         $config['last_link'] = ' Última'; //último link
         $config['next_link'] = ' Siguiente '; //siguiente link
         $config['prev_link'] = ' Anterior '; //anterior link
-        $config['full_tag_open'] = '<div id="paginacion">'; //el div que debemos maquetar si queremos
+        $config['full_tag_open'] = '<div id="paginacion" class="pagination">'; //el div que debemos maquetar si queremos
         $config['full_tag_close'] = '</div>'; //el cierre del div de la paginación
         $this->pagination->initialize($config); //inicializamos la paginación
         //el array con los datos a paginar ya preparados
@@ -267,5 +269,53 @@ class Usuario extends CI_Controller
             $this->session->set_flashdata('Error', 'Consultar administrador');
             $this->actualizarUsuario($i);
         }
+    }
+    //función para generar reportes de excel 
+    //ejemplo de excel
+    public function reportExcelUs()
+    {
+        $search = $this->input->post('busqueda');
+        //creamos objeto de spreadsheet 
+        $spreadsheet = new Spreadsheet();
+        //agrega columnas de encabezado
+        $spreadsheet->setActiveSheetIndex(0)
+        ->setCellValue('A1', 'IDENTIFICADOR')
+        ->setCellValue('B1', 'NOMBRE')
+        ->setCellValue('C1', 'CORREO')
+        ->setCellValue('D1', 'ACTIVO');
+        //se madan estilos para las colunas A1,B1,C1 cells
+        $cell_st =[
+        'font' =>['bold' => true],
+        'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
+        'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
+        ];
+        $spreadsheet->getActiveSheet()->getStyle('A1:D1')->applyFromArray($cell_st);                
+        //tamaño de las celdas 
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(40);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+        //consulta datos en el modelo usuario
+        $datos['datos'] = $this->Usuario_model->search_usuario($search);
+        foreach ($datos as $dato) {            
+            $row = count($dato);
+            for ($n=2; $n<=$row+1; $n++){
+                if($dato[$n-2]->activo == 1){ $activo = 'activo';}else{$activo = 'Inactivo';}
+                $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue('A'.$n, $dato[$n-2]->id_usuario)
+                ->setCellValue('B'.$n, $dato[$n-2]->nombre." ".$dato[$n-2]->apellidop." ".$dato[$n-2]->apellidom)
+                ->setCellValue('C'.$n, $dato[$n-2]->correo)
+                ->setCellValue('D'.$n, $activo);
+            }
+        }        
+        //se crea objeto para guardar archivo xlsx
+        $writer = new Xlsx($spreadsheet);
+        //nombre del archivo a descargar
+        $filename = 'excel_usuarios';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        header('Cache-Control: max-age=0');
+        //linea que descarga el archivo
+        $writer->save('php://output');    
     }  
 }

@@ -16,9 +16,9 @@
 		<div class="page-header float-right">
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
-                    <span class="input-group-addon">
-                        <span class="fa fa-download" target='_blank' OnClick="excelOficio();"></span>
-                    </span>  
+                    <span> 
+                        <img clas= 'icon fa fa' src="assets/img/excel.png" width="35" height="35" target='_blank' OnClick="excelOficio();">
+                    </span> 
                 </ol>
 			</div>
 		</div>

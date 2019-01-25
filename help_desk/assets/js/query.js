@@ -132,6 +132,15 @@ function BusquedaAtenCap(){
     });
 }
 
+//busqueda de todos usuarios
+function excelUsuario(){
+    var nomenclatura = $('#busqueda').val();
+    var form = document.getElementById("usuario");
+    form.action = "Usuario/reportExcelUs";
+    form.setAttribute("target", "_blank");   
+    form.submit();
+}
+
 //imprime nomenclatura 
 function nomenclatura(){
     var data = $('#nom').serialize();
@@ -145,14 +154,7 @@ function nomenclatura(){
     });
 }
 
-$(function (e) {
-    $('#not').onclick(function (e) {
-        e.preventDefault()
-        $('#nott').load('buscanoticia.php?' + $('#not').serialize())
-    })
-})
-
-
+//
 function Paginacion(){
     var data = $('#usuario').serialize();
     $.ajax({

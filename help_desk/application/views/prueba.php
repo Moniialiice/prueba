@@ -10,8 +10,8 @@
 		<div class="page-header float-right">
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
-                    <span class="input-group-addon">
-                        <span class="fa " target='_blank' OnClick="ReportOS();">example</span>
+                    <span> 
+                        <img src="assets/img/excel.png" width="35" height="35" target='_blank' OnClick="excelUsuario();">                   
                     </span>  
                 </ol>
 			</div>

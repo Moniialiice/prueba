@@ -16,9 +16,9 @@
 		<div class="page-header float-right">
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
-                    <span class="input-group-addon">
-                        <span class='fa fa-download' target='_blank' OnClick='excelAtendido();'></span>
-                    </span>  
+                    <span> 
+                        <img src="assets/img/excel.png" width="35" height="35"target='_blank' OnClick="excelAtendido();">
+                    </span> 
                 </ol>
 			</div>
 		</div>
