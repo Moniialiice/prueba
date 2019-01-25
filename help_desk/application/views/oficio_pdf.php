@@ -10,17 +10,13 @@
 	font-size:10px;
 	font-family:Arial, Helvetica, sans-serif;
 }
-
 .fecha_lib{
 	width: 70%;
 	border: 0.0px solid white
 }
-
-
 .datos{
 	width: 70%;
 }
-
 .titulo_tr {
 	background-color:#CDDCAE;
 	text-align: center;
