@@ -11,7 +11,7 @@
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
                     <span> 
-                        <img src="assets/img/excel.png" width="35" height="35" target='_blank' OnClick="excelUsuario();">                   
+                        <img src="assets/img/excel.png" width="30" height="30" target='_blank' OnClick="excelUsuario();">                   
                     </span>  
                 </ol>
 			</div>
@@ -41,15 +41,16 @@
                             "<td>Activo</td>".
                             "<td align='center'><a href='datosUsuario/".$dato->id_usuario."' class='fa fa-plus fa-1x'></a></td>".
                            "</tr>";
-                }else{
-                    echo "<tr>
-                            <th scope='row'>".$dato->id_usuario."</th>".
-                            "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
-                            "<td>".$dato->correo."</td>" .
-                            "<td>Inactivo</td>".
-                            "<td align='center'><a href='datosUsuario/".$dato->id_usuario."' class='fa fa-plus fa-1x'></a></td>".
-                          "</tr>";
-                      }
+                }
+                    else{
+                        echo "<tr>
+                                <th scope='row'>".$dato->id_usuario."</th>".
+                                "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
+                                "<td>".$dato->correo."</td>" .
+                                "<td>Inactivo</td>".
+                                "<td align='center'><a href='datosUsuario/".$dato->id_usuario."' class='fa fa-plus fa-1x'></a></td>".
+                            "</tr>";
+                        }
             }
         }    
         ?>

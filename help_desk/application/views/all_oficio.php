@@ -17,7 +17,7 @@
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
                     <span> 
-                        <img clas= 'icon fa fa' src="assets/img/excel.png" width="35" height="35" target='_blank' OnClick="excelOficio();">
+                        <img clas= 'icon fa fa' src="assets/img/excel.png" width="30" height="30" target='_blank' OnClick="excelOficio();">
                     </span> 
                 </ol>
 			</div>

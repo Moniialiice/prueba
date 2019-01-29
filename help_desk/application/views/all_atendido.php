@@ -17,7 +17,7 @@
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
                     <span> 
-                        <img src="assets/img/excel.png" width="35" height="35"target='_blank' OnClick="excelAtendido();">
+                        <img src="assets/img/excel.png" width="30" height="30"target='_blank' OnClick="excelAtendido();">
                     </span> 
                 </ol>
 			</div>
@@ -56,7 +56,7 @@
                 "<td>".$dato->descripcion."</td>".
                 "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                 "<td align='center'><a href='descargarAtendido/".$dato->arch_atendido."' class='fa fa-download fa-1x'></a></td>".               
-                "<td align='center'><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' class='fa fa-plus fa-1x'></a></td>"; //".$dato->id_oficioAtendido."
+                "<td align='center'><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' class='fa fa-print fa-1x'></a></td>"; //".$dato->id_oficioAtendido."
             }
         }        
         ?>

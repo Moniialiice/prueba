@@ -101,7 +101,6 @@ h4{
 	<tr><td>&nbsp;</td></tr>
 	<tr><td>&nbsp;</td></tr>
 </table>
-
 <table>
 	<tr>
 		<td class="table_cont"> NO. OFICIO</td>
