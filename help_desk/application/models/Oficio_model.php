@@ -29,13 +29,8 @@ class Oficio_model extends CI_Model{
         return $query->result();
     }
     //se obtiene ultima nomenclatura de oficio seguimiento
-    public function lastID(){
-        $query = $this->db->query("SELECT MAX(id_oficioseg) FROM oficio_seguimiento");
-        return $query->result();
-    }
-    //se obtiene ultima nomenclatura de oficio seguimiento
-    public function lastNom($id){
-        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento WHERE id_oficioseg='$id'");
+    public function getNom($nom){
+        $query = $this->db->query("SELECT id_oficioseg, nomenclatura FROM oficio_seguimiento WHERE nomenclatura LIKE '%$nom%' ORDER by id_oficioseg DESC");
         return $query->result();
     }
     //llama oficio para insertar oficio seguimiento
