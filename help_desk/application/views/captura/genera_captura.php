@@ -381,17 +381,22 @@
                                                 <div class="col-12 col-md-9"><textarea name="copia_at" id="textarea-input" rows="3" class="form-control"><?php echo set_value('copia_at'); ?></textarea></div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="text-input" class="form-control-label"> Atención</label></div>
-                                                <?php
-                                                //se toman los datos del usuario de las sesiones
-                                                    $id = $this->session->userdata('id_usuario');
-                                                    $nom = $this->session->userdata('name');
-                                                    echo "<div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$nom."' disabled>
-                                                        <input type='text' id='text-input' name='atencion' value='".$id."' hidden>
-                                                        </div>";?>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label"> Atención</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name='atencion' id='atencion' class='form-control'>
+                                                        <?php
+                                                        var_dump($atendido);
+                                                        //se toman los datos de todos los usuarios para la insesión
+                                                        foreach ( $atencion as $atendido) {
+                                                            echo "<option value='$atencion->id_usuario'".set_select('atencion',$atencion->nombre.' '.$atencion->apellidop.' '.$atencion->apellidom).">".$atencion->$atencion->nombre.' '.$atencion->apellidop.' '.$atencion->apellidom."</option>";
+                                                        }
+                                                    ?>
+                                                    </select>
+                                                </div>
+                                            </div>  
+                                    </div>           
                                         <!--/form><--/form-->
-                                            
-                                    </div>                                    
+                                </div>                                    
                                         <?php
                                             echo validation_errors();
                                         ?>  

@@ -84,6 +84,11 @@ h4{
 	$day = $ext[2];
 	//array convierte número de mes en nombre 
 	$months = array (1=>'ENERO',2=>'FEBRERO',3=>'MARZO',4=>'ABRIL',5=>'MAYO', 6=>'JUNIO', 7=>'JULIO', 8=>'AGOSTO', 9=>'SEPTIEMBRE', 10=>'OCTUBRE',11=>'NOVIEMBRE',12=>'DICIEMBRE'); 
+	$termino = $dato[0]->termino;
+	$space = explode(" ",$termino);
+	$fec = explode("-",$space[0]);
+	$fechat = $fec[2]."/".$fec[1]."/".$fec[0]." ".$space[1];
+ 
 ?>
 <table>
 	<tr>
@@ -267,7 +272,7 @@ h4{
 		<td></td>
         <td class="table_font" colspan="3"> ESTA OFICINA </td>
         <td class="table_cont" ><?php if($dato[0]->esta_oficina == 1){ echo " X ";}?></td>
-		<td class="table_cont" ><?php if($dato[0]->esta_oficina == 1){ echo $dato[0]->termino; }?></td>
+		<td class="table_cont" ><?php if($dato[0]->esta_oficina == 1){ echo $fechat; }?></td>
 	</tr>
     <tr>
         <td class="table_font" colspan="5"> GESTIONAR PETICIÓN Y REMITIR CONSTANCIAS QUE ACREDITEN LA ATENCIÓN BRINDADA </td>
@@ -275,7 +280,7 @@ h4{
 		<td></td>
         <td class="table_font" colspan="3"> PETICIONARIO </td>
         <td class="table_cont"><?php if($dato[0]->peticionario == 1){echo " X ";}?> </td>
-		<td class="table_cont"><?php if($dato[0]->peticionario == 1){ echo $dato[0]->termino; }?></td>
+		<td class="table_cont"><?php if($dato[0]->peticionario == 1){ echo $fechat; }?></td>
 	</tr>
     <tr>
         <td class="table_font" colspan="5"> ARCHIVO </td>
@@ -283,7 +288,7 @@ h4{
 		<td></td>
         <td class="table_font" colspan="3"> INSTITUCIÓN REQUIRENTE </td>
 		<td class="table_cont"><?php if($dato[0]->institucion_requiriente == 1){ echo " X "; }?></td>
-		<td class="table_cont"><?php if($dato[0]->institucion_requiriente == 1){ echo $dato[0]->termino; }?></td> 
+		<td class="table_cont"><?php if($dato[0]->institucion_requiriente == 1){ echo $fechat; }?></td> 
 	</tr>
 	<tr>
         <td class="table_font" colspan="6"> OTRAS: <?php if($dato[0]->otras != ""){ echo $dato[0]->otras;}?></td>

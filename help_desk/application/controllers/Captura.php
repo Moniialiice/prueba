@@ -22,10 +22,14 @@ class Captura extends CI_Controller
     }
     //función para cargar vista de captura
     public function index(){
+        //muestra los usuario difentes a coordinador y administrador
+        $users = $this->Captura_model->getUsuarios();
+        $atendido['atencion'] = $users;
         $this->load->view('templates/head');
-        $this->load->view('captura/genera_captura');
+        $this->load->view('captura/genera_captura',$atendido);
         $this->load->view('templates/footer');
     }
+
     //función para dar de alta nuevo registro
     public function altaCaptura(){
         //id del usuario que realiza la captura

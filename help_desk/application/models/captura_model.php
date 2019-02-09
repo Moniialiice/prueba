@@ -7,6 +7,11 @@ class Captura_model extends CI_model
         $this->load->database();
     }
 
+    //consulta los usuarios que sean diferentes de administrador y coordinador
+    public function getUsuarios(){
+        $query = $this->db->query("SELECT id_usuario, nombre, apellidop, apellidom FROM usuario WHERE id_usuario != '1' AND id_usuario != '2'");
+        return $query->result();
+    } 
     //manda datos a la función para insertar
     public function insertaCaptura($oficio_rec, $fecha1, $fecha2, $fecha3, $firma_origen_rec, $cargo_rec, $peticion_rec, $entrada, 
     $oficina, $peticionario, $requiriente, 

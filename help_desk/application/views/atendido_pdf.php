@@ -96,7 +96,7 @@ p{
 				echo "\"2018. AÑO DEL BICENTENARIO DEL NATALICIO DE IGNACIO RAMÍREZ CALZADA, EL NIGROMANTE\".";
 			break;
 			case '2019':
-				echo "\" 2019. AÑO DEL CENTÉSIMO ANIVERSARIO LUCTUOSO DE EMILIANO ZAPATA SALAZAR, EL CAUDILLO DEL SUR\".";
+				echo "\"2019. AÑO DEL CENTÉSIMO ANIVERSARIO LUCTUOSO DE EMILIANO ZAPATA SALAZAR, EL CAUDILLO DEL SUR\".";
 			break;
 		}	
 	?>
@@ -121,14 +121,33 @@ p{
 <br><br><br><br>
 <label class="label_encabezado">ATENTAMENTE</label><br><br><br><br><br>
 <label class="label_encabezado">
-	<?php 
-		$nom = $dato[0]->nomenclatura; 
-		$cut = explode("/",$nom); 
-		if($cut[0]=="400LIA000"){
-		echo"DR. H. C. RODRIGO ARCHUNDIA BARRIENTOS <br>COORDINADOR GENERAL DE COMBATE AL SECUESTRO";
-		}elseif($cut[0]=="400LI0010"){
-			echo "ANTONIO MARTIN TORRES BALLESTEROS <br>SECRETARIO PARTICULAR DEL COORDINADOR <br>GENERAL DE COMBATE AL SECUESTRO";
-		} ?>
+	<?php
+	$nom = $dato[0]->nomenclatura; 
+	$cut = explode("/",$nom); 
+	switch ($year){
+		case '2016':
+			if($cut[0]=="400LIA000"){
+			echo"DR. H. C. RODRIGO ARCHUNDIA BARRIENTOS <br>COORDINADOR GENERAL DE COMBATE AL SECUESTRO";
+			}elseif($cut[0]=="400LI0010"){
+				echo "ANTONIO MARTIN TORRES BALLESTEROS <br>SECRETARIO PARTICULAR DEL COORDINADOR <br>GENERAL DE COMBATE AL SECUESTRO";
+			} 
+		break;
+		case '2018':
+			if($cut[0]=="400LIA000"){
+				echo"DR. H. C. RODRIGO ARCHUNDIA BARRIENTOS <br>COORDINADOR GENERAL DE COMBATE AL SECUESTRO";
+			}elseif($cut[0]=="400LI0010"){
+				echo "ANTONIO MARTIN TORRES BALLESTEROS <br>SECRETARIO PARTICULAR DEL COORDINADOR <br>GENERAL DE COMBATE AL SECUESTRO";
+			} 
+		break;
+		case '2019':
+			if($cut[0]=="400LIA000"){
+				echo"DR. H. C. RODRIGO ARCHUNDIA BARRIENTOS <br>COORDINADOR GENERAL DE COMBATE AL SECUESTRO";
+			}elseif($cut[0]=="400LI0010"){
+				echo "ANTONIO MARTIN TORRES BALLESTEROS <br>SECRETARIO PARTICULAR DEL COORDINADOR <br>GENERAL DE COMBATE AL SECUESTRO";
+			} 
+		break;	
+	}
+	?>
 </label><br><br><br>
 <table>
 	<tr><td></td><td colspan="7"><label class="label_copia"><?php echo nl2br($dato[0]->copia_a);?></label>	
