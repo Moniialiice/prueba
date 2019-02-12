@@ -114,7 +114,7 @@ class Usuario extends CI_Controller
     {
         $search = $this->input->post('busqueda');
         $pages = 2; //Número de registros mostrados por páginas
-        $config['base_url'] = base_url() . 'usuario/pagina'; // parametro base de la aplicación, si tenemos un .htaccess nos evitamos el index.php
+        $config['base_url'] = base_url() . 'muestraUsuario/'; // parametro base de la aplicación, si tenemos un .htaccess nos evitamos el index.php
         $config['total_rows'] = $this->Usuario_model->filas($search); //calcula el número de filas
         $config['per_page'] = $pages; //Número de registros mostrados por páginas
         $config['num_links'] = 200; //Número de links mostrados en la paginación

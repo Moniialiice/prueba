@@ -29,8 +29,8 @@ $.extend($.ui, { timepicker: { version: "0.9.6" } });
 function Timepicker() {
 	this.regional = []; // Available regional settings, indexed by language code
 	this.regional[''] = { // Default regional settings
-		currentText: 'Now',
-		closeText: 'Done',
+		currentText: 'Ahora',
+		closeText: 'Listo',
 		ampm: false,
 		timeFormat: 'hh:mm tt',
 		timeSuffix: '',
