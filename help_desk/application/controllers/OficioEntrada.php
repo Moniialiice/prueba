@@ -15,6 +15,7 @@ class OficioEntrada extends CI_Controller
         $this->load->library('session');
         $this->load->library('encrypt');
         $this->load->model('Entrada_model');
+        $this->load->model('Bitacora_model');
         $this->load->library('form_validation');
         //$this->load->library('curl');
         $this->load->library('upload');
@@ -88,6 +89,10 @@ class OficioEntrada extends CI_Controller
                         {
                             $this->session->set_flashdata('Creado','Oficio creado');
                             $this->generaEntrada();
+                            $id = $this->session->userdata('id_usuario'); //id del usuario loggeado
+                            $fec_bit = date('Y-m-d H:m:s'); //fecha y hora del servidor
+                            //inserción de registros en bitacora
+                            $this->Bitacora_model->insertBitacora($id,'Se ha creado el oficio recepción '.$no_oficio.'.',$fec_bit);
                         }else{
                             $this->session->set_flashdata('No creado','Oficio no creado');
                             $this->generaEntrada();
@@ -147,6 +152,10 @@ class OficioEntrada extends CI_Controller
                 if($this->session->userdata('id_tipoUsuario') != 5){
                     $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);
                     $this->load->view('all_entrada',$datos);
+                    $id = $this->session->userdata('id_usuario'); //id del usuario logeado
+                    $fec_bit = date('Y-m-d H:m:s'); //fecha actual del servidor
+                    //inserción de registros en la bitacora
+                    $this->Bitacora_model->insertBitacora($id,'Búsqueda Oficio Recepción '.$search.' con fechas '.$date1.'-'.$date2.'.',$fec_bit);
                 }else{
                     $id = $this->session->userdata('id_usuario');
                     $datos ['datos'] = $this->Entrada_model->reportFI($search, $fecha1 ,$fecha2, $id);
@@ -167,13 +176,21 @@ class OficioEntrada extends CI_Controller
     //función para descagar archivos
     public function descarga($name)
     {
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d H:m:s'); //fecha actual del servidor
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($id,'Descarga de archivo recepción'.$name.'.',$fec_bit);
+        //datos del archivo para descargar
         $data = file_get_contents($this->folder.$name);
         force_download($name,$data);
     }
     //muestra todas las entradas que ha realizado el usuario
     public function reportEntradaId()
     {
-        $id = $this->session->userdata('id_usuario');
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d H:m:s'); //fecha actual del servidor
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($id,'Reporte Oficio Recepción Secretariado.',$fec_bit);
         $datos ['datos'] = $this->Entrada_model->reportEntradaId($id);
         $this->load->view('templates/head');
         $this->load->view('report_entrada',$datos);
@@ -265,7 +282,11 @@ class OficioEntrada extends CI_Controller
                 ->setCellValue('G'.$n, $dato[$n-2]->cargo)
                 ->setCellValue('H'.$n, $dato[$n-2]->nombre." ".$dato[$n-2]->apellidop." ".$dato[$n-2]->apellidom);
             }
-        }        
+        }
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d H:m:s'); //fecha actual del servidor
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($id,'Descarga reporte en Excel de la búsqueda '.$search.' oficio recepción con fechas '.$date1.'-'.$date2.'.',$fec_bit);        
         //se crea objeto para guardar archivo xlsx
         $writer = new Xlsx($spreadsheet);
         //nombre del archivo a descargar

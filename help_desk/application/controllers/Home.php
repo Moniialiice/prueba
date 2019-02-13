@@ -11,6 +11,7 @@ class Home extends CI_Controller {
 		 $this->load->library('session');
 		 $this->load->library('encrypt');
 		 $this->load->model('Usuario_model');
+		 $this->load->model('Bitacora_model');
          $this->load->library('form_validation');
          $this->load->dbutil();
 		 //$this->load->library('curl');
@@ -21,7 +22,7 @@ class Home extends CI_Controller {
 		$data = array();
 		$this->load->view('templates/head1');
 		$this->load->view('login',$data);
-		$this->load->view('templates/footer1');
+        $this->load->view('templates/footer1');
 	}
 	//función recibe datos del formulario, valida para iniciar sesion
     public function validaDatos()
@@ -52,6 +53,9 @@ class Home extends CI_Controller {
                         //los datos del usuario se almacenan en un array en la función set_userdata de libreria session
                         $this->session->set_userdata($data_user);
                         //carga la función inicio, ingresando al sistema
+                        $id = $this->session->userdata('id_usuario');
+                        $fec_bit = date('Y-m-d H:i:s');
+                        $this->Bitacora_model->insertBitacora($id,'Usuario inicio Sesión',$fec_bit);
                         redirect('index');               
                 }else{
                     $this->session->set_flashdata('UP', 'Correo o Contraseña incorrectos');
@@ -87,7 +91,6 @@ class Home extends CI_Controller {
             //redirecciona al login
 	        redirect('inicio');
 	    }
-
     }
     //función para cerrar sesión
     public function cerrarSesion(){
@@ -96,6 +99,9 @@ class Home extends CI_Controller {
         );
         $this->session->set_userdata($user_data);
         $this->session->sess_destroy();
+        $id = $this->session->userdata('id_usuario');
+        $fec_bit = date('Y-m-d H:i:s');
+        $this->Bitacora_model->insertBitacora($id,'Usuario cerro Sesión',$fec_bit);
         //
         redirect('inicio');
     }

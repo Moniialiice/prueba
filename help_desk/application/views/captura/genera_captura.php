@@ -24,7 +24,7 @@
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Datos </strong>
+                        <strong>Datos</strong>
                     </div>
                     <div class="card-body card-block">
                         <?php
@@ -106,12 +106,7 @@
                                                     <div class="col-12 col-md-9"><input id="file-input" name="entrada" class="form-control-file" type="file" ></div>
                                                 </div>
                                             <!--/form--> 
-                                    </div>                                               
-                                    <!--div class="card-footer">
-                                        <button type="button" class="btn btn-success btn-sm">
-                                            <i class="fa fa-arrow"></i> Siguiente
-                                        </button>
-                                    </div-->
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="seguimiento" role="tabpanel" aria-labelledby="seguimiento-tab">
                                     <div class="card-body card-block">
@@ -334,11 +329,6 @@
                                                     </div>
                                         <!--/form>< form-->
                                     </div> <!-- card-body-->
-                                    <!--div class="card-footer">
-                                        <button type="submit" class="btn btn-success btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i> Siguiente
-                                        </button>
-                                    </div-->  
                                 </div>        
                                 <div class="tab-pane fade" id="atendido" role="tabpanel" aria-labelledby="atendido-tab">
                                     <div class="card-body card-block">
@@ -393,18 +383,18 @@
                                                     ?>
                                                     </select>
                                                 </div>
-                                            </div>  
+                                            </div>                                          
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-dot-circle-o">Guardar</i>  
+                                            </button>
+                                        </div>    
                                     </div>           
                                         <!--/form><--/form-->
                                 </div>                                    
                                         <?php
                                             echo validation_errors();
                                         ?>  
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-dot-circle-o">Guardar</i>  
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                     </div>     
