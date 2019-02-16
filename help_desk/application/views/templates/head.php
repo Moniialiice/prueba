@@ -149,7 +149,7 @@ if( !$this->session->userdata['correcto']){
                                 <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon fa fa-cog'></i>Herramientas</a>
                                 <ul class='sub-menu children dropdown-menu'>
                                     <li><i class='menu-icon fa fa-save'></i><a href='respaldo'>Respaldo</a></li>
-                                    <li><i class='menu-icon fa fa-paperclip'></i><a href=''>Bit</a></li>
+                                    <li><i class='menu-icon fa fa-paperclip'></i><a href='consultaBitacora'>Bit</a></li>
                                 </ul>
                             </li>
                         </ul>

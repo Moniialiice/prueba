@@ -16,6 +16,7 @@ class Atendido extends CI_Controller
         $this->load->library('session');
         $this->load->library('encrypt');
         $this->load->model('Atendido_model');
+        $this->load->model('Bitacora_model');
         $this->load->library(array('form_validation','upload'));
         //$this->load->library('curl');
         $this->folder = 'document/atendido/';
@@ -72,7 +73,7 @@ class Atendido extends CI_Controller
                 $config['upload_path'] = $this->folder;
                 $config['allowed_types'] = 'jpg|png|pdf';
                 $config['max_size'] = 1000;
-                $config['file_name'] = $nomen.$fecha;
+                $config['file_name'] = $nomen.'-'.$fecha;
                 //carga libreria archivos e inicializa el array config con los datos del archivo
                 $this->load->library('upload',$config);
                 $this->upload->initialize($config);
@@ -82,10 +83,16 @@ class Atendido extends CI_Controller
                     $upload_data = $this->upload->data();
                     //toma el nombre del archivo
                     $archivo = $upload_data['file_name']; 
-                    $insertOficio = $this->Atendido_model->insert_Atendido($fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion);                if ($insertOficio == true){                    
+                    $insertOficio = $this->Atendido_model->insert_Atendido($fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion);                
+                    if ($insertOficio == true){                    
                     //id oficio seguimiento 
                     $idatendido = $this->Atendido_model->getIDA($segui);
                     $ida = $idatendido[0]->id_oficioAtendido;
+                    $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                    $hor_bit = date('H:i:s'); //fecha el servidor
+                    //inserta registros en la bitacora
+                    $this->Bitacora_model->insertBitacora($idu,'Oficio atendido creado, del oficio '.$nomen.' creado.',$fec_bit,$hor_bit);
                     //una vez insertado muestra datos en actualizar oficio
                     $this->session->set_flashdata('Creado','Oficio creado');
                     $this->mostrarAtendido($ida);
@@ -146,6 +153,11 @@ class Atendido extends CI_Controller
                 $mont2 = $ext2[1];
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
+                $idu = $this->session->userdata('id_usuario'); //id del usuario logeado
+                $fec_bit = date('Y-m-d'); //fecha actual del servidor
+                $hor_bit = date('H:i:s');
+                //inserción de registros en la bitacora
+                $this->Bitacora_model->insertBitacora($idu,'Búsqueda Oficio Atendido '.$search.' con fechas '.$date1.'-'.$date2.'.',$fec_bit, $hor_bit);
                 switch($this->session->userdata('id_tipoUsuario')){
                     case '1':
                         //datos de la consulta oficio  
@@ -153,7 +165,7 @@ class Atendido extends CI_Controller
                         $this->load->view('all_atendido', $datos);
                     break;
                     case '2':
-                        //datos de la consulta oficio  
+                        //datos de la consulta oficio
                         $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $fecha1, $fecha2);
                         $this->load->view('all_atendido', $datos);
                     break;
@@ -180,6 +192,13 @@ class Atendido extends CI_Controller
     {
         //consulta datos del oficio atendido
         $datos['datos'] = $this->Atendido_model->consultaAtendido($id);
+        $idu = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hor_bit = date('H:i:s'); //fecha actual del servidor
+        $nom = $this->Atendido_model->nomenBit($id); //consulta de nomenclatura por el id del asunto
+        $nome = $nom[0]->nomenclatura; //nomenclatura del oficio seguimiento
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($idu,'Consulta oficio atendido del oficio: '.$nome.'.',$fec_bit,$hor_bit);
         //carga vistas, formulario de consulta
         $this->load->view('templates/head');
         $this->load->view('consulta_atendido',$datos);
@@ -188,10 +207,15 @@ class Atendido extends CI_Controller
     //función para descargar archivo seguimiento o final
     public function descarga($name)
     {
+        $idu = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hor_bit = date('H:i:s'); //hora del servidor
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($idu,'Descarga de archivo atendido '.$name.'.',$fec_bit,$hor_bit);
         $data = file_get_contents($this->folder.$name);
         force_download($name,$data);
     }
-    //función para generar pdf de oficio atendid
+    //función para generar pdf de oficio atendido
     public function imprimirOficioAtendido($id)
     {
         $datos['dato'] = $this->Atendido_model->reportOficioAtendido($id);
@@ -217,6 +241,13 @@ class Atendido extends CI_Controller
         $pdf->writeHTML($html, true, false, true, false, '');
         //manda a imprimir al cargar el archivo
         //$pdf->IncludeJS("print();"); I
+        $idu = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hor_bit = date('H:i:s'); //fecha actual del servidor
+        $nom = $this->Atendido_model->nomenBit($id); //consulta de nomenclatura por el id del asunto
+        $nome = $nom[0]->nomenclatura; //nomenclatura del oficio seguimiento
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($idu,'Descarga Oficio Atendido en PDF de: '.$nome.'.',$fec_bit,$hor_bit);
         $pdf->Output($pdfFilePath, 'D');
     }
     //reporte en excel 
@@ -290,6 +321,11 @@ class Atendido extends CI_Controller
                 ->setCellValue('F'.$n, $dato[$n-2]->nombre." ".$dato[$n-2]->apellidop." ".$dato[$n-2]->apellidom);
             }
         }
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d H:i:s'); //fecha actual del servidor
+        $hor_bit = date('Y-m-d H:i:s'); //hora actual del servidor        
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($id,'Descarga reporte en Excel de la búsqueda '.$search.' oficio atendido con fechas '.$date1.'-'.$date2.'.',$fec_bit,$hor_bit);
         //se crea objeto para guardar archivo xls
         $writer = new Xlsx($spreadsheet);
         //nombre del archivo a descargar 
@@ -301,5 +337,4 @@ class Atendido extends CI_Controller
         $writer->save('php://output');
     }
     //el motivo de este correo 
-
 }

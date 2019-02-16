@@ -54,8 +54,9 @@ class Home extends CI_Controller {
                         $this->session->set_userdata($data_user);
                         //carga la función inicio, ingresando al sistema
                         $id = $this->session->userdata('id_usuario');
-                        $fec_bit = date('Y-m-d H:i:s');
-                        $this->Bitacora_model->insertBitacora($id,'Usuario inicio Sesión',$fec_bit);
+                        $fec_bit = date('Y-m-d');
+                        $hor_bit = date('H:i:s');
+                        $this->Bitacora_model->insertBitacora($id,'Inicio Sesión',$fec_bit,$hor_bit);
                         redirect('index');               
                 }else{
                     $this->session->set_flashdata('UP', 'Correo o Contraseña incorrectos');
@@ -99,10 +100,6 @@ class Home extends CI_Controller {
         );
         $this->session->set_userdata($user_data);
         $this->session->sess_destroy();
-        $id = $this->session->userdata('id_usuario');
-        $fec_bit = date('Y-m-d H:i:s');
-        $this->Bitacora_model->insertBitacora($id,'Usuario cerro Sesión',$fec_bit);
-        //
         redirect('inicio');
     }
 

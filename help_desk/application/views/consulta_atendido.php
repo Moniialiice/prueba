@@ -10,7 +10,11 @@
         <div class='page-header float-right'>
             <div class='page-title'>
                 <ol class='breadcrumb text-right'>
-                    <li><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' class='fa fa-print fa-2x'></a></li>
+                    <?php
+                        foreach ($datos as $dato)
+                        {
+                            echo "<li><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' class='fa fa-print fa-2x'></a></li>";
+                    ?>
                 </ol>
             </div>
         </div>
@@ -39,8 +43,7 @@
                                 echo validation_errors();    
                         
                         //echo date('l jS \of F Y h:i:s A');
-                        foreach ($datos as $dato)
-                        {
+                       
                             //cambia formato de fecha  
                             $date = $dato->fecha_atendido;
                             //corta los datos de d,m,a

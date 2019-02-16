@@ -40,6 +40,12 @@ class Atendido_model extends CI_model
         $query = $this->db->query("SELECT a.id_oficioAtendido, a.fecha_atendido, a.nombre_aten, a.cargo_aten, a.descripcion, a.arch_atendido, a.copia_a, a.atencion, u.nombre, u.apellidop, u.apellidom, s.id_oficioseg, s.nomenclatura, s.asunto FROM oficio_atendido as a, usuario as u, oficio_seguimiento as s WHERE u.id_usuario = a.atencion AND s.id_oficioseg = a.id_oficioseg AND a.id_oficioAtendido = '$id'");
         return $query->result();
     }
+    //consulta nomenclatura de oficio seguimiento para bitacora 
+    public function nomenBit($id)
+    {
+        $query = $this->db->query("SELECT nomenclatura FROM oficio_seguimiento as s, oficio_atendido as a WHERE a.id_oficioseg = s.id_oficioseg AND a.id_oficioAtendido = '$id'");
+        return $query->result();
+    }
     //consulta por nomenclatura y fecha de atendido
     public function searchfechaAtendido($search, $fecha1, $fecha2)
     {

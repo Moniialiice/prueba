@@ -21,6 +21,7 @@ class Usuario extends CI_Controller
         $this->load->library('session');
         $this->load->library('encrypt');
         $this->load->model('Usuario_model');
+        $this->load->model('Bitacora_model');
         $this->load->library('form_validation');
     }
     //carga el formulario de alta usuario 
@@ -65,6 +66,11 @@ class Usuario extends CI_Controller
                     $query = $this->Usuario_model->createUsuario($name, $app, $apm, $email, $pass, $activo, $tipoUser, $dependencia);
                     //sí se inserto los datos manda mensaje     
                     if($query == true){    
+                        $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                        $fec_bit = date('Y-m-d'); //fecha el servidor
+                        $hor_bit = date('H:i:s'); //hora el servidor
+                        //inserta registros en la bitacora
+                        $this->Bitacora_model->insertBitacora($idu,'Se ha creado usuario '.$email.'.',$fec_bit,$hor_bit);
                         $this->session->set_flashdata('Creado','Usuario creado correctamente');
                         redirect('nuevoUsuario');
                     }else{
@@ -105,6 +111,11 @@ class Usuario extends CI_Controller
     public function consultaUsuario()
     {
         $search = $this->input->post('busqueda');
+        $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+        $fec_bit = date('Y-m-d'); //fecha el servidor
+        $hor_bit = date('H:i:s'); //hora el servidor
+        //inserta registros en la bitacora
+        $this->Bitacora_model->insertBitacora($idu,'Búsqueda usuario '.$search.'.',$fec_bit,$hor_bit);
         //var_dump($search);
         $datos['datos'] = $this->Usuario_model->search_usuario($search);
         $this->load->view('all_usuarios',$datos);    
@@ -113,6 +124,11 @@ class Usuario extends CI_Controller
     public function ejemplo()
     {
         $search = $this->input->post('busqueda');
+        $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+        $fec_bit = date('Y-m-d'); //fecha el servidor
+        $hor_bit = date('H:i:s'); //hora el servidor
+        //inserta registros en la bitacora
+        $this->Bitacora_model->insertBitacora($idu,'Búsqueda usuario '.$search.'.',$fec_bit,$hor_bit);
         $pages = 2; //Número de registros mostrados por páginas
         $config['base_url'] = base_url() . 'muestraUsuario/'; // parametro base de la aplicación, si tenemos un .htaccess nos evitamos el index.php
         $config['total_rows'] = $this->Usuario_model->filas($search); //calcula el número de filas
@@ -173,7 +189,12 @@ class Usuario extends CI_Controller
                     if($this->form_validation->run() == TRUE){
                         $query = $this->Usuario_model->updateUsuario($id, $name, $app, $apm, $activo, $email, $pass, $tipoUser, $dependencia);  
                         //sí se inserto los datos manda mensaje     
-                        if($query == true){    
+                        if($query == true){
+                            $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                            $fec_bit = date('Y-m-d'); //fecha el servidor
+                            $hor_bit = date('H:i:s'); //hora el servidor
+                            //inserta registros en la bitacora
+                            $this->Bitacora_model->insertBitacora($idu,'Se ha modificado usuario '.$email.'.',$fec_bit,$hor_bit);    
                             $this->session->set_flashdata('Modificado','Usuario creado correctamente');
                             $this->actualizarUsuario($i);
                         }else{
@@ -192,7 +213,12 @@ class Usuario extends CI_Controller
                     if($this->form_validation->run() == TRUE){
                         $query = $this->Usuario_model->updateUsuario($id, $name, $app, $apm, $activo, $email, $passn, $tipoUser, $dependencia);  
                         //sí se inserto los datos manda mensaje     
-                        if($query == true){    
+                        if($query == true){
+                            $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                            $fec_bit = date('Y-m-d'); //fecha el servidor
+                            $hor_bit = date('H:i:s'); //fecha el servidor
+                            //inserta registros en la bitacora
+                            $this->Bitacora_model->insertBitacora($idu,'Se ha modificado usuario '.$email.'.',$fec_bit,$hor_bit);    
                             $this->session->set_flashdata('Modificado','Usuario creado correctamente');
                             $this->actualizarUsuario($i);
                         }else{
@@ -226,6 +252,11 @@ class Usuario extends CI_Controller
     //muestra datos para modificar y actualizar contraseña
     public function perfilUsuario($id){
         //consulta los datos de usuario 
+        $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+        $fec_bit = date('Y-m-d'); //fecha el servidor
+        $hor_bit = date('H:i:s'); //fecha el servidor
+        //inserta registros en la bitacora
+        $this->Bitacora_model->insertBitacora($idu,'Consultó su perfil.',$fec_bit,$hor_bit);
         $datos['usuario'] = $this->Usuario_model->muestraUsuario($id);                 
         $this->load->view('templates/head');
         $this->load->view('perfil',$datos);
@@ -249,7 +280,12 @@ class Usuario extends CI_Controller
             if($this->form_validation->run() == TRUE){
                 $query = $this->Usuario_model->updatePassword($passn,$id);  
                 //sí se inserto los datos manda mensaje     
-                if($query == true){    
+                if($query == true){
+                    $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                    $hor_bit = date('H:i:s'); //fecha el servidor
+                    //inserta registros en la bitacora
+                    $this->Bitacora_model->insertBitacora($idu,'Cambió su contraseña.',$fec_bit,$hor_bit);    
                     $this->session->set_flashdata('Modificado','Contraseña actualizada correctamente');
                     $this->perfilUsuario($i);
                 }else{
@@ -307,7 +343,12 @@ class Usuario extends CI_Controller
                 ->setCellValue('C'.$n, $dato[$n-2]->correo)
                 ->setCellValue('D'.$n, $activo);
             }
-        }        
+        }
+        $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+        $fec_bit = date('Y-m-d'); //fecha el servidor
+        $hor_bit = date('H:i:s'); //hora el servidor
+        //inserta registros en la bitacora
+        $this->Bitacora_model->insertBitacora($idu,'Descarga archivo Excel de usuario '.$search.'.',$fec_bit,$hor_bit);       
         //se crea objeto para guardar archivo xlsx
         $writer = new Xlsx($spreadsheet);
         //nombre del archivo a descargar

@@ -15,6 +15,7 @@ class Captura extends CI_Controller
         $this->load->library('session');
         $this->load->library('encrypt');
         $this->load->model('Captura_model');
+        $this->load->model('Bitacora_model');
         $this->load->library(array('form_validation'));
         $this->load->library('calendar');
         $this->load->library('upload');
@@ -173,6 +174,11 @@ class Captura extends CI_Controller
             
             if($insertCaptura == TRUE)
             {
+                $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                $fec_bit = date('Y-m-d'); //fecha el servidor
+                $hora_bit = date('H:i:s'); //hora el servidor
+                //inserta registros en la bitacora
+                $this->Bitacora_model->insertBitacora($idu,'Captura creado, Oficio Recepción '.$oficio_rec.' Oficio Seguimiento '.$nomenclatura.'.',$fec_bit,$hora_bit);
                 $this->session->set_flashdata('Creado','Oficio creado');
                 $this->index();
             }else{
@@ -235,6 +241,11 @@ class Captura extends CI_Controller
                 $mont2 = $ext2[1];
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
+                $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                $fec_bit = date('Y-m-d'); //fecha el servidor
+                $hora_bit = date('H:i:s'); //hora el servidor
+                //inserta registros en la bitacora
+                $this->Bitacora_model->insertBitacora($idu,'Consulta Oficio Seguimiento Captura '.$search.'con fechas '.$date1.'-'.$date2.'.',$fec_bit,$hora_bit);
                 $datos['datos'] = $this->Captura_model->consultaOSCaptura($search,$fecha1,$fecha2);
                 $this->load->view('captura/all_oficioseg_Captura', $datos);
             }else{
@@ -277,6 +288,11 @@ class Captura extends CI_Controller
                 $mont2 = $ext2[1];
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
+                $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                $fec_bit = date('Y-m-d'); //fecha el servidor
+                $hora_bit = date('H:i:s'); //hora el servidor
+                //inserta registros en la bitacora
+                $this->Bitacora_model->insertBitacora($idu,'Búsqueda Oficio Atendido Captura'.$search.'con fechas '.$date1.'-'.$date2.'.',$fec_bit,$hora_bit);
                 $datos['datos'] = $this->Captura_model->consultaAtenCap($search,$fecha1,$fecha2); 
                 $this->load->view('captura/all_atendido_Captura',$datos);
             }else{
@@ -295,6 +311,13 @@ class Captura extends CI_Controller
     public function imprimirOficioCap($id)
     {
         $datos['dato'] = $this->Captura_model->reportOficioCap($id);
+        $nomen = $this->Oficio_model->nomenSegBit($id);//consulta la nomenclatura por id del oficio
+        $nom = $nomen[0]->nomen_ofseg; //
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hora_bit = date('H:i:s'); //hora actual del servidor
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($id,'Descarga Trámite de Turno Oficio Seguimiento Captura.',$fec_bit,$hora_bit);
         $html = $this->load->view('captura/oficio_pdf', $datos, true);
         //this the the PDF filename that user will get to download
         $pdfFilePath = "CapturaOficio_seguimiento." . "pdf";
@@ -323,6 +346,13 @@ class Captura extends CI_Controller
     public function imprimirAtendidoCap($id)
     {
         $datos['dato'] = $this->Captura_model->reportAtendidoCap($id);
+        $nomen = $this->Oficio_model->nomenAtenBit($id);//consulta la nomenclatura por id del oficio
+        $nom = $nomen[0]->nomen_ofseg; //
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hora_bit = date('H:i:s'); //hora actual del servidor
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($id,'Descarga Trámite de Turno Oficio Seguimiento Captura.',$fec_bit,$hora_bit);
         $html = $this->load->view('captura/atendido_pdf', $datos, true);
         //this the the PDF filename that user will get to download  
         $pdfFilePath = "CapturaOficio_atendido." . "pdf";
@@ -349,7 +379,11 @@ class Captura extends CI_Controller
     }
     //consulta oficio seguimiento por id del usuario
     public function consultaCapID(){
-        $id = $this->session->userdata('id_usuario');
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hora_bit = date('H:i:s'); //hora actual del servidor
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($id,'Reporte Oficio Seguimiento Captura.',$fec_bit,$hora_bit);
         $datos['datos'] = $this->Captura_model->reportOficioID($id);
         $this->load->view('templates/head');
         $this->load->view('report_seguimiento',$datos);
@@ -357,7 +391,11 @@ class Captura extends CI_Controller
     }
     //consulta oficio atendido por el id del usuario
     public function consultaAtenId(){
-        $id = $this->session->userdata('id_usuario');
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hora_bit = date('H:i:s'); //fecha actual del servidor
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($id,'Reporte Oficio Atendido Captura.',$fec_bit,$hora_bit);
         $datos['datos'] = $this->Captura_model->reportAtendidoID($id);
         $this->load->view('templates/head');
         $this->load->view('report_atendido',$datos); 

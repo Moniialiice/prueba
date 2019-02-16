@@ -139,9 +139,10 @@ class Oficio extends CI_Controller
                                     $idoficio = $this->Oficio_model->getIDO($nomenclatura);
                                     $ido = $idoficio[0]->id_oficioseg;                                
                                     $id = $this->session->userdata('id_usuario');//id del usuario loggeado
-                                    $fec_bit = date('Y-m-d H:i:s'); //fecha el servidor
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
                                     //inserta registros en la bitacora
-                                    $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit);
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
                                     //una vez insertado muestra datos en mostrar oficio
                                     $this->actualizarOficio($ido);
                                 }else{
@@ -157,9 +158,10 @@ class Oficio extends CI_Controller
                                 $idoficio = $this->Oficio_model->getIDO($nomenclatura);
                                 $ido = $idoficio[0]->id_oficioseg;
                                 $id = $this->session->userdata('id_usuario');//id del usuario loggeado
-                                $fec_bit = date('Y-m-d H:i:s'); //fecha el servidor
+                                $fec_bit = date('Y-m-d'); //fecha el servidor
+                                $hor_bit = date('H:i:s'); //fecha el servidor
                                 //inserta registros en la bitacora
-                                $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit);
+                                $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
                                 //una vez insertado muestra datos en mostrar oficio
                                 $this->actualizarOficio($ido);
                                 }else{
@@ -184,9 +186,10 @@ class Oficio extends CI_Controller
                                     $idoficio = $this->Oficio_model->getIDO($nomenclatura);
                                     $ido = $idoficio[0]->id_oficioseg;
                                     $id = $this->session->userdata('id_usuario');//id del usuario loggeado
-                                    $fec_bit = date('Y-m-d H:i:s'); //fecha el servidor
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
                                     //inserta registros en la bitacora
-                                    $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit);
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
                                     //una vez insertado muestra datos en actualizar oficio
                                     $this->actualizarOficio($ido);
                                 }else{
@@ -201,9 +204,10 @@ class Oficio extends CI_Controller
                                         $idoficio = $this->Oficio_model->getIDO($nomenclatura);
                                         $ido = $idoficio[0]->id_oficioseg;
                                         $id = $this->session->userdata('id_usuario');//id del usuario loggeado
-                                        $fec_bit = date('Y-m-d H:i:s'); //fecha el servidor
+                                        $fec_bit = date('Y-m-d'); //fecha el servidor
+                                        $hor_bit = date('H:i:s'); //fecha el servidor
                                         //inserta registros en la bitacora
-                                        $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit);
+                                        $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
                                         //una vez insertado muestra datos en actualizar oficio
                                         $this->actualizarOficio($ido);
                                     }else{
@@ -263,9 +267,10 @@ class Oficio extends CI_Controller
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;                
                 $id = $this->session->userdata('id_usuario'); //id del usuario logeado
-                $fec_bit = date('Y-m-d H:i:s'); //fecha actual del servidor
+                $fec_bit = date('Y-m-d'); //fecha actual del servidor
+                $hor_bit = date('H:i:s'); //fecha actual del servidor
                 //inserción de registros en la bitacora
-                $this->Bitacora_model->insertBitacora($id,'Búsqueda de '.$search.' con fechas '.$date1.'-'.$date2.'.',$fec_bit);
+                $this->Bitacora_model->insertBitacora($id,'Búsqueda Oficio Seguimiento '.$search.' con fechas '.$date1.'-'.$date2.'.',$fec_bit,$hor_bit);
                 switch($this->session->userdata('id_tipoUsuario')){
                     case '1':
                         $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
@@ -299,11 +304,12 @@ class Oficio extends CI_Controller
         //consulta los datos del oficio por el id de oficio
         $datos ['datos'] = $this->Oficio_model->report($id);
         $id_u = $this->session->userdata('id_usuario'); //id del usuario logeado
-        $fec_bit = date('Y-m-d H:i:s'); //fecha actual del servidor
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hor_bit = date('H:i:s'); //fecha actual del servidor
         $nom = $this->Oficio_model->getNomBit($id);
         $nomen = $nom[0]->nomenclatura;
         //inserción de registros en la bitacora
-        $this->Bitacora_model->insertBitacora($id_u,'Consulta oficio seguimiento '.$nomen.'.',$fec_bit);
+        $this->Bitacora_model->insertBitacora($id_u,'Consulta oficio seguimiento '.$nomen.'.',$fec_bit,$hor_bit);
         //manda datos de la consulta a la vista para mostrar el formulario correspondiente 
             $this->load->view('templates/head');
             $this->load->view('consulta_oficio',$datos); //formulario para visualizar oficio e imprimir
@@ -347,11 +353,12 @@ class Oficio extends CI_Controller
         //manda a imprimir al cargar el archivo
         //$pdf->IncludeJS("print();"); D
         $id_u = $this->session->userdata('id_usuario'); //id del usuario logeado
-        $fec_bit = date('Y-m-d H:i:s'); //fecha actual del servidor
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hor_bit = date('H:i:s'); //fecha actual del servidor
         $nom = $this->Oficio_model->getNomBit($id);
         $nomen = $nom[0]->nomenclatura;
         //inserción de registros en la bitacora
-        $this->Bitacora_model->insertBitacora($id_u,'Trámite en Turno del oficio seguimiento '.$nomen.' en PDF.',$fec_bit);
+        $this->Bitacora_model->insertBitacora($id_u,'Descarga de Trámite en Turno del oficio seguimiento '.$nomen.' en PDF.',$fec_bit,$hor_bit);
         $pdf->Output($pdfFilePath, 'D');
     }
      //reporte en excel
@@ -437,9 +444,10 @@ class Oficio extends CI_Controller
             }   
         }
         $id = $this->session->userdata('id_usuario'); //id del usuario logeado
-        $fec_bit = date('Y-m-d H:i:s'); //fecha actual del servidor
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hor_bit = date('H:i:s'); //fecha actual del servidor
         //inserción de registros en la bitacora
-        $this->Bitacora_model->insertBitacora($id,'Descarga reporte en Excel de la búsqueda'.$search.' con fechas '.$date1.'-'.$date2.'.',$fec_bit);
+        $this->Bitacora_model->insertBitacora($id,'Descarga reporte en Excel de la búsqueda '.$search.' con fechas '.$date1.'-'.$date2.'.',$fec_bit,$hor_bit);
         //se crea objeto para guardar archivo xlsx
         $writer = new Xlsx($spreadsheet);
         //nombre del archivo a descargar

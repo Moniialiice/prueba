@@ -111,3 +111,5 @@ $route['imprimirCapAtendido/(:any)'] = 'Captura/imprimirAtendidoCap/$1';
 $route['resultAtendido'] = 'Captura/consultaCapturaAten';
 $route['muestraSeguimiento'] = 'Captura/consultaCapID'; //busqueda de oficio seguimiento por id del usuario
 $route['muestraAtendidos'] = 'Captura/consultaAtenId'; //busqueda de oficio atendido por ek id del usuario
+//rutas de bitacora
+$route['consultaBitacora'] = 'Bitacora/index';

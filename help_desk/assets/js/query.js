@@ -141,18 +141,37 @@ function excelUsuario(){
     form.submit();
 }
 
-//imprime nomenclatura 
-function nomenclatura(){
-    var data = $('#nom').serialize();
+//búsqueda de oficio atendido captura
+function BusquedaBitacora(){
+    var data = $('#bit').serialize();
     $.ajax({
-        url: 'Oficio/consecutivo',
+        url: 'Bitacora/consultaBit', 
         type: 'post',
         data: data,
         success:function(data){
-            $('#consecutivo').html(data);
+            $('#rbit').html(data);
         }
     });
 }
+//pdf bitacora
+function pdfBitacora() {
+    var nomenclatura = $('#busqueda').val();
+    var date1 = $("#date1").val();
+    var date2 = $("#date2").val();
+    if (date1 == "" || date2 == "") {
+        $.sweetModal({
+            content: 'Favor de Llenar todos los campos',
+            icon: $.sweetModal.ICON_WARNING
+        });
+    } else {
+        var form = document.getElementById("bit");
+        form.action = "Bitacora/imprimirBitacora";
+        form.setAttribute("target", "_blank");
+        form.submit();
+    }
+}
+
+
 
 //
 function Paginacion(){
