@@ -84,7 +84,6 @@ class Bitacora extends CI_Controller
         $day2 = $ext2[0];
         $fecha2 = $year2."-".$mont2."-".$day2;
         $datos ['datos'] = $this->Bitacora_model->searchfechaBitacora($search,$fecha1,$fecha2);
-        $html = $this->load->view('bitacora_pdf', $datos, true);
         //this the the PDF filename that user will get to download  
         $pdfFilePath = "bitacora_sigo." . "pdf";
         //load TCPDF library
@@ -92,13 +91,15 @@ class Bitacora extends CI_Controller
         //Tamaño de pdf
         //var_dump($data);
         $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
-        $pdf->segundaHoja = false;
-        $pdf->setPrintHeader(false);
+        $pdf->segundaHoja = true;
+        $pdf->setPrintHeader(true);
         $pdf->setPrintFooter(false);
-        $pdf->SetHeaderMargin(20);
-        $pdf->SetTopMargin(20);
-        $pdf->setFooterMargin(15);
-        $pdf->SetAutoPageBreak(true);
+        // set margins
+        $pdf->SetMargins(20, 40, 20);
+        $pdf->SetHeaderMargin(15);
+        $pdf->SetFooterMargin(15);
+        $pdf->SetAutoPageBreak(TRUE, 20);
+        $html = $this->load->view('bitacora_pdf', $datos, true);
         $pdf->SetAuthor('FGJEM');
         $pdf->SetDisplayMode('real', 'default');
         $pdf->AddPage('P', 'LETTER');

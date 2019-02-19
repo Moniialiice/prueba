@@ -375,10 +375,9 @@
                                                 <div class="col-12 col-md-9">
                                                     <select name='atencion' id='atencion' class='form-control'>
                                                         <?php
-                                                        var_dump($atendido);
                                                         //se toman los datos de todos los usuarios para la insesión
-                                                        foreach ( $atencion as $atendido) {
-                                                            echo "<option value='$atencion->id_usuario'".set_select('atencion',$atencion->nombre.' '.$atencion->apellidop.' '.$atencion->apellidom).">".$atencion->$atencion->nombre.' '.$atencion->apellidop.' '.$atencion->apellidom."</option>";
+                                                        foreach ( $atencion as $us) {
+                                                            echo "<option value='$us->id_usuario'".set_select('atencion',$us->nombre.' '.$us->apellidop.' '.$us->apellidom).">".$us->nombre.' '.$us->apellidop.' '.$us->apellidom."</option>";
                                                         }
                                                     ?>
                                                     </select>

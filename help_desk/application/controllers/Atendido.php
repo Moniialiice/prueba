@@ -169,11 +169,6 @@ class Atendido extends CI_Controller
                         $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $fecha1, $fecha2);
                         $this->load->view('all_atendido', $datos);
                     break;
-                    case '5':
-                        //datos de la consulta oficio
-                        $id = $this->session->userdata('id_usuario');  
-                        $datos['datos'] = $this->Atendido_model->searchAtenFI($search, $fecha1, $fecha2, $id);
-                        $this->load->view('all_atendido', $datos);
                 }                               
             }else{
                 $datos = array();
@@ -301,11 +296,7 @@ class Atendido extends CI_Controller
             break;
             case '2':
                 $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
-            break;
-            case '5':
-                $id = $this->session->userdata('id_usuario');
-                $datos['datos'] = $this->Atendido_model->searchAtenFI($search,$fecha1,$fecha2,$id);
-            break;    
+            break;   
         }   
         foreach($datos as $dato){ 
             $row = count($dato);

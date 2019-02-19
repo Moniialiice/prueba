@@ -13,7 +13,7 @@
                     <?php
                         foreach ($datos as $dato)
                         {
-                            echo "<li><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' class='fa fa-print fa-2x'></a></li>";
+                            echo "<li><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' ><img src='assets/img/pdf.png' width='30' height='30'></a></li>";
                     ?>
                 </ol>
             </div>

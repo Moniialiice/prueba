@@ -280,11 +280,6 @@ class Oficio extends CI_Controller
                         $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
                         $this->load->view('all_oficio', $datos);
                     break;
-                    case '5':
-                        $id = $this->session->userdata('id_usuario');
-                        $datos['datos'] = $this->Oficio_model->searchDI($search,$fecha1,$fecha2,$id);
-                        $this->load->view('all_oficio', $datos);
-                    break;
                 }                
             }else{
                 $datos = array();
@@ -410,10 +405,6 @@ class Oficio extends CI_Controller
             break;
             case '2':
                 $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
-            break;
-            case '5':
-                $id = $this->session->userdata('id_usuario');
-                $datos['datos'] = $this->Oficio_model->searchDI($search,$fecha1,$fecha2,$id);
             break;
         }
         //muestra los datos de un array

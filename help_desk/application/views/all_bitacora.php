@@ -17,7 +17,7 @@
 			<div class="page-title">
 				<ol class="breadcrumb text-right">
                     <span> 
-                        <img src="assets/img/excel.png" width="30" height="30"target='_blank' OnClick="pdfBitacora();">
+                        <img src="assets/img/pdf.png" width="30" height="30"target='_blank' OnClick="pdfBitacora();">
                     </span> 
                 </ol>
 			</div>

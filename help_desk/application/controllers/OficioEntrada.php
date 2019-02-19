@@ -272,12 +272,7 @@ class OficioEntrada extends CI_Controller
         $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(40);
         $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(30);
         //valida que tipo de consulta realizará deacuerdo al tipo de usuario
-        if($this->session->userdata('id_tipoUsuario') != 5){
-            $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);
-        }else{
-            $id = $this->session->userdata('id_usuario');
-            $datos ['datos'] = $this->Entrada_model->reportFI($search, $fecha1 ,$fecha2, $id);
-        }  
+        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);
         foreach ($datos as $dato) {            
             $row = count($dato);
             for ($n=2; $n<=$row+1; $n++){

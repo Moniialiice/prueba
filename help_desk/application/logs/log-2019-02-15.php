@@ -6413,3 +6413,56 @@ INFO - 2019-02-15 18:05:17 --> Form Validation Class Initialized
 INFO - 2019-02-15 18:05:17 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\bitacora_pdf.php
 INFO - 2019-02-15 18:05:24 --> Final output sent to browser
 INFO - 2019-02-15 18:05:24 --> Total execution time: 6.7412
+INFO - 2019-02-15 18:07:01 --> Config Class Initialized
+INFO - 2019-02-15 18:07:01 --> Hooks Class Initialized
+INFO - 2019-02-15 18:07:01 --> UTF-8 Support Enabled
+INFO - 2019-02-15 18:07:01 --> Utf8 Class Initialized
+INFO - 2019-02-15 18:07:01 --> URI Class Initialized
+INFO - 2019-02-15 18:07:01 --> Router Class Initialized
+INFO - 2019-02-15 18:07:01 --> Output Class Initialized
+INFO - 2019-02-15 18:07:01 --> Security Class Initialized
+INFO - 2019-02-15 18:07:01 --> Input Class Initialized
+INFO - 2019-02-15 18:07:01 --> Language Class Initialized
+INFO - 2019-02-15 18:07:01 --> Loader Class Initialized
+INFO - 2019-02-15 18:07:01 --> Controller Class Initialized
+INFO - 2019-02-15 18:07:01 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2019-02-15 18:07:01 --> Pagination Class Initialized
+INFO - 2019-02-15 18:07:01 --> Helper loaded: url_helper
+INFO - 2019-02-15 18:07:01 --> Helper loaded: form_helper
+DEBUG - 2019-02-15 18:07:01 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2019-02-15 18:07:01 --> Session: Class initialized using 'files' driver.
+INFO - 2019-02-15 18:07:01 --> Encrypt Class Initialized
+INFO - 2019-02-15 18:07:01 --> Database Driver Class Initialized
+INFO - 2019-02-15 18:07:01 --> Model "Usuario_model" initialized
+INFO - 2019-02-15 18:07:01 --> Model "Bitacora_model" initialized
+INFO - 2019-02-15 18:07:01 --> Form Validation Class Initialized
+INFO - 2019-02-15 18:07:01 --> Database Utility Class Initialized
+INFO - 2019-02-15 18:07:01 --> Config Class Initialized
+INFO - 2019-02-15 18:07:01 --> Hooks Class Initialized
+INFO - 2019-02-15 18:07:01 --> UTF-8 Support Enabled
+INFO - 2019-02-15 18:07:01 --> Utf8 Class Initialized
+INFO - 2019-02-15 18:07:01 --> URI Class Initialized
+INFO - 2019-02-15 18:07:01 --> Router Class Initialized
+INFO - 2019-02-15 18:07:01 --> Output Class Initialized
+INFO - 2019-02-15 18:07:01 --> Security Class Initialized
+INFO - 2019-02-15 18:07:01 --> Input Class Initialized
+INFO - 2019-02-15 18:07:01 --> Language Class Initialized
+INFO - 2019-02-15 18:07:01 --> Loader Class Initialized
+INFO - 2019-02-15 18:07:01 --> Controller Class Initialized
+INFO - 2019-02-15 18:07:01 --> Language file loaded: language/spanish/pagination_lang.php
+INFO - 2019-02-15 18:07:01 --> Pagination Class Initialized
+INFO - 2019-02-15 18:07:01 --> Helper loaded: url_helper
+INFO - 2019-02-15 18:07:01 --> Helper loaded: form_helper
+DEBUG - 2019-02-15 18:07:01 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2019-02-15 18:07:01 --> Session: Class initialized using 'files' driver.
+INFO - 2019-02-15 18:07:01 --> Encrypt Class Initialized
+INFO - 2019-02-15 18:07:01 --> Database Driver Class Initialized
+INFO - 2019-02-15 18:07:01 --> Model "Usuario_model" initialized
+INFO - 2019-02-15 18:07:01 --> Model "Bitacora_model" initialized
+INFO - 2019-02-15 18:07:01 --> Form Validation Class Initialized
+INFO - 2019-02-15 18:07:01 --> Database Utility Class Initialized
+INFO - 2019-02-15 18:07:01 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/head1.php
+INFO - 2019-02-15 18:07:01 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\login.php
+INFO - 2019-02-15 18:07:01 --> File loaded: C:\xampp\htdocs\prueba\help_desk\application\views\templates/footer1.php
+INFO - 2019-02-15 18:07:01 --> Final output sent to browser
+INFO - 2019-02-15 18:07:01 --> Total execution time: 0.0410
