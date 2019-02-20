@@ -93,11 +93,11 @@ class Bitacora extends CI_Controller
         $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
         $pdf->segundaHoja = true;
         $pdf->setPrintHeader(true);
-        $pdf->setPrintFooter(false);
+        $pdf->setPrintFooter(true);
         // set margins
-        $pdf->SetMargins(20, 40, 20);
+        $pdf->SetMargins(15, 35, 15);
         $pdf->SetHeaderMargin(15);
-        $pdf->SetFooterMargin(15);
+        $pdf->SetFooterMargin(20);
         $pdf->SetAutoPageBreak(TRUE, 20);
         $html = $this->load->view('bitacora_pdf', $datos, true);
         $pdf->SetAuthor('FGJEM');
@@ -112,7 +112,7 @@ class Bitacora extends CI_Controller
         $hor_bit = date('H:i:s'); //fecha actual del servidor
         //inserción de registros en la bitacora
         $this->Bitacora_model->insertBitacora($idu,'Descarga bitácora en PDF '.$search.' con fechas '.$date1.'-'.$date2.'.',$fec_bit,$hor_bit);
-        $pdf->Output($pdfFilePath, 'I');
+        $pdf->Output($pdfFilePath, 'D');
     }
 
 

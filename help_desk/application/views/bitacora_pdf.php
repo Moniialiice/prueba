@@ -39,10 +39,10 @@ p{
 	 
 ?>
 <div class="body">
-	<label class="label_encabezado">BITÁCORA - SISTEMA DE CONTROL DE OFICIOS</label> 
+	<label class="label_encabezado">BITÁCORA - SISTEMA DE CONTROL DE OFICIOS<br>FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO<br>COORDINACIÓN GENERAL DE COMBATE AL SECUESTRO</label> 
 	<br>
-	<p>FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO.<br>COORDINACIÓN GENERAL DE COMBATE AL SECUESTRO.<br>
-		METEPEC, ESTADO DE MEXICO A <?php echo $day." DE ".$months[(int)$mes]." DE ".$year."."; ?></p>
+	<br>
+		<p>METEPEC, ESTADO DE MEXICO A <?php echo $day." DE ".$months[(int)$mes]." DE ".$year."."; ?></p>
 	<br><br><br>
 	<table class="table_cont">
 			<tr><td>&nbsp;</td></tr>

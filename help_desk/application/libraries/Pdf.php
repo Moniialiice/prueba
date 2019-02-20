@@ -12,7 +12,7 @@ class Pdf extends TCPDF
     public function Header() {
 		// Logo
 		$image_file = K_PATH_IMAGES.'header.png';
-		$this->Image($image_file, 10, 10, 180, 25, 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$this->Image($image_file, 16, 10, 180, 25, 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		// Set font
 		$this->SetFont('helvetica', 'B', 20);
 		// Title
@@ -26,11 +26,7 @@ class Pdf extends TCPDF
        $this->SetY(-15);
        // Set font
        $this->SetFont('helvetica', 'I', 8);
-       //Footer formatea la fecha para que envie algo como: Viernes 23 de Marzo del 2018
-       $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
-       $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-       $dia= $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y');
-       $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages()." ".$dia, 0, false, 'C', 0, '', 0, false, 'T', 'M');
+       $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 }
 /* application/libraries/Pdf.php */

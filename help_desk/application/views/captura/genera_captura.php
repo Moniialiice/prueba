@@ -28,110 +28,121 @@
                     </div>
                     <div class="card-body card-block">
                         <?php
-                             if($this->session->flashdata('Creado')){
-                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción creado correctamente.</label></div>";
-                            }
-                            if($this->session->flashdata('No')){
-                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción no creado.</label></div>";                            
-                            }
+                        if($this->session->flashdata('Creado')){
+                            echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción creado correctamente.</label></div>";
+                        }if($this->session->flashdata('No')){
+                            echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción no creado.</label></div>";                            
+                        }
                         ?>
-                            <ul class="nav nav-tabs" id="Tab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="recepcion-tab" data-toggle="tab" href="#recepcion" role="tab" aria-controls="recepcion" aria-selected="true">Recepción</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="seguimiento-tab" data-toggle="tab" href="#seguimiento" role="tab" aria-controls="seguimiento" aria-selected="false">Seguimiento</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="atendido-tab" data-toggle="tab" href="#atendido" role="tab" aria-controls="atendido" aria-selected="false">Atendido</a>
-                                    </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="recepcion" role="tabpanel" aria-labelledby="recepcion-tab">
-                                    <div class="card-body card-block">
-                                        <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
-                                            <form action="insertCaptura" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Oficio Recepción</label></div>
-                                                    <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="no_oficio" class="form-control" value="<?php echo set_value('no_oficio'); ?>" ></div>
+                        <ul class="nav nav-tabs" id="Tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="recepcion-tab" data-toggle="tab" href="#recepcion" role="tab" aria-controls="recepcion" aria-selected="true">Recepción</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="seguimiento-tab" data-toggle="tab" href="#seguimiento" role="tab" aria-controls="seguimiento" aria-selected="false">Seguimiento</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="atendido-tab" data-toggle="tab" href="#atendido" role="tab" aria-controls="atendido" aria-selected="false">Atendido</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="recepcion" role="tabpanel" aria-labelledby="recepcion-tab">
+                                <div class="card-body card-block">
+                                    <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
+                                    <form action="insertCaptura" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Oficio Recepción</label></div>
+                                            <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="no_oficio" class="form-control" value="<?php echo set_value('no_oficio'); ?>" ></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Día y Hora Recepción</label></div>
+                                            <div class="col-12 col-md-9">
+                                                <div class='input-group' >                                        
+                                                    <input type='text-input' class="form-control" id="datepicker" name="fecha_r" value="<?php echo set_value('fecha_r'); ?>">
+                                                    <span class="input-group-addon">
+                                                        <span class="fa fa-calendar"></span>
+                                                    </span>
+                                                </div>    
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha y Hora Recepción</label></div>
+                                            <div class="col-12 col-md-9">
+                                                <div class="input-group">                                        
+                                                    <input type="text-input" class="form-control" id="datepickerf" name="fecha_rec" value="<?php echo set_value('fecha_rec'); ?>">
+                                                    <span class="input-group-addon">
+                                                        <span class="fa fa-calendar"></span>
+                                                    </span>
                                                 </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Día y Hora Recepción</label></div>
-                                                    <div class="col-12 col-md-9">
-                                                        <div class='input-group' >                                        
-                                                            <input type='text-input' class="form-control" id="datepicker" name="fecha_r" value="<?php echo set_value('fecha_r'); ?>">
-                                                            <span class="input-group-addon">
-                                                                <span class="fa fa-calendar"></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Real</label></div>
+                                            <div class="col-12 col-md-9">
+                                                <div class='input-group' >
+                                                    <input type='text-input' class="form-control" id="date1" name="fecha_real" value="<?php echo set_value('fecha_real');?>"  >
+                                                    <span class="input-group-addon">
+                                                        <span class="fa fa-calendar" ></span>
+                                                    </span>
                                                 </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha y Hora Recepción</label></div>
-                                                    <div class="col-12 col-md-9">
-                                                        <div class="input-group">                                        
-                                                            <input type="text-input" class="form-control" id="datepickerf" name="fecha_rec" value="<?php echo set_value('fecha_rec'); ?>">
-                                                            <span class="input-group-addon">
-                                                                <span class="fa fa-calendar"></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Real</label></div>
-                                                    <div class="col-12 col-md-9">
-                                                        <div class='input-group' >
-                                                            <input type='text-input' class="form-control" id="date1" name="fecha_real" value="<?php echo set_value('fecha_real');?>"  >
-                                                            <span class="input-group-addon">
-                                                                <span class="fa fa-calendar" ></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="text-input" class="form-control-label"> Firma Origen</label></div>
-                                                    <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="firma_r" class="form-control" value="<?php echo set_value('firma_r'); ?>"></div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="text-input" class="form-control-label"> Cargo</label></div>
-                                                    <div class="col-12 col-md-9"><textarea name="cargo_r" id="textarea-input" OnKeyUp="Upper(this);" rows="1" class="form-control"><?php echo set_value('cargo_r'); ?></textarea></div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="text-input" class="form-control-label"> Peticion</label></div>
-                                                    <div class="col-12 col-md-9"><textarea name="peticion_r" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('peticion_r'); ?></textarea></div>
-                                                </div>
-                                                <div><label for='text-input' class='form-control-label fa fa-exclamation' > Nombre de archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="file-input" class="form-control-label"> Archivo Entrada</label></div>
-                                                    <div class="col-12 col-md-9"><input id="file-input" name="entrada" class="form-control-file" type="file" ></div>
-                                                </div>
-                                            <!--/form--> 
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="seguimiento" role="tabpanel" aria-labelledby="seguimiento-tab">
-                                    <div class="card-body card-block">
-                                        <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>                                    
+                                            </div>
+                                        </div>    
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class="form-control-label"> Firma Origen</label></div>
+                                                <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="firma_r" class="form-control" value="<?php echo set_value('firma_r'); ?>"></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class="form-control-label"> Cargo</label></div>
+                                            <div class="col-12 col-md-9"><textarea name="cargo_r" id="textarea-input" OnKeyUp="Upper(this);" rows="1" class="form-control"><?php echo set_value('cargo_r'); ?></textarea></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class="form-control-label"> Peticion</label></div>
+                                            <div class="col-12 col-md-9"><textarea name="peticion_r" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('peticion_r'); ?></textarea></div>
+                                        </div>
+                                        <div><label for='text-input' class='form-control-label fa fa-exclamation' > Nombre de archivo sin ningun tipo de carácter (/,$,(),-,#)</label></div><br>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="file-input" class="form-control-label"> Archivo Entrada</label></div>
+                                            <div class="col-12 col-md-9"><input id="file-input" name="entrada" class="form-control-file" type="file" ></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="select" class=" form-control-label"> Atención</label></div>
+                                            <div class="col-12 col-md-9">
+                                                <select name='atencion1' id='atencion1' class='form-control'>
+                                                <?php
+                                                //se toman los datos de todos los usuarios para la insesión
+                                                    foreach ( $atencion as $us) {
+                                                        echo "<option value='$us->id_usuario'".set_select('atencion1',$us->nombre.' '.$us->apellidop.' '.$us->apellidom).">".$us->nombre.' '.$us->apellidop.' '.$us->apellidom."</option>";
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>    
+                                        </div><!--/form--> 
+                                </div><!-- card-block -->  
+                            </div>
+                            <div class="tab-pane fade" id="seguimiento" role="tabpanel" aria-labelledby="seguimiento-tab">
+                                <div class="card-body card-block">
+                                    <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>                                    
                                         <!--form action="insertaCaptura2" method="post" enctype="multipart/form-data" class="form-horizontal"-->
-                                                <div class='row form-group'>
-                                                    <div class='col col-md-3'><label for='text-input' class=' form-control-label'>No Oficio Seguimiento</label></div>
-                                                    <div class='col-12 col-md-9'><input type='text-input' id="text-input" name='nomenclatura' class='form-control' value="<?php echo set_value('nomenclatura');?>"></div>
+                                    <div class='row form-group'>
+                                        <div class='col col-md-3'><label for='text-input' class=' form-control-label'>No Oficio Seguimiento</label></div>
+                                        <div class='col-12 col-md-9'><input type='text-input' id="text-input" name='nomenclatura' class='form-control' value="<?php echo set_value('nomenclatura');?>"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha De Atención</label></div>
+                                            <div class="col-12 col-md-9">
+                                                <div class='input-group' >
+                                                    <input type='text-input' class="form-control" id="date2" name="fecha" value="<?php echo set_value('fecha');?>"  >
+                                                    <span class="input-group-addon">
+                                                        <span class="fa fa-calendar" ></span>
+                                                    </span>
                                                 </div>
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha De Atención</label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <div class='input-group' >
-                                                                <input type='text-input' class="form-control" id="date2" name="fecha" value="<?php echo set_value('fecha');?>"  >
-                                                                <span class="input-group-addon">
-                                                                    <span class="fa fa-calendar" ></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Asunto</label></div>
-                                                        <div class="col-12 col-md-9"><textarea name="asunto" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('asunto');?></textarea></div>
-                                                    </div>
-                                                    <div class="row form-group">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Asunto</label></div>
+                                                <div class="col-12 col-md-9"><textarea name="asunto" id="textarea-input" OnKeyUp="Upper(this);" rows="5" class="form-control"><?php echo set_value('asunto');?></textarea></div>
+                                            </div>
+                                            <div class="row form-group">
                                                         <div class="col col-md-3"><label class=" form-control-label">Etiquetas de Asuntos</label></div>
                                                         <div class="col col-md-9">
                                                             <div class="form-check">
@@ -327,9 +338,22 @@
                                                         <div class="col col-sm-3"><label for="textarea-input" class=" form-control-label">Observaciones</label></div>
                                                         <div class="col col-md-9"><textarea name="observaciones" id="textarea-input" OnKeyUp="Upper(this);" rows="9" class="form-control"><?php echo set_value('observaciones');?></textarea></div>
                                                     </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-3"><label for="select" class=" form-control-label"> Atención Seguimiento</label></div>
+                                                        <div class="col-12 col-md-9">
+                                                            <select name='atencion2' id='atencion2' class='form-control'>
+                                                                <?php
+                                                                //se toman los datos de todos los usuarios para la insesión
+                                                                foreach ( $atencion as $us) {
+                                                                    echo "<option value='$us->id_usuario'".set_select('atencion2',$us->nombre.' '.$us->apellidop.' '.$us->apellidom).">".$us->nombre.' '.$us->apellidop.' '.$us->apellidom."</option>";
+                                                                }
+                                                            ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>   
                                         <!--/form>< form-->
-                                    </div> <!-- card-body-->
-                                </div>        
+                                </div> <!-- card-body-->
+                            </div>        
                                 <div class="tab-pane fade" id="atendido" role="tabpanel" aria-labelledby="atendido-tab">
                                     <div class="card-body card-block">
                                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
@@ -383,22 +407,21 @@
                                                     </select>
                                                 </div>
                                             </div>                                          
-                                        <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-dot-circle-o">Guardar</i>  
-                                            </button>
-                                        </div>    
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-dot-circle-o">Guardar</i>  
+                                                </button>
+                                            </div>    
                                     </div>           
                                         <!--/form><--/form-->
                                 </div>                                    
-                                        <?php
-                                            echo validation_errors();
-                                        ?>  
-                                </div>
-                            </div>
-                    </div>     
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                                <?php
+                                    echo validation_errors();
+                                ?>  
+                        </div> <!-- tab-content -->
+                    </div>     <!-- card-body -->
+                </div> <!-- card -->
+            </div>  <!-- col-lg-9 -->
+        </div>  <!-- row -->
+    </div> <!-- animated fadeIn-->
+</div> <!-- content mt-3 -->

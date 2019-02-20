@@ -30,10 +30,11 @@ class Captura extends CI_Controller
         $this->load->view('captura/genera_captura',$atendido);
         $this->load->view('templates/footer');
     }
-
     //función para dar de alta nuevo registro
     public function altaCaptura(){
-        //id del usuario que realiza la captura
+        //usuario que realizó la captura
+        $Urecepcion = $this->input->post('atencion2');
+        $Srecepción = $this->input->post('atencion1');
         $atencion = $this->input->post('atencion');
         //datos de oficio recepción
         $oficio_rec = $this->input->post('no_oficio');
@@ -211,8 +212,7 @@ class Captura extends CI_Controller
             $this->load->view('genera_captura',$datos);
             $this->load->view('templates/footer');
         }
-    }
-    
+    }    
     //consulta datos de oficio seguimiento en la tabla de captura
     public function busquedaOficioSeguimiento(){
         $this->load->view('templates/head');
