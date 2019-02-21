@@ -17,18 +17,6 @@
 .datos{
 	width: 70%;
 }
-.titulo_tr {
-	background-color:#CDDCAE;
-	text-align: center;
-	font-weight: bold;
-	font-size: 9px;
-	border: 0.5px solid black
-}
-.heading { #encabezado
-	text-align: center;
-	font-weight: bold;
-	border: 0.5px solid black
-}
 .table_cont{
 	text-align: center;
 	border: 0.5px solid black;
@@ -46,26 +34,6 @@
 	text-align: left;
 	height: 15px;
 	font-size: 8px;
-}
-.hid_tr{
-	text-align: center;
-	font-weight: bold;
-	font-size: 9px;
-}
-.td_height{
-	text-align: center;
-	height: 100px;
-	border: 0.5px solid black;
-}
-
-.table_styles{
-	text-align: left;
-	border: 0.5px solid black;
-	height: 15px
-}
-/*estilo con lineas*/
-h4{
-	text-align:center;
 }
 /*
 * fin estilo para tablas de PDF
@@ -88,21 +56,11 @@ h4{
 	$space = explode(" ",$termino);
 	$fec = explode("-",$space[0]);
 	$fechat = $fec[2]."/".$fec[1]."/".$fec[0]." ".$space[1];
- 
 ?>
 <table>
-	<tr>
-		<td colspan="2"></td>
-		<td colspan="6"><img src="assets/img/escudo.png" width="50" height="40"></td>
-		<td colspan="20"></td>
-		<td colspan="6"><img src="assets/img/logo_fgj.png" width="40" height="40"></td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
 	<tr><th align="center"> TRAMITE DE TURNO</th></tr>
 	<tr><td>&nbsp;</td></tr>
-	<tr><td align="right" class="table_dont">METEPEC, ESTADO DE MEXICO A <?php echo $day." DE ".$months[(int)$mont]." DE ".$year; ?></td></tr>
+	<tr><td align="right">METEPEC, ESTADO DE MEXICO A <?php echo $day." DE ".$months[(int)$mont]." DE ".$year; ?></td></tr>
 	<tr><td>&nbsp;</td></tr>
 	<tr><td>&nbsp;</td></tr>
 </table>

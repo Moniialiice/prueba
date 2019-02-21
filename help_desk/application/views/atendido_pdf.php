@@ -72,16 +72,6 @@ p{
 	//array convierte número de mes en nombre 
 	$months = array (1=>'ENERO',2=>'FEBRERO',3=>'MARZO',4=>'ABRIL',5=>'MAYO', 6=>'JUNIO', 7=>'JULIO', 8=>'AGOSTO', 9=>'SEPTIEMBRE', 10=>'OCTUBRE',11=>'NOVIEMBRE',12=>'DICIEMBRE'); 
 ?>
-<div class="header">
-<table>
-	<tr>
-		<td colspan="2"></td>
-		<td colspan="6"><img src="assets/img/escudo.png" width="50" height="40"></td>
-		<td colspan="20"></td>
-		<td colspan="6"><img src="assets/img/logo_fgj.png" width="40" height="40"></td>
-	</tr>
-</table>
-</div>
 <div class="body">
 	<label class="label_encabezado">
 	<?php 

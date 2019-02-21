@@ -334,12 +334,13 @@ class Oficio extends CI_Controller
         //var_dump($data);
         $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
         $pdf->segundaHoja = false;
-        $pdf->setPrintHeader(false);
+        $pdf->setPrintHeader(true);
         $pdf->setPrintFooter(false);
-        $pdf->SetHeaderMargin(20);
-        $pdf->SetTopMargin(20);
-        $pdf->setFooterMargin(15);
-        $pdf->SetAutoPageBreak(true);
+        // set margins
+        $pdf->SetMargins(15, 35, 15);
+        $pdf->SetHeaderMargin(15);
+        $pdf->SetFooterMargin(20);
+        $pdf->SetAutoPageBreak(TRUE, 20);
         $pdf->SetAuthor('FGJEM');
         $pdf->SetDisplayMode('real', 'default');
         $pdf->AddPage('P', 'LETTER');
