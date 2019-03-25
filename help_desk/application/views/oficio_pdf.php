@@ -7,7 +7,7 @@ body {
     margin-top: 2cm;
     margin-left: 2cm;
     margin-right: 2cm;
-    margin-bottom: 1cm;
+    margin-bottom: 0cm;
 	}
 header {
     position: fixed;
@@ -16,13 +16,6 @@ header {
     right: 2cm;
     height: 3cm;
     }
-footer {
-	position: fixed; 
-    bottom: 0.5cm; 
-    left: 1cm; 
-    right: 1cm;
-    height: 2cm;
-}
 h1 {
 	text-align: center;
 	font-size: 10px;
@@ -30,7 +23,7 @@ h1 {
 }
 .p_right{
 	text-align: right;
-	font-size: 9px;
+	font-size: 10px;
 	font-weight: bold;
 	font-family:Arial, Helvetica, sans-serif;
 }
@@ -63,6 +56,8 @@ table{
 	border: 1px solid black;
 }
 td{
+	padding: 0px;
+	weight: 10%;
 	border-collapse: collapse;
 	border: 1px solid black;	
 }

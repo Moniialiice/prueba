@@ -39,8 +39,8 @@ table{
 	border-collapse: collapse;
 	border: 1px;
 }
-.p_justify{
-	text-align: justify;
+.p_left{
+	text-align: left;
 	font-size: 10px;
 	font-family:Arial, Helvetica, sans-serif;
 }

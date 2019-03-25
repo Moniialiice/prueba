@@ -22,6 +22,7 @@ class Usuario_model extends CI_Model
         $query = $this->db->get();
         $result = $query->row();
         return $result;
+        $this->db->close();
     }
     //consulta todos los datos de usuario, tipo de usuario y dependencia por id del usuario
     public function muestraUsuario($id)
@@ -30,18 +31,21 @@ class Usuario_model extends CI_Model
                                     FROM usuario AS u, tipousuario as t, dependencias as d 
                                     WHERE u.id_tipoUsuario = t.id_tipoUsuario AND u.id_usuario = '$id'");
         return $query->result();
+        $this->db->close();
     }
     //consulta el tipo de usuario para el nuevo registro de usuario
     public function tipoUsuario()
     {
         $query = $this->db->query("SELECT * FROM tipousuario ORDER BY tipoUsuario ASC");
         return $query->result();
+        $this->db->close();
     }
     //muestra todas las dependencias para el nuevo registro de usuario
     public function getDependencia ()
     {
         $query = $this->db->query("SELECT * FROM dependencias ORDER BY dependencias ASC");
         return $query->result();
+        $this->db->close();
     }
     //inserta los datos del usuario
     public function createUsuario($name,$app,$apm,$email,$pass,$activo,$tipoUser,$dependencia)
@@ -53,24 +57,28 @@ class Usuario_model extends CI_Model
         }else{
             return false;
         }
+        $this->db->close();
     }
     //busqueda de usuario por nombre o usuario
     public function search_usuario($search)
     {
         $query = $this->db->query("SELECT u.id_usuario, u.correo, u.nombre, u.apellidop, u.apellidom, u.activo, u.id_tipoUsuario, t.tipoUsuario FROM usuario AS u, tipousuario as t WHERE u.nombre LIKE '%$search%' AND u.id_tipoUsuario=t.id_tipoUsuario ORDER BY id_usuario ASC");
         return $query->result();
+        $this->db->close();
     }
     //muestra tipo de usuario que es diferente al que tiene el usuario para modificar
     public function tipoUsuarioId($id)
     {
         $query = $this->db->query("SELECT t.id_tipoUsuario, t.tipoUsuario FROM usuario AS u, tipousuario as t WHERE u.id_usuario = '$id' AND t.id_tipoUsuario NOT LIKE u.id_tipoUsuario");
         return $query->result();
+        $this->db->close();
     }
     //muestra dependencias que son diferentes a la que tiene el usuario
     public function dependenciasId($id)
     {
         $query = $this->db->query("SELECT d.id_dependencias, d.dependencias FROM dependencias AS d, usuario AS u WHERE u.id_usuario = '$id' AND d.id_dependencias NOT LIKE u.id_dependencias");
         return $query->result();
+        $this->db->close();
     }
     //modifica los datos del usuario
     public function updateUsuario($id,$name,$app,$apm,$activo,$email,$password,$tipoUser,$dependencia)
@@ -81,6 +89,7 @@ class Usuario_model extends CI_Model
         }else{
             return FALSE;
         }
+        $this->db->close();
     }
     //modifica sólo contraseña del usuario (perfil)
     public function updatePassword($pass,$id)
@@ -92,17 +101,20 @@ class Usuario_model extends CI_Model
         }else{
             return FALSE;
         }
+        $this->db->close();
     }    
     //Función para eliminar usuario, no se usa ya que los oficios tienen registrado el usuario  que lo creó
     public function deleteUsuario($id_usuario)
     {
         $query = $this->db->query("DELETE from usuario WHERE id_usuario = '$id_usuario'");
         return $query->result();
+        $this->db->close();
     }    
     //obtenemos el total de filas para hacer la paginación
 	function filas($search) {
         $query = $this->db->query("SELECT u.id_usuario, u.correo, u.nombre, u.apellidop, u.apellidom, u.activo, u.id_tipoUsuario, t.tipoUsuario FROM usuario AS u, tipousuario as t WHERE u.correo LIKE '%$search%' AND u.id_tipoUsuario=t.id_tipoUsuario ORDER BY id_usuario ASC ");
         return $query->num_rows();
+        $this->db->close();
     }      
     //obtenemos todas las provincias a paginar con la función
     //total_posts_paginados pasando la cantidad por página y el segmento
@@ -116,6 +128,7 @@ class Usuario_model extends CI_Model
         }
             return $data;
         }
+        $this->db->close();
     }
 
 }

@@ -74,7 +74,7 @@ class Atendido extends CI_Controller
                 $config['upload_path'] = $this->folder;
                 $config['allowed_types'] = 'jpg|png|pdf';
                 $config['max_size'] = 1000;
-                $config['file_name'] = $nomen.'-'.$fecha;
+                $config['file_name'] = $nomen.'_'.$fecha;
                 //carga libreria archivos e inicializa el array config con los datos del archivo
                 $this->load->library('upload',$config);
                 $this->upload->initialize($config);
