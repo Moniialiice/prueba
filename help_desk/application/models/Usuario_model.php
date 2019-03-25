@@ -75,8 +75,7 @@ class Usuario_model extends CI_Model
     //modifica los datos del usuario
     public function updateUsuario($id,$name,$app,$apm,$activo,$email,$password,$tipoUser,$dependencia)
     {
-        $p = base64_encode($password); //encripta contraseña en base64
-        $query = $this->db->query("UPDATE usuario SET nombre = '$name', apellidop = '$app', apellidom = '$apm', activo = '$activo', correo = '$email', password = '$p', id_tipoUsuario = '$tipoUser', id_dependencias = '$dependencia' WHERE id_usuario = '$id'");
+        $query = $this->db->query("UPDATE usuario SET nombre = '$name', apellidop = '$app', apellidom = '$apm', activo = '$activo', correo = '$email', password = '$password', id_tipoUsuario = '$tipoUser', id_dependencias = '$dependencia' WHERE id_usuario = '$id'");
         if($query){
             return TRUE;
         }else{

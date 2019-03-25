@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require 'vendor/autoload.php';
-
+require_once ('vendor/dompdf/dompdf/src/Autoloader.php');
+use Dompdf\Dompdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -320,6 +321,17 @@ class Oficio extends CI_Controller
             $this->load->view('consulta_captura',$datos); //formulario para visualizar oficio e imprimir
             $this->load->view('templates/footer');    
     }
+    function imprimirOficioA($id){
+        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
+        $datos['dato'] = $this->Oficio_model->reportOficio($id);
+        $registro = $this->Oficio_model->reportOficio($id);
+        $html = $this->load->view('oficio_pdf', $datos, true);
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        //$dompdf->stream("sample.pdf", array("Attachment"=>0)); //muestra pdf
+        $dompdf->stream("tramite_turno.pdf");   //descarga pdf
+    }
+
     //función para craar pdf
     public function imprimirOficio($id)
     {

@@ -90,7 +90,7 @@ $route['resultOficio'] = 'Oficio/consultaOficio';
 $route['muestraOficio/(:num)'] = 'Oficio/actualizarOficio/$1';
 $route['descargarOficio/(:any)'] = 'Oficio/descarga/$1';
 $route['actualizaOficio'] = 'Oficio/modificaOficio';
-$route['imprimirOficio/(:num)'] = 'Oficio/imprimirOficio/$1';
+$route['imprimirOficio/(:num)'] = 'Oficio/imprimirOficioA/$1';
 //rutas de atendido
 $route['nuevoAtendido/(:num)'] = 'Atendido/index/$1';
 $route['insertarAtendido'] = 'Atendido/createAtendidoVal';
@@ -113,3 +113,5 @@ $route['muestraSeguimiento'] = 'Captura/consultaCapID'; //busqueda de oficio seg
 $route['muestraAtendidos'] = 'Captura/consultaAtenId'; //busqueda de oficio atendido por ek id del usuario
 //rutas de bitacora
 $route['consultaBitacora'] = 'Bitacora/index';
+
+$route['welcome'] = 'Welcome/pdf';

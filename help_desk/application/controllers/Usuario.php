@@ -211,7 +211,8 @@ class Usuario extends CI_Controller
                     $this->form_validation->set_rules('newpsr', 'Repetir contraseña', 'required');
                     //Sí la validación es correcta procede a insertar los datos en la base de datos
                     if($this->form_validation->run() == TRUE){
-                        $query = $this->Usuario_model->updateUsuario($id, $name, $app, $apm, $activo, $email, $passn, $tipoUser, $dependencia);  
+                        $p = base64_encode($passn);
+                        $query = $this->Usuario_model->updateUsuario($id, $name, $app, $apm, $activo, $email, $p, $tipoUser, $dependencia);  
                         //sí se inserto los datos manda mensaje     
                         if($query == true){
                             $idu = $this->session->userdata('id_usuario');//id del usuario loggeado

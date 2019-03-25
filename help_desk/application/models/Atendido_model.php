@@ -62,6 +62,7 @@ class Atendido_model extends CI_model
     public function reportOficioAtendido($id)
     {
         $query = $this->db->query("SELECT a.fecha_atendido, a.nombre_aten, a.cargo_aten, a.descripcion, a.copia_a, a.atencion, a.id_oficioseg, s.nomenclatura FROM oficio_atendido AS a, oficio_seguimiento AS s WHERE s.id_oficioseg = a.id_oficioseg AND a.id_oficioAtendido = $id");
+        $this->db->close();
         return $query->result();
     }
 }

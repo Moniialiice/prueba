@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require 'vendor/autoload.php';
-
+require_once ('vendor/dompdf/dompdf/src/Autoloader.php');
+use Dompdf\Dompdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -210,33 +211,12 @@ class Atendido extends CI_Controller
         $data = file_get_contents($this->folder.$name);
         force_download($name,$data);
     }
-    //función para generar pdf de oficio atendido
-    public function imprimirOficioAtendido($id)
-    {
+    function imprimirOficioAtendido($id){
+        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
         $datos['dato'] = $this->Atendido_model->reportOficioAtendido($id);
         $html = $this->load->view('atendido_pdf', $datos, true);
-        //this the the PDF filename that user will get to download  
-        $pdfFilePath = "oficio_atendido." . "pdf";
-        //load TCPDF library
-        $this->load->library('Pdf');
-        //Tamaño de pdf
-        //var_dump($data);
-        $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
-        $pdf->segundaHoja = false;
-        $pdf->setPrintHeader(true);
-        $pdf->setPrintFooter(false);
-        // set margins
-        $pdf->SetMargins(15, 35, 15);
-        $pdf->SetHeaderMargin(15);
-        $pdf->SetFooterMargin(20);
-        $pdf->SetAutoPageBreak(TRUE, 20);
-        $pdf->SetAuthor('FGJEM');
-        $pdf->SetDisplayMode('real', 'default');
-        $pdf->AddPage('P', 'LETTER');
-        // salida de HTML contenido a pdf
-        $pdf->writeHTML($html, true, false, true, false, '');
-        //manda a imprimir al cargar el archivo
-        //$pdf->IncludeJS("print();"); I
+        $dompdf->loadHtml($html);
+        $dompdf->render();
         $idu = $this->session->userdata('id_usuario'); //id del usuario logeado
         $fec_bit = date('Y-m-d'); //fecha actual del servidor
         $hor_bit = date('H:i:s'); //fecha actual del servidor
@@ -244,7 +224,8 @@ class Atendido extends CI_Controller
         $nome = $nom[0]->nomenclatura; //nomenclatura del oficio seguimiento
         //inserción de registros en la bitacora
         $this->Bitacora_model->insertBitacora($idu,'Descarga Oficio Atendido en PDF de: '.$nome.'.',$fec_bit,$hor_bit);
-        $pdf->Output($pdfFilePath, 'D');
+        //$dompdf->stream("sample.pdf", array("Attachment"=>0)); //muestra pdf
+        $dompdf->stream("oficio_atendido.pdf");   //descarga pdf
     }
     //reporte en excel 
     public function reportExcelA()
