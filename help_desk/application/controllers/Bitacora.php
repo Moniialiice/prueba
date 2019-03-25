@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+require 'vendor/autoload.php';
+require_once ('vendor/dompdf/dompdf/src/Autoloader.php');
+use Dompdf\Dompdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -66,10 +68,9 @@ class Bitacora extends CI_Controller
             $this->session->set_flashdata('Error', 'Consultar administrador');
         }
     }
-    //función para generar pdf de oficio atendido
-    public function imprimirBitacora()
-    {
-        //recibe datos de la búsqueda
+    //función para crear pdf de bitacora
+    public function imprimirBitacora(){
+        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('date1');
         $date2 = $this->input->post('date2');
@@ -84,37 +85,15 @@ class Bitacora extends CI_Controller
         $day2 = $ext2[0];
         $fecha2 = $year2."-".$mont2."-".$day2;
         $datos ['datos'] = $this->Bitacora_model->searchfechaBitacora($search,$fecha1,$fecha2);
-        //this the the PDF filename that user will get to download  
-        $pdfFilePath = "bitacora_sigo." . "pdf";
-        //load TCPDF library
-        $this->load->library('Pdf');
-        //Tamaño de pdf
-        //var_dump($data);
-        $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
-        $pdf->segundaHoja = true;
-        $pdf->setPrintHeader(true);
-        $pdf->setPrintFooter(true);
-        // set margins
-        $pdf->SetMargins(15, 35, 15);
-        $pdf->SetHeaderMargin(15);
-        $pdf->SetFooterMargin(20);
-        $pdf->SetAutoPageBreak(TRUE, 20);
         $html = $this->load->view('bitacora_pdf', $datos, true);
-        $pdf->SetAuthor('FGJEM');
-        $pdf->SetDisplayMode('real', 'default');
-        $pdf->AddPage('P', 'LETTER');
-        // salida de HTML contenido a pdf
-        $pdf->writeHTML($html, true, false, true, false, '');
-        //manda a imprimir al cargar el archivo
-        //$pdf->IncludeJS("print();"); I
+        $dompdf->loadHtml($html);
+        $dompdf->render();
         $idu = $this->session->userdata('id_usuario'); //id del usuario logeado
         $fec_bit = date('Y-m-d'); //fecha actual del servidor
         $hor_bit = date('H:i:s'); //fecha actual del servidor
         //inserción de registros en la bitacora
         $this->Bitacora_model->insertBitacora($idu,'Descarga bitácora en PDF '.$search.' con fechas '.$date1.'-'.$date2.'.',$fec_bit,$hor_bit);
-        $pdf->Output($pdfFilePath, 'D');
+        //$dompdf->stream("sample.pdf", array("Attachment"=>0)); //muestra pdf
+        $dompdf->stream("bitacora_".$fec_bit.".pdf");   //descarga pdf
     }
-
-
-
 }    

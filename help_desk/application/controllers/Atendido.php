@@ -211,7 +211,8 @@ class Atendido extends CI_Controller
         $data = file_get_contents($this->folder.$name);
         force_download($name,$data);
     }
-    function imprimirOficioAtendido($id){
+    //función paara imprimir atendido pdf
+    public function imprimirOficioAtendido($id){
         $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
         $datos['dato'] = $this->Atendido_model->reportOficioAtendido($id);
         $html = $this->load->view('atendido_pdf', $datos, true);

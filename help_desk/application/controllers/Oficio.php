@@ -321,53 +321,23 @@ class Oficio extends CI_Controller
             $this->load->view('consulta_captura',$datos); //formulario para visualizar oficio e imprimir
             $this->load->view('templates/footer');    
     }
-    function imprimirOficioA($id){
+    //función para crear archivo pdf de tramite de turno
+    public function imprimirOficio($id){
         $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
         $datos['dato'] = $this->Oficio_model->reportOficio($id);
         $registro = $this->Oficio_model->reportOficio($id);
         $html = $this->load->view('oficio_pdf', $datos, true);
-        $dompdf->loadHtml($html);
-        $dompdf->render();
-        //$dompdf->stream("sample.pdf", array("Attachment"=>0)); //muestra pdf
-        $dompdf->stream("tramite_turno.pdf");   //descarga pdf
-    }
-
-    //función para craar pdf
-    public function imprimirOficio($id)
-    {
-        $datos['dato'] = $this->Oficio_model->reportOficio($id);
-        $registro = $this->Oficio_model->reportOficio($id);
-        $html = $this->load->view('oficio_pdf', $datos, true);
-        //this the the PDF filename that user will get to download
-        $pdfFilePath = "oficio_seguimiento." . "pdf";
-        //load TCPDF library
-        $this->load->library('Pdf');
-        //Tamaño de pdf
-        //var_dump($data);
-        $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
-        $pdf->segundaHoja = false;
-        $pdf->setPrintHeader(true);
-        $pdf->setPrintFooter(false);
-        // set margins
-        $pdf->SetMargins(15, 35, 15);
-        $pdf->SetHeaderMargin(15);
-        $pdf->SetFooterMargin(20);
-        $pdf->SetAutoPageBreak(TRUE, 20);
-        $pdf->SetAuthor('FGJEM');
-        $pdf->SetDisplayMode('real', 'default');
-        $pdf->AddPage('P', 'LETTER');
-        // salida de HTML contenido a pdf
-        $pdf->writeHTML($html, true, false, true, false, '');
-        //manda a imprimir al cargar el archivo
-        //$pdf->IncludeJS("print();"); D
         $id_u = $this->session->userdata('id_usuario'); //id del usuario logeado
         $fec_bit = date('Y-m-d'); //fecha actual del servidor
         $hor_bit = date('H:i:s'); //fecha actual del servidor
         $nom = $this->Oficio_model->getNomBit($id);
         $nomen = $nom[0]->nomenclatura;
         //inserción de registros en la bitacora
-        $this->Bitacora_model->insertBitacora($id_u,'Descarga de Trámite en Turno del oficio seguimiento '.$nomen.' en PDF.',$fec_bit,$hor_bit);
-        $pdf->Output($pdfFilePath, 'D');
+        $this->Bitacora_model->insertBitacora($id_u,'Descarga Trámite en Turno del oficio seguimiento '.$nomen.' en PDF.',$fec_bit,$hor_bit);        
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        //$dompdf->stream("sample.pdf", array("Attachment"=>0)); //muestra pdf
+        $dompdf->stream("tramite_turno.pdf");   //descarga pdf
     }
      //reporte en excel
     public function reportExcelOS()

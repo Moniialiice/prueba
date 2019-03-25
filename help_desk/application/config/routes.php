@@ -90,7 +90,7 @@ $route['resultOficio'] = 'Oficio/consultaOficio';
 $route['muestraOficio/(:num)'] = 'Oficio/actualizarOficio/$1';
 $route['descargarOficio/(:any)'] = 'Oficio/descarga/$1';
 $route['actualizaOficio'] = 'Oficio/modificaOficio';
-$route['imprimirOficio/(:num)'] = 'Oficio/imprimirOficioA/$1';
+$route['imprimirOficio/(:num)'] = 'Oficio/imprimirOficio/$1';
 //rutas de atendido
 $route['nuevoAtendido/(:num)'] = 'Atendido/index/$1';
 $route['insertarAtendido'] = 'Atendido/createAtendidoVal';
