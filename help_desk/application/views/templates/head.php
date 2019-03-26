@@ -228,13 +228,13 @@ if( !$this->session->userdata['correcto']){
                                     <li class='menu-item-has-children dropdown'>    
                                         <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-search'></i>Seguimiento</a>
                                         <ul class='sub-menu children dropdown-menu'>
-                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='muestraSeguimiento'>Consulta Seguimiento</a></li>
+                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaCaptura'>Consulta Seguimiento</a></li>
                                         </ul>
                                     </li>
                                     <li class='menu-item-has-children dropdown'>    
                                         <a href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='flase'><i class='menu-icon ti-search'></i>Atendido</a>
                                         <ul class='sub-menu children dropdown-menu'>
-                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='muestraAtendidos'>Consulta Atendido</a></li>
+                                            <li><i class='menu-icon fa fa-list-alt'></i><a href='consultaAtendidoCap'>Consulta Atendido</a></li>
                                         </ul>
                                     </li>
                                 </ul>

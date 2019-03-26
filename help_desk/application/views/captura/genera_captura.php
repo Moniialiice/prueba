@@ -110,7 +110,7 @@
                                                 <select name='atencion1' id='atencion1' class='form-control'>
                                                 <?php
                                                 //se toman los datos de todos los usuarios para la insesión
-                                                    foreach ( $atencion as $us) {
+                                                    foreach ( $atencion1 as $us) {
                                                         echo "<option value='$us->id_usuario'".set_select('atencion1',$us->nombre.' '.$us->apellidop.' '.$us->apellidom).">".$us->nombre.' '.$us->apellidop.' '.$us->apellidom."</option>";
                                                     }
                                                 ?>
@@ -344,7 +344,7 @@
                                                             <select name='atencion2' id='atencion2' class='form-control'>
                                                                 <?php
                                                                 //se toman los datos de todos los usuarios para la insesión
-                                                                foreach ( $atencion as $us) {
+                                                                foreach ( $atencion2 as $us) {
                                                                     echo "<option value='$us->id_usuario'".set_select('atencion2',$us->nombre.' '.$us->apellidop.' '.$us->apellidom).">".$us->nombre.' '.$us->apellidop.' '.$us->apellidom."</option>";
                                                                 }
                                                             ?>

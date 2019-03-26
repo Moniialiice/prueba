@@ -40,12 +40,13 @@
         {   
             //var_dump($row);  
             foreach ($datos as $dato) {
+                $ia = $dato->id_ofAtenCap;
+                $ida = base64_encode($ia);
                 //obtenemos fecha 
                 $date = $dato->fecha_atenCap;
                 //corta los datos de d,m,a
                 $ext = explode("-",$date);
                 //obtenemos los datos
-                //$pr = base64_encode($dato->id_ofAtenCap);
                 echo "<tr>
                 <th scope='row'>".$dato->nomen_ofseg."</th>".
                 "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".
@@ -53,7 +54,7 @@
                 "<td>".$dato->descCap."</td>".
                 "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                 "<td align='center'><a href='descargarAtendido/".$dato->arch_atenCap."' class='fa fa-download fa-1x'></a></td>".               
-                "<td align='center'><a href='imprimirCapAtendido/".$dato->id_ofAtenCap."' target='_blank' class='fa fa-plus fa-1x'></a></td>"; //".$dato->id_oficioAtendido."
+                "<td align='center'><a href='imprimirCapAtendido/".$ida."' target='_blank' class='fa fa-print fa-1x'></a></td>"; //".$dato->id_oficioAtendido."
             }
         }        
         ?>

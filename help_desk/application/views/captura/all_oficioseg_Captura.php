@@ -40,6 +40,8 @@
                 if($this->form_validation->run()==true)
                 {
                               foreach ($datos as $dato) {  
+                                $io = $dato->id_ofseg;
+                                $ido = base64_encode($io);  
                                 $plazo = $dato->termino_ofseg;
                                 $date = $dato->fecha_ofseg;
                                 //corta termino para obtener fecha y hora
@@ -112,7 +114,6 @@
                                   }else{
                                         echo "";
                                   }
-
                                 echo "</td>".
                                     "<td>".$dato->asunto_ofseg."</td>".
                                     "<td>".$pday."/".$pmont."/".$pyear." ".$h."</td>";
@@ -123,7 +124,7 @@
                                 }
                                 //termino                                
                                 echo"</td><td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
-                                    "<td align ='center'><a href='imprimirCapSeguimiento/".$dato->id_ofseg."' target='_blank' class='fa fa-print fa-1x'></a></td>".
+                                    "<td align ='center'><a href='imprimirCapSeguimiento/".$ido."' target='_blank' class='fa fa-print fa-1x'></a></td>".
                                 "</tr>";
                               }
                 }              

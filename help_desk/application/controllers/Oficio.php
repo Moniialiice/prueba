@@ -281,6 +281,10 @@ class Oficio extends CI_Controller
                     case '2':
                         $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
                         $this->load->view('all_oficio', $datos);
+                    break;                    
+                    case '5':
+                        $datos['datos'] = $this->Oficio_model->searchDI($search,$fecha1,$fecha2,$id);
+                        $this->load->view('all_oficio', $datos);
                     break;
                 }                
             }else{
@@ -347,6 +351,7 @@ class Oficio extends CI_Controller
         $search = $this->input->post('busqueda');
         $date1 = $this->input->post('date1');
         $date2 = $this->input->post('date2');
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
         //cambiamos formato de fecha
         $ext = explode("/",$date1);
         $year = $ext[2];
@@ -391,6 +396,9 @@ class Oficio extends CI_Controller
             case '2':
                 $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
             break;
+            case '5':
+                $datos['datos'] = $this->Oficio_model->searchDI($search,$fecha1,$fecha2,$id);
+            break;
         }
         //muestra los datos de un array
         foreach ($datos as $dato)
@@ -419,7 +427,6 @@ class Oficio extends CI_Controller
             ->setCellValue('F'.$n, $dato[$n-2]->nombre." ".$dato[$n-2]->apellidop." ".$dato[$n-2]->apellidom);
             }   
         }
-        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
         $fec_bit = date('Y-m-d'); //fecha actual del servidor
         $hor_bit = date('H:i:s'); //fecha actual del servidor
         //inserción de registros en la bitacora

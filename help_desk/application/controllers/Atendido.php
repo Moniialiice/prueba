@@ -170,6 +170,11 @@ class Atendido extends CI_Controller
                         $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $fecha1, $fecha2);
                         $this->load->view('all_atendido', $datos);
                     break;
+                    case '5':
+                        //datos de la consulta oficio
+                        $datos['datos'] = $this->Atendido_model->searchAtenFI($search, $fecha1, $fecha2, $idu);
+                        $this->load->view('all_atendido', $datos);
+                    break;
                 }                               
             }else{
                 $datos = array();
@@ -272,6 +277,7 @@ class Atendido extends CI_Controller
         $mont2 = $ext2[1];
         $day2 = $ext2[0];
         $fecha2 = $year2."-".$mont2."-".$day2;
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
 
         //valida el tipo de consulta para obtener los datos deacuerdo al id del usuario        
         switch ($this->session->userdata('id_tipoUsuario')){
@@ -280,7 +286,10 @@ class Atendido extends CI_Controller
             break;
             case '2':
                 $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
-            break;   
+            break;            
+            case '5':
+                $datos['datos'] = $this->Atendido_model->searchAtenFI($search,$fecha1,$fecha2,$id);
+            break;     
         }   
         foreach($datos as $dato){ 
             $row = count($dato);
@@ -296,7 +305,6 @@ class Atendido extends CI_Controller
                 ->setCellValue('F'.$n, $dato[$n-2]->nombre." ".$dato[$n-2]->apellidop." ".$dato[$n-2]->apellidom);
             }
         }
-        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
         $fec_bit = date('Y-m-d H:i:s'); //fecha actual del servidor
         $hor_bit = date('Y-m-d H:i:s'); //hora actual del servidor        
         //inserción de registros en la bitacora

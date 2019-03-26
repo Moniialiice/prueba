@@ -68,19 +68,19 @@ class Captura_model extends CI_model
     }
     //consulta oficio para bitacora de oficio seguimiento por id 
     public function nomenAtenBit($id){
-        $query = $this->db->query("SELECT nomen_ofseg FROM captura as c, captura_atendido as a WHERE a.id_ofAtenCap=c.id_ofseg AND id_ofseg = '$id' ");
+        $query = $this->db->query("SELECT nomen_ofseg FROM captura as c, captura_atendido as a WHERE a.id_ofAtenCap=c.id_ofseg AND id_ofAtenCap = '$id' ");
         $this->db->close();
         return $query->result();
     }
-    //consulta oficio seguimiento en la tabla captura que el id usuario a dado de alta
-    public function reportOficioID($id){
-        $query = $this->db->query("SELECT c.id_ofseg, c.nomen_ofseg, c.asunto_ofseg, c.fecha_ofseg, c.aten_ofseg, c.termino_ofseg, c.obs_ofseg, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM captura AS c, destinatario AS d, usuario AS u WHERE c.id_dest_ofseg = d.id_destinatario AND c.aten_ofseg = u.id_usuario AND u.id_usuario = '$id' ORDER BY c.nomen_ofseg ASC");
+    //consulta oficio seguimiento en la tabla captura 
+    public function reportOficioID(){
+        $query = $this->db->query("SELECT c.id_ofseg, c.nomen_ofseg, c.asunto_ofseg, c.fecha_ofseg, c.aten_ofseg, c.termino_ofseg, c.obs_ofseg, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM captura AS c, destinatario AS d, usuario AS u WHERE c.id_dest_ofseg = d.id_destinatario AND c.aten_ofseg = u.id_usuario ORDER BY c.nomen_ofseg ASC");
         $this->db->close();
         return $query->result();
     }
     //consulta oficio atendido por medio del id de usuario
-    public function reportAtendidoID($id){
-        $query = $this->db->query("SELECT a.id_ofAtenCap, a.fecha_atenCap, a.nombre_atenCap, a.cargo_atenCap, a.descCap, a.arch_atenCap, a.copia_aCap, c.nomen_ofseg, u.nombre, u.apellidop, u.apellidom, u.activo FROM captura_atendido as a, captura as c, usuario as u WHERE a.atencionCap = u.id_usuario AND u.id_usuario = '$id' ORDER BY c.nomen_ofseg");
+    public function reportAtendidoID(){
+        $query = $this->db->query("SELECT a.id_ofAtenCap, a.fecha_atenCap, a.nombre_atenCap, a.cargo_atenCap, a.descCap, a.arch_atenCap, a.copia_aCap, c.nomen_ofseg, u.nombre, u.apellidop, u.apellidom, u.activo FROM captura_atendido as a, captura as c, usuario as u WHERE a.atencionCap = u.id_usuario ORDER BY c.nomen_ofseg");
         $this->db->close();
         return $query->result();
     }

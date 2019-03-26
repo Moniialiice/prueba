@@ -1,82 +1,67 @@
 <style>
-/*
-* Estilo para las tablas PDF
-*/
-.reporte, .encabezado {
-	/*border-collapse:collapse;*/
-	width:100%;
-}
-.reporte th, td{
-	font-size:10px;
+@page {
+    margin: 0cm 0cm;
+    }
+/** Define now the real margins of every page in the PDF **/
+body {
+    margin-top: 2cm;
+    margin-left: 2cm;
+    margin-right: 2cm;
+    margin-bottom: 0cm;
+	}
+header {
+    position: fixed;
+    top: 0cm;
+    left: 2cm;
+    right: 2cm;
+    height: 3cm;
+    }
+h1 {
+	text-align: center;
+	font-size: 10px;
 	font-family:Arial, Helvetica, sans-serif;
 }
-
-.fecha_lib{
-	width: 70%;
-	border: 0.0px solid white
-}
-
-
-.datos{
-	width: 70%;
-}
-
-.titulo_tr {
-	background-color:#CDDCAE;
-	text-align: center;
+.p_right{
+	text-align: right;
+	font-size: 10px;
 	font-weight: bold;
-	font-size: 9px;
-	border: 0.5px solid black
+	font-family:Arial, Helvetica, sans-serif;
 }
-.heading { #encabezado
-	text-align: center;
+.p_bold{
 	font-weight: bold;
-	border: 0.5px solid black
-}
-.table_cont{
-	text-align: center;
-	border: 0.5px solid black;
-	height: 15px;
-	font-size: 9px;
-	text-transform: uppercase;
-}
-.table_font{
-	text-align: left;
-	border: 0.5px solid black;
-	height: 15px;
 	font-size: 8px;
+	font-family:Arial, Helvetica, sans-serif;
 }
-.table_dont{
-	text-align: left;
-	height: 15px;
+.p_justify{
+	text-align: justify;
 	font-size: 8px;
-}
-.hid_tr{
-	text-align: center;
 	font-weight: bold;
-	font-size: 9px;
+	font-family:Arial, Helvetica, sans-serif;
 }
-.td_height{
-	text-align: center;
-	height: 100px;
-	border: 0.5px solid black;
-}
-
-.table_styles{
+.p_left{
 	text-align: left;
-	border: 0.5px solid black;
-	height: 15px
+	font-size: 8px;
+	font-weight: bold;
+	font-family:Arial, Helvetica, sans-serif;
 }
-/*estilo con lineas*/
-h4{
-	text-align:center;
+.p_center{
+	text-align: center;
+	font-size: 8px;
+	font-weight: bold;
+	font-family:Arial, Helvetica, sans-serif;
 }
-/*
-* fin estilo para tablas de PDF
-*
-* Reporte para liberacion de combustible
-*/
-</style></header>
+table{
+	width: 100%; 
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+td{
+	padding: 0px;
+	weight: 10%;
+	border-collapse: collapse;
+	border: 1px solid black;	
+}
+</style>
 <?php
 	header("Content-Type: text/html;charset=ISO-8859-1");
 	//recibe fecha  
@@ -88,242 +73,195 @@ h4{
 	$day = $ext[2];
 	//array convierte número de mes en nombre 
 	$months = array (1=>'ENERO',2=>'FEBRERO',3=>'MARZO',4=>'ABRIL',5=>'MAYO', 6=>'JUNIO', 7=>'JULIO', 8=>'AGOSTO', 9=>'SEPTIEMBRE', 10=>'OCTUBRE',11=>'NOVIEMBRE',12=>'DICIEMBRE'); 
+	$termino = $dato[0]->termino_ofseg;
+	$space = explode(" ",$termino);
+	$fec = explode("-",$space[0]);
+	$fechat = $fec[2]."/".$fec[1]."/".$fec[0]." ".$space[1];
 ?>
-<table>
-	<tr>
-		<td colspan="2"></td>
-		<td colspan="6"><img src="assets/img/escudo.png" width="50" height="40"></td>
-		<td colspan="20"></td>
-		<td colspan="6"><img src="assets/img/logo_fgj.png" width="40" height="40"></td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-	<tr><th align="center"> TRAMITE DE TURNO</th></tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr><td align="right" class="table_dont">METEPEC, ESTADO DE MEXICO A <?php echo $day." DE ".$months[(int)$mont]." DE ".$year; ?></td></tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr><td>&nbsp;</td></tr>
-</table>
-
-<table>
-	<tr>
-		<td class="table_cont"> NO. OFICIO</td>
-		<td class="table_cont" colspan="4" >ASUNTO</td>
-	</tr>
-	<tr>	
-		<td class="table_cont"><?php echo $dato[0]->nomen_ofseg; ?></td>
-		<td class="table_font" colspan="4"> <?php echo $dato[0]->asunto_ofseg; ?></td>
-	</tr>
-	<tr><td>&nbsp;</td></tr>
-</table>
-<table>
-	<tr><td class="table_dont">ETIQUETAS DE ASUNTOS:</td></tr>
-	<tr><td>&nbsp;</td></tr>
-</table>	
-<table>
-    <tr>
-        <td class="table_font" colspan="4"> COLABORACIÓN </td>
-        <td class="table_cont">
-			<?php if($dato[0]->colaboracion == 1){echo " X ";} ?>
-        </td>
-        <td class="table_font" colspan="4"> RECURSOS HUMANOS </td>
-        <td class="table_cont">
-			<?php if($dato[0]->recursos_humanos == 1){echo " X ";}?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> BOLETAS DE AUDIENCIA </td>
-        <td class="table_cont">
-			<?php if($dato[0]->boletas_audiencia == 1){echo " X ";}?>
-        </td>
-        <td class="table_font" colspan="4"> TELEFONÍA </td>
-        <td class="table_cont">
-			<?php if($dato[0]->telefonia ==1 ){ echo " X ";} ?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> SOLICITUDES </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->solicitudes == 1 ){ echo " X "; }?>
-        </td>
-        <td class="table_font" colspan="4"> ESTADÍSTICA </td>
-        <td class="table_cont">
-			<?php if($dato[0]->estadistica == 1){echo " X ";}?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> GESTIÓN </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->gestion == 1){echo " X ";}?>
-        </td>
-        <td class="table_font" colspan="4"> RELACIONES INTERINSTITUCIONALES </td>
-        <td class="table_cont">
-			<?php if($dato[0]->relaciones_interis == 1){echo " X ";}?>	
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> CURSOS Y CAPACITACIONES  </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->cursos_capacitaciones == 1){echo " X ";}?>
-        </td>
-        <td class="table_font"  colspan="4"> BOLETAS DE AUDIENCIA  </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->boletas_audiencia == 1){echo " X ";}?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> JUZGADOS </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->juzgados == 1){echo " X ";}?>
-        </td>
-        <td class="table_font"  colspan="4"> COPIAS DE CONOCIMIENTO   </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->copias_conocimiento == 1){echo " X ";}?>
-        </td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-</table>		
-<table>
-	<tr>
-		<td class="table_dont" colspan="5">EL COORDINADOR GENERAL DE COMBATE AL SECUESTRO DE LA FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO INSTRUYE SE TURNE A: </td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-</table>
-<table>
-    <tr>
-        <td class="table_font"colspan="4"> CONASE </td>
-        <td class="table_cont">
-			<?php if($dato[0]->conase == 1){ echo " X ";}?>
-		</td>
-        <td class="table_font"colspan="4"> FISCAL GENERAL </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->fiscal_general == 1){ echo " X ";}?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="5"> FISCALÍA ESPECIALIZADA DE SECUESTRO DE  </td>
-        <td class="table_font" colspan="4"> VICEFISCALIA </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->vicefiscalia){echo " X ";}?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> VALLE DE TOLUCA </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->valle_toluca == 1){echo " X";}?>
-        </td>
-        <td class="table_font" colspan="4"> OFICIALÍA MAYOR </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->oficialia_mayor == 1){echo "X";}?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> VALLE DE MÉXICO </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->valle_mexico == 1){echo " X ";}?>
-        </td>
-        <td class="table_font" colspan="4"> DEPARTAMENTO DE INFORMACIÓN Y ESTADÍSTICA </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->informacion_estadistica == 1){echo " X ";}?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="4"> ZONA ORIENTE </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->zona_oriente == 1){echo " X "; }?>
-        </td>
-        <td class="table_font" colspan="4" > CENTRAL JURÍDICO </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->central_juridico == 1){echo " X ";}?>
-        </td>
-	</tr>
-	<tr>
-        <td class="table_font" colspan="5"> OTRAS: <?php if($dato[0]->otra != ""){ echo $dato[0]->otra; }?></td>
-        <td class="table_font" colspan="4"> SERVICIO DE CARRERA  </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->servicio_carrera == 1){ echo " X ";}?>
-        </td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-</table>
-<table>
-    <tr>
-        <td class="table_font" colspan="5"> REALIZAR DILIGENCIAS EN VÍA DE COLABORACIÓN </td>
-        <td class="table_cont">
-			<?php if($dato[0]->realiza_diligencias == 1){ echo " X ";}?>
-        </td>
-		<td></td>
-        <td class="table_font" colspan="3"> INFORMAR A: </td>
-        <td class="table_cont" ></td>
-		<td class="table_font" > TERMINO</td>
-	</tr>
-    <tr>
-        <td class="table_font" colspan="5"> RECIBIR PERSONALMENTE EN AUDIENCIA E INFORMAR </td>
-        <td class="table_cont" >
-			<?php if($dato[0]->recibir_personalmente==1){echo " X ";}?>	
-		</td>
-		<td></td>
-        <td class="table_font" colspan="3"> ESTA OFICINA </td>
-        <td class="table_cont" ><?php if($dato[0]->esta_oficina == 1){ echo " X ";}?></td>
-		<td class="table_cont" ><?php if($dato[0]->esta_oficina == 1){ echo $dato[0]->termino_ofseg; }?></td>
-	</tr>
-    <tr>
-        <td class="table_font" colspan="5"> GESTIONAR PETICIÓN Y REMITIR CONSTANCIAS QUE ACREDITEN LA ATENCIÓN BRINDADA </td>
-        <td class="table_cont"><?php if($dato[0]->gestionar_peticion == 1){echo " X ";}?></td>
-		<td></td>
-        <td class="table_font" colspan="3"> PETICIONARIO </td>
-        <td class="table_cont"><?php if($dato[0]->peticionario == 1){echo " X ";}?> </td>
-		<td class="table_cont"><?php if($dato[0]->peticionario == 1){ echo $dato[0]->termino_ofseg; }?></td>
-	</tr>
-    <tr>
-        <td class="table_font" colspan="5"> ARCHIVO </td>
-        <td class="table_cont"><?php if($dato[0]->archivo == 1){ echo " X ";}?></td>
-		<td></td>
-        <td class="table_font" colspan="3"> INSTITUCIÓN REQUIRENTE </td>
-		<td class="table_cont"><?php if($dato[0]->institucion_requiriente == 1){ echo " X "; }?></td>
-		<td class="table_cont"><?php if($dato[0]->institucion_requiriente == 1){ echo $dato[0]->termino_ofseg; }?></td> 
-	</tr>
-	<tr>
-        <td class="table_font" colspan="6"> OTRAS: <?php if($dato[0]->otras != ""){ echo $dato[0]->otras;}?></td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr><td>&nbsp;</td></tr>
-</table>
-<table>
-	<tr>
-		<td></td>
-		<td class="table_cont" colspan="5" > ELABORO:</td>
-		<td colspan="2"></td>
-		<td class="table_cont" colspan="6"> Vo. Bo.</td>
-		<td  colspan="2"></td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td class="table_cont" colspan="5"><br><br><br></td>
-		<td colspan="2"></td>
-		<td class="table_cont" colspan="6"></td>
-		<td colspan="2"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td class="table_cont" colspan="5"><?php echo $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom;?> </td>
-		<td colspan="2"></td>
-		<td class="table_cont" colspan = "6"> DR. H. C. RODRIGO ARCHUNDIA BARREINTOS COORDINADOR GENERAL DE COMBATE AL SECUESTRO
-		</td>
-		<td colspan="3"></td>
-	</tr>
-</table>
-<table>
-	<tr><td>&nbsp;</td></tr>
-	<tr><td class="table_font" colspan="16"> OBSERVACIONES: <?php echo $dato[0]->obs_ofseg;?></td></tr>
-</table>
+<body>
+	<header>
+		<img src="assets/img/header.png" width="100%" height="70%">
+	</header>
+	<h1>TRAMITE DE TURNO</h1>
+	<p class="p_right">METEPEC, ESTADO DE MEXICO A <?php echo $day." DE ".$months[(int)$mont]." DE ".$year; ?></p>
+	<table>
+		<tr>
+			<td><p class="p_center">NO. OFICIO</p></td>
+			<td colspan="8"><p class="p_center">ASUNTO</p></td>
+		</tr>
+		<tr>	
+			<td><p class="p_center"><?php echo $dato[0]->nomen_ofseg;?></p></td>
+			<td colspan="8"><p class="p_justify"><?php echo $dato[0]->asunto_ofseg;?></p></td>
+		</tr>
+	</table>
+	<p class="p_bold">ETIQUETAS DE ASUNTOS:</p>
+	<table>
+		<tr>
+			<td colspan="4"><p class="p_left">COLABORACIÓN</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->colaboracion == 1){echo " X ";} ?></p>
+			</td>
+			<td colspan="4"><p class="p_left">RECURSOS HUMANOS</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->recursos_humanos == 1){echo " X ";}else{ echo " ";}?></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"><p class="p_left">BOLETAS DE AUDIENCIA</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->boletas_audiencia == 1){echo " X ";}?></p>
+			</td>
+			<td colspan="4"><p class="p_left">TELEFONÍA</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->telefonia ==1 ){ echo " X ";} ?></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"><p class="p_left">SOLICITUDES</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->solicitudes == 1 ){ echo " X "; }?></p>
+			</td>
+			<td colspan="4"><p class="p_left">ESTADÍSTICA</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->estadistica == 1){echo " X ";}?></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"><p class="p_left">GESTIÓN</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->gestion == 1){echo " X ";}?></p>
+			</td>
+			<td colspan="4"><p class="p_left">RELACIONES INTERINSTITUCIONALES</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->relaciones_interis == 1){echo " X ";}?></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"><p class="p_left">CURSOS Y CAPACITACIONES</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->cursos_capacitaciones == 1){echo " X ";}?></p>
+			</td>
+			<td colspan="4"><p class="p_left">BOLETAS DE AUDIENCIA</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->boletas_audiencia == 1){echo " X ";}?></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"><p class="p_left">JUZGADOS</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->juzgados == 1){echo " X ";}?></p>
+			</td>
+			<td colspan="4"><p class="p_left">COPIAS DE CONOCIMIENTO</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->copias_conocimiento == 1){echo " X ";}?></p>
+			</td>
+		</tr>
+	</table>
+	<p class="p_bold">EL COORDINADOR GENERAL DE COMBATE AL SECUESTRO DE LA FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO INSTRUYE SE TURNE A: </p>		
+	<table>
+		<tr>
+			<td colspan="4"><p class="p_left">CONASE</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->conase == 1){ echo " X ";}?></p>
+			</td>
+			<td colspan="4"><p class="p_left">FISCAL GENERAL</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->fiscal_general == 1){ echo " X ";}?></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5"><p class="p_left">FISCALÍA ESPECIALIZADA DE SECUESTRO DE</p></td>
+			<td colspan="4"><p class="p_left">VICEFISCALIA</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->vicefiscalia){echo " X ";}?></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"><p class="p_left">VALLE DE TOLUCA</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->valle_toluca == 1){echo "X";}?></p>
+			</td>
+			<td colspan="4"><p class="p_left">OFICIALÍA MAYOR</p></p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->oficialia_mayor == 1){echo "X";}?></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"><p class="p_left">VALLE DE MÉXICO</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->valle_mexico == 1){echo " X ";}?></p>
+			</td>
+			<td colspan="4"><p class="p_left">DEPARTAMENTO DE INFORMACIÓN Y ESTADÍSTICA</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->informacion_estadistica == 1){echo " X ";}?></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"><p class="p_left">ZONA ORIENTE</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->zona_oriente == 1){echo " X "; }?></p>
+			</td>
+			<td colspan="4" ><p class="p_left">CENTRAL JURÍDICO</p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->central_juridico == 1){echo " X ";}?></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5"><p class="p_left">OTRAS:</p><?php if($dato[0]->otra != ""){ echo $dato[0]->otra; }?></td>
+			<td colspan="4"><p class="p_left">SERVICIO DE CARRERA </p></td>
+			<td>
+			<p class="p_center"><?php if($dato[0]->servicio_carrera == 1){ echo " X ";}?></p>
+			</td>
+		</tr>
+	</table><br>
+	<table>
+		<tr>
+			<td colspan="5"><p class="p_left">REALIZAR DILIGENCIAS EN VÍA DE COLABORACIÓN</p></td>
+			<td>
+				<p class="p_center"><?php if($dato[0]->realiza_diligencias == 1){ echo " X ";}?></p>
+			</td>
+			<td colspan="4"><p class="p_left">INFORMAR A: </p></td>
+			<td><p class="p_left"> TERMINO</p></td>
+		</tr>
+		<tr>
+			<td colspan="5"><p class="p_left">RECIBIR PERSONALMENTE EN AUDIENCIA E INFORMAR </p></td>
+			<td>
+				<p class="p_center"><?php if($dato[0]->recibir_personalmente==1){echo " X ";}?></p>	
+			</td>
+			<td colspan="3"><p class="p_left">ESTA OFICINA </p></td>
+			<td><p class="p_center"><?php if($dato[0]->esta_oficina == 1){ echo " X ";}?></p></td>
+			<td><p class="p_center"><?php if($dato[0]->esta_oficina == 1){ echo $fechat; }?></p></td>
+		</tr>
+		<tr>
+			<td colspan="5"><p class="p_left"> GESTIONAR PETICIÓN Y REMITIR CONSTANCIAS QUE ACREDITEN LA ATENCIÓN BRINDADA</p> </td>
+			<td><p class="p_center"><?php if($dato[0]->gestionar_peticion == 1){echo " X ";}?></p></td>
+			<td colspan="3"><p class="p_left"> PETICIONARIO </p></td>
+			<td><p class="p_center"><?php if($dato[0]->peticionario == 1){echo " X ";}?></p></td>
+			<td><p class="p_center"><?php if($dato[0]->peticionario == 1){ echo $fechat; }?></p></td>
+		</tr>
+		<tr>
+			<td colspan="5"><p class="p_left"> ARCHIVO </p></td>
+			<td><p class="p_center"><?php if($dato[0]->archivo == 1){ echo " X ";}?></p></td>
+			<td colspan="3"><p class="p_left"> INSTITUCIÓN REQUIRENTE </p></td>
+			<td><p class="p_center"><?php if($dato[0]->institucion_requiriente == 1){ echo " X "; }?></p></td>
+			<td><p class="p_center"><?php if($dato[0]->institucion_requiriente == 1){ echo $fechat; }?></p></td> 
+		</tr>
+		<tr>
+			<td colspan="11"><p class="p_justify">OTRAS: <?php if($dato[0]->otras != ""){ echo $dato[0]->otras;}?></p></td>
+		</tr>
+	</table><br>
+	<table>
+		<tr>
+			<td colspan="5" ><p class="p_center"> ELABORO:</p></td>
+			<td colspan="6"><p class="p_center"> Vo. Bo.</p></td>
+		</tr>
+		<tr>
+			<td colspan="5"><br><br><p class="p_center"><?php echo $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom;?></p> </td>
+			<td colspan = "6"><br><br><p class="p_center"> DR. H. C. RODRIGO ARCHUNDIA BARREINTOS<br>COORDINADOR GENERAL DE COMBATE AL SECUESTRO</p>
+			</td>
+		</tr>
+	</table><br>
+	<table>
+		<tr><td colspan="16"><p class="p_justify"> OBSERVACIONES: <?php echo $dato[0]->obs_ofseg;?></p></td></tr>
+	</table>
+</body>

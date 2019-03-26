@@ -104,13 +104,13 @@ $route['reporte_excel/(:any)'] = 'Atendido/download/$1';
 $route['nuevaCaptura'] = 'Captura/index';
 $route['insertCaptura'] = 'Captura/altaCaptura';
 $route['consultaCaptura'] = 'Captura/busquedaOficioSeguimiento';
-$route['imprimirCapSeguimiento/(:num)'] = 'Captura/imprimirOficioCap/$1'; 
+$route['imprimirCapSeguimiento/(:any)'] = 'Captura/imprimirOficioCap/$1'; 
 $route['resultCaptura'] = 'Captura/consultaOficioSeguimiento';
 $route['consultaAtendidoCap'] = 'Captura/busquedaAtendido';
 $route['imprimirCapAtendido/(:any)'] = 'Captura/imprimirAtendidoCap/$1';
 $route['resultAtendido'] = 'Captura/consultaCapturaAten';
-$route['muestraSeguimiento'] = 'Captura/consultaCapID'; //busqueda de oficio seguimiento por id del usuario
-$route['muestraAtendidos'] = 'Captura/consultaAtenId'; //busqueda de oficio atendido por ek id del usuario
+$route['muestraSeguimiento'] = 'Captura/consultaCapID'; //busqueda de oficio seguimiento 
+$route['muestraAtendidos'] = 'Captura/consultaAtenId'; //busqueda de oficio atendido
 //rutas de bitacora
 $route['consultaBitacora'] = 'Bitacora/index';
 

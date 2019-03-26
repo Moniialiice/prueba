@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+require 'vendor/autoload.php';
+require_once ('vendor/dompdf/dompdf/src/Autoloader.php');
+use Dompdf\Dompdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -307,8 +309,26 @@ class Captura extends CI_Controller
             $this->session->set_flashdata('Error','Consultar administrador');
         }
     }
+    //función para crear archivo pdf de tramite de turno
+    public function imprimirOficioCap($id){
+        $io = base64_decode($id);
+        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
+        $datos['dato'] = $this->Captura_model->reportOficioCap($io);
+        $html = $this->load->view('captura/oficio_pdf', $datos, true);
+        $nomen = $this->Captura_model->nomenSegBit($io);//consulta la nomenclatura por id del oficio
+        $nom = $nomen[0]->nomen_ofseg; //
+        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hora_bit = date('H:i:s'); //hora actual del servidor
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($id,'Descarga Trámite de Turno Oficio Seguimiento Captura '.$nom,$fec_bit,$hora_bit);
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        $dompdf->stream("sample.pdf", array("Attachment"=>0)); //muestra pdf
+        //$dompdf->stream("tramite_turno.pdf");   //descarga pdf
+    }
     //función para craar pdf de oficio seguimiento 
-    public function imprimirOficioCap($id)
+    public function imprimirOficioCap2($id)
     {
         $datos['dato'] = $this->Captura_model->reportOficioCap($id);
         $nomen = $this->Oficio_model->nomenSegBit($id);//consulta la nomenclatura por id del oficio
@@ -342,40 +362,24 @@ class Captura extends CI_Controller
         //$pdf->IncludeJS("print();"); D
         $pdf->Output($pdfFilePath, 'D');
     }
-    //función para generar pdf de oficio atendid
-    public function imprimirAtendidoCap($id)
-    {
-        $datos['dato'] = $this->Captura_model->reportAtendidoCap($id);
-        $nomen = $this->Oficio_model->nomenAtenBit($id);//consulta la nomenclatura por id del oficio
+    //función paara imprimir atendido pdf
+    public function imprimirAtendidoCap($id){
+        $ida = base64_decode($id);
+        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
+        $datos['dato'] = $this->Captura_model->reportAtendidoCap($ida);
+        $html = $this->load->view('captura/atendido_pdf', $datos, true);
+        $nomen = $this->Captura_model->nomenAtenBit($ida);//consulta la nomenclatura por id del oficio
         $nom = $nomen[0]->nomen_ofseg; //
         $id = $this->session->userdata('id_usuario'); //id del usuario logeado
         $fec_bit = date('Y-m-d'); //fecha actual del servidor
         $hora_bit = date('H:i:s'); //hora actual del servidor
         //inserción de registros en la bitacora
-        $this->Bitacora_model->insertBitacora($id,'Descarga Trámite de Turno Oficio Seguimiento Captura.',$fec_bit,$hora_bit);
-        $html = $this->load->view('captura/atendido_pdf', $datos, true);
-        //this the the PDF filename that user will get to download  
-        $pdfFilePath = "CapturaOficio_atendido." . "pdf";
-        //load TCPDF library
-        $this->load->library('Pdf');
-        //Tamaño de pdf
-        //var_dump($data);
-        $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
-        $pdf->segundaHoja = false;
-        $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->SetHeaderMargin(20);
-        $pdf->SetTopMargin(20);
-        $pdf->setFooterMargin(15);
-        $pdf->SetAutoPageBreak(true);
-        $pdf->SetAuthor('FGJEM');
-        $pdf->SetDisplayMode('real', 'default');
-        $pdf->AddPage('P', 'LETTER');
-        // salida de HTML contenido a pdf
-        $pdf->writeHTML($html, true, false, true, false, '');
-        //manda a imprimir al cargar el archivo
-        //$pdf->IncludeJS("print();"); D
-        $pdf->Output($pdfFilePath, 'D');
+        $this->Bitacora_model->insertBitacora($id,'Descarga de Atendido Oficio Captura '.$nom,$fec_bit,$hora_bit);
+        //carga vista html 
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        //$dompdf->stream("sample.pdf", array("Attachment"=>0)); //muestra pdf
+        $dompdf->stream("CapturaOficio_atendido.pdf");   //descarga pdf
     }
     //consulta oficio seguimiento por id del usuario
     public function consultaCapID(){
@@ -384,7 +388,7 @@ class Captura extends CI_Controller
         $hora_bit = date('H:i:s'); //hora actual del servidor
         //inserción de registros en la bitacora
         $this->Bitacora_model->insertBitacora($id,'Reporte Oficio Seguimiento Captura.',$fec_bit,$hora_bit);
-        $datos['datos'] = $this->Captura_model->reportOficioID($id);
+        $datos['datos'] = $this->Captura_model->reportOficioID();
         $this->load->view('templates/head');
         $this->load->view('report_seguimiento',$datos);
         $this->load->view('templates/footer');
@@ -396,7 +400,7 @@ class Captura extends CI_Controller
         $hora_bit = date('H:i:s'); //fecha actual del servidor
         //inserción de registros en la bitacora
         $this->Bitacora_model->insertBitacora($id,'Reporte Oficio Atendido Captura.',$fec_bit,$hora_bit);
-        $datos['datos'] = $this->Captura_model->reportAtendidoID($id);
+        $datos['datos'] = $this->Captura_model->reportAtendidoID();
         $this->load->view('templates/head');
         $this->load->view('report_atendido',$datos); 
         $this->load->view('templates/footer');
