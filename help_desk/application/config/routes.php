@@ -64,9 +64,9 @@ $route['nuevoUsuario'] = 'Usuario/generaUsuario';
 $route['insertaU'] = 'Usuario/altaUsuarioVal';
 $route['consultaUsuario'] = 'Usuario/busquedaUsuario';
 $route['muestraUsuario'] = 'Usuario/consultaUsuario';
-$route['datosUsuario/(:num)'] = 'Usuario/actualizarUsuario/$1';
+$route['datosUsuario/(:any)'] = 'Usuario/actualizarUsuario/$1';
 $route['actualizaUsuario'] = 'Usuario/modificaUsuarioVal';
-$route['misDatos/(:num)'] = 'Usuario/perfilUsuario/$1';
+$route['misDatos/(:any)'] = 'Usuario/perfilUsuario/$1';
 $route['actializaMisDatos']= 'Usuario/cambiarpass';
 //paginación
 $route['muestraUsuario/'] = 'Usuario/ejemplo/$1';
@@ -83,22 +83,22 @@ $route['muestraEntrada'] = 'OficioEntrada/reportEntradaId';
 $route['entrada/pagina/(:num)'] = 'Entrada/pagEntrada/$1';
 
 //rutas de seguimiento oficio
-$route['nuevoSeguimiento/(:num)'] = 'Oficio/index/$1';
+$route['nuevoSeguimiento/(:any)'] = 'Oficio/index/$1';
 $route['insertaOficio'] = 'Oficio/createOficioVal';
 $route['consultaOficio'] = 'Oficio/busquedaOficio';
 $route['resultOficio'] = 'Oficio/consultaOficio';
-$route['muestraOficio/(:num)'] = 'Oficio/actualizarOficio/$1';
+$route['muestraOficio/(:any)'] = 'Oficio/actualizarOficio/$1';
 $route['descargarOficio/(:any)'] = 'Oficio/descarga/$1';
 $route['actualizaOficio'] = 'Oficio/modificaOficio';
-$route['imprimirOficio/(:num)'] = 'Oficio/imprimirOficio/$1';
+$route['imprimirOficio/(:any)'] = 'Oficio/imprimirOficio/$1';
 //rutas de atendido
-$route['nuevoAtendido/(:num)'] = 'Atendido/index/$1';
+$route['nuevoAtendido/(:any)'] = 'Atendido/index/$1';
 $route['insertarAtendido'] = 'Atendido/createAtendidoVal';
 $route['consultaAtendido'] = 'Atendido/busquedaAtendido';
 $route['resultAtendido'] = 'Atendido/consultaAtendido';
-$route['muestraAtendido/(:num)'] = 'Atendido/mostrarAtendido/$1';
+$route['muestraAtendido/(:any)'] = 'Atendido/mostrarAtendido/$1';
 $route['descargarAtendido/(:any)'] = 'Atendido/descarga/$1';
-$route['imprimirAtendido/(:num)'] = 'Atendido/imprimirOficioAtendido/$1';
+$route['imprimirAtendido/(:any)'] = 'Atendido/imprimirOficioAtendido/$1';
 $route['reporte_excel/(:any)'] = 'Atendido/download/$1';
 //rutas de captura
 $route['nuevaCaptura'] = 'Captura/index';

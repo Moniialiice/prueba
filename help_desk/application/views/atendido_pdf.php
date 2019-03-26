@@ -38,7 +38,7 @@ h1 {
 	font-size: 11px;
 	font-family:Arial, Helvetica, sans-serif;
 }
-.p_asunto{
+.p_justify{
 	text-align: justify;
 	font-size: 11px;
 	font-family:Arial, Helvetica, sans-serif;
@@ -99,11 +99,11 @@ h1 {
 	<p class="p_remitente"><b>
 		<?php echo $dato[0]->nombre_aten."<br>".$dato[0]->cargo_aten."<br>PRESENTE.";?>	
 	</b></p>	
-	<br><br><br>
-	<p class="justify">	
+	<br><br>
+	<p class="p_justify">	
 		<?php echo nl2br($dato[0]->descripcion);?>
 	</p>
-	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br>
 	<p class="p_atentamente"><b>
 		ATENTAMENTE<br><br><br><br>
 		<?php

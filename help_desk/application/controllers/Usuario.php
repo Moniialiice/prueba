@@ -149,9 +149,10 @@ class Usuario extends CI_Controller
     //carga vista con los  datos del usuario para modificar además de los tipos de usuario
     public function actualizarUsuario($id)
     { 
-        $datos ['usuario'] = $this->Usuario_model->muestraUsuario($id);                 
-        $datos ['tipu'] = $this->Usuario_model->tipoUsuarioId($id);
-        $datos ['dep'] = $this->Usuario_model->dependenciasId($id);
+        $idu = base64_decode($id);
+        $datos ['usuario'] = $this->Usuario_model->muestraUsuario($idu);                 
+        $datos ['tipu'] = $this->Usuario_model->tipoUsuarioId($idu);
+        $datos ['dep'] = $this->Usuario_model->dependenciasId($idu);
         $this->load->view('templates/head');
         $this->load->view('actualiza_usuario',$datos);
         $this->load->view('templates/footer');
@@ -161,6 +162,7 @@ class Usuario extends CI_Controller
     {
         //recibe el id del usuario
         $i = $this->input->post('id');
+        $u = base64_encode($i);
         if($this->input->post())
         {
             //recibe campos de formulario
@@ -187,7 +189,7 @@ class Usuario extends CI_Controller
                 {
                     //Sí la validación es correcta procede a insertar los datos en la base de datos
                     if($this->form_validation->run() == TRUE){
-                        $query = $this->Usuario_model->updateUsuario($id, $name, $app, $apm, $activo, $email, $pass, $tipoUser, $dependencia);  
+                        $query = $this->Usuario_model->updateUsuario($i, $name, $app, $apm, $activo, $email, $pass, $tipoUser, $dependencia);  
                         //sí se inserto los datos manda mensaje     
                         if($query == true){
                             $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
@@ -196,13 +198,13 @@ class Usuario extends CI_Controller
                             //inserta registros en la bitacora
                             $this->Bitacora_model->insertBitacora($idu,'Se ha modificado usuario '.$email.'.',$fec_bit,$hor_bit);    
                             $this->session->set_flashdata('Modificado','Usuario creado correctamente');
-                            $this->actualizarUsuario($i);
+                            $this->actualizarUsuario($u);
                         }else{
                             $this->session->set_flashdata('No', 'Datos no ingresados');
-                            $this->actualizarUsuario($i);
+                            $this->actualizarUsuario($u);
                         }
                     }else{
-                        $this->actualizarUsuario($i);
+                        $this->actualizarUsuario($u);
                     }
                 //si es nueva contraseña procede a validar    
                 }else{
@@ -212,7 +214,7 @@ class Usuario extends CI_Controller
                     //Sí la validación es correcta procede a insertar los datos en la base de datos
                     if($this->form_validation->run() == TRUE){
                         $p = base64_encode($passn);
-                        $query = $this->Usuario_model->updateUsuario($id, $name, $app, $apm, $activo, $email, $p, $tipoUser, $dependencia);  
+                        $query = $this->Usuario_model->updateUsuario($i, $name, $app, $apm, $activo, $email, $p, $tipoUser, $dependencia);  
                         //sí se inserto los datos manda mensaje     
                         if($query == true){
                             $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
@@ -221,13 +223,13 @@ class Usuario extends CI_Controller
                             //inserta registros en la bitacora
                             $this->Bitacora_model->insertBitacora($idu,'Se ha modificado usuario '.$email.'.',$fec_bit,$hor_bit);    
                             $this->session->set_flashdata('Modificado','Usuario creado correctamente');
-                            $this->actualizarUsuario($i);
+                            $this->actualizarUsuario($u);
                         }else{
                             $this->session->set_flashdata('No', 'Datos no ingresados');
-                            $this->actualizarUsuario($i);
+                            $this->actualizarUsuario($u);
                         }
                     }else{
-                        $this->actualizarUsuario($i);
+                        $this->actualizarUsuario($idu);
                     }
                 }    
             }else{
@@ -247,18 +249,19 @@ class Usuario extends CI_Controller
             }                  
         }else{
             $this->session->set_flashdata('Error', 'Consultar administrador');
-            $this->actualizarUsuario($i);
+            $this->actualizarUsuario($idu);
         }
     }
     //muestra datos para modificar y actualizar contraseña
     public function perfilUsuario($id){
+        $u = base64_decode($id);
         //consulta los datos de usuario 
         $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
         $fec_bit = date('Y-m-d'); //fecha el servidor
         $hor_bit = date('H:i:s'); //fecha el servidor
         //inserta registros en la bitacora
         $this->Bitacora_model->insertBitacora($idu,'Consultó su perfil.',$fec_bit,$hor_bit);
-        $datos['usuario'] = $this->Usuario_model->muestraUsuario($id);                 
+        $datos['usuario'] = $this->Usuario_model->muestraUsuario($u);                 
         $this->load->view('templates/head');
         $this->load->view('perfil',$datos);
         $this->load->view('templates/footer');
@@ -267,6 +270,7 @@ class Usuario extends CI_Controller
     public function cambiarpass(){
         //recibe el id del usuario
         $i = $this->input->post('id');
+        $u = base64_encode($i);
         if($this->input->post())
         {
             //recibe campos de formulario
@@ -288,10 +292,10 @@ class Usuario extends CI_Controller
                     //inserta registros en la bitacora
                     $this->Bitacora_model->insertBitacora($idu,'Cambió su contraseña.',$fec_bit,$hor_bit);    
                     $this->session->set_flashdata('Modificado','Contraseña actualizada correctamente');
-                    $this->perfilUsuario($i);
+                    $this->perfilUsuario($u);
                 }else{
                     $this->session->set_flashdata('No', 'Datos no ingresados');
-                    $this->perfilUsuario($i);
+                    $this->perfilUsuario($u);
                 }      
             }else{
                 //tomamos los datos en un array para emviar a la vista

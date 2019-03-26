@@ -25,9 +25,9 @@ class Atendido extends CI_Controller
     //función carga templates, el formulario para generar oficio con el $id del oficio entrada
     public function index($id)
     {
-        //$id = $this->encrypt->decode($enID);
-        $datos ['datos'] = $this->Atendido_model->datosSeguimiento($id); //datos de tabla oficio entrada
-        $sAtendido = $this->Atendido_model->seguimientoAtendido($id); //obtiene id de oficio seguimiento
+        $ida = base64_decode($id);
+        $datos ['datos'] = $this->Atendido_model->datosSeguimiento($ida); //datos de tabla oficio entrada
+        $sAtendido = $this->Atendido_model->seguimientoAtendido($ida); //obtiene id de oficio seguimiento
         //si se ejecuta eSeguimiento
         if($sAtendido){
             //$idatencion = $sAtendido[0]->id_oficioseg; //id de oficioSeguimiento
@@ -213,15 +213,16 @@ class Atendido extends CI_Controller
     }
     //función paara imprimir atendido pdf
     public function imprimirOficioAtendido($id){
+        $ida = base64_decode($id);
         $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
-        $datos['dato'] = $this->Atendido_model->reportOficioAtendido($id);
+        $datos['dato'] = $this->Atendido_model->reportOficioAtendido($ida);
         $html = $this->load->view('atendido_pdf', $datos, true);
         $dompdf->loadHtml($html);
         $dompdf->render();
         $idu = $this->session->userdata('id_usuario'); //id del usuario logeado
         $fec_bit = date('Y-m-d'); //fecha actual del servidor
         $hor_bit = date('H:i:s'); //fecha actual del servidor
-        $nom = $this->Atendido_model->nomenBit($id); //consulta de nomenclatura por el id del asunto
+        $nom = $this->Atendido_model->nomenBit($ida); //consulta de nomenclatura por el id del asunto
         $nome = $nom[0]->nomenclatura; //nomenclatura del oficio seguimiento
         //inserción de registros en la bitacora
         $this->Bitacora_model->insertBitacora($idu,'Descarga Oficio Atendido en PDF de: '.$nome.'.',$fec_bit,$hor_bit);

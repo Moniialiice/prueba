@@ -19,6 +19,8 @@
 <?php
     foreach ($datos as $dato) 
     {
+        $ido = $dato->id_oficioseg;
+        $io = base64_encode($ido);
         //cambia formato de fecha  
         $date = $dato->fecha;
         //corta los datos de d,m,a
@@ -28,7 +30,7 @@
             <div class='page-header float-right'>
                 <div class='page-title'>
                     <ol class='breadcrumb text-right'>
-                        <li><a href='imprimirOficio/".$dato->id_oficioseg."' target='_blank'><img src='assets/img/pdf.png' width='30' height='30'></a></li>
+                        <li><a href='imprimirOficio/".$io."' target='_blank'><img src='assets/img/pdf.png' width='30' height='30'></a></li>
                     </ol>
                 </div>
             </div>

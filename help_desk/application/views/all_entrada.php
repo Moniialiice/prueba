@@ -42,6 +42,8 @@
         <?php //excel.png
         if($this->form_validation->run()==true){         
             foreach ($datos as $dato) {
+                $oe = $dato->id_oficioEntrada;
+                $ide = base64_encode($oe);
                 $date = $dato->fecha_ent;
                 $espacio = explode(" ", $date);
                 $fec = explode("-", $espacio[0]);
@@ -64,7 +66,7 @@
                 "<td>".$dato->peticion."</td>".
                 "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                 "<td align='center'><a href='descargar/".$dato->arch_entrada."' class='fa fa-download fa-1x'></td>".
-                "<td align='center'><a href='nuevoSeguimiento/".$dato->id_oficioEntrada."' class='fa fa-plus fa-1x'></td>".
+                "<td align='center'><a href='nuevoSeguimiento/".$ide."' class='fa fa-plus fa-1x'></td>".
                 "</tr>";
             }
         }

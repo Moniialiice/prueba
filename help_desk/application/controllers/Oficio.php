@@ -26,9 +26,10 @@ class Oficio extends CI_Controller
     public function index($id)
     {
         //$id = $this->encrypt->decode($enID);
-        $datos ['datos'] = $this->Oficio_model->datosEntrada($id); //datos de tabla oficio entrada
-        $eSeguimiento = $this->Oficio_model->entradaSeguimiento($id); //obtiene id de oficio seguimiento
-        $eCaptura = $this->Oficio_model->capturaSeguimiento($id); //verifica si oficio seg existe en tabla captura
+        $ide = base64_decode($id);
+        $datos ['datos'] = $this->Oficio_model->datosEntrada($ide); //datos de tabla oficio entrada
+        $eSeguimiento = $this->Oficio_model->entradaSeguimiento($ide); //obtiene id de oficio seguimiento
+        $eCaptura = $this->Oficio_model->capturaSeguimiento($ide); //verifica si oficio seg existe en tabla captura
         //si se ejecuta eSeguimiento 
         if($eSeguimiento){
             $idoficio = $eSeguimiento[0]->id_oficioseg; //id de oficioSeguimiento
@@ -323,14 +324,15 @@ class Oficio extends CI_Controller
     }
     //función para crear archivo pdf de tramite de turno
     public function imprimirOficio($id){
+        $io = base64_decode($id);
         $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
-        $datos['dato'] = $this->Oficio_model->reportOficio($id);
-        $registro = $this->Oficio_model->reportOficio($id);
+        $datos['dato'] = $this->Oficio_model->reportOficio($io);
+        $registro = $this->Oficio_model->reportOficio($io);
         $html = $this->load->view('oficio_pdf', $datos, true);
         $id_u = $this->session->userdata('id_usuario'); //id del usuario logeado
         $fec_bit = date('Y-m-d'); //fecha actual del servidor
         $hor_bit = date('H:i:s'); //fecha actual del servidor
-        $nom = $this->Oficio_model->getNomBit($id);
+        $nom = $this->Oficio_model->getNomBit($io);
         $nomen = $nom[0]->nomenclatura;
         //inserción de registros en la bitacora
         $this->Bitacora_model->insertBitacora($id_u,'Descarga Trámite en Turno del oficio seguimiento '.$nomen.' en PDF.',$fec_bit,$hor_bit);        

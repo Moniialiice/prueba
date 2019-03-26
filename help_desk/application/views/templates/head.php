@@ -294,7 +294,10 @@ if( !$this->session->userdata['correcto']){
                             <?php echo $name = $this->session->userdata('name'); ?>
                         </a>
                         <div class='user-menu dropdown-menu'>
-                            <?php echo "<a class='nav-link' href='misDatos/".$this->session->userdata('id_usuario')."'><i class='fa fa-user'></i>  Mi Perfil</a>"?>
+                            <?php
+                            $id = $this->session->userdata('id_usuario');
+                            $u = base64_encode($id);
+                            echo "<a class='nav-link' href='misDatos/".$u."'><i class='fa fa-user'></i>  Mi Perfil</a>"?>
                             <a class='nav-link' href='close'><i class='fa fa-power-off'></i>  Cerrar Sesión</a>
                         </div>                        
                     </div>

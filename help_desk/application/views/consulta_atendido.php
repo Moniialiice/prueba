@@ -13,7 +13,9 @@
                     <?php
                         foreach ($datos as $dato)
                         {
-                            echo "<li><a href='imprimirAtendido/".$dato->id_oficioAtendido."' target='_blank' ><img src='assets/img/pdf.png' width='30' height='30'></a></li>";
+                            $ia = $dato->id_oficioAtendido;
+                            $ida = base64_encode($ia);
+                            echo "<li><a href='imprimirAtendido/".$ida."' target='_blank' ><img src='assets/img/pdf.png' width='30' height='30'></a></li>";
                     ?>
                 </ol>
             </div>
