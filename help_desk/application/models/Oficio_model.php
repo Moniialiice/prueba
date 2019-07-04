@@ -63,13 +63,13 @@ class Oficio_model extends CI_Model{
     }
     //consulta con la fecha y nomenclatura de oficio
     public function searchDate($search,$date1,$date2){
-        $query = $this->db->query("SELECT o.id_oficioseg,o.nomenclatura, o.fecha, o.asunto, o.termino, o.atencion, o.observaciones, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, usuario AS u WHERE fecha BETWEEN '$date1' AND '$date2' AND nomenclatura LIKE '%$search%' AND o.id_destinatario = d.id_destinatario AND o.atencion = u.id_usuario ORDER BY o.fecha DESC");
+        $query = $this->db->query("SELECT e.fecha_rec, o.id_oficioseg,o.nomenclatura, o.fecha, o.asunto, o.termino, o.atencion, o.observaciones, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, usuario AS u, oficio_entrada as e WHERE fecha BETWEEN '$date1' AND '$date2' AND nomenclatura LIKE '%$search%' AND e.id_oficioEntrada = o.id_oficioEntrada AND o.id_destinatario = d.id_destinatario AND o.atencion = u.id_usuario ORDER BY o.fecha DESC");
         $this->db->close();
         return $query->result();
     }
     //consulta con la fecha y nomenclatura de oficio que ha creado el usuario 
     public function searchDI($search, $date1, $date2, $id){
-        $query = $this->db->query("SELECT o.id_oficioseg, o.nomenclatura, o.fecha, o.asunto, o.termino, o.atencion, o.observaciones, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, usuario AS u WHERE fecha BETWEEN '$date1' AND '$date2' AND nomenclatura LIKE '%$search%' AND o.id_destinatario = d.id_destinatario AND o.atencion = u.id_usuario AND u.id_usuario = '$id' ORDER BY o.fecha DESC");
+        $query = $this->db->query("SELECT e.fecha_rec, o.id_oficioseg, o.nomenclatura, o.fecha, o.asunto, o.termino, o.atencion, o.observaciones, d.conase, d.valle_toluca, d.valle_mexico, d.zona_oriente, d.fiscal_general, d.vicefiscalia, d.oficialia_mayor, d.informacion_estadistica, d.central_juridico, d.servicio_carrera, d.otra, u.nombre, u.apellidop, u.apellidom FROM oficio_seguimiento AS o, destinatario AS d, usuario AS u, oficio_entrada as e WHERE fecha BETWEEN '$date1' AND '$date2' AND nomenclatura LIKE '%$search%' AND e.id_oficioEntrada = o.id_oficioEntrada AND o.id_destinatario = d.id_destinatario AND o.atencion = u.id_usuario AND u.id_usuario = '$id' ORDER BY o.fecha DESC");
         $this->db->close();
         return $query->result();
     }

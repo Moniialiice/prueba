@@ -58,6 +58,7 @@ class Atendido extends CI_Controller
             $descripcion = $this->input->post('descripcion');
             $copia = $this->input->post('copia');
             //valida los datos del formulario
+            $this->form_validation->set_rules('segui','Nomenclatura','is_unique[oficio_atendido.id_oficioseg]');
             $this->form_validation->set_rules('date1','Fecha','required');
             $this->form_validation->set_rules('nombre','Nombre', 'required');
             $this->form_validation->set_rules('cargo','Cargo','required');
@@ -65,16 +66,18 @@ class Atendido extends CI_Controller
             //sí la validación es correcta procede insetar en la base de datos
             if($this->form_validation->run()==TRUE)
             {   
-                //formato de fecha
+                //formato de fecha2
                 $date = array();
                 $date = $fecha;
                 $ext = explode('/',$date);
                 $fecha1 = $ext[2]."-".$ext[1]."-".$ext[0];
+                $fecha2 = $ext[2]."_".$ext[1]."_".$ext[0];                
+                $nom = explode('/',$nomen);
                 //datos requeridos para subir archivo y ruta a guardar 
                 $config['upload_path'] = $this->folder;
                 $config['allowed_types'] = 'jpg|png|pdf';
                 $config['max_size'] = 1000;
-                $config['file_name'] = $nomen.'_'.$fecha;
+                $config['file_name'] = $nom[0].'_'.$fecha2;
                 //carga libreria archivos e inicializa el array config con los datos del archivo
                 $this->load->library('upload',$config);
                 $this->upload->initialize($config);

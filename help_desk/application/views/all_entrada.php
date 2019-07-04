@@ -26,11 +26,12 @@
 </div>
 <table class="table animated fadeIn">
     <thead>
-        <tr>
+        <tr>           
+            <th scope="col">No. Control</th>
             <th scope="col">No. Oficio</th>
-            <th scope="col">Día y Hora Recepción</th>
-            <th scope="col">Fecha y Hora Recepción</th>
-            <th scope="col">Fecha Real</th>
+            <th scope="col">Día y Hora Recepción Oficialía</th>
+            <th scope="col">Fecha y Hora Recepción Coordinación</th>
+            <th scope="col">Fecha Origen</th>
             <th scope="col">Firma Origen</th>
             <th scope="col">Petición</th>
             <th scope="col">Atención</th>
@@ -57,8 +58,9 @@
                 $date3 = $dato->fecha_real;
                 $ext = explode('-',$date3);
                 $fecha3 = $ext[2]."/".$ext[1]."/".$ext[0]; 
-                echo "<tr>
-                <th scope='row'>".$dato->no_oficioEntrada."</th>".
+                echo "<tr>                
+                <th scope='row'>".$dato->control."</th>".
+                "<th scope='row'>".$dato->no_oficioEntrada."</th>".
                 "<td>".$fecha1."</td>".
                 "<td>".$fecha2."</td>".
                 "<td>".$fecha3."</td>".

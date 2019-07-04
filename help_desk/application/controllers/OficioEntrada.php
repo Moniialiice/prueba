@@ -24,8 +24,9 @@ class OficioEntrada extends CI_Controller
     //muestra el formulario de oficio entrada
     public function generaEntrada()
     {
+        $datos['num'] = $this->Entrada_model->lastID();
         $this->load->view('templates/head');
-        $this->load->view('genera_entrada');
+        $this->load->view('genera_entrada',$datos);
         $this->load->view('templates/footer');
     }
     //recibe datos del formulario los manda al modelo de Entrada_model para ingresar
@@ -35,6 +36,7 @@ class OficioEntrada extends CI_Controller
         if($this->input->post())
         {  
             //recibimos datos del formulario
+            $control = $this->input->post('control');
             $no_oficio = $this->input->post('no_oficio');
             $firma = $this->input->post('firma');
             $cargo = $this->input->post('cargo');
@@ -84,11 +86,11 @@ class OficioEntrada extends CI_Controller
                         //toma el nombre del archivo
                         $arch_entrada = $upload_data['file_name'];
                         //envia datos al modelo
-                        $query = $this->Entrada_model->createOficio($no_oficio, $firma, $cargo, $peticion, $arch_entrada, $id_usuario, $fecha1, $fecha2, $fecha3);
+                        $query = $this->Entrada_model->createOficio($control,$no_oficio, $firma, $cargo, $peticion, $arch_entrada, $id_usuario, $fecha1, $fecha2, $fecha3);
                         if($query == TRUE)
                         {
                             $this->session->set_flashdata('Creado','Oficio creado');
-                            $this->generaEntrada();
+                            redirect('nuevaEntrada');
                             $id = $this->session->userdata('id_usuario'); //id del usuario loggeado
                             $fec_bit = date('Y-m-d'); //fecha del servidor
                             $hor_bit = date('H:i:s'); //hora del servidor
@@ -96,7 +98,7 @@ class OficioEntrada extends CI_Controller
                             $this->Bitacora_model->insertBitacora($id,'Se ha creado el oficio recepción '.$no_oficio.'.',$fec_bit,$hor_bit);
                         }else{
                             $this->session->set_flashdata('No creado','Oficio no creado');
-                            $this->generaEntrada();
+                            redirect('nuevaEntrada');
                         }                    
             }else{
                 //carga datos para mostrar en el formulario
@@ -131,7 +133,9 @@ class OficioEntrada extends CI_Controller
         if($this->input->post())
         {
             //recibe datos de la búsqueda
+            $control = $this->input->post('control');
             $search = $this->input->post('busqueda');
+            $firma = $this->input->post('firma');
             $date1 = $this->input->post('date1');
             $date2 = $this->input->post('date2');
             //valida campos vacios
@@ -151,7 +155,7 @@ class OficioEntrada extends CI_Controller
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
                 if($this->session->userdata('id_tipoUsuario') != 5){
-                    $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);
+                    $datos ['datos'] = $this->Entrada_model->searchFecha($control,$search,$firma,$fecha1,$fecha2);
                     $this->load->view('all_entrada',$datos);
                     $id = $this->session->userdata('id_usuario'); //id del usuario logeado
                     $fec_bit = date('Y-m-d'); //fecha actual del servidor
@@ -229,7 +233,9 @@ class OficioEntrada extends CI_Controller
     //función para reporte excel de los oficios recepción
     public function reportExcelEn()
     {
+        $control = $this->input->post('control');
         $search = $this->input->post('busqueda');
+        $firma = $this->input->post('firma');
         $date1 = $this->input->post('date1');
         $date2 = $this->input->post('date2');
         //cambiamos formato de fecha
@@ -247,44 +253,47 @@ class OficioEntrada extends CI_Controller
         $spreadsheet = new Spreadsheet();
         //agrega columnas de encabezado
         $spreadsheet->setActiveSheetIndex(0)
-        ->setCellValue('A1', 'NO. OFICIO')
-        ->setCellValue('B1', 'DÍA Y HORA RECEPCIÓN')
-        ->setCellValue('C1', 'FECHA Y HORA RECEPCIÓN')
-        ->setCellValue('D1', 'FECHA REAL')
-        ->setCellValue('E1', 'PETICIÓN')
-        ->setCellValue('F1', 'FIRMA ORIGEN')
-        ->setCellValue('G1', 'CARGO')
-        ->setCellValue('H1', 'ATENCIÓN');
+        ->setCellValue('A1', 'NO. CONTROL')
+        ->setCellValue('B1', 'NO. OFICIO')
+        ->setCellValue('C1', 'DÍA Y HORA RECEPCIÓN')
+        ->setCellValue('D1', 'FECHA Y HORA RECEPCIÓN')
+        ->setCellValue('E1', 'FECHA REAL')
+        ->setCellValue('F1', 'PETICIÓN')
+        ->setCellValue('G1', 'FIRMA ORIGEN')
+        ->setCellValue('H1', 'CARGO')
+        ->setCellValue('I1', 'ATENCIÓN');
         //se madan estilos para las colunas A1,B1,C1 cells
         $cell_st =[
         'font' =>['bold' => true],
         'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
         'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
         ];
-        $spreadsheet->getActiveSheet()->getStyle('A1:H1')->applyFromArray($cell_st);                
+        $spreadsheet->getActiveSheet()->getStyle('A1:I1')->applyFromArray($cell_st);                
         //tamaño de las celdas 
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(18);
-        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(22);
-        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(25);
-        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
-        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(40);        
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(18);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(22);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(100);        
         $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(40);
-        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(40);
+        $spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(30);
         //valida que tipo de consulta realizará deacuerdo al tipo de usuario
-        $datos ['datos'] = $this->Entrada_model->searchFecha($search,$fecha1,$fecha2);
+        $datos ['datos'] = $this->Entrada_model->searchFecha($control,$search,$firma,$fecha1,$fecha2);
         foreach ($datos as $dato) {            
             $row = count($dato);
             for ($n=2; $n<=$row+1; $n++){
                 $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A'.$n, $dato[$n-2]->no_oficioEntrada)
-                ->setCellValue('B'.$n, $dato[$n-2]->fecha_ent)
-                ->setCellValue('C'.$n, $dato[$n-2]->fecha_rec)
-                ->setCellValue('D'.$n, $dato[$n-2]->fecha_real)
-                ->setCellValue('E'.$n, $dato[$n-2]->peticion)
-                ->setCellValue('F'.$n, $dato[$n-2]->firma_origen)
-                ->setCellValue('G'.$n, $dato[$n-2]->cargo)
-                ->setCellValue('H'.$n, $dato[$n-2]->nombre." ".$dato[$n-2]->apellidop." ".$dato[$n-2]->apellidom);
+                ->setCellValue('A'.$n, $dato[$n-2]->control)
+                ->setCellValue('B'.$n, $dato[$n-2]->no_oficioEntrada)
+                ->setCellValue('C'.$n, $dato[$n-2]->fecha_ent)
+                ->setCellValue('D'.$n, $dato[$n-2]->fecha_rec)
+                ->setCellValue('E'.$n, $dato[$n-2]->fecha_real)
+                ->setCellValue('F'.$n, $dato[$n-2]->peticion)
+                ->setCellValue('G'.$n, $dato[$n-2]->firma_origen)
+                ->setCellValue('H'.$n, $dato[$n-2]->cargo)
+                ->setCellValue('I'.$n, $dato[$n-2]->nombre." ".$dato[$n-2]->apellidop." ".$dato[$n-2]->apellidom);
             }
         }
         $id = $this->session->userdata('id_usuario'); //id del usuario logeado

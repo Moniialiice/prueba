@@ -50,16 +50,13 @@ h1 {
 	font-weight: bold;
 	font-family:Arial, Helvetica, sans-serif;
 }
-table{
-	width: 100%; 
+.table, tr, td{
+	width: 100%;
+	padding: 0px;
+	weight: 10%; 
 	border-collapse: collapse;
 	border: 1px solid black;
-}
-td{
-	padding: 0px;
-	weight: 10%;
-	border-collapse: collapse;
-	border: 1px solid black;	
+	vertical-align: middle; 
 }
 </style>
 <?php
@@ -84,7 +81,7 @@ td{
 	</header>
 	<h1>TRAMITE DE TURNO</h1>
 	<p class="p_right">METEPEC, ESTADO DE MEXICO A <?php echo $day." DE ".$months[(int)$mont]." DE ".$year; ?></p>
-	<table>
+	<table class="table" CELLPADDING="4">
 		<tr>
 			<td><p class="p_center">NO. OFICIO</p></td>
 			<td colspan="4"><p class="p_center">ASUNTO</p></td>
@@ -95,7 +92,7 @@ td{
 		</tr>
 	</table>
 	<p class="p_bold">ETIQUETAS DE ASUNTOS:</p>
-	<table>
+	<table class="table" CELLPADDING="4">
 		<tr>
 			<td colspan="4"><p class="p_left">COLABORACIÓN</p></td>
 			<td>
@@ -158,7 +155,7 @@ td{
 		</tr>
 	</table>
 	<p class="p_bold">EL COORDINADOR GENERAL DE COMBATE AL SECUESTRO DE LA FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO INSTRUYE SE TURNE A: </p>		
-	<table>
+	<table class="table" CELLPADDING="4">
 		<tr>
 			<td colspan="4"><p class="p_left">CONASE</p></td>
 			<td>
@@ -214,54 +211,53 @@ td{
 			</td>
 		</tr>
 	</table><br>
-	<table>
+	<table class = "table">
 		<tr>
-			<td colspan="5"><p class="p_left">REALIZAR DILIGENCIAS EN VÍA DE COLABORACIÓN</p></td>
+			<td colspan="12"><p class="p_left">REALIZAR DILIGENCIAS EN VÍA DE COLABORACIÓN</p></td>
 			<td>
 				<p class="p_center"><?php if($dato[0]->realiza_diligencias == 1){ echo " X ";}?></p>
 			</td>
-			<td colspan="4"><p class="p_left">INFORMAR A: </p></td>
-			<td><p class="p_left"> TERMINO</p></td>
+			<td colspan="2"><p class="p_left">INFORMAR A: </p></td>
+			<td  ><p class="p_left"> TERMINO</p></td>
 		</tr>
 		<tr>
-			<td colspan="5"><p class="p_left">RECIBIR PERSONALMENTE EN AUDIENCIA E INFORMAR </p></td>
+			<td colspan="12"><p class="p_left">RECIBIR PERSONALMENTE EN AUDIENCIA E INFORMAR </p></td>
 			<td>
 				<p class="p_center"><?php if($dato[0]->recibir_personalmente==1){echo " X ";}?></p>	
 			</td>
-			<td colspan="3"><p class="p_left">ESTA OFICINA </p></td>
+			<td><p class="p_left">ESTA OFICINA </p></td>
 			<td><p class="p_center"><?php if($dato[0]->esta_oficina == 1){ echo " X ";}?></p></td>
 			<td><p class="p_center"><?php if($dato[0]->esta_oficina == 1){ echo $fechat; }?></p></td>
 		</tr>
 		<tr>
-			<td colspan="5"><p class="p_left"> GESTIONAR PETICIÓN Y REMITIR CONSTANCIAS QUE ACREDITEN LA ATENCIÓN BRINDADA</p> </td>
+			<td colspan="12"><p class="p_left"> GESTIONAR PETICIÓN Y REMITIR CONSTANCIAS QUE ACREDITEN LA ATENCIÓN BRINDADA</p> </td>
 			<td><p class="p_center"><?php if($dato[0]->gestionar_peticion == 1){echo " X ";}?></p></td>
-			<td colspan="3"><p class="p_left"> PETICIONARIO </p></td>
+			<td><p class="p_left"> PETICIONARIO </p></td>
 			<td><p class="p_center"><?php if($dato[0]->peticionario == 1){echo " X ";}?></p></td>
 			<td><p class="p_center"><?php if($dato[0]->peticionario == 1){ echo $fechat; }?></p></td>
 		</tr>
 		<tr>
-			<td colspan="5"><p class="p_left"> ARCHIVO </p></td>
+			<td colspan="12"><p class="p_left"> ARCHIVO </p></td>
 			<td><p class="p_center"><?php if($dato[0]->archivo == 1){ echo " X ";}?></p></td>
-			<td colspan="3"><p class="p_left"> INSTITUCIÓN REQUIRENTE </p></td>
+			<td><p class="p_left"> INSTITUCIÓN REQUIRENTE </p></td>
 			<td><p class="p_center"><?php if($dato[0]->institucion_requiriente == 1){ echo " X "; }?></p></td>
 			<td><p class="p_center"><?php if($dato[0]->institucion_requiriente == 1){ echo $fechat; }?></p></td> 
 		</tr>
 		<tr>
-			<td colspan="11"><p class="p_justify">OTRAS: <?php if($dato[0]->otras != ""){ echo $dato[0]->otras;}?></p></td>
+			<td colspan="16"><p class="p_justify">OTRAS: <?php if($dato[0]->otras != ""){ echo $dato[0]->otras;}?></p></td>
 		</tr>
 	</table><br>
-	<table>
+	<table class="table">
 		<tr>
 			<td colspan="5" ><p class="p_center"> ELABORO:</p></td>
 			<td colspan="6"><p class="p_center"> Vo. Bo.</p></td>
 		</tr>
 		<tr>
-			<td colspan="5"><br><br><p class="p_center"><?php echo $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom;?></p> </td>
-			<td colspan = "6"><br><br><p class="p_center"> DR. H. C. RODRIGO ARCHUNDIA BARREINTOS<br>COORDINADOR GENERAL DE COMBATE AL SECUESTRO</p>
-			</td>
+			<td colspan="5"><br><p class="p_center"><?php echo $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom;?></p> </td>
+			<td colspan = "6"><br><p class="p_center"> DR. H. C. RODRIGO ARCHUNDIA BARREINTOS<br>COORDINADOR GENERAL DE COMBATE AL SECUESTRO</p></td>
 		</tr>
 	</table><br>
-	<table>
+	<table class="table" CELLPADDING="4">
 		<tr><td colspan="16"><p class="p_justify"> OBSERVACIONES: <?php echo $dato[0]->observaciones;?></p></td></tr>
 	</table>
 </body>

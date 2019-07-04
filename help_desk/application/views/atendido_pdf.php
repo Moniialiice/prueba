@@ -30,17 +30,17 @@ h1 {
 }
 .p_atendido{
 	text-align: right;
-	font-size: 11px;
+	font-size: 12px;
 	font-family:Arial, Helvetica, sans-serif;
 }
 .p_remitente{
 	text-align: left;
-	font-size: 11px;
+	font-size: 12px;
 	font-family:Arial, Helvetica, sans-serif;
 }
 .p_justify{
 	text-align: justify;
-	font-size: 11px;
+	font-size: 12px;
 	font-family:Arial, Helvetica, sans-serif;
 }
 .p_atentamente{

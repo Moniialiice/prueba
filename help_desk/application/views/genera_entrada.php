@@ -50,11 +50,25 @@
                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div>
                         <form action="insertaEntrada" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> Número Control</label></div>
+                                <?php
+                                if(empty($num)){
+                                    echo"<div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='1' disabled><input type='text' name='control' value='1' hidden></div>";
+                                }else{
+                                foreach($num as $r){
+                                    $tur = $r->control;
+                                    $n = $tur+1;
+                                    echo"<div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$n."' disabled><input type='text' name='control' value='".$n."' hidden></div>";
+                                    }
+                                }
+                                ?> 
+                            </div>
+                            <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Oficio</label></div>
                                 <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="no_oficio" class="form-control" value="<?php echo set_value('no_oficio'); ?>" ></div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Día y Hora Recepción</label></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Día y Hora Recepción Oficialía</label></div>
                                 <div class="col-12 col-md-9">
                                     <div class='input-group' >                                        
                                         <input type='text-input' class="form-control" id="datepicker" name="fecha" value="<?php echo set_value('fecha'); ?>">
@@ -65,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha y Hora Recepción</label></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha y Hora Recepción Coordinación</label></div>
                                 <div class="col-12 col-md-9">
                                     <div class="input-group">                                        
                                         <input type="text-input" class="form-control" id="datepickerf" name="fecha_rec" value="<?php echo set_value('fecha_rec'); ?>">
@@ -76,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Real</label></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Origen</label></div>
                                 <div class="col-12 col-md-9">
                                     <div class='input-group' >
                                         <input type='text-input' class="form-control" id="date1" name="fecha_real" value="<?php echo set_value('fecha_real');?>"  >

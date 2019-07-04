@@ -12,11 +12,14 @@ class Entrada_model extends CI_Model
     {
         $this->load->database();
     }
-
+    public function lastID(){
+        $query = $this->db->query("SELECT e.control FROM oficio_entrada as e ORDER BY e.control DESC LIMIT 1");
+        return $query->result();
+    }
     //funcion para dar de alta el oficio de entrada
-    public function createOficio($no_oficio,$firma_origen,$cargo,$peticion,$arch_entrada,$id_usuario,$fecha,$fecha2,$fecha_r)
+    public function createOficio($control,$no_oficio,$firma_origen,$cargo,$peticion,$arch_entrada,$id_usuario,$fecha,$fecha2,$fecha_r)
     {
-        $query = $this->db->query("INSERT INTO oficio_entrada(no_oficioEntrada, firma_origen, cargo, peticion, arch_entrada, atencion, fecha_ent, fecha_rec, fecha_real) VALUES ('$no_oficio','$firma_origen','$cargo','$peticion','$arch_entrada','$id_usuario','$fecha','$fecha2','$fecha_r')");
+        $query = $this->db->query("INSERT INTO oficio_entrada(control, no_oficioEntrada, firma_origen, cargo, peticion, arch_entrada, atencion, fecha_ent, fecha_rec, fecha_real) VALUES ('$control','$no_oficio','$firma_origen','$cargo','$peticion','$arch_entrada','$id_usuario','$fecha','$fecha2','$fecha_r')");
         if ($query) {
             return true;
         }else{
@@ -25,9 +28,9 @@ class Entrada_model extends CI_Model
         $this->db->close();
     }
     //consulta con fecha y no. de nomenclatura del oficio entrada muestra datos y para general excel
-    public function searchFecha($search,$date1,$date2)
+    public function searchFecha($control,$search,$firma,$date1,$date2)
     {
-        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%$search%' AND e.fecha_real BETWEEN '$date1' AND '$date2' AND e.atencion = u.id_usuario ORDER BY e.fecha_rec DESC");
+        $query = $this->db->query("SELECT e.id_oficioEntrada, e.control, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.control LIKE '%$control%' AND e.no_oficioEntrada LIKE '%$search%' AND e.firma_origen LIKE '%$firma%' AND e.fecha_rec BETWEEN '$date1 00:00:00' AND '$date2 23:59:59' AND e.atencion = u.id_usuario ORDER BY e.control DESC");
         $this->db->close();
         return $query->result();
     }
@@ -43,27 +46,5 @@ class Entrada_model extends CI_Model
         $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.no_oficioEntrada LIKE '%$search%' AND e.fecha_real BETWEEN '$date1' AND '$date2' AND e.atencion = u.id_usuario AND u.id_usuario = '$id' ORDER BY e.fecha_rec DESC");
         $this->db->close();
         return $query->result();
-    }     
-    //obtenemos el total de filas para hacer la paginación
-	function filas($id) {
-        $query = $this->db->query("SELECT e.id_oficioEntrada, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, e.atencion, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.atencion = u.id_usuario and e.atencion='$id' ORDER BY id_oficioEntrada ASC");
-        $this->db->close();
-        return $query->num_rows();
-    }      
-    //obtenemos todas las provincias a paginar con la función
-    //total_posts_paginados pasando la cantidad por página y el segmento
-    //como parámetros de la misma
-	function total_paginados($id, $por_pagina, $segmento){
-        $this->db->where('atencion', $id);
-        $consulta = $this->db->get('oficio_entrada', $por_pagina, $segmento);
-        if ($consulta->num_rows() > 0) {
-            foreach ($consulta->result() as $fila) {
-            $data[] = $fila;
-            }
-            return $data;
-        }
-        $this->db->close();
-
     }
-
 }
