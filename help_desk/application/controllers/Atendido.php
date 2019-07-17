@@ -23,7 +23,418 @@ class Atendido extends CI_Controller
         $this->folder = 'document/atendido/';
     }
     //función carga templates, el formulario para generar oficio con el $id del oficio entrada
-    public function index($id)
+    public function index()
+    {
+        //carga el vista para nuevo oficio seguimiento
+        $this->load->view('templates/head');
+        $this->load->view('genera_atendido_new');
+        $this->load->view('templates/footer');     
+    }
+    //ejemplo consecutivo
+    function generaNomenclatura($start,$count,$digits) 
+    {
+        $result = array();
+        for ($n = $start; $n < $start + $count; $n++) {
+           $result[] = str_pad($n, $digits, "0", STR_PAD_LEFT);
+        }
+        return $result;
+    }    
+    //alta de oficio antendido con un nuevo número de oficio  
+    public function createAtendido()
+    {
+        if($this->input->post())
+        { 
+            //nomenclatura para colocarlo al archivo atendido
+            $tipoOficio = $this->input->post('tipoOficio');
+            //id del usuario que creo el oficio
+            $atencion = $this->input->post('atencion');
+            //recibimos datos del formulario
+            $valfile = $this->input->post('archivo');
+            $fecha = $this->input->post('date1');
+            $nombre = $this->input->post('nombre');
+            $cargo = $this->input->post('cargo');
+            $descripcion = $this->input->post('descripcion');
+            $copia = $this->input->post('copia');
+            //valida los datos del formulario
+            $this->form_validation->set_rules('date1','Fecha','required');
+            $this->form_validation->set_rules('nombre','Nombre', 'required');
+            $this->form_validation->set_rules('cargo','Cargo','required');
+            $this->form_validation->set_rules('descripcion','Descripción','required');
+            //sí la validación es correcta procede insetar en la base de datos
+            if($this->form_validation->run()==TRUE)
+            {   
+                $year = date('Y'); //carga el año en curso del servidor
+                $ext = explode('/',$fecha); 
+                $fecha1 = $ext[2]."-".$ext[1]."-".$ext[0];
+                $fecha2 = $ext[2]."_".$ext[1]."_".$ext[0];
+                if($this->Atendido_model->getNomAtendido($tipoOficio)){
+                    $nomaten = $this->Atendido_model->getNomAtendido($tipoOficio); //consulta ultima nomenclatura en atendido
+                    $nomate = $nomaten[0]->nomenclatura_aten; //asigna la nomenclatura a la variable $nomate
+                    $nomat = explode("/",$nomate); //corta nomenclatura en cada diagonal 
+                    $nomena = $nomat[0]; //nomenclatura
+                    $numa = $nomat[1]; //número consecutivo
+                    $ansa = $nomat[2]; //año
+                }else{
+                    $numa = 0;
+                    $ansa = $year;
+                }
+                if($this->Atendido_model->getNom($tipoOficio)){
+                    $nomcon = $this->Atendido_model->getNom($tipoOficio); //consulta última nomenclatura en seguimiento                       
+                    $nomc = $nomcon[0]->nomenclatura; //se obtiene ultima nomenclatura de seguimiento
+                    $nom = explode("/",$nomc); //corta nomenclatura en cada diagonal
+                    $nomen = $nom[0]; //nomenclatura del ultimo registro
+                    $num = $nom[1]; //número consecutivo de la nomenclatura
+                    $ans = $nom[2]; //año de nomenclatura del ultimo registro
+                }else{
+                    $num = 0;
+                    $ans = $year;
+                }
+                switch ($tipoOficio)
+                {
+                    case '400LIA000':
+                        if($numa>$num){ // si consecutivo de atendido es mayor al consecutivo de seguimiento                            
+                            if($ansa == $year){ //si año es igual a nomenclatura del ultimo registro
+                                $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
+                                $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                //inserta datos
+                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido;                                
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio atendido '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->index();
+                                }
+                            }else{
+                                $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                //llama función para insertar datos
+                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                if($insertAtendido == true){                    
+                                //id oficio seguimiento 
+                                $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                $ida = $idatendido[0]->id_oficioAtendido; 
+                                $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                $fec_bit = date('Y-m-d'); //fecha el servidor
+                                $hor_bit = date('H:i:s'); //fecha el servidor
+                                //inserta registros en la bitacora
+                                $this->Bitacora_model->insertBitacora($id,'Oficio atendido '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                //una vez insertado muestra datos en mostrar oficio
+                                $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->index();
+                                }
+                            }
+                        }else{
+                            if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
+                                $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
+                                $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                //inserta los datos 
+                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido;                                
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->index();
+                                }
+                            }else{
+                                $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                //llama función para insertar datos
+                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                if($insertAtendido == true){                    
+                                //id oficio seguimiento 
+                                $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                $ida = $idatendido[0]->id_oficioAtendido;
+                                $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                $fec_bit = date('Y-m-d'); //fecha el servidor
+                                $hor_bit = date('H:i:s'); //fecha el servidor
+                                //inserta registros en la bitacora
+                                $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                //una vez insertado muestra datos en mostrar oficio
+                                $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->index();
+                                }
+                            }
+                        }   
+                        break; 
+                    case '400LI0010':
+                        if($numa>$num){ // si consecutivo de atendido es mayor al consecutivo de seguimiento
+                            if(isset($valfile)){
+                                $archivo = "";
+                            }else{
+                                $config['upload_path'] = $this->folder;
+                                $config['allowed_types'] = 'jpg|png|pdf';
+                                $config['max_size'] = 2048;
+                                $config['file_name'] = $nomena[0].'_'.$fecha2;
+                                //carga libreria archivos e inicializa el array config con los datos del archivo
+                                $this->load->library('upload',$config);
+                                $this->upload->initialize($config);
+                                //toma el datos de archivo entrada
+                                $this->upload->do_upload('archivo');                
+                                //carga los datos del archivo
+                                $upload_data = $this->upload->data();
+                                //toma el nombre del archivo
+                                $archivo = $upload_data['file_name'];
+                            }
+                            if($ansa == $year){ //si año es igual a nomenclatura del ultimo registro
+                                $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
+                                $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
+                                //inserta los datos
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido;                                
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio atendido '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->index();
+                                }
+                            }else{
+                                $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
+                                //llama función para insertar datos
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido; 
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio atendido '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->index();
+                                }
+                            }
+                        }else{
+                            if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
+                                $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
+                                $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
+                                //inserta los datos
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                } 
+                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido;                                
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->index();
+                                }
+                            }else{
+                                $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
+                                //llama función para insertar datos
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                if($insertAtendido == true){                    
+                                //id oficio seguimiento 
+                                $idatendido = $this->Atendido_model->getIDAt($nomenclatura); 
+                                $ida = $idatendido[0]->id_oficioAtendido;
+                                $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                $fec_bit = date('Y-m-d'); //fecha el servidor
+                                $hor_bit = date('H:i:s'); //fecha el servidor
+                                //inserta registros en la bitacora
+                                $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                //una vez insertado muestra datos en mostrar oficio
+                                $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->index();
+                                }
+                            }
+                        }
+                    break;    
+                }
+            }else{
+                //tomamos los datos del formulario en un array
+                $datos = array();
+                $datos['date1'] = $fecha;
+                $datos['nombre'] = $nombre;
+                $datos['cargo'] = $cargo;
+                $datos['descripcion'] = $descripcion;
+                $copia['copia'] = $copia;
+                //envia datos del array a la vista
+                $this->load->view('templates/head');
+                $this->load->view('genera_atendido_new'); 
+                $this->load->view('templates/footer');
+            }
+        }else{
+            //mensaje de error si  la inserción no se realiza
+            $this->session->set_flashdata('Error','Consultar administrador');
+            $this->index();
+        }
+    } 
+    public function inicio($id)
     {
         $ida = base64_decode($id);
         $datos ['datos'] = $this->Atendido_model->datosSeguimiento($ida); //datos de tabla oficio entrada
@@ -43,22 +454,23 @@ class Atendido extends CI_Controller
     //valida los datos para insertar en la base 
     public function createAtendidoVal()
     {
-        //id de seguimiento
-        $segui = $this->input->post('segui');
+        $ids = $this->input->post('segui');
         if($this->input->post())
         { 
             //nomenclatura para colocarlo al archivo atendido
-            $nomen = $this->input->post('nomen');
+            $nome = $this->input->post('nomen');
+            $nom = explode('/',$nome);
+            $tipoOficio = $nom[0];
             //id del usuario que creo el oficio
             $atencion = $this->input->post('atencion');
             //recibimos datos del formulario
+            $valfile = $this->input->post('archivo');
             $fecha = $this->input->post('date1');
             $nombre = $this->input->post('nombre');
             $cargo = $this->input->post('cargo');
             $descripcion = $this->input->post('descripcion');
             $copia = $this->input->post('copia');
             //valida los datos del formulario
-            $this->form_validation->set_rules('segui','Nomenclatura','is_unique[oficio_atendido.id_oficioseg]');
             $this->form_validation->set_rules('date1','Fecha','required');
             $this->form_validation->set_rules('nombre','Nombre', 'required');
             $this->form_validation->set_rules('cargo','Cargo','required');
@@ -66,43 +478,357 @@ class Atendido extends CI_Controller
             //sí la validación es correcta procede insetar en la base de datos
             if($this->form_validation->run()==TRUE)
             {   
-                //formato de fecha2
-                $date = array();
-                $date = $fecha;
-                $ext = explode('/',$date);
+                $year = date('Y'); //carga el año en curso del servidor
+                $ext = explode('/',$fecha); 
                 $fecha1 = $ext[2]."-".$ext[1]."-".$ext[0];
-                $fecha2 = $ext[2]."_".$ext[1]."_".$ext[0];                
-                $nom = explode('/',$nomen);
-                //datos requeridos para subir archivo y ruta a guardar 
-                $config['upload_path'] = $this->folder;
-                $config['allowed_types'] = 'jpg|png|pdf';
-                $config['max_size'] = 1000;
-                $config['file_name'] = $nom[0].'_'.$fecha2;
-                //carga libreria archivos e inicializa el array config con los datos del archivo
-                $this->load->library('upload',$config);
-                $this->upload->initialize($config);
-                //toma el datos de archivo entrada
-                $this->upload->do_upload('archivo');                
-                    //carga los datos del archivo
-                    $upload_data = $this->upload->data();
-                    //toma el nombre del archivo
-                    $archivo = $upload_data['file_name']; 
-                    $insertOficio = $this->Atendido_model->insert_Atendido($fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $segui, $atencion);                
-                    if ($insertOficio == true){                    
-                    //id oficio seguimiento 
-                    $idatendido = $this->Atendido_model->getIDA($segui);
-                    $ida = $idatendido[0]->id_oficioAtendido;
-                    $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
-                    $fec_bit = date('Y-m-d'); //fecha el servidor
-                    $hor_bit = date('H:i:s'); //fecha el servidor
-                    //inserta registros en la bitacora
-                    $this->Bitacora_model->insertBitacora($idu,'Oficio atendido creado, del oficio '.$nomen.' creado.',$fec_bit,$hor_bit);
-                    //una vez insertado muestra datos en actualizar oficio
-                    $this->session->set_flashdata('Creado','Oficio creado');
-                    $this->mostrarAtendido($ida);
+                $fecha2 = $ext[2]."_".$ext[1]."_".$ext[0];
+                if($this->Atendido_model->getNomAtendido($tipoOficio)){
+                    $nomaten = $this->Atendido_model->getNomAtendido($tipoOficio); //consulta ultima nomenclatura en atendido
+                    $nomate = $nomaten[0]->nomenclatura_aten; //asigna la nomenclatura a la variable $nomate
+                    $nomat = explode("/",$nomate); //corta nomenclatura en cada diagonal 
+                    $nomena = $nomat[0]; //nomenclatura
+                    $numa = $nomat[1]; //número consecutivo
+                    $ansa = $nomat[2]; //año
                 }else{
-                    $this->session->set_flashdata('Error','Consulta administrador');                    
-                    $this->index($segui);
+                    $numa = 0;
+                    $ansa = $year;
+                }
+                if($this->Atendido_model->getNom($tipoOficio)){
+                    $nomcon = $this->Atendido_model->getNom($tipoOficio); //consulta última nomenclatura en seguimiento                       
+                    $nomc = $nomcon[0]->nomenclatura; //se obtiene ultima nomenclatura de seguimiento
+                    $nom = explode("/",$nomc); //corta nomenclatura en cada diagonal
+                    $nomen = $nom[0]; //nomenclatura del ultimo registro
+                    $num = $nom[1]; //número consecutivo de la nomenclatura
+                    $ans = $nom[2]; //año de nomenclatura del ultimo registro
+                }else{
+                    $num = 0;
+                    $ans = $year;
+                }
+                switch ($tipoOficio)
+                {
+                    case '400LIA000':
+                        if($numa>$num){ // si consecutivo de atendido es mayor al consecutivo de seguimiento                            
+                            if($ansa == $year){ //si año es igual a nomenclatura del ultimo registro
+                                $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
+                                $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                //inserta datos
+                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido;                                
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio atendido '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->inicio($ids);
+                                }
+                            }else{
+                                $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                //llama función para insertar datos
+                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido; 
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio atendido '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->inicio($ids);
+                                }
+                            }
+                        }else{
+                            if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
+                                $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
+                                $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                //inserta los datos 
+                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido;                                
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->inicio($ids);
+                                }
+                            }else{
+                                $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                //llama función para insertar datos
+                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                if($insertAtendido == true){                    
+                                //id oficio seguimiento 
+                                $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                $ida = $idatendido[0]->id_oficioAtendido;
+                                $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                $fec_bit = date('Y-m-d'); //fecha el servidor
+                                $hor_bit = date('H:i:s'); //fecha el servidor
+                                //inserta registros en la bitacora
+                                $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                //una vez insertado muestra datos en mostrar oficio
+                                $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->inicio($ids);
+                                }
+                            }
+                        }   
+                        break; 
+                    case '400LI0010':
+                        if($numa>$num){ // si consecutivo de atendido es mayor al consecutivo de seguimiento
+                            if(isset($valfile)){
+                                $archivo = "";
+                            }else{
+                                $config['upload_path'] = $this->folder;
+                                $config['allowed_types'] = 'jpg|png|pdf';
+                                $config['max_size'] = 2048;
+                                $config['file_name'] = $nomena[0].'_'.$fecha2;
+                                //carga libreria archivos e inicializa el array config con los datos del archivo
+                                $this->load->library('upload',$config);
+                                $this->upload->initialize($config);
+                                //toma el datos de archivo entrada
+                                $this->upload->do_upload('archivo');                
+                                //carga los datos del archivo
+                                $upload_data = $this->upload->data();
+                                //toma el nombre del archivo
+                                $archivo = $upload_data['file_name'];
+                            }
+                            if($ansa == $year){ //si año es igual a nomenclatura del ultimo registro
+                                $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
+                                $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
+                                //inserta los datos
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido;                                
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio atendido '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->inicio($ids);
+                                }
+                            }else{
+                                $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
+                                //llama función para insertar datos
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido; 
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio atendido '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->inicio($ids);
+                                }
+                            }
+                        }else{
+                            if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
+                                $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
+                                $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
+                                //inserta los datos
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                } 
+                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                if($insertAtendido == true){                    
+                                    //id oficio seguimiento 
+                                    $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
+                                    $ida = $idatendido[0]->id_oficioAtendido;                                
+                                    $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                                    $hor_bit = date('H:i:s'); //fecha el servidor
+                                    //inserta registros en la bitacora
+                                    $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                    //una vez insertado muestra datos en mostrar oficio
+                                    $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->inicio($ids);
+                                }
+                            }else{
+                                $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
+                                //llama función para insertar datos
+                                if(isset($valfile)){
+                                    $archivo = "";
+                                }else{
+                                    $config['upload_path'] = $this->folder;
+                                    $config['allowed_types'] = 'jpg|png|pdf';
+                                    $config['max_size'] = 2048;
+                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    //carga libreria archivos e inicializa el array config con los datos del archivo
+                                    $this->load->library('upload',$config);
+                                    $this->upload->initialize($config);
+                                    //toma el datos de archivo entrada
+                                    $this->upload->do_upload('archivo');                
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                }
+                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                if($insertAtendido == true){                    
+                                //id oficio seguimiento 
+                                $idatendido = $this->Atendido_model->getIDAt($nomenclatura); 
+                                $ida = $idatendido[0]->id_oficioAtendido;
+                                $id = $this->session->userdata('id_usuario');//id del usuario loggeado
+                                $fec_bit = date('Y-m-d'); //fecha el servidor
+                                $hor_bit = date('H:i:s'); //fecha el servidor
+                                //inserta registros en la bitacora
+                                $this->Bitacora_model->insertBitacora($id,'Oficio seguimiento '.$nomenclatura.' creado.',$fec_bit,$hor_bit);
+                                //una vez insertado muestra datos en mostrar oficio
+                                $this->mostrarAtendido($ida);
+                                }else{
+                                    $this->session->set_flashdata('Error','Consulta administrador');                    
+                                    $this->inicio($ids);
+                                }
+                            }
+                        }
+                    break;    
                 }
             }else{
                 //tomamos los datos del formulario en un array
@@ -111,8 +837,8 @@ class Atendido extends CI_Controller
                 $datos['nombre'] = $nombre;
                 $datos['cargo'] = $cargo;
                 $datos['descripcion'] = $descripcion;
-                $copia['copia'] = $copia;
-                $datos['datos'] = $this->Atendido_model->datosSeguimiento($segui);
+                $datos['copia'] = $copia;
+                $datos['datos'] = $this->Atendido_model->datosSeguimiento($ids); //datos de tabla oficio entrada
                 //envia datos del array a la vista
                 $this->load->view('templates/head');
                 $this->load->view('genera_atendido',$datos); 
@@ -121,9 +847,10 @@ class Atendido extends CI_Controller
         }else{
             //mensaje de error si  la inserción no se realiza
             $this->session->set_flashdata('Error','Consultar administrador');
-            $this->index($ide);
+            $this->inicio($ids);
         }
     }
+
     //carga formulario de busqueda
     public function busquedaAtendido()
     {
@@ -200,13 +927,122 @@ class Atendido extends CI_Controller
         $fec_bit = date('Y-m-d'); //fecha actual del servidor
         $hor_bit = date('H:i:s'); //fecha actual del servidor
         $nom = $this->Atendido_model->nomenBit($id); //consulta de nomenclatura por el id del asunto
-        $nome = $nom[0]->nomenclatura; //nomenclatura del oficio seguimiento
+        $nome = $nom[0]->nomenclatura_aten; //nomenclatura del oficio seguimiento
         //inserción de registros en la bitacora
         $this->Bitacora_model->insertBitacora($idu,'Consulta oficio atendido del oficio: '.$nome.'.',$fec_bit,$hor_bit);
         //carga vistas, formulario de consulta
         $this->load->view('templates/head');
         $this->load->view('consulta_atendido',$datos);
         $this->load->view('templates/footer');
+    }
+    //vista de los datos atendido para actualizar
+    public function updateAtendido($id)
+    {
+        $ida = base64_decode($id);
+        //consulta datos del oficio atendido
+        $datos['datos'] = $this->Atendido_model->consultaAtendido($ida);
+        $idu = $this->session->userdata('id_usuario'); //id del usuario logeado
+        $fec_bit = date('Y-m-d'); //fecha actual del servidor
+        $hor_bit = date('H:i:s'); //fecha actual del servidor
+        $nom = $this->Atendido_model->nomenBit($ida); //consulta de nomenclatura por el id
+        $nome = $nom[0]->nomenclatura_aten; //nomenclatura del oficio seguimiento
+        //inserción de registros en la bitacora
+        $this->Bitacora_model->insertBitacora($idu,'Consulta oficio atendido del oficio: '.$nome.'.',$fec_bit,$hor_bit);
+        //carga vistas, formulario de consulta
+        $this->load->view('templates/head');
+        $this->load->view('actualiza_atendido',$datos);
+        $this->load->view('templates/footer');
+    }
+    //update de datos de atendido
+    public function modifAtendido()
+    {
+        $ida = $this->input->post('aten'); //id atendido
+        $a = base64_encode($ida);
+        if($this->input->post())
+        {
+            $year = date('Y'); //carga el año en curso del servidor 
+            $nom = $this->input->post('nomen');
+            //id del usuario que creo el oficio
+            $atencion = $this->input->post('atencion');
+            //recibimos datos del formulario
+            $valfile = $this->input->post('archivo');            
+            $fecha1 = $this->input->post('old');
+            $fecha2 = $this->input->post('date1');
+            $nombre = $this->input->post('nombre');
+            $cargo = $this->input->post('cargo');
+            $descripcion = $this->input->post('descripcion');
+            $copia = $this->input->post('copia');
+            $nullarchivo = $this->input->post('archivo');
+            if(empty($fecha1)){
+                $fecha = $fecha2;
+                $ext = explode('/',$fecha); 
+                $farch = $ext[2]."_".$ext[1]."_".$ext[0];
+            }else{
+                $fecha = $fecha1;
+                $ext = explode('-',$fecha); 
+                $farch = $ext[0]."_".$ext[1]."_".$ext[2];
+            }
+            //valida los datos del formulario
+            $this->form_validation->set_rules('nombre','Nombre', 'required');
+            $this->form_validation->set_rules('cargo','Cargo','required');
+            $this->form_validation->set_rules('descripcion','Descripción','required');
+            //sí la validación es correcta procede insetar en la base de datos
+            if($this->form_validation->run()==TRUE)
+            {   
+                $config['upload_path'] = $this->folder;
+                $config['allowed_types'] = 'jpg|png|pdf';
+                $config['max_size'] = 2048;
+                $config['file_name'] = $nom.'_'.$farch;
+                //carga libreria archivos e inicializa el array config con los datos del archivo
+                $this->load->library('upload',$config);
+                $this->upload->initialize($config);
+                //toma el datos de archivo entrada
+                if(empty($nullarchivo)){                            
+                    if ( !$this->upload->do_upload('archivo'))
+                    {
+                        $query = $this->Atendido_model->updateAtendido($ida, $fecha, $nombre, $cargo, $descripcion, $copia, '');                  
+                    }else{               
+                        //carga los datos del archivo
+                        $upload_data = $this->upload->data();
+                        //toma el nombre del archivo
+                        $archivo = $upload_data['file_name'];
+                        $query = $this->Atendido_model->updateAtendido($ida, $fecha, $nombre, $cargo, $descripcion, $copia, $archivo);                   
+                    }
+                }else{
+                    $query = $this->Atendido_model->updateAtendido($ida, $fecha, $nombre, $cargo, $descripcion, $copia, $nullarchivo);                      
+                }
+                //sí se inserto los datos manda mensaje     
+                if($query == true){
+                    $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                    $fec_bit = date('Y-m-d'); //fecha el servidor
+                    $hor_bit = date('H:i:s'); //hora el servidor
+                    //inserta registros en la bitacora
+                    $this->Bitacora_model->insertBitacora($idu,'Se ha modificado oficio'.$nom.'.',$fec_bit,$hor_bit);    
+                    $this->session->set_flashdata('Modificado','Usuario creado correctamente');
+                    $this->updateAtendido($a);
+                }else{
+                    $this->session->set_flashdata('No', 'Datos no ingresados');
+                    $this->updateAtendido($a);
+                }
+            }else{
+                //tomamos los datos del formulario en un array
+                $datos = array();
+                $datos['date1'] = $fecha;
+                $datos['nombre'] = $nombre;
+                $datos['cargo'] = $cargo;
+                $datos['descripcion'] = $descripcion;
+                $datos['copia'] = $copia;
+                $datos['datos'] = $this->Atendido_model->consultaAtendido($ida);
+                //envia datos del array a la vista
+                $this->load->view('templates/head');
+                $this->load->view('actualiza_atendido',$datos); 
+                $this->load->view('templates/footer');
+            }
+        }else{
+            //mensaje de error si  la inserción no se realiza
+            $this->session->set_flashdata('Error','Consultar administrador');
+            $this->updateAtendido($a);
+        }        
     }
     //función para descargar archivo seguimiento o final
     public function descarga($name)
@@ -231,11 +1067,11 @@ class Atendido extends CI_Controller
         $fec_bit = date('Y-m-d'); //fecha actual del servidor
         $hor_bit = date('H:i:s'); //fecha actual del servidor
         $nom = $this->Atendido_model->nomenBit($ida); //consulta de nomenclatura por el id del asunto
-        $nome = $nom[0]->nomenclatura; //nomenclatura del oficio seguimiento
+        $nome = $nom[0]->nomenclatura_aten; //nomenclatura del oficio seguimiento
         //inserción de registros en la bitacora
         $this->Bitacora_model->insertBitacora($idu,'Descarga Oficio Atendido en PDF de: '.$nome.'.',$fec_bit,$hor_bit);
-        //$dompdf->stream("sample.pdf", array("Attachment"=>0)); //muestra pdf
-        $dompdf->stream("oficio_atendido.pdf");   //descarga pdf
+        $dompdf->stream("oficio_atendido.pdf", array("Attachment"=>0)); //muestra pdf
+        //$dompdf->stream("oficio_atendido.pdf");   //descarga pdf
     }
     //reporte en excel 
     public function reportExcelA()
@@ -300,7 +1136,7 @@ class Atendido extends CI_Controller
             {      
                 //var_dump($datos);
                 $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A'.$n, $dato[$n-2]->nomenclatura)
+                ->setCellValue('A'.$n, $dato[$n-2]->nomenclatura_aten)
                 ->setCellValue('B'.$n, $dato[$n-2]->fecha_atendido)
                 ->setCellValue('C'.$n, $dato[$n-2]->nombre_aten)  
                 ->setCellValue('D'.$n, $dato[$n-2]->cargo_aten)

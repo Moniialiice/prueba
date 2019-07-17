@@ -33,7 +33,7 @@
             <th scope="col">Descripción</th>
             <th scope="col">Atención</th>
             <th scope="col">Descargar</th>
-            <th scope="col">Imprimir</th>
+            <th scope="col">Actualizar</th>
         </tr>
     </thead>
     <tbody>
@@ -49,16 +49,16 @@
                 //corta los datos de d,m,a
                 $ext = explode("-",$date);
                 //obtenemos el tipo de oficio
-                $nomenclatura = $dato->nomenclatura;
+                $nomenclatura = $dato->nomenclatura_aten;
                 $cut = explode("/",$nomenclatura);
                 echo "<tr>
-                <th scope='row'>".$dato->nomenclatura."</th>".
+                <th scope='row'>".$dato->nomenclatura_aten."</th>".
                 "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".
                 "<td>".$dato->nombre_aten." ".$dato->cargo_aten."</td>".
                 "<td>".$dato->descripcion."</td>".
                 "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                 "<td align='center'><a href='descargarAtendido/".$dato->arch_atendido."' class='fa fa-download fa-1x'></a></td>".               
-                "<td align='center'><a href='imprimirAtendido/".$ida."' target='_blank' class='fa fa-print fa-1x'></a></td>"; //".$dato->id_oficioAtendido."
+                "<td align='center'><a href='actualizarAtendido/".$ida."' class='fa fa-edit fa-1x'></a></td>"; //".$dato->id_oficioAtendido."
             }
         }        
         ?>

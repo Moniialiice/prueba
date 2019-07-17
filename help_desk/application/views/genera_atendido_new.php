@@ -2,7 +2,7 @@
     <div class="col-sm-4">
         <div class="page-header float-left">
             <div class="page-title">
-                <h1>Oficio Seguimiento Atendido</h1>
+                <h1>Oficio Atendido</h1>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Datos Oficio Seguimiento Atendido</strong>
+                        <strong>Datos Oficio</strong>
                     </div>
                     <div class="card-body card-block">
                         <?php
@@ -36,30 +36,19 @@
                             if($this->session->flashdata('Error')){
                                 echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos</label></div>";
                             }
-                                echo validation_errors();
+                                echo validation_errors();    
                         ?>
                         <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
-                        <form action="insertAtendido" method="post" enctype="multipart/form-data" class="form-horizontal">
-                            <?php
-                                //echo date('l jS \of F Y h:i:s A');
-                                //oficio entrada e id
-                                foreach ($datos as $dato)
-                                {
-                                    echo "<div class='row form-group'>
-                                            <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Oficio Seguimiento</label></div>
-                                            <div class='col-12 col-md-9'>
-                                                <input type='text' id='text-input' value='".$dato->nomenclatura."' class='form-control' disabled>
-                                                <input type='text' name= 'nomen' value='".$dato->nomenclatura."' hidden>
-                                                <input type='text' id='text-input' name='segui' value='".$dato->id_oficioseg."' hidden>
-                                            </div>
-                                          </div>";                
-                                    echo "
-                                    <div class='row form-group'>
-                                        <div class='col col-md-3'><label for='text-input' class='form-control-label'>  Asunto</label></div>
-                                        <div class='col-12 col-md-9'><textarea name='asunto' id='textarea-input' rows='5' class='form-control' disabled>".$dato->asunto."</textarea></div>
-                                    </div>";
-                                }                                        
-                            ?>
+                        <form action="insertarAtendido" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Selecciona Oficio</label></div>
+                                <div class="col-12 col-md-9">
+                                    <select name="tipoOficio" id="tipoOficio" class="form-control" >
+                                        <option  value="400LIA000" <?php echo set_select('tipoOficio','400LIA000');?>> COORDINADOR GENERAL</option>
+                                        <option  value="400LI0010" <?php echo set_select('tipoOficio','400LI0010');?>> SECRETARIO PARTICULAR</option>
+                                    </select>
+                                </div>
+                            </div>  
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Atendido</label></div>
                                 <div class="col-12 col-md-9">

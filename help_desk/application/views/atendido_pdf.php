@@ -93,7 +93,7 @@ h1 {
 		FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO<br>
 		COORDINACIÓN GENERAL DE COMBATE AL SECUESTRO<br>
 		METEPEC, ESTADO DE MEXICO A <?php echo $day." DE ".$months[(int)$mont]." DE ".$year; ?><br>
-		OFICIO <?php echo $dato[0]->nomenclatura;?>
+		OFICIO <?php echo $dato[0]->nomenclatura_aten;?>
 	</b></p>	
 	<br><br><br>
 	<p class="p_remitente"><b>
@@ -107,7 +107,7 @@ h1 {
 	<p class="p_atentamente"><b>
 		ATENTAMENTE<br><br><br><br>
 		<?php
-		$nom = $dato[0]->nomenclatura; 
+		$nom = $dato[0]->nomenclatura_aten; 
 		$cut = explode("/",$nom); 
 		switch ($year){
 			case '2016':

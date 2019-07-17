@@ -33,7 +33,7 @@ class Oficio_model extends CI_Model{
     }
     //se obtiene ultima nomenclatura de oficio seguimiento
     public function getNom($nom){
-        $query = $this->db->query("SELECT id_oficioseg, nomenclatura FROM oficio_seguimiento WHERE nomenclatura LIKE '%$nom%' ORDER by id_oficioseg DESC");
+        $query = $this->db->query("SELECT id_oficioseg, nomenclatura FROM oficio_seguimiento WHERE nomenclatura LIKE '%$nom%' ORDER by id_oficioseg DESC LIMIT 1");
         $this->db->close();
         return $query->result();
     }

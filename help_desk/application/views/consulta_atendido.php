@@ -2,7 +2,7 @@
     <div class='col-sm-4'>
         <div class='page-header float-left'>
             <div class='page-title'>
-                <h1>Oficio Seguimiento Atendido</h1>
+                <h1>Oficio Atendido</h1>
             </div>
         </div>
     </div>
@@ -28,40 +28,22 @@
             <div class='col-lg-9'>
                 <div class='card'>
                     <div class='card-header'>
-                        <strong>Datos Oficio Seguimiento Atendido</strong>
+                        <strong>Datos Oficio Atendido</strong>
                     </div>
                     <div class='card-body card-block'>
                     <?php
-                            //Mensajes
-                            if($this->session->flashdata('Creado')){
-                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción creado correctamente.</label></div>";
-                            }
-                            if($this->session->flashdata('No')){
-                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation' > Oficio recepción no creado.</label></div>";                            
-                            }
-                            if($this->session->flashdata('Error')){
-                                echo "<div><label for='text-input' class='form-control-label fa fa-exclamation'> Datos no recibidos</label></div>";
-                            }
-                                echo validation_errors();    
-                        
-                        //echo date('l jS \of F Y h:i:s A');
-                       
-                            //cambia formato de fecha  
-                            $date = $dato->fecha_atendido;
-                            //corta los datos de d,m,a
-                            $ext = explode("-",$date);
+                        //echo date('l jS \of F Y h:i:s A');                       
+                        //cambia formato de fecha  
+                        $date = $dato->fecha_atendido;
+                        //corta los datos de d,m,a
+                        $ext = explode("-",$date);
                 echo   "<form action='#' method='' enctype='multipart/form-data' class='form-horizontal'>
                             <div class='row form-group'>
                                 <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Oficio Seguimiento</label></div>";
                                 echo "<div class='col-12 col-md-9'>
-                                        <input type='text' id='text-input' value='".$dato->nomenclatura."' class='form-control' disabled>
-                                        <input type='text' id='text-input' name='segui' value='".$dato->id_oficioseg."' hidden>
+                                        <input type='text' id='text-input' value='".$dato->nomenclatura_aten."' class='form-control' disabled>
                                       </div>
-                            </div>";
-                            echo "<div class='row form-group'>
-                            <div class='col col-md-3'><label for='text-input' class='form-control-label'>  Asunto</label></div>
-                            <div class='col-12 col-md-9'><textarea name='asunto' id='textarea-input' rows='5' class='form-control' disabled>".$dato->asunto."</textarea></div>
-                        </div>";              
+                            </div>";             
                 echo        "<div class='row form-group'>
                                 <div class='col col-md-3'><label for='text-input' class=' form-control-label'> Fecha Atendido</label></div>
                                 <div class='col-12 col-md-9'>

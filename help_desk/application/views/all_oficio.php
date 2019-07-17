@@ -122,14 +122,14 @@
                                     "<td>".$dato->asunto."</td>".
                                     "<td>".$pday."/".$pmont."/".$pyear." ".$h."</td>";
                                 if($date1 > $date2){ //sí la fecha termino es mayor a fecha actual    
-                                    echo "<td>Quedan ".$dias." días ".$horas." horas ".$minutos." minutos</td>"; //muestra los dias, horas y minutos restantes 
+                                    echo "<td class='text-danger'>Quedan ".$dias." días ".$horas." horas ".$minutos." minutos</td>"; //muestra los dias, horas y minutos restantes 
                                 }else{
-                                    echo "<td>Finalizado</td>"; //si la fecha termino es menor
+                                    echo "<td class='text-success'>Finalizado</td>"; //si la fecha termino es menor
                                 }
                                 //termino                                
                                 echo"</td><td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
                                     "<td align ='center'><a href='imprimirOficio/".$ido."' target='_blank' class='fa fa-print fa-1x'></a></td>".
-                                    "<td align='center'><a href='nuevoAtendido/".$ido."' class='fa fa-plus fa-1x'></a></td>".
+                                    "<td align='center'><a href='atendido/".$ido."' class='fa fa-plus fa-1x'></a></td>".
                                 "</tr>";
                               }
                 }              

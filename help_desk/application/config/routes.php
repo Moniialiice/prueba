@@ -92,11 +92,15 @@ $route['descargarOficio/(:any)'] = 'Oficio/descarga/$1';
 $route['actualizaOficio'] = 'Oficio/modificaOficio';
 $route['imprimirOficio/(:any)'] = 'Oficio/imprimirOficio/$1';
 //rutas de atendido
-$route['nuevoAtendido/(:any)'] = 'Atendido/index/$1';
-$route['insertarAtendido'] = 'Atendido/createAtendidoVal';
+$route['nuevoAtendido'] = 'Atendido/index';
+$route['atendido/(:any)'] = 'Atendido/inicio/$1';
+$route['insertarAtendido'] = 'Atendido/createAtendido';
+$route['insertAtendido'] = 'Atendido/createAtendidoVal';
 $route['consultaAtendido'] = 'Atendido/busquedaAtendido';
 $route['resultAtendido'] = 'Atendido/consultaAtendido';
 $route['muestraAtendido/(:any)'] = 'Atendido/mostrarAtendido/$1';
+$route['actualizarAtendido/(:any)'] = 'Atendido/updateAtendido/$1';
+$route['modificarAtendido'] = 'Atendido/modifAtendido';
 $route['descargarAtendido/(:any)'] = 'Atendido/descarga/$1';
 $route['imprimirAtendido/(:any)'] = 'Atendido/imprimirOficioAtendido/$1';
 $route['reporte_excel/(:any)'] = 'Atendido/download/$1';
