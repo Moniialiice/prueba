@@ -28,7 +28,7 @@
             <div class='col-lg-9'>
                 <div class='card'>
                     <div class='card-header'>
-                        <strong>Datos Oficio Atendido</strong>
+                        <strong>Datos Oficio</strong>
                     </div>
                     <div class='card-body card-block'>
                     <?php
@@ -39,7 +39,7 @@
                         $ext = explode("-",$date);
                 echo   "<form action='#' method='' enctype='multipart/form-data' class='form-horizontal'>
                             <div class='row form-group'>
-                                <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Oficio Seguimiento</label></div>";
+                                <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Número de Oficio</label></div>";
                                 echo "<div class='col-12 col-md-9'>
                                         <input type='text' id='text-input' value='".$dato->nomenclatura_aten."' class='form-control' disabled>
                                       </div>

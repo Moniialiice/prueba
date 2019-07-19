@@ -96,13 +96,14 @@ class Atendido extends CI_Controller
                             if($ansa == $year){ //si año es igual a nomenclatura del ultimo registro
                                 $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
+                                $nomenArchivo = $tipoOficio.$consecutivo[0].$ansa; //nomenclatura para nombre de archivo
                                 if(isset($valfile)){
                                     $archivo = "";
                                 }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -132,13 +133,14 @@ class Atendido extends CI_Controller
                                 }
                             }else{
                                 $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
+                                $nomenArchivo = '400LIA0000001'.$year; //nomenclatura para nombre de archivo
                                 if(isset($valfile)){
                                     $archivo = "";
                                 }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -171,13 +173,14 @@ class Atendido extends CI_Controller
                             if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
                                 $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
+                                $nomenArchivo = $tipoOficio.$consecutivo[0].$ans; //nomenclatura para nombre de archivo
                                 if(isset($valfile)){
                                     $archivo = "";
                                 }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -207,13 +210,14 @@ class Atendido extends CI_Controller
                                 }
                             }else{
                                 $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
+                                $nomenArchivo = '400LIA0000001'.$year;
                                 if(isset($valfile)){
                                     $archivo = "";
                                 }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -246,26 +250,10 @@ class Atendido extends CI_Controller
                         break; 
                     case '400LI0010':
                         if($numa>$num){ // si consecutivo de atendido es mayor al consecutivo de seguimiento
-                            if(isset($valfile)){
-                                $archivo = "";
-                            }else{
-                                $config['upload_path'] = $this->folder;
-                                $config['allowed_types'] = 'jpg|png|pdf';
-                                $config['max_size'] = 2048;
-                                $config['file_name'] = $nomena[0].'_'.$fecha2;
-                                //carga libreria archivos e inicializa el array config con los datos del archivo
-                                $this->load->library('upload',$config);
-                                $this->upload->initialize($config);
-                                //toma el datos de archivo entrada
-                                $this->upload->do_upload('archivo');                
-                                //carga los datos del archivo
-                                $upload_data = $this->upload->data();
-                                //toma el nombre del archivo
-                                $archivo = $upload_data['file_name'];
-                            }
                             if($ansa == $year){ //si año es igual a nomenclatura del ultimo registro
                                 $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
+                                $nomenArchivo = $tipoOficio.$consecutivo[0].$ansa; //crea nomenclatura coordinador
                                 //inserta los datos
                                 if(isset($valfile)){
                                     $archivo = "";
@@ -273,7 +261,7 @@ class Atendido extends CI_Controller
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -302,6 +290,7 @@ class Atendido extends CI_Controller
                                 }
                             }else{
                                 $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
+                                $nomenArchivo  = '400LI00100001'.$year;
                                 //llama función para insertar datos
                                 if(isset($valfile)){
                                     $archivo = "";
@@ -309,7 +298,7 @@ class Atendido extends CI_Controller
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -341,6 +330,7 @@ class Atendido extends CI_Controller
                             if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
                                 $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
+                                $nomenArchivo = $tipoOficio.$consecutivo[0].$ans; //crea nomenclatura coordinador
                                 //inserta los datos
                                 if(isset($valfile)){
                                     $archivo = "";
@@ -348,7 +338,7 @@ class Atendido extends CI_Controller
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -377,6 +367,7 @@ class Atendido extends CI_Controller
                                 }
                             }else{
                                 $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
+                                $nomenArchivo = '400LI00100001'.$year;
                                 //llama función para insertar datos
                                 if(isset($valfile)){
                                     $archivo = "";
@@ -384,7 +375,7 @@ class Atendido extends CI_Controller
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -511,13 +502,14 @@ class Atendido extends CI_Controller
                             if($ansa == $year){ //si año es igual a nomenclatura del ultimo registro
                                 $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
+                                $nomenArchivo = $tipoOficio.$consecutivo[0].$ansa; //nomenclatura para nombre de archivo
                                 if(isset($valfile)){
                                     $archivo = "";
                                 }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -547,13 +539,14 @@ class Atendido extends CI_Controller
                                 }
                             }else{
                                 $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
+                                $nomenArchivo = '400LIA0000001'.$year; 
                                 if(isset($valfile)){
                                     $archivo = "";
                                 }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -586,13 +579,14 @@ class Atendido extends CI_Controller
                             if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
                                 $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
+                                $nomenArchivo = $tipoOficio.$consecutivo[0].$ans;
                                 if(isset($valfile)){
                                     $archivo = "";
                                 }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -622,13 +616,14 @@ class Atendido extends CI_Controller
                                 }
                             }else{
                                 $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
+                                $nomenArchivo = '400LIA0000001'.$year;
                                 if(isset($valfile)){
                                     $archivo = "";
                                 }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -661,26 +656,10 @@ class Atendido extends CI_Controller
                         break; 
                     case '400LI0010':
                         if($numa>$num){ // si consecutivo de atendido es mayor al consecutivo de seguimiento
-                            if(isset($valfile)){
-                                $archivo = "";
-                            }else{
-                                $config['upload_path'] = $this->folder;
-                                $config['allowed_types'] = 'jpg|png|pdf';
-                                $config['max_size'] = 2048;
-                                $config['file_name'] = $nomena[0].'_'.$fecha2;
-                                //carga libreria archivos e inicializa el array config con los datos del archivo
-                                $this->load->library('upload',$config);
-                                $this->upload->initialize($config);
-                                //toma el datos de archivo entrada
-                                $this->upload->do_upload('archivo');                
-                                //carga los datos del archivo
-                                $upload_data = $this->upload->data();
-                                //toma el nombre del archivo
-                                $archivo = $upload_data['file_name'];
-                            }
                             if($ansa == $year){ //si año es igual a nomenclatura del ultimo registro
                                 $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
+                                $nomenArchivo = $tipoOficio.$consecutivo[0].$ansa;
                                 //inserta los datos
                                 if(isset($valfile)){
                                     $archivo = "";
@@ -688,7 +667,7 @@ class Atendido extends CI_Controller
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -717,6 +696,7 @@ class Atendido extends CI_Controller
                                 }
                             }else{
                                 $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
+                                $nomenArchivo = '400LI00100001'.$year;
                                 //llama función para insertar datos
                                 if(isset($valfile)){
                                     $archivo = "";
@@ -724,7 +704,7 @@ class Atendido extends CI_Controller
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -756,6 +736,7 @@ class Atendido extends CI_Controller
                             if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
                                 $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
+                                $nomenArchivo = $tipoOficio.$consecutivo[0].$ans;
                                 //inserta los datos
                                 if(isset($valfile)){
                                     $archivo = "";
@@ -763,7 +744,7 @@ class Atendido extends CI_Controller
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -792,6 +773,7 @@ class Atendido extends CI_Controller
                                 }
                             }else{
                                 $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
+                                $nomenArchivo = '400LI00100001'.$year;
                                 //llama función para insertar datos
                                 if(isset($valfile)){
                                     $archivo = "";
@@ -799,7 +781,7 @@ class Atendido extends CI_Controller
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
-                                    $config['file_name'] = $nomenclatura.'_'.$fecha2;
+                                    $config['file_name'] = $nomenArchivo.'_'.$fecha2;
                                     //carga libreria archivos e inicializa el array config con los datos del archivo
                                     $this->load->library('upload',$config);
                                     $this->upload->initialize($config);
@@ -932,7 +914,7 @@ class Atendido extends CI_Controller
         $this->Bitacora_model->insertBitacora($idu,'Consulta oficio atendido del oficio: '.$nome.'.',$fec_bit,$hor_bit);
         //carga vistas, formulario de consulta
         $this->load->view('templates/head');
-        $this->load->view('consulta_atendido',$datos);
+        $this->load->view('actualiza_atendido',$datos);
         $this->load->view('templates/footer');
     }
     //vista de los datos atendido para actualizar

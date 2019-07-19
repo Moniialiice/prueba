@@ -46,6 +46,7 @@ class OficioEntrada extends CI_Controller
             $fecha_rec = $this->input->post('fecha_rec');
             $fecha_real = $this->input->post('fecha_real');
             //valida los datos del formulario
+            $this->form_validation->set_rules('control', 'No. de Control', 'required|is_unique[oficio_entrada.control]');
             $this->form_validation->set_rules('no_oficio', 'No. de Oficio', 'required|is_unique[oficio_entrada.no_oficioEntrada]'); 
             $this->form_validation->set_rules('firma', 'Firma Origen', 'required');
             $this->form_validation->set_rules('cargo', 'Cargo', 'required');

@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg-6"-->
                 <!--div class="card"-->
-                    <div class="card-header">Iniciar Sesión</div>
+                    <img src='assets/img/header.png' class='img'><h2 align='center'>Sistema de Gestión de Oficios</h2>                    
                     <div class="card-body card-block">
                         <form action="verificar" method="post" class="">
                             <div class="form-group">

@@ -120,98 +120,13 @@
                                 echo "</td>".
                                     "<td>".$dato->asunto."</td>".
                                     "<td>".$pday."/".$pmont."/".$pyear." ".$h."</td>";
-                                        if($date1 > $date2 ){ //sí la fecha termino es mayor a fecha actual    
-                                            echo "<td class='text-danger'>Quedan ".$dias." días ".$horas." horas ".$minutos." minutos</td>"; //muestra los dias, horas y minutos restantes 
-                                        }else{
-                                            echo "<td class='text-success'>Finalizado</td>"; //si la fecha termino es menor
-                                        }
+                                    if($date1 > $date2 ){ //sí la fecha termino es mayor a fecha actual    
+                                        echo "<td class='text-danger'>Quedan ".$dias." días ".$horas." horas ".$minutos." minutos</td>"; //muestra los dias, horas y minutos restantes 
+                                    }else{
+                                        echo "<td class='text-success'>Finalizado</td>"; //si la fecha termino es menor
+                                    }
                                 //termino                                
                                 echo"</td><td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
-                                    "<td align ='center'><a href='imprimirOficio/".$ido."' target='_blank' class='fa fa-print fa-1x'></a></td>".
-                                    "<td align='center'><a href='atendido/".$ido."' class='fa fa-plus fa-1x'></a></td>".
-                                "</tr>";
-                              }
-                              foreach ($aten as $at) { 
-                                $io = $at->id_oficioseg;
-                                $ido = base64_encode($io);    
-                                $plazo = $at->termino;
-                                $date = $at->fecha;
-                                //corta termino para obtener fecha y hora
-                                $res = explode(" ",$plazo);  
-                                $f = $res[0]; //fecha de termino
-                                $h = $res[1]; //hora termino 
-                                //corta fecha para cambiar formato
-                                $termino = explode("-",$f);
-                                $pyear = $termino[0]; 
-                                $pmont = $termino[1];
-                                $pday = $termino[2];        
-                                //creamos objeto fecha: termino, actual                        
-                                $date1 = new DateTime("$plazo");
-                                $date2 = new DateTime("now");
-                                //calcula la diferencias entre fechas 
-                                $intervalo = date_diff($date1, $date2);
-                                //de la diferencia obtenemos dias, horas, minutos
-                                $dias = $intervalo->d; //dias restantes
-                                $horas = $intervalo->h; //horas restantes
-                                $minutos = $intervalo->i; //minutos restantes
-                                //corta los datos de d,m,a
-                                $ext = explode("-",$date);
-                                //código para cuenta atras
-                                echo "<tr>                                
-                                    <th scope='row'>".$at->nomenclatura."</th>".
-                                    "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".
-                                    "<td>";
-                                    if ($at->conase == 1){
-                                        echo "CONASE ";
-                                    }else{
-                                        echo "";
-                                    }if($at->valle_toluca == 1){
-                                        echo "Valle de Toluca ";
-                                    }else{
-                                        echo "";
-                                    }if ($at->valle_mexico == 1){
-                                        echo "Valle de México ";
-                                    }else{
-                                        echo "";
-                                    }if($at->zona_oriente == 1){
-                                        echo "Fiscalia Zona Oriente ";
-                                    }else{
-                                        echo "";                                       
-                                    }if($at->fiscal_general == 1){
-                                        echo "Fiscal General ";
-                                    }else{
-                                        echo "";
-                                    }if($at->vicefiscalia == 1){
-                                        echo "Viceficalia ";
-                                    }else{
-                                        echo "";
-                                  }if($at->oficialia_mayor == 1){
-                                        echo "Oficialia Mayor ";
-                                  }else{
-                                        echo"";
-                                  }if($at->informacion_estadistica == 1){
-                                        echo "Departamento de Información y Estadistica ";
-                                  }else{
-                                        echo"";
-                                  }if($at->central_juridico == 1){
-                                        echo "Central Jurídico ";
-                                  }else{
-                                        echo"";
-                                  }if($at->servicio_carrera == 1){
-                                        echo"Servicio Carrera ";
-                                  }else{
-                                        echo "";
-                                  }if($at->otra != " "){
-                                        echo "$at->otra";
-                                  }else{
-                                        echo "";
-                                  }
-                                echo "</td>".
-                                    "<td>".$at->asunto."</td>".
-                                    "<td>".$pday."/".$pmont."/".$pyear." ".$h."</td>";
-                                        echo "<td class='text-warning'>Atendido</td>"; //si la fecha termino es menor
-                                //termino                                
-                                echo"</td><td>".$at->nombre." ".$at->apellidop." ".$at->apellidom."</td>".
                                     "<td align ='center'><a href='imprimirOficio/".$ido."' target='_blank' class='fa fa-print fa-1x'></a></td>".
                                     "<td align='center'><a href='atendido/".$ido."' class='fa fa-plus fa-1x'></a></td>".
                                 "</tr>";

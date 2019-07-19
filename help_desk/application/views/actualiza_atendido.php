@@ -51,7 +51,7 @@
                             $ext = explode("-",$date);
                         echo "<form action='modificarAtendido' method='post' enctype='multipart/form-data' class='form-horizontal'>
                             <div class='row form-group'>
-                                <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Oficio Seguimiento</label></div>";
+                                <div class='col col-md-3'><label for='text-input' class=' form-control-label'>Número de Oficio</label></div>";
                                 echo "<div class='col-12 col-md-9'>
                                         <input type='text' id='text-input' value='".$dato->nomenclatura_aten."' class='form-control' disabled>
                                         <input type='text' id='text-input' name='aten' value='".$dato->id_oficioAtendido."' hidden>

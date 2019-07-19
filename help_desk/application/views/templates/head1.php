@@ -65,7 +65,8 @@
 
     h2 {
     color:#404040;
-    margin:0;
+    font-size: 20px;
+    margin: 0;
     padding:0 0 10px 0;
     }
 
@@ -96,6 +97,13 @@
     #body {
     margin: 0 15px 0 15px;
     min-height: 96px;
+    }
+    .img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 100px;
     }
     </style>
             <?php

@@ -46,7 +46,7 @@ class Atendido_model extends CI_model
     //consulta si el oficio atendido ya existe
     public function seguimientoAtendido($id)
     {
-        $query = $this->db->query("SELECT a.id_oficioAtendido FROM oficio_atendido as a, oficio_seguimiento as s, re_seg_aten as r WHERE a.id_oficioAtendido = r.id_aten AND s.id_oficioseg = r.id_seg AND id_oficioseg = '$id'");
+        $query = $this->db->query("SELECT a.id_oficioAtendido FROM oficio_atendido as a, oficio_seguimiento as s, re_seg_aten as r WHERE a.id_oficioAtendido = r.id_aten AND s.id_oficioseg = r.id_seg AND s.id_oficioseg = '$id'");
         $this->db->close();
         return $query->result();
     }
