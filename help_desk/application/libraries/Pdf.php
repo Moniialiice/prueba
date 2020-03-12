@@ -1,24 +1,32 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-define('DOMPDF_ENABLE_AUTOLOAD', false);
-require_once ('vendor/dompdf/dompdf/src/Autoloader.php');
+require_once dirname(__FILE__) . '/tcpdf/tcpdf.php';
 
-class Pdf {
-
-  public function generate($html, $filename='', $stream=TRUE, $paper = 'A4', $orientation = "portrait")
-  {
-    $dompdf = new DOMPDF();
-    $dompdf->load_html($html);
-    $dompdf->set_paper($paper, $orientation);
-    $dompdf->render();
-    if ($stream) {
-        $dompdf->stream($filename.".pdf", array("Attachment" => 0));
-    } else {
-        return $dompdf->output();
+class Pdf extends TCPDF
+{
+    function __construct()
+    {
+        parent::__construct();
     }
-  }
-}
-    
-    
 
+    public function Header() {
+		// Logo
+		$image_file = K_PATH_IMAGES.'header.png';
+		$this->Image($image_file, 16, 10, 180, 25, 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		// Set font
+		$this->SetFont('helvetica', 'B', 20);
+		// Title
+		$this->Cell(0, 15, '', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+	}
+
+    // Page footer
+    public function Footer() {
+       // Position at 15 mm from bottom
+       //$image_file1 = base_url()."assets/img/footer.png";
+       $this->SetY(-15);
+       // Set font
+       $this->SetFont('helvetica', 'I', 8);
+       $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+    }
+}
+/* application/libraries/Pdf.php */

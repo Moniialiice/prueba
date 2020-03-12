@@ -21,6 +21,9 @@ class Oficio extends CI_Controller
         $this->load->library(array('form_validation'));
         $this->load->library('calendar');
         //$this->load->library('curl');
+
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit','-1');
     }
     //función carga templates, el formulario para generar oficio con el $id del oficio entrada
     public function index($id)
@@ -149,7 +152,7 @@ class Oficio extends CI_Controller
                     case '400LIA000':
                         if($numa>$num){                                        
                             if($ansa == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
-                                $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
+                                $consecutivo = $this->generaNomenclatura($numa+1,1,5); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
                                 //inserta los datos 
                                 $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $fechat, $observaciones, $atencion, $asunto, $ide);               
@@ -190,7 +193,7 @@ class Oficio extends CI_Controller
                             }
                         }else{
                             if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
-                                $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
+                                $consecutivo = $this->generaNomenclatura($num+1,1,5); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
                                 //inserta los datos 
                                 $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $fechat, $observaciones, $atencion, $asunto, $ide);               
@@ -234,7 +237,7 @@ class Oficio extends CI_Controller
                     case '400LI0010':
                         if($numa>$num){      
                             if($ansa == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
-                                $consecutivo = $this->generaNomenclatura($numa+1, 1, 4); //manda datos para generar consecutivo                           
+                                $consecutivo = $this->generaNomenclatura($numa+1, 1, 5); //manda datos para generar consecutivo                           
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$year; //genera nomenclatura secretario
                                 $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $fechat, $observaciones, $atencion, $asunto, $ide);               
                                 if($insertOficio == true){                    
@@ -273,7 +276,7 @@ class Oficio extends CI_Controller
                             }
                         }else{
                             if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
-                                $consecutivo = $this->generaNomenclatura($num+1, 1, 4); //manda datos para generar consecutivo                           
+                                $consecutivo = $this->generaNomenclatura($num+1, 1, 5); //manda datos para generar consecutivo                           
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$year; //genera nomenclatura secretario
                                 $insertOficio = $this->Oficio_model->insert_Oficio($oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, $rh, $telefonia, $estadistica, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia, $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, $fecha1, $fechat, $observaciones, $atencion, $asunto, $ide);               
                                 if($insertOficio == true){                    
@@ -345,7 +348,7 @@ class Oficio extends CI_Controller
         if($this->input->post()){
             //recibe datos del formulario
             $search = $this->input->post('busqueda');
-            //$dir = $this->input->post('dirigido');
+            $asunto = $this->input->post('asunto');
             $tipCon = $this->input->post('tipoCon');
             $date1 = $this->input->post('date1');
             $date2 = $this->input->post('date2');
@@ -372,17 +375,30 @@ class Oficio extends CI_Controller
                 switch($this->session->userdata('id_tipoUsuario')){
                     case '1':
                         if($tipCon == 1){                            
-                            $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
+                            $datos['datos'] = $this->Oficio_model->searchDate($search,$asunto,$fecha1,$fecha2);
                             $this->load->view('all_oficio', $datos);
                         }if($tipCon == 2){                            
-                            $datos['datos'] = $this->Oficio_model->searchDateTur($search,$fecha1,$fecha2);
+                            $datos['datos'] = $this->Oficio_model->searchDateTur($search,$asunto,$fecha1,$fecha2);
                             $this->load->view('all_oficio', $datos);    
                         }if($tipCon == 3){                            
-                            $datos['datos'] = $this->Oficio_model->searchDateAten($search,$fecha1,$fecha2);
+                            $datos['datos'] = $this->Oficio_model->searchDateAten($search,$asunto,$fecha1,$fecha2);
                             $this->load->view('all_oficio', $datos);    
                         }
                     break;
                     case '2':
+                        if($tipCon == 1){                            
+                            $datos['datos'] = $this->Oficio_model->searchDate($search,$asunto,$fecha1,$fecha2);
+                            $datos['aten'] = $this->Oficio_model->searchDateAten($search,$asunto,$fecha1,$fecha2);
+                            $this->load->view('all_oficio', $datos);
+                        }if($tipCon == 2){                            
+                            $datos['datos'] = $this->Oficio_model->searchDateTur($search,$asunto,$fecha1,$fecha2);                            
+                            $this->load->view('all_OficioSeg', $datos);    
+                        }if($tipCon == 3){                            
+                            $datos['datos'] = $this->Oficio_model->searchDateAten($search,$asunto,$fecha1,$fecha2);
+                            $this->load->view('all_OficioAtendido', $datos);    
+                        }
+                    break;                    
+                    case '5':
                         if($tipCon == 1){                            
                             $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
                             $datos['aten'] = $this->Oficio_model->searchDateAten($search,$fecha1,$fecha2);
@@ -394,10 +410,6 @@ class Oficio extends CI_Controller
                             $datos['datos'] = $this->Oficio_model->searchDateAten($search,$fecha1,$fecha2);
                             $this->load->view('all_OficioAtendido', $datos);    
                         }
-                    break;                    
-                    case '5':
-                        $datos['datos'] = $this->Oficio_model->searchDI($search,$fecha1,$fecha2,$id);
-                        $this->load->view('all_oficio', $datos);
                     break;
                 }                
             }else{
@@ -462,6 +474,7 @@ class Oficio extends CI_Controller
     public function reportExcelOS()
     {
         $search = $this->input->post('busqueda');
+        $asunto = $this->input->post('asunto');
         $tipCon = $this->input->post('tipoCon');
         $date1 = $this->input->post('date1');
         $date2 = $this->input->post('date2');
@@ -506,25 +519,31 @@ class Oficio extends CI_Controller
         switch ($this->session->userdata('id_tipoUsuario')){            
             case '1':
                 if($tipCon == 1){                            
-                    $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
+                    $datos['datos'] = $this->Oficio_model->searchDate($search,$asunto,$fecha1,$fecha2);
                 }if($tipCon == 2){                            
-                    $datos['datos'] = $this->Oficio_model->searchDateTur($search,$fecha1,$fecha2);
+                    $datos['datos'] = $this->Oficio_model->searchDateTur($search,$asunto,$fecha1,$fecha2);
                 }if($tipCon == 3){                            
-                    $datos['datos'] = $this->Oficio_model->searchDateAten($search,$fecha1,$fecha2);
+                    $datos['datos'] = $this->Oficio_model->searchDateAten($search,$asunto,$fecha1,$fecha2);
                 }
             break;
             case '2':
                 if($tipCon == 1){                            
-                    $datos['datos'] = $this->Oficio_model->searchDate($search,$fecha1,$fecha2);
+                    $datos['datos'] = $this->Oficio_model->searchDate($search,$asunto,$fecha1,$fecha2);
                 }if($tipCon == 2){                            
-                    $datos['datos'] = $this->Oficio_model->searchDateTur($search,$fecha1,$fecha2);                            
+                    $datos['datos'] = $this->Oficio_model->searchDateTur($search,$asunto,$fecha1,$fecha2);                            
                 }if($tipCon == 3){                            
-                    $datos['datos'] = $this->Oficio_model->searchDateAten($search,$fecha1,$fecha2);
+                    $datos['datos'] = $this->Oficio_model->searchDateAten($search,$asunto,$fecha1,$fecha2);
                 }
             break;                    
             case '5':
-                $datos['datos'] = $this->Oficio_model->searchDI($search,$fecha1,$fecha2,$id);
-                $this->load->view('all_oficio', $datos);
+                if($tipCon == 1){                            
+                    $datos['datos'] = $this->Oficio_model->searchDate($search,$asunto,$fecha1,$fecha2);
+                    $datos['aten'] = $this->Oficio_model->searchDateAten($search,$asunto,$fecha1,$fecha2);
+                }if($tipCon == 2){                            
+                    $datos['datos'] = $this->Oficio_model->searchDateTur($search,$asunto,$fecha1,$fecha2);                            
+                }if($tipCon == 3){                            
+                    $datos['datos'] = $this->Oficio_model->searchDateAten($search,$asunto,$fecha1,$fecha2);
+                }
             break;
         }
         //muestra los datos de un array

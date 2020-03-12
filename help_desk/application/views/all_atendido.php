@@ -56,9 +56,13 @@
                 "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".
                 "<td>".$dato->nombre_aten." ".$dato->cargo_aten."</td>".
                 "<td>".$dato->descripcion."</td>".
-                "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>".
-                "<td align='center'><a href='descargarAtendido/".$dato->arch_atendido."' class='fa fa-download fa-1x'></a></td>".               
-                "<td align='center'><a href='actualizarAtendido/".$ida."' class='fa fa-edit fa-1x'></a></td>"; //".$dato->id_oficioAtendido."
+                "<td>".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."</td>";
+                if(empty($dato->arch_atendido)){
+                echo "<td align='center'><a href=''></a>Sin Archivo</td>";               
+                }else{
+                echo "<td align='center'><a href='descargarAtendido/".$dato->arch_atendido."' class='fa fa-download fa-1x'></a></td>";           
+                }
+                echo "<td align='center'><a href='actualizarAtendido/".$ida."' class='fa fa-edit fa-1x'></a></td>"; //".$dato->id_oficioAtendido."
             }
         }        
         ?>

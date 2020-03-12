@@ -1,17 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require 'vendor/autoload.php';
-require_once ('vendor/dompdf/dompdf/src/Autoloader.php');
-use Dompdf\Dompdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
 class Atendido extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-
         $this->load->library('pagination');
         $this->load->helper(array('download','file','url','html','form'));
         $this->load->library('session');
@@ -21,6 +17,9 @@ class Atendido extends CI_Controller
         $this->load->library(array('form_validation','upload'));
         //$this->load->library('curl');
         $this->folder = 'document/atendido/';
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit',-1);
+        error_reporting(0);
     }
     //función carga templates, el formulario para generar oficio con el $id del oficio entrada
     public function index()
@@ -94,12 +93,9 @@ class Atendido extends CI_Controller
                     case '400LIA000':
                         if($numa>$num){ // si consecutivo de atendido es mayor al consecutivo de seguimiento                            
                             if($ansa == $year){ //si año es igual a nomenclatura del ultimo registro
-                                $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
+                                $consecutivo = $this->generaNomenclatura($numa+1,1,5); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
                                 $nomenArchivo = $tipoOficio.$consecutivo[0].$ansa; //nomenclatura para nombre de archivo
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -113,9 +109,17 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
-                                }
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                        $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                    }
                                 //inserta datos
-                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -134,9 +138,6 @@ class Atendido extends CI_Controller
                             }else{
                                 $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
                                 $nomenArchivo = '400LIA0000001'.$year; //nomenclatura para nombre de archivo
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -150,9 +151,17 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
-                                }
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                        $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                    }
                                 //llama función para insertar datos
-                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
                                 if($insertAtendido == true){                    
                                 //id oficio seguimiento 
                                 $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -171,12 +180,9 @@ class Atendido extends CI_Controller
                             }
                         }else{
                             if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
-                                $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
+                                $consecutivo = $this->generaNomenclatura($num+1,1,5); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
                                 $nomenArchivo = $tipoOficio.$consecutivo[0].$ans; //nomenclatura para nombre de archivo
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -190,9 +196,16 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
+                                if ( ! $this->upload->do_upload('archivo'))
+                                {
+                                    $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $atencion); 
+                                }else{               
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                    $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
                                 }
-                                //inserta los datos 
-                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -211,9 +224,6 @@ class Atendido extends CI_Controller
                             }else{
                                 $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
                                 $nomenArchivo = '400LIA0000001'.$year;
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -227,9 +237,16 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
+                                if ( ! $this->upload->do_upload('archivo'))
+                                {
+                                    $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $atencion); 
+                                }else{               
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                    $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
                                 }
-                                //llama función para insertar datos
-                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
                                 if($insertAtendido == true){                    
                                 //id oficio seguimiento 
                                 $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -251,13 +268,9 @@ class Atendido extends CI_Controller
                     case '400LI0010':
                         if($numa>$num){ // si consecutivo de atendido es mayor al consecutivo de seguimiento
                             if($ansa == $year){ //si año es igual a nomenclatura del ultimo registro
-                                $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
+                                $consecutivo = $this->generaNomenclatura($numa+1,1,5); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
                                 $nomenArchivo = $tipoOficio.$consecutivo[0].$ansa; //crea nomenclatura coordinador
-                                //inserta los datos
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -271,8 +284,16 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
+                                if ( ! $this->upload->do_upload('archivo'))
+                                {
+                                    $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $atencion); 
+                                }else{               
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                    $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
                                 }
-                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -291,10 +312,6 @@ class Atendido extends CI_Controller
                             }else{
                                 $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
                                 $nomenArchivo  = '400LI00100001'.$year;
-                                //llama función para insertar datos
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -308,8 +325,16 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
-                                }
-                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                        $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                    }
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -328,13 +353,9 @@ class Atendido extends CI_Controller
                             }
                         }else{
                             if($ans == $year){ //si tipo oficio y año es igual a nomenclatura del ultimo registro
-                                $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
+                                $consecutivo = $this->generaNomenclatura($num+1,1,5); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
                                 $nomenArchivo = $tipoOficio.$consecutivo[0].$ans; //crea nomenclatura coordinador
-                                //inserta los datos
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -348,8 +369,16 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
-                                } 
-                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                if ( ! $this->upload->do_upload('archivo'))
+                                {
+                                    $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $atencion); 
+                                }else{               
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                    $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
+                                }
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -368,10 +397,6 @@ class Atendido extends CI_Controller
                             }else{
                                 $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
                                 $nomenArchivo = '400LI00100001'.$year;
-                                //llama función para insertar datos
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -385,8 +410,16 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
+                                if ( ! $this->upload->do_upload('archivo'))
+                                {
+                                    $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $atencion); 
+                                }else{               
+                                    //carga los datos del archivo
+                                    $upload_data = $this->upload->data();
+                                    //toma el nombre del archivo
+                                    $archivo = $upload_data['file_name'];
+                                    $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
                                 }
-                                $insertAtendido = $this->Atendido_model->insert_Atendido($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $atencion); 
                                 if($insertAtendido == true){                    
                                 //id oficio seguimiento 
                                 $idatendido = $this->Atendido_model->getIDAt($nomenclatura); 
@@ -503,9 +536,6 @@ class Atendido extends CI_Controller
                                 $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
                                 $nomenArchivo = $tipoOficio.$consecutivo[0].$ansa; //nomenclatura para nombre de archivo
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -518,10 +548,19 @@ class Atendido extends CI_Controller
                                     //carga los datos del archivo
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
-                                    $archivo = $upload_data['file_name'];
-                                }
-                                //inserta datos
-                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    $archivo = $upload_data['file_name'];                        
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                        //inserta datos
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $ids, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        //inserta datos
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    }
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -540,9 +579,6 @@ class Atendido extends CI_Controller
                             }else{
                                 $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
                                 $nomenArchivo = '400LIA0000001'.$year; 
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -556,9 +592,18 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
-                                }
-                                //llama función para insertar datos
-                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                         //llama función para insertar datos
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $ids, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        //llama función para insertar datos
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    }
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -580,9 +625,6 @@ class Atendido extends CI_Controller
                                 $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
                                 $nomenArchivo = $tipoOficio.$consecutivo[0].$ans;
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -596,9 +638,18 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
-                                }
-                                //inserta los datos 
-                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                        //llama función para insertar datos
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $ids, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        //inserta los datos 
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    }
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -617,9 +668,6 @@ class Atendido extends CI_Controller
                             }else{
                                 $nomenclatura = '400LIA000/0001/'.$year; //carga primera nomenclatura del año
                                 $nomenArchivo = '400LIA0000001'.$year;
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -632,10 +680,19 @@ class Atendido extends CI_Controller
                                     //carga los datos del archivo
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
-                                    $archivo = $upload_data['file_name'];
-                                }
-                                //llama función para insertar datos
-                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    $archivo = $upload_data['file_name'];                                
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                        //llama función para insertar datos
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $ids, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        //inserta los datos 
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    }
                                 if($insertAtendido == true){                    
                                 //id oficio seguimiento 
                                 $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -660,10 +717,6 @@ class Atendido extends CI_Controller
                                 $consecutivo = $this->generaNomenclatura($numa+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ansa; //crea nomenclatura coordinador
                                 $nomenArchivo = $tipoOficio.$consecutivo[0].$ansa;
-                                //inserta los datos
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -677,8 +730,18 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
-                                }
-                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                        //llama función para insertar datos
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        //inserta los datos 
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    }
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -697,10 +760,6 @@ class Atendido extends CI_Controller
                             }else{
                                 $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
                                 $nomenArchivo = '400LI00100001'.$year;
-                                //llama función para insertar datos
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -714,8 +773,18 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
-                                }
-                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                        //llama función para insertar datos
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $ids, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        //inserta los datos 
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    }
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -737,10 +806,6 @@ class Atendido extends CI_Controller
                                 $consecutivo = $this->generaNomenclatura($num+1,1,4); //manda datos para generar consecutivo
                                 $nomenclatura = $tipoOficio.'/'.$consecutivo[0].'/'.$ans; //crea nomenclatura coordinador
                                 $nomenArchivo = $tipoOficio.$consecutivo[0].$ans;
-                                //inserta los datos
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -754,8 +819,18 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
-                                } 
-                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                        //llama función para insertar datos
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $ids, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        //inserta los datos 
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    } 
                                 if($insertAtendido == true){                    
                                     //id oficio seguimiento 
                                     $idatendido = $this->Atendido_model->getIDAt($nomenclatura);
@@ -774,10 +849,6 @@ class Atendido extends CI_Controller
                             }else{
                                 $nomenclatura = '400LI0010/0001/'.$year; //carga primera nomenclatura del año
                                 $nomenArchivo = '400LI00100001'.$year;
-                                //llama función para insertar datos
-                                if(isset($valfile)){
-                                    $archivo = "";
-                                }else{
                                     $config['upload_path'] = $this->folder;
                                     $config['allowed_types'] = 'jpg|png|pdf';
                                     $config['max_size'] = 2048;
@@ -791,8 +862,18 @@ class Atendido extends CI_Controller
                                     $upload_data = $this->upload->data();
                                     //toma el nombre del archivo
                                     $archivo = $upload_data['file_name'];
-                                }
-                                $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    if ( ! $this->upload->do_upload('archivo'))
+                                    {
+                                        //llama función para insertar datos
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, '', $copia, $ids, $atencion); 
+                                    }else{               
+                                        //carga los datos del archivo
+                                        $upload_data = $this->upload->data();
+                                        //toma el nombre del archivo
+                                        $archivo = $upload_data['file_name'];
+                                        //inserta los datos 
+                                        $insertAtendido = $this->Atendido_model->insert_AtenSeg($nomenclatura, $fecha1, $nombre, $cargo, $descripcion, $archivo, $copia, $ids, $atencion); 
+                                    } 
                                 if($insertAtendido == true){                    
                                 //id oficio seguimiento 
                                 $idatendido = $this->Atendido_model->getIDAt($nomenclatura); 
@@ -832,7 +913,6 @@ class Atendido extends CI_Controller
             $this->inicio($ids);
         }
     }
-
     //carga formulario de busqueda
     public function busquedaAtendido()
     {
@@ -847,6 +927,7 @@ class Atendido extends CI_Controller
         {
             //recibe datos del formulario
             $search = $this->input->post('busqueda');
+            $desc = $this->input->post('desc');
             $date1 = $this->input->post('date1');
             $date2 = $this->input->post('date2');
             //valida campos vacios
@@ -874,17 +955,17 @@ class Atendido extends CI_Controller
                 switch($this->session->userdata('id_tipoUsuario')){
                     case '1':
                         //datos de la consulta oficio  
-                        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $fecha1, $fecha2);
+                        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $desc, $fecha1, $fecha2);
                         $this->load->view('all_atendido', $datos);
                     break;
                     case '2':
                         //datos de la consulta oficio
-                        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $fecha1, $fecha2);
+                        $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $desc, $fecha1, $fecha2);
                         $this->load->view('all_atendido', $datos);
                     break;
                     case '5':
                         //datos de la consulta oficio
-                        $datos['datos'] = $this->Atendido_model->searchAtenFI($search, $fecha1, $fecha2, $idu);
+                        $datos['datos'] = $this->Atendido_model->searchAtenFI($search, $desc, $fecha1, $fecha2, $idu);
                         $this->load->view('all_atendido', $datos);
                     break;
                 }                               
@@ -1037,28 +1118,95 @@ class Atendido extends CI_Controller
         $data = file_get_contents($this->folder.$name);
         force_download($name,$data);
     }
-    //función paara imprimir atendido pdf
-    public function imprimirOficioAtendido($id){
+        //examplel helper
+        public function imprimirOficioAtendido($id)
+        {        
+            $ida = base64_decode($id);
+            $a = $this->Atendido_model->reportOficioAtendido($ida);
+            $dato = $a;
+            $datos['dato'] = $a;
+            $date = $dato[0]->fecha_atendido;
+            //corta los datos de d,m,a
+            //var_dump($datos);
+            $ext = explode("-",$date);
+            $year = $ext[0];
+            $mont = $ext[1];
+            $day = $ext[2];
+            //array convierte número de mes en nombre 
+            $months = array (1=>'ENERO',2=>'FEBRERO',3=>'MARZO',4=>'ABRIL',5=>'MAYO', 6=>'JUNIO', 7=>'JULIO', 8=>'AGOSTO', 9=>'SEPTIEMBRE', 10=>'OCTUBRE',11=>'NOVIEMBRE',12=>'DICIEMBRE'); 
+            $m = $months[(int)$mont];
+            $oficio = $dato[0]->nomenclatura_aten;   
+            $f = '<b>FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO.<br>
+            COORDINACIÓN GENERAL DE COMBATE AL SECUESTRO.</b><br>';
+            $html = $this->load->view('atendido_pdf', $datos, true);
+            $this->load->library('Pdf');
+            // create new PDF document
+            $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
+            // set document information
+            $pdf->SetCreator('FGJEM');
+            $pdf->SetAuthor('Moni');
+            $pdf->SetTitle('atendido_pdf');
+            $pdf->SetMargins(15, 50, 15);
+            $pdf->SetHeaderMargin(15);
+            $pdf->SetFooterMargin(20);
+            $pdf->SetAutoPageBreak(TRUE, 20);
+            $pdf->SetFont('helvetica', '', 10);
+            //$pdf->data($day,$m,$year,$oficio);
+            $pdf->setPrintHeader(false);
+            // add a page
+            $pdf->AddPage();
+            //$pdf->CreateTextBox($f, 0, 50, 0, 10, 10, '','');
+            $pdf->writeHTML($html, true, false, true, false, '');
+            //Close and output PDF document
+            $pdf->Output('atendido_pdf.pdf', 'I'); //D descargar I abre en navegador
+        }
+    public function imprimirOficioAtendido1($id)
+    {        
         $ida = base64_decode($id);
-        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
         $datos['dato'] = $this->Atendido_model->reportOficioAtendido($ida);
+        $dato = $this->Atendido_model->reportOficioAtendido($ida);
+        $date = $dato[0]->fecha_atendido;
+        //corta los datos de d,m,a
+        //var_dump($datos);
+        $ext = explode("-",$date);
+        $year = $ext[0];
+        $mont = $ext[1];
+        $day = $ext[2];
+        //array convierte número de mes en nombre 
+        $months = array (1=>'ENERO',2=>'FEBRERO',3=>'MARZO',4=>'ABRIL',5=>'MAYO', 6=>'JUNIO', 7=>'JULIO', 8=>'AGOSTO', 9=>'SEPTIEMBRE', 10=>'OCTUBRE',11=>'NOVIEMBRE',12=>'DICIEMBRE'); 
+        $m = $months[(int)$mont];
+        $oficio = $dato[0]->nomenclatura_aten;   
+        $f = '<b>FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO.<br>
+        COORDINACIÓN GENERAL DE COMBATE AL SECUESTRO.</b><br>';
         $html = $this->load->view('atendido_pdf', $datos, true);
-        $dompdf->loadHtml($html);
-        $dompdf->render();
-        $idu = $this->session->userdata('id_usuario'); //id del usuario logeado
-        $fec_bit = date('Y-m-d'); //fecha actual del servidor
-        $hor_bit = date('H:i:s'); //fecha actual del servidor
-        $nom = $this->Atendido_model->nomenBit($ida); //consulta de nomenclatura por el id del asunto
-        $nome = $nom[0]->nomenclatura_aten; //nomenclatura del oficio seguimiento
-        //inserción de registros en la bitacora
-        $this->Bitacora_model->insertBitacora($idu,'Descarga Oficio Atendido en PDF de: '.$nome.'.',$fec_bit,$hor_bit);
-        $dompdf->stream("oficio_atendido.pdf", array("Attachment"=>0)); //muestra pdf
-        //$dompdf->stream("oficio_atendido.pdf");   //descarga pdf
+        ob_start();
+        $this->load->library('Pdf');
+        // create new PDF document
+        $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);
+        // set document information
+        $pdf->SetCreator('FGJEM');
+        $pdf->SetAuthor('Moni');
+        $pdf->SetTitle('atendido_pdf');
+        $pdf->SetMargins(15, 50, 15);
+        $pdf->SetHeaderMargin(15);
+        $pdf->SetFooterMargin(20);
+        $pdf->SetAutoPageBreak(TRUE, 20);
+        $pdf->SetFont('helvetica', '', 10);
+        $pdf->data($day,$m,$year,$oficio);
+        $pdf->setPrintHeader(true);
+        // add a page
+        $pdf->AddPage();
+        $pdf->CreateTextBox($f, 0, 50, 0, 10, 10, '','');
+        $pdf->writeHTML($html, true, false, true, false, '');
+        //Close and output PDF document
+        ob_end_clean();
+        $pdf->Output('atendido_pdf.pdf', 'I'); //D descargar I abre en navegador
     }
     //reporte en excel 
     public function reportExcelA()
     {
         $search = $this->input->post('busqueda');
+        $desc = $this->input->post('desc');
         $date1 = $this->input->post('date1');
         $date2 = $this->input->post('date2'); 
         //creamos objeto de spreadsheet para excel 
@@ -1077,16 +1225,14 @@ class Atendido extends CI_Controller
         'alignment' =>['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
         'borders'=>['bottom' =>['style'=> \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]
         ];
-        $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($cell_st);
-            
+        $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($cell_st);            
         //tamaño de las celdas 
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(20);
         $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(26);
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(26);
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(100);
-        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(40);
-        
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(40);        
         //cambiamos formato de fecha
         $ext = explode("/",$date1);
         $year = $ext[2];
@@ -1099,17 +1245,16 @@ class Atendido extends CI_Controller
         $day2 = $ext2[0];
         $fecha2 = $year2."-".$mont2."-".$day2;
         $id = $this->session->userdata('id_usuario'); //id del usuario logeado
-
         //valida el tipo de consulta para obtener los datos deacuerdo al id del usuario        
-        switch ($this->session->userdata('id_tipoUsuario')){
+        switch ($this->session->userdata('id_tipoUsuario')){ //searchfechaAtendido
             case '1':
-                $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
+                $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $desc, $fecha1,$fecha2);
             break;
             case '2':
-                $datos['datos'] = $this->Atendido_model->searchFechaAtendido($search,$fecha1,$fecha2);
+                $datos['datos'] = $this->Atendido_model->searchfechaAtendido($search, $desc, $fecha1,$fecha2);
             break;            
             case '5':
-                $datos['datos'] = $this->Atendido_model->searchAtenFI($search,$fecha1,$fecha2,$id);
+                $datos['datos'] = $this->Atendido_model->searchAtenFI($search,$fecha1, $desc, $fecha2,$id);
             break;     
         }   
         foreach($datos as $dato){ 
@@ -1140,5 +1285,4 @@ class Atendido extends CI_Controller
         //linea que descarga el archivo
         $writer->save('php://output');
     }
-    //el motivo de este correo 
 }

@@ -25,22 +25,31 @@
                     <strong class="card-title">Búsqueda Oficio Atendido Captura</strong>
                 </div>
                 <div class="card-body card-block">
-                    <div class="form-inline">
-                        <form class="search-form" action="resultAtendido" method="post" id="atendido">
-                            <div class="col col-md-5"><label for="text-input" class="form-control-label" >Búsqueda por número de oficio</label></div>
-                            <div class="col col-md-5"><input class="form-control mr-sm-3" type="text-input" OnKeyUp="Upper(this);" id="busqueda" name='busqueda'></div>
-                            <div class="col col-md-5"><label for="text-input" class="form-control-label"> Fecha Oficio Inicial</label></div>
-                            <div class="col col-md-5"><input class="form-control mr-sm-3" type='text-input' class="form-control" id="date1" name="date1"></div>
-                            <div class="col col-md-5"><label for="text-input" class=" form-control-label"> Fecha Oficio Final</label></div>
-                            <div class="col col-md-5"><input class="form-control mr-sm-3" type="text-input" class="form-control" id="date2" name="date2">
+                    <!--div class="form-inline"-->
+                        <form class="search-form" action="" method="post" id="atendidos" name="atendidos">
+                            <div class='row form-group'>
+                                <div class='col-12 col-md-2'><label for='text-input' class=' form-control-label'>Número Oficio</label></div>
+                                <div class='col-12 col-md-3'>
+                                <input class="form-control" type="text-input" id="busqueda" name='busqueda' OnKeyUp='Upper(this);'></div>
+                                <div class='col-12 col-md-2'><label for='text-input' class=' form-control-label'>Descripción</label></div>
+                                <div class='col-12 col-md-5'>
+                                <input class="form-control" type="text-input" id="desc" name='desc' OnKeyUp='Upper(this);'></div>
+                            </div>
+                            <div class='row form-group'>
+                                <div class='col-12 col-md-3'><label for='text-input' class=' form-control-label'>Fecha Atendido Inicial</label></div>
+                                <div class='col-12 col-md-2'>
+                                <input class="form-control" type="text-input" id="date1" name='date1' OnKeyUp='Upper(this);'></div>
+                                <div class='col-12 col-md-3'><label for='text-input' class=' form-control-label'>Fecha Atendido Final</label></div>
+                                <div class='col-12 col-md-2'>
+                                <input class="form-control" type="text-input" id="date2" name='date2' OnKeyUp='Upper(this);'></div>
                                 <span class="input-group-addon">
-                                    <span class="fa fa-search" OnClick="BusquedaAtenCap();"></span>
+                                    <span class="fa fa-search" OnClick="BusquedaAts();"></span>
                                 </span>
-                            </div>    
+                            </div>  
                         </form>
-                    </div>
+                    <!--/div-->
                 </div>
-                <div  class="card-body card-block" id="ratendido"></div>
+                <div  class="card-body card-block" id="ratendidos"></div>
             </div>
         </div>
       </div>

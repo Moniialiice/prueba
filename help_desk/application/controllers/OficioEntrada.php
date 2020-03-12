@@ -46,8 +46,8 @@ class OficioEntrada extends CI_Controller
             $fecha_rec = $this->input->post('fecha_rec');
             $fecha_real = $this->input->post('fecha_real');
             //valida los datos del formulario
-            $this->form_validation->set_rules('control', 'No. de Control', 'required|is_unique[oficio_entrada.control]');
-            $this->form_validation->set_rules('no_oficio', 'No. de Oficio', 'required|is_unique[oficio_entrada.no_oficioEntrada]'); 
+            $this->form_validation->set_rules('control', 'No. de Control', 'is_unique[oficio_entrada.control]');
+            $this->form_validation->set_rules('no_oficio', 'No. de Oficio', 'required'); 
             $this->form_validation->set_rules('firma', 'Firma Origen', 'required');
             $this->form_validation->set_rules('cargo', 'Cargo', 'required');
             $this->form_validation->set_rules('peticion', ' Peticion', 'required');
@@ -135,7 +135,8 @@ class OficioEntrada extends CI_Controller
         {
             //recibe datos de la búsqueda
             $control = $this->input->post('control');
-            $search = $this->input->post('busqueda');
+            $search = $this->input->post('busqueda'); 
+            $asunto = $this->input->post('asunto'); //asunto
             $firma = $this->input->post('firma');
             $date1 = $this->input->post('date1');
             $date2 = $this->input->post('date2');
@@ -155,8 +156,8 @@ class OficioEntrada extends CI_Controller
                 $mont2 = $ext2[1];
                 $day2 = $ext2[0];
                 $fecha2 = $year2."-".$mont2."-".$day2;
-                if($this->session->userdata('id_tipoUsuario') != 5){
-                    $datos ['datos'] = $this->Entrada_model->searchFecha($control,$search,$firma,$fecha1,$fecha2);
+                if($this->session->userdata('id_tipoUsuario') != 5 or $this->session->userdata('id_tipoUsuario') != 4){
+                    $datos ['datos'] = $this->Entrada_model->searchFecha($control,$search,$asunto,$firma,$fecha1,$fecha2);
                     $this->load->view('all_entrada',$datos);
                     $id = $this->session->userdata('id_usuario'); //id del usuario logeado
                     $fec_bit = date('Y-m-d'); //fecha actual del servidor
@@ -236,6 +237,7 @@ class OficioEntrada extends CI_Controller
     {
         $control = $this->input->post('control');
         $search = $this->input->post('busqueda');
+        $asunto = $this->input->post('asunto'); //asunto
         $firma = $this->input->post('firma');
         $date1 = $this->input->post('date1');
         $date2 = $this->input->post('date2');
@@ -281,7 +283,7 @@ class OficioEntrada extends CI_Controller
         $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(40);
         $spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(30);
         //valida que tipo de consulta realizará deacuerdo al tipo de usuario
-        $datos ['datos'] = $this->Entrada_model->searchFecha($control,$search,$firma,$fecha1,$fecha2);
+        $datos ['datos'] = $this->Entrada_model->searchFecha($control,$search,$asunto,$firma,$fecha1,$fecha2);
         foreach ($datos as $dato) {            
             $row = count($dato);
             for ($n=2; $n<=$row+1; $n++){

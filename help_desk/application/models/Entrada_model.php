@@ -28,9 +28,9 @@ class Entrada_model extends CI_Model
         $this->db->close();
     }
     //consulta con fecha y no. de nomenclatura del oficio entrada muestra datos y para general excel
-    public function searchFecha($control,$search,$firma,$date1,$date2)
+    public function searchFecha($control,$search,$asunto,$firma,$date1,$date2)
     {
-        $query = $this->db->query("SELECT e.id_oficioEntrada, e.control, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.control LIKE '%$control%' AND e.no_oficioEntrada LIKE '%$search%' AND e.firma_origen LIKE '%$firma%' AND e.fecha_rec BETWEEN '$date1 00:00:00' AND '$date2 23:59:59' AND e.atencion = u.id_usuario ORDER BY e.control DESC");
+        $query = $this->db->query("SELECT e.id_oficioEntrada, e.control, e.no_oficioEntrada, e.firma_origen, e.cargo, e.peticion, e.arch_entrada, e.fecha_ent, e.fecha_rec, e.fecha_real, u.nombre, u.apellidop, u.apellidom FROM oficio_entrada as e, usuario as u WHERE e.control LIKE '%$control%' AND e.no_oficioEntrada LIKE '%$search%' AND e.firma_origen LIKE '%$firma%' AND e.fecha_rec BETWEEN '$date1 00:00:00' AND '$date2 23:59:59' AND e.peticion LIKE '%$asunto%' AND e.atencion = u.id_usuario ORDER BY e.control DESC");
         $this->db->close();
         return $query->result();
     }

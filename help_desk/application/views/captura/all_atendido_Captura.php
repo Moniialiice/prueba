@@ -48,7 +48,7 @@
                 $ext = explode("-",$date);
                 //obtenemos los datos
                 echo "<tr>
-                <th scope='row'>".$dato->nomen_ofseg."</th>".
+                <th scope='row'>".$dato->nomenclatura_cap."</th>".
                 "<td>".$ext[2]."/".$ext[1]."/".$ext[0]."</td>".
                 "<td>".$dato->nombre_atenCap." ".$dato->cargo_atenCap."</td>".
                 "<td>".$dato->descCap."</td>".

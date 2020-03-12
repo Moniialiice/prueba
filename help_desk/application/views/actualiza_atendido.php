@@ -91,7 +91,7 @@
                             </div>
                             <div class='row form-group'>
                                 <div class='col col-md-3'><label for='text-input' class='form-control-label'> Descrición del Oficio</label></div>
-                                <div class='col-12 col-md-9'><textarea name='descripcion' id='textarea-input' rows='5' OnKeyUp='Upper(this);''  class='form-control'>".$dato->descripcion."</textarea></div>
+                                <div class='col-12 col-md-9'><textarea name='descripcion' id='textarea-input' rows='5' class='form-control'>".$dato->descripcion."</textarea></div>
                             </div>";
                             if(empty($dato->arch_atendido)){                                
                                 echo"
@@ -113,7 +113,7 @@
                             </div>
                             <div class='row form-group'>
                                 <div class='col col-md-3'><label for='text-input' class='form-control-label'> Atención</label></div>
-                                    <div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."'>
+                                    <div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$dato->nombre." ".$dato->apellidop." ".$dato->apellidom."' disabled>
                                         <input type='text' id='text-input' name='atencion' value='".$dato->atencion."' hidden>
                                     </div>
                             </div>";

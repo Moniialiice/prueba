@@ -51,6 +51,10 @@
                                     <div><label for='text-input' class='form-control-label' > Todos los datos son requeridos.</label></div><br>
                                     <form action="insertCaptura" method="post" enctype="multipart/form-data" class="form-horizontal">
                                         <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Control</label></div>
+                                            <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="ccontrol" class="form-control" value="<?php echo set_value('ccontrol'); ?>" ></div>
+                                        </div>
+                                        <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input" class=" form-control-label" required> No. de Oficio Recepción</label></div>
                                             <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="no_oficio" class="form-control" value="<?php echo set_value('no_oficio'); ?>" ></div>
                                         </div>
@@ -104,7 +108,7 @@
                                             <div class="col col-md-3"><label for="file-input" class="form-control-label"> Archivo Entrada</label></div>
                                             <div class="col-12 col-md-9"><input id="file-input" name="entrada" class="form-control-file" type="file" ></div>
                                         </div>
-                                        <div class="row form-group">
+                                        <!--div class="row form-group">
                                             <div class="col col-md-3"><label for="select" class=" form-control-label"> Atención</label></div>
                                             <div class="col-12 col-md-9">
                                                 <select name='atencion1' id='atencion1' class='form-control'>
@@ -116,7 +120,7 @@
                                                 ?>
                                                 </select>
                                             </div>    
-                                        </div><!--/form--> 
+                                        </div--><!--/form--> 
                                 </div><!-- card-block -->  
                             </div>
                             <div class="tab-pane fade" id="seguimiento" role="tabpanel" aria-labelledby="seguimiento-tab">
@@ -338,7 +342,7 @@
                                                         <div class="col col-sm-3"><label for="textarea-input" class=" form-control-label">Observaciones</label></div>
                                                         <div class="col col-md-9"><textarea name="observaciones" id="textarea-input" OnKeyUp="Upper(this);" rows="9" class="form-control"><?php echo set_value('observaciones');?></textarea></div>
                                                     </div>
-                                                    <div class="row form-group">
+                                                    <!--div class="row form-group">
                                                         <div class="col col-md-3"><label for="select" class=" form-control-label"> Atención Seguimiento</label></div>
                                                         <div class="col-12 col-md-9">
                                                             <select name='atencion2' id='atencion2' class='form-control'>
@@ -350,7 +354,7 @@
                                                             ?>
                                                             </select>
                                                         </div>
-                                                    </div>   
+                                                    </div-->   
                                         <!--/form>< form-->
                                 </div> <!-- card-body-->
                             </div>        
@@ -362,6 +366,10 @@
                                                 //echo date('l jS \of F Y h:i:s A');
                                                 //oficio entrada e id                                       
                                             ?>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="text-input" class="form-control-label"> Número de Oficio</label></div>
+                                                <div class="col-12 col-md-9"><input type="text" id="text-input" OnKeyUp="Upper(this);" name="nom_at" placeholder="" class="form-control" value="<?php echo set_value('nom_at'); ?>"></div>
+                                            </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Fecha Atendido</label></div>
                                                 <div class="col-12 col-md-9">
@@ -397,14 +405,14 @@
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label"> Atención</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name='atencion' id='atencion' class='form-control'>
                                                         <?php
-                                                        //se toman los datos de todos los usuarios para la insesión
-                                                        foreach ( $atencion as $us) {
-                                                            echo "<option value='$us->id_usuario'".set_select('atencion',$us->nombre.' '.$us->apellidop.' '.$us->apellidom).">".$us->nombre.' '.$us->apellidop.' '.$us->apellidom."</option>";
-                                                        }
+                                                        //se toman los datos del usuario de las sesiones
+                                                        $id = $this->session->userdata('id_usuario');
+                                                        $nom = $this->session->userdata('name');
+                                                        echo "<div class='col-12 col-md-9'><input type='text' id='text-input' class='form-control' value='".$nom."' disabled>
+                                                            <input type='text' id='text-input' name='atencion' value='".$id."' hidden>
+                                                            </div>";
                                                     ?>
-                                                    </select>
                                                 </div>
                                             </div>                                          
                                             <div class="card-footer">

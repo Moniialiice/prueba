@@ -94,16 +94,16 @@ class Atendido_model extends CI_model
         return $query->result();
     }
     //consulta por nomenclatura y fecha de atendido
-    public function searchfechaAtendido($search, $fecha1, $fecha2)
+    public function searchfechaAtendido($search, $desc, $fecha1, $fecha2)
     {
-        $query = $this->db->query("SELECT a.id_oficioAtendido, a.nomenclatura_aten, a.fecha_atendido, a.nombre_aten, a.cargo_aten, a.descripcion, a.arch_atendido, a.copia_a, u.nombre, u.apellidop, u.apellidom FROM oficio_atendido as a, usuario as u WHERE a.nomenclatura_aten LIKE '%$search%' AND a.fecha_atendido BETWEEN '$fecha1' AND '$fecha2' AND a.atencion = u.id_usuario ORDER BY a.fecha_atendido DESC");
+        $query = $this->db->query("SELECT a.id_oficioAtendido, a.nomenclatura_aten, a.fecha_atendido, a.nombre_aten, a.cargo_aten, a.descripcion, a.arch_atendido, a.copia_a, u.nombre, u.apellidop, u.apellidom FROM oficio_atendido as a, usuario as u WHERE a.nomenclatura_aten LIKE '%$search%' AND a.descripcion LIKE '%$desc%' AND a.fecha_atendido BETWEEN '$fecha1' AND '$fecha2' AND a.atencion = u.id_usuario ORDER BY a.fecha_atendido DESC");
         $this->db->close();
         return $query->result();
     }
     //consulta por nomenclatura y fecha de atendido y id del usuario que realizo el oficio 
-    public function searchAtenFI($search, $fecha1, $fecha2, $id)
+    public function searchAtenFI($search, $desc, $fecha1, $fecha2, $id)
     {
-        $query = $this->db->query("SELECT a.id_oficioAtendido, a.nomenclatura_aten, a.fecha_atendido, a.nombre_aten, a.cargo_aten, a.descripcion, a.arch_atendido, a.copia_a, u.id_usuario, u.nombre, u.apellidop, u.apellidom FROM oficio_atendido as a, usuario as u WHERE a.nomenclatura_aten LIKE '%$search%' AND a.fecha_atendido BETWEEN '$fecha1' AND '$fecha2' AND a.atencion = u.id_usuario AND u.id_usuario = '$id' ORDER BY a.fecha_atendido DESC ");
+        $query = $this->db->query("SELECT a.id_oficioAtendido, a.nomenclatura_aten, a.fecha_atendido, a.nombre_aten, a.cargo_aten, a.descripcion, a.arch_atendido, a.copia_a, u.id_usuario, u.nombre, u.apellidop, u.apellidom FROM oficio_atendido as a, usuario as u WHERE a.nomenclatura_aten LIKE '%$search%' AND a.descripcion LIKE '%$desc%' AND a.fecha_atendido BETWEEN '$fecha1' AND '$fecha2' AND a.atencion = u.id_usuario AND u.id_usuario = '$id' ORDER BY a.fecha_atendido DESC ");
         $this->db->close();
         return $query->result();
     }
@@ -111,7 +111,8 @@ class Atendido_model extends CI_model
     public function reportOficioAtendido($id)
     {
         $query = $this->db->query("SELECT nomenclatura_aten, fecha_atendido, nombre_aten, cargo_aten, descripcion, copia_a, atencion FROM oficio_atendido WHERE id_oficioAtendido = $id");
-        $this->db->close();
         return $query->result();
+        $this->db->close();
+
     }
 }

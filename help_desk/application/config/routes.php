@@ -112,10 +112,15 @@ $route['imprimirCapSeguimiento/(:any)'] = 'Captura/imprimirOficioCap/$1';
 $route['resultCaptura'] = 'Captura/consultaOficioSeguimiento';
 $route['consultaAtendidoCap'] = 'Captura/busquedaAtendido';
 $route['imprimirCapAtendido/(:any)'] = 'Captura/imprimirAtendidoCap/$1';
-$route['resultAtendido'] = 'Captura/consultaCapturaAten';
+$route['resultAtendidos'] = 'Captura/consultaCapturaAten';
 $route['muestraSeguimiento'] = 'Captura/consultaCapID'; //busqueda de oficio seguimiento 
 $route['muestraAtendidos'] = 'Captura/consultaAtenId'; //busqueda de oficio atendido
-//rutas de bitacora
+$route['nuevoCAtendido'] = 'Captura/indexA'; //insertar nuevo atendido
+$route['insertCAtendido'] = 'Captura/altaAtendido'; //insertar nuevo atendido
+$route['consultaEnCap'] = 'Captura/busquedaEntrada'; //consulta entrada
+
+
+//consultaEnCap rutas de bitacora
 $route['consultaBitacora'] = 'Bitacora/index';
 
 $route['welcome'] = 'Welcome/pdf';

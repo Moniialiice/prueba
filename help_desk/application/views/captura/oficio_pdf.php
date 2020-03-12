@@ -1,12 +1,14 @@
+<body>
+	<header>
 <style>
 @page {
     margin: 0cm 0cm;
     }
 /** Define now the real margins of every page in the PDF **/
 body {
-    margin-top: 2cm;
-    margin-left: 2cm;
-    margin-right: 2cm;
+    margin-top: 1.5cm;
+    margin-left: 1cm;
+    margin-right: 1cm;
     margin-bottom: 0cm;
 	}
 header {
@@ -18,35 +20,35 @@ header {
     }
 h1 {
 	text-align: center;
-	font-size: 10px;
+	font-size: 9px;
 	font-family:Arial, Helvetica, sans-serif;
 }
 .p_right{
 	text-align: right;
-	font-size: 10px;
+	font-size: 9px;
 	font-weight: bold;
 	font-family:Arial, Helvetica, sans-serif;
 }
 .p_bold{
 	font-weight: bold;
-	font-size: 8px;
+	font-size: 9px;
 	font-family:Arial, Helvetica, sans-serif;
 }
 .p_justify{
 	text-align: justify;
-	font-size: 8px;
+	font-size: 9px;
 	font-weight: bold;
 	font-family:Arial, Helvetica, sans-serif;
 }
 .p_left{
 	text-align: left;
-	font-size: 8px;
+	font-size: 9px;
 	font-weight: bold;
 	font-family:Arial, Helvetica, sans-serif;
 }
 .p_center{
 	text-align: center;
-	font-size: 8px;
+	font-size: 9px;
 	font-weight: bold;
 	font-family:Arial, Helvetica, sans-serif;
 }
@@ -55,11 +57,14 @@ table{
 	border-collapse: collapse;
 	border: 1px solid black;
 }
-td{
-	padding: 0px;
-	weight: 10%;
+.table, tr, td{
+	width: 100%;
+	
 	border-collapse: collapse;
-	border: 1px solid black;	
+	border: 1px solid black;
+	vertical-align: middle;
+	padding: 0.5px;
+	border-spacing: 2px; 
 }
 </style>
 <?php
@@ -78,8 +83,7 @@ td{
 	$fec = explode("-",$space[0]);
 	$fechat = $fec[2]."/".$fec[1]."/".$fec[0]." ".$space[1];
 ?>
-<body>
-	<header>
+
 		<img src="assets/img/header.png" width="100%" height="70%">
 	</header>
 	<h1>TRAMITE DE TURNO</h1>
@@ -257,8 +261,16 @@ td{
 		</tr>
 		<tr>
 			<td colspan="5"><br><br><p class="p_center"><?php echo $dato[0]->nombre." ".$dato[0]->apellidop." ".$dato[0]->apellidom;?></p> </td>
-			<td colspan = "6"><br><br><p class="p_center"> DR. H. C. RODRIGO ARCHUNDIA BARREINTOS<br>COORDINADOR GENERAL DE COMBATE AL SECUESTRO</p>
-			</td>
+			<?php
+			$nom = $dato[0]->nomen_ofseg; 
+			$cut = explode("/",$nom); 
+			if($cut[0]=="400LIA000"){
+				echo "<td colspan = '6'><br><p class='p_center'> DR. H. C. RODRIGO ARCHUNDIA BARREINTOS<br>COORDINADOR GENERAL DE COMBATE AL SECUESTRO</p></td>";
+				}elseif($cut[0]=="400LI0010"){
+					echo "
+					<td colspan = '6'><br><p class='p_center'> ANTONIO MARTIN TORRES BALLESTEROS <br>SECRETARIO PARTICULAR DEL COORDINADOR <br>GENERAL DE COMBATE AL SECUESTRO</p></td>";
+				} 
+			?>	
 		</tr>
 	</table><br>
 	<table>

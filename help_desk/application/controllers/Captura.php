@@ -22,6 +22,8 @@ class Captura extends CI_Controller
         $this->load->library('calendar');
         $this->load->library('upload');
         //$this->load->library('curl');
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit','-1');
     }
     //función para cargar vista de captura
     public function index(){
@@ -39,6 +41,7 @@ class Captura extends CI_Controller
         $Srecepción = $this->input->post('atencion1');
         $atencion = $this->input->post('atencion');
         //datos de oficio recepción
+        $control = $this->input->post('ccontrol');
         $oficio_rec = $this->input->post('no_oficio');
         $fecha_r = $this->input->post('fecha_r');
         $fecha_rec = $this->input->post('fecha_rec');
@@ -102,6 +105,7 @@ class Captura extends CI_Controller
         $peticionario = $this->input->post('peticionario');
         $requiriente = $this->input->post('requiriente');
         //recibe datos de oficio atendido
+        $nom_at = $this->input->post('nom_at');
         $fecha_aten = $this->input->post('fecha_at');
         $nombre_aten = $this->input->post('nombre_at');
         $cargo_aten = $this->input->post('cargo_at');
@@ -122,19 +126,20 @@ class Captura extends CI_Controller
         //toma el nombre del archivo
         $archivo_aten = $upload_aten['file_name'];
         //valida los datos recibidos de oficio recepción
-            $this->form_validation->set_rules('no_oficio', 'No. de Oficio Recepción', 'required|is_unique[oficio_entrada.no_oficioEntrada]');
+            $this->form_validation->set_rules('no_oficio', 'No. de Oficio Recepción', 'required|is_unique[captura_entrada.ccontrol]');
             $this->form_validation->set_rules('fecha_r', 'Día y Hora Recepción','required');
             $this->form_validation->set_rules('fecha_real', 'Fecha y Hora Recepción', 'required');
             $this->form_validation->set_rules('firma_r','Fecha Real', 'required');
             $this->form_validation->set_rules('cargo_r','Cargo','required');
             $this->form_validation->set_rules('peticion_r','Petición de entrada','required');
             //valida los datos del oficio seguimiento
-            $this->form_validation->set_rules('nomenclatura', 'Nomenclatura','required|is_unique[oficio_seguimiento.nomenclatura]|min_length[19]|max_length[19]');
+            $this->form_validation->set_rules('nomenclatura', 'Nomenclatura','required|is_unique[captura.nomen_ofseg]|min_length[19]|max_length[22]');
             $this->form_validation->set_rules('fecha', 'Fecha Oficio Seguimiento','required');
             $this->form_validation->set_rules('asunto', 'Asunto', 'required');
             $this->form_validation->set_rules('observaciones', 'Observaciones','required');
             $this->form_validation->set_rules('termino', 'Plazo', 'required');
             //valida los datos de oficio atendido
+            $this->form_validation->set_rules('nom_at', 'Nomenclatura Atendido','required|is_unique[captura_atendidos.nomenclatura_cap]|min_length[19]|max_length[22]');
             $this->form_validation->set_rules('fecha_at','Fecha Atendido','required');
             $this->form_validation->set_rules('nombre_at', 'Nombre Atendido', 'required');
             $this->form_validation->set_rules('cargo_at','Cargo Atendido','required');
@@ -168,12 +173,12 @@ class Captura extends CI_Controller
             $date6 = $fecha_aten;
             $space6 = explode('/',$date6);
             $fecha6 = $space6[2]."-".$space6[1]."-".$space6[0];
-            
+            // 
             $insertCaptura = $this->Captura_model->insertaCaptura($oficio_rec, $fecha1, $fecha2, $fecha3, $firma_origen_rec, $cargo_rec, 
             $peticion_rec, $entrada, $oficina, $peticionario, $requiriente, $colaboracion, $amparo, $solicitudes, $gestion, $cursos, $juzgados, 
             $rh, $estadistica, $telefonia, $ri, $boletas, $conocimiento, $conase, $toluca, $mexico, $zoriente, $fgeneral, $vicefiscalia,
             $oficialia, $informacion, $central, $servicio, $otrad, $diligencia, $personalmente, $gestionar, $archivo, $otrar, $nomenclatura, 
-            $fecha4, $asunto_seg, $observaciones, $fecha5, $atencion, $fecha6, $nombre_aten, $cargo_aten, $archivo_aten, $descripcion_aten, $copia_aten);
+            $fecha4, $asunto_seg, $observaciones, $fecha5, $atencion, $fecha6, $nombre_aten, $cargo_aten, $archivo_aten, $descripcion_aten, $copia_aten, $nom_at, $control);
             
             if($insertCaptura == TRUE)
             {
@@ -210,11 +215,87 @@ class Captura extends CI_Controller
             $datos['cargo_at'] = $cargo_aten;
             $datos['descripcion_at'] = $descripcion_aten;
             $datos['copia_at'] = $copia_aten;
+            $datos['atencion'] = $atencion;
             $this->load->view('templates/head');
-            $this->load->view('genera_captura',$datos);
+            $this->load->view('captura/genera_captura',$datos);
             $this->load->view('templates/footer');
         }
-    }    
+    }
+    
+    //función para cargar vista de captura
+    public function indexA(){
+        //muestra los usuario difentes a coordinador y administrador
+        $users = $this->Captura_model->getUsuarios();
+        $atendido['atencion'] = $users;
+        $this->load->view('templates/head');
+        $this->load->view('captura/genera_atendido_new',$atendido);
+        $this->load->view('templates/footer');
+    }
+    //función para dar de alta nuevo registro
+    public function altaAtendido(){
+        $atencion = $this->input->post('atencion');
+        //recibe datos de oficio atendido
+        $nomenclatura_at = $this->input->post('nom');
+        $fecha_aten = $this->input->post('date3');
+        $nombre_aten = $this->input->post('nombre_at');
+        $cargo_aten = $this->input->post('cargo_at');
+        $descripcion_aten = $this->input->post('descripcion_at');
+        $copia_aten = $this->input->post('copia_at');
+        //datos requeridos para subir archivo y ruta a guardar 
+        $config_aten['upload_path'] = './document/atendido/.';
+        $config_aten['allowed_types'] = 'jpg|png|pdf';
+        $config_aten['max_size'] = 1000;
+        $config_aten['file_name'] = $nomenclatura_at.$fecha_aten;
+        //carga libreria archivos e inicializa el array config con los datos del archivo
+        $this->load->library('upload',$config_aten);
+        $this->upload->initialize($config_aten);
+        //toma el datos de archivo entrada
+        $this->upload->do_upload('archivo');                
+        //carga los datos del archivo
+        $upload_aten = $this->upload->data();
+        //toma el nombre del archivo
+        $archivo_aten = $upload_aten['file_name'];
+            //valida los datos de oficio atendido
+            $this->form_validation->set_rules('nom', 'Nomenclatura','required|is_unique[oficio_seguimiento.nomenclatura]|min_length[19]|max_length[22]');
+            $this->form_validation->set_rules('date3','Fecha Atendido','required');
+            $this->form_validation->set_rules('nombre_at', 'Nombre Atendido', 'required');
+            $this->form_validation->set_rules('cargo_at','Cargo Atendido','required');
+            $this->form_validation->set_rules('descripcion_at','Descripción atendido','required');
+        if($this->form_validation->run()==TRUE){
+            //formato de fecha atendido
+            $date6 = array();
+            $date6 = $fecha_aten;
+            $space6 = explode('/',$date6);
+            $fecha6 = $space6[2]."-".$space6[1]."-".$space6[0];
+            
+            $insertCAtendido = $this->Captura_model->insertAtendido($nomenclatura_at, $fecha6, $nombre_aten, $cargo_aten, $descripcion_aten, $archivo_aten, $copia_aten, $atencion);            
+            if($insertCAtendido == TRUE)
+            {
+                $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                $fec_bit = date('Y-m-d'); //fecha el servidor
+                $hora_bit = date('H:i:s'); //hora el servidor
+                //inserta registros en la bitacora
+                $this->Bitacora_model->insertBitacora($idu,'Captura creado, Oficio Atendido '.$nomenclatura_at.'' ,$fec_bit,$hora_bit);
+                $this->session->set_flashdata('Creado','Oficio Atendido creado');
+                $this->indexA();
+            }else{
+                $this->session->set_flashdata('No creado','Oficio no creado');
+                $this->indexA();
+            } 
+        }else{
+            $datos = array();
+            $datos['nom'] = $nomenclatura_at;
+            $datos['fecha_at'] = $fecha_aten;
+            $datos['nombre_at'] = $nombre_aten;
+            $datos['cargo_at'] = $cargo_aten;
+            $datos['descripcion_at'] = $descripcion_aten;
+            $datos['copia_at'] = $copia_aten;
+            $datos['atencion'] = $atencion;
+            $this->load->view('templates/head');
+            $this->load->view('captura/genera_atendido_new',$datos);
+            $this->load->view('templates/footer');
+        }
+    }
     //consulta datos de oficio seguimiento en la tabla de captura
     public function busquedaOficioSeguimiento(){
         $this->load->view('templates/head');
@@ -226,6 +307,7 @@ class Captura extends CI_Controller
         if($this->input->post()){
             //recibe datos del formulario
             $search = $this->input->post('busqueda');
+            $asunto = $this->input->post('asunto');
             $date1 = $this->input->post('date1');
             $date2 = $this->input->post('date2');
             //valida que los campos feccha no esten vacios
@@ -248,11 +330,12 @@ class Captura extends CI_Controller
                 $hora_bit = date('H:i:s'); //hora el servidor
                 //inserta registros en la bitacora
                 $this->Bitacora_model->insertBitacora($idu,'Consulta Oficio Seguimiento Captura '.$search.'con fechas '.$date1.'-'.$date2.'.',$fec_bit,$hora_bit);
-                $datos['datos'] = $this->Captura_model->consultaOSCaptura($search,$fecha1,$fecha2);
+                $datos['datos'] = $this->Captura_model->consultaOSCaptura($search, $asunto, $fecha1,$fecha2);
                 $this->load->view('captura/all_oficioseg_Captura', $datos);
             }else{
                 $datos = array();
                 $datos['busqueda'] = $search;
+                $datos['aseunto'] = $asunto;
                 $datos['date1'] = $date1;
                 $datos['date2'] = $date2;
                 $this->load->view('captura/all_oficioseg_Captura',$datos);
@@ -271,8 +354,9 @@ class Captura extends CI_Controller
     //consulta atendido de captura
     public function consultaCapturaAten(){
         if($this->input->post()){
-            //recibe datos de la busqueda
+            //recibe datos de la busqueda desc
             $search = $this->input->post('busqueda');
+            $desc = $this->input->post('desc');
             $date1 = $this->input->post('date1');
             $date2 = $this->input->post('date2');
             //valida que los datos no esten vacios
@@ -295,14 +379,66 @@ class Captura extends CI_Controller
                 $hora_bit = date('H:i:s'); //hora el servidor
                 //inserta registros en la bitacora
                 $this->Bitacora_model->insertBitacora($idu,'Búsqueda Oficio Atendido Captura'.$search.'con fechas '.$date1.'-'.$date2.'.',$fec_bit,$hora_bit);
-                $datos['datos'] = $this->Captura_model->consultaAtenCap($search,$fecha1,$fecha2); 
+                $datos['datos'] = $this->Captura_model->consultaAtenCap($search, $desc, $fecha1,$fecha2); 
                 $this->load->view('captura/all_atendido_Captura',$datos);
             }else{
                 $datos = array();
                 $datos['busqueda'] = $search;
+                $datos['desc'] = $desc;
                 $datos['date1'] = $date1;
                 $datos['date2'] = $date2;
                 $this->load->view('captura/all_atendido_Captura',$datos);
+            }
+        }else{
+            //mensaje de error
+            $this->session->set_flashdata('Error','Consultar administrador');
+        }
+    }
+    //carga vista de busqueda atendido
+    public function busquedaEntrada(){
+        $this->load->view('templates/head');
+        $this->load->view('captura/busqueda_entradaCaptura');
+        $this->load->view('templates/footer');
+    }
+    //consulta entrada de captura
+    public function consultaEntradaAten(){
+        if($this->input->post()){
+            //recibe datos de la busqueda desc
+            $control = $this->input->post('control');
+            $search = $this->input->post('busqueda');
+            $firma = $this->input->post('firma'); 
+            $asunto = $this->input->post('asunto');
+            $date1 = $this->input->post('date1');
+            $date2 = $this->input->post('date2');
+            //valida que los datos no esten vacios
+            $this->form_validation->set_rules('date1', 'Fecha Atendido Inicio', 'required');
+            $this->form_validation->set_rules('date2', 'Fecha Atendido Final', 'required');
+            if($this->form_validation->run()==true){
+                //cambiamos formato de fecha
+                $ext = explode("/",$date1);
+                $year = $ext[2];
+                $mont = $ext[1];
+                $day = $ext[0];
+                $fecha1 = $year."-".$mont."-".$day;
+                $ext2 = explode("/",$date2);
+                $year2 = $ext2[2];
+                $mont2 = $ext2[1];
+                $day2 = $ext2[0];
+                $fecha2 = $year2."-".$mont2."-".$day2;
+                $idu = $this->session->userdata('id_usuario');//id del usuario loggeado
+                $fec_bit = date('Y-m-d'); //fecha el servidor
+                $hora_bit = date('H:i:s'); //hora el servidor
+                //inserta registros en la bitacora
+                $this->Bitacora_model->insertBitacora($idu,'Búsqueda Oficio Atendido Captura'.$search.'con fechas '.$date1.'-'.$date2.'.',$fec_bit,$hora_bit);
+                $datos['datos'] = $this->Captura_model->searchCapFecha($control,$search,$asunto,$firma,$fecha1,$fecha2); 
+                $this->load->view('captura/all_entrada_Captura',$datos);
+            }else{
+                $datos = array();
+                $datos['busqueda'] = $search;
+                $datos['control'] = $control;
+                $datos['date1'] = $date1;
+                $datos['date2'] = $date2;
+                $this->load->view('captura/all_entrada_Captura',$datos);
             }
         }else{
             //mensaje de error
@@ -324,14 +460,15 @@ class Captura extends CI_Controller
         $this->Bitacora_model->insertBitacora($id,'Descarga Trámite de Turno Oficio Seguimiento Captura '.$nom,$fec_bit,$hora_bit);
         $dompdf->loadHtml($html);
         $dompdf->render();
-        $dompdf->stream("sample.pdf", array("Attachment"=>0)); //muestra pdf
+        $dompdf->stream("CapturaOficio_seguimiento.pdf", array("Attachment"=>0)); //muestra pdf
         //$dompdf->stream("tramite_turno.pdf");   //descarga pdf
     }
     //función para craar pdf de oficio seguimiento 
     public function imprimirOficioCap2($id)
     {
-        $datos['dato'] = $this->Captura_model->reportOficioCap($id);
-        $nomen = $this->Oficio_model->nomenSegBit($id);//consulta la nomenclatura por id del oficio
+        $io = base64_decode($id);
+        $datos['dato'] = $this->Captura_model->reportOficioCap($io);
+        $nomen = $this->Captura_model->nomenSegBit($io);//consulta la nomenclatura por id del oficio
         $nom = $nomen[0]->nomen_ofseg; //
         $id = $this->session->userdata('id_usuario'); //id del usuario logeado
         $fec_bit = date('Y-m-d'); //fecha actual del servidor
@@ -362,24 +499,47 @@ class Captura extends CI_Controller
         //$pdf->IncludeJS("print();"); D
         $pdf->Output($pdfFilePath, 'D');
     }
-    //función paara imprimir atendido pdf
-    public function imprimirAtendidoCap($id){
+    //examplel helper
+    public function imprimirAtendidoCap($id){     
+        $this->load->library('Pdf');
+        // create new PDF document
+        $pdf = new Pdf('L', 'cm', 'Letter', true, 'UTF-8', false);    
+        // set document information
+        $pdf->SetCreator('FGJEM');
+        $pdf->SetAuthor('Moni');
+        $pdf->SetTitle('atendido_pdf');
+        $pdf->SetMargins(15, 50, 15);
+        $pdf->SetHeaderMargin(15);
+        $pdf->SetFooterMargin(20);
+        $pdf->SetAutoPageBreak(TRUE, 20);
+        // set default header data
+        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 023', PDF_HEADER_STRING);
         $ida = base64_decode($id);
-        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
         $datos['dato'] = $this->Captura_model->reportAtendidoCap($ida);
+        $dato = $this->Captura_model->reportAtendidoCap($ida);    
+        $date = $dato[0]->fecha_atenCap;
+        //corta los datos de d,m,a
+        $ext = explode("-",$date);
+        $year = $ext[0];
+        $mont = $ext[1];
+        $day = $ext[2];
+        //array convierte número de mes en nombre 
+        $months = array (1=>'ENERO',2=>'FEBRERO',3=>'MARZO',4=>'ABRIL',5=>'MAYO', 6=>'JUNIO', 7=>'JULIO', 8=>'AGOSTO', 9=>'SEPTIEMBRE', 10=>'OCTUBRE',11=>'NOVIEMBRE',12=>'DICIEMBRE'); 
+        $m = $months[(int)$mont];
+        $oficio = $dato[0]->nomenclatura_cap;                  
+        // set font
+        $pdf->SetFont('helvetica', '', 10);
+        $pdf->data($day,$m,$year,$oficio);
+        $pdf->setPrintHeader(true);
+        // add a page
+        $pdf->AddPage();    
+        $f = '<b>FISCALÍA GENERAL DE JUSTICIA DEL ESTADO DE MÉXICO.<br>
+        COORDINACIÓN GENERAL DE COMBATE AL SECUESTRO.</b><br>';
+        $pdf->CreateTextBox($f, 0, 50, 0, 10, 10, '','');    
         $html = $this->load->view('captura/atendido_pdf', $datos, true);
-        $nomen = $this->Captura_model->nomenAtenBit($ida);//consulta la nomenclatura por id del oficio
-        $nom = $nomen[0]->nomen_ofseg; //
-        $id = $this->session->userdata('id_usuario'); //id del usuario logeado
-        $fec_bit = date('Y-m-d'); //fecha actual del servidor
-        $hora_bit = date('H:i:s'); //hora actual del servidor
-        //inserción de registros en la bitacora
-        $this->Bitacora_model->insertBitacora($id,'Descarga de Atendido Oficio Captura '.$nom,$fec_bit,$hora_bit);
-        //carga vista html 
-        $dompdf->loadHtml($html);
-        $dompdf->render();
-        //$dompdf->stream("sample.pdf", array("Attachment"=>0)); //muestra pdf
-        $dompdf->stream("CapturaOficio_atendido.pdf");   //descarga pdf
+        $pdf->writeHTML($html, true, false, true, false, '');    
+        //Close and output PDF document
+        $pdf->Output('CapturaOficio_atendido.pdf', 'I');
     }
     //consulta oficio seguimiento por id del usuario
     public function consultaCapID(){

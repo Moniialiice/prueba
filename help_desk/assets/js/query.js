@@ -119,19 +119,30 @@ function BusquedaCap(){
     });
 }
 
-//búsqueda de oficio atendido captura
-function BusquedaAtenCap(){
-    var data = $('#atendido').serialize();
+//búsqueda de oficio seguimiento atendido
+function BusquedaAts(){
+    var data = $('#atendidos').serialize();
     $.ajax({
-        url: 'Captura/consultaCapturaAten', 
+        url: 'Captura/consultaCapturaAten',
         type: 'post',
         data: data,
         success:function(data){
-            $('#ratendido').html(data);
+            $('#ratendidos').html(data);
         }
     });
 }
-
+//búsqueda de entrada captura
+function BusquedaEnCa(){
+    var data = $('#capentrada').serialize();
+    $.ajax({
+        url: 'Captura/consultaEntradaAten',
+        type: 'post',
+        data: data,
+        success:function(data){
+            $('#entradac').html(data);
+        }
+    });
+}
 //busqueda de todos usuarios
 function excelUsuario(){
     var nomenclatura = $('#busqueda').val();
@@ -186,5 +197,17 @@ function Paginacion(){
     });
 }
 
-
+//búsqueda de captura atendido
+//búsqueda de oficio seguimiento atendido
+function consultaCapturaAten(){
+    var data = $('#atendido').serialize();
+    $.ajax({
+        url: 'Captura/consultaAtendido',
+        type: 'post',
+        data: data,
+        success:function(data){
+            $('#ratendido').html(data);
+        }
+    });
+}
 
